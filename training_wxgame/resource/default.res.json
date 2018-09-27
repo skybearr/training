@@ -1,0 +1,70 @@
+{
+	"groups": [
+		{
+			"keys": "rank_back_png,rank_bg_png,rank_button_png,reglogbg_png,star_a_png,star_b_png,yong_11_png,yong_3_png,yong_6_png,yong_7_png,yong_8_png,config_json",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/rank_back.png",
+			"type": "image",
+			"name": "rank_back_png"
+		},
+		{
+			"url": "assets/rank_bg.png",
+			"type": "image",
+			"name": "rank_bg_png"
+		},
+		{
+			"url": "assets/rank_button.png",
+			"type": "image",
+			"name": "rank_button_png"
+		},
+		{
+			"url": "assets/reglogbg.png",
+			"type": "image",
+			"name": "reglogbg_png"
+		},
+		{
+			"url": "assets/star_a.png",
+			"type": "image",
+			"name": "star_a_png"
+		},
+		{
+			"url": "assets/star_b.png",
+			"type": "image",
+			"name": "star_b_png"
+		},
+		{
+			"url": "assets/yong_11.png",
+			"type": "image",
+			"name": "yong_11_png"
+		},
+		{
+			"url": "assets/yong_3.png",
+			"type": "image",
+			"name": "yong_3_png"
+		},
+		{
+			"url": "assets/yong_6.png",
+			"type": "image",
+			"name": "yong_6_png"
+		},
+		{
+			"url": "assets/yong_7.png",
+			"type": "image",
+			"name": "yong_7_png"
+		},
+		{
+			"url": "assets/yong_8.png",
+			"type": "image",
+			"name": "yong_8_png"
+		},
+		{
+			"url": "data/config.json",
+			"type": "json",
+			"name": "config_json"
+		}
+	]
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="MissionSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="img_bg" height="1334" width="750" x="0" verticalCenter="0" source="yong_3_png" scale9Grid="51,47,43,32" locked="true"/>
+	<e:Label text="选择关卡" y="75" size="50" fontFamily="SimHei" textColor="0x341cef" bold="true" verticalAlign="middle" textAlign="center" horizontalCenter="0" background="false" backgroundColor="0xffffff"/>
+	<e:Image source="reglogbg_png" y="206" width="720" height="720" scale9Grid="70,55,426,330" horizontalCenter="0"/>
+	<e:List id="list" width="640" height="640" y="246" horizontalCenter="0">
+		<e:layout>
+			<e:TileLayout orientation="rows" horizontalGap="34" verticalGap="20" horizontalAlign="left" verticalAlign="top"/>
+		</e:layout>
+	</e:List>
+	<e:Button id="btn1" name="1" label="舒尔特" x="20" y="150" skinName="BaseButton1Skin"/>
+	<e:Button id="btn2" name="2" label="趣味" x="180" y="150" skinName="BaseButton1Skin"/>
+	<e:Button id="btn3" name="3" label="瞬间记忆" x="340" y="150" skinName="BaseButton1Skin"/>
+	<e:Button id="btn_back" label="返回" skinName="BaseButton1Skin" right="37" bottom="31"/>
+</e:Skin>

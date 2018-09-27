@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="BaseButton1Skin" width="160" height="60" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="img_bg" scale9Grid="33,25,130,4" left="0" right="0" top="0" bottom="0" source="yong_6_png"/>
+    <e:Label id="labelDisplay"  text="150体力 " size="23" anchorOffsetY="0" bold="true" fontFamily="SimHei" textColor="0x161616" anchorOffsetX="0" height="34" width="160" horizontalCenter="0" verticalCenter="0" verticalAlign="middle" textAlign="center"/>
+</e:Skin>

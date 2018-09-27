@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="BaseButtonSkin" width="400" height="158" xmlns:e="http://ns.egret.com/eui" states="up,down" >
+	<e:Image left="0" right="0" top="0" bottom="0" source="yong_7_png" scale9Grid="103,0,165,159" visible.down="false"/>
+	<e:Image left="0" right="0" top="0" bottom="0" scale9Grid="103,0,165,159" source="yong_7_png" visible.up="false" source.down="yong_8_png"/>
+	<e:Label id="labelDisplay" text="开始游戏" verticalAlign="middle" textAlign="center" size="54" anchorOffsetY="0" left="30" right="30" top="3" bottom="12" textColor="0xffffff" fontFamily="Microsoft JhengHei" left.down="30" right.down="30" top.down="6" bottom.down="9" textColor.down="0xc4c4c4" bold="true"/>
+</e:Skin>

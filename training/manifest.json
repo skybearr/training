@@ -1,0 +1,38 @@
+{
+	"initial": [
+		"libs/modules/egret/egret.js",
+		"libs/modules/egret/egret.web.js",
+		"libs/modules/eui/eui.js",
+		"libs/modules/assetsmanager/assetsmanager.js",
+		"libs/modules/tween/tween.js",
+		"libs/modules/game/game.js",
+		"libs/modules/promise/promise.js"
+	],
+	"game": [
+		"bin-debug/sky/view/game/BaseUI.js",
+		"bin-debug/sky/view/game/MissionItemUI.js",
+		"bin-debug/sky/utils/FilterUtil.js",
+		"bin-debug/Platform.js",
+		"bin-debug/ThemeAdapter.js",
+		"bin-debug/sky/command/HttpCommand.js",
+		"bin-debug/sky/event/GameEvent.js",
+		"bin-debug/sky/logic/GameLogic.js",
+		"bin-debug/sky/model/DataBase.js",
+		"bin-debug/sky/model/GameConst.js",
+		"bin-debug/sky/model/PlayerConst.js",
+		"bin-debug/sky/msg/Int64.js",
+		"bin-debug/LoadingUI.js",
+		"bin-debug/sky/utils/StringUtil.js",
+		"bin-debug/sky/utils/TimeUtil.js",
+		"bin-debug/sky/utils/WxApi.js",
+		"bin-debug/AssetAdapter.js",
+		"bin-debug/sky/view/game/GameItemUI.js",
+		"bin-debug/sky/view/game/GameOverUI.js",
+		"bin-debug/sky/view/game/GameUI.js",
+		"bin-debug/Main.js",
+		"bin-debug/sky/view/game/MissionUI.js",
+		"bin-debug/sky/view/game/RankUI.js",
+		"bin-debug/sky/view/game/StartUI.js",
+		"bin-debug/sky/vo/MissionVO.js"
+	]
+}
