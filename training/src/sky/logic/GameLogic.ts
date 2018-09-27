@@ -24,17 +24,17 @@ class GameLogic extends egret.EventDispatcher {
 		this.openStart();
 
 		WxApi.getInstance().userInfo = platform.getUserInfo();
-        console.log("userinfo:",WxApi.getInstance().userInfo);
+		console.log("userinfo:", WxApi.getInstance().userInfo);
 	}
 
 	private initData() {
 		this.data = [, [], [], []];
 		this.config = RES.getRes("config_json");
-		let localdata = WxApi.getInstance().getLocalData(GameConst.localkey_missiondata);
-		console.log("initdata:",localdata,localdata == "");
-		
-		if(localdata == null || localdata == ""){
-			localdata = [,[],[],[]];
+		this.localdata = WxApi.getInstance().getLocalData(GameConst.localkey_missiondata);
+		console.log("initdata:", this.localdata, this.localdata == "");
+
+		if (this.localdata == null || this.localdata == "") {
+			this.localdata = [, [], [], []];
 		}
 		if (this.config != null) {
 			for (let i in this.config) {
@@ -63,8 +63,8 @@ class GameLogic extends egret.EventDispatcher {
 						vo.state = 1;
 					}
 				}
-				if (localdata != null) {
-					let brr = localdata[vo.type];
+				if (this.localdata != null) {
+					let brr = this.localdata[vo.type];
 					if (brr != null) {
 						let o = brr[vo.id];
 						if (o != null) {
@@ -83,25 +83,28 @@ class GameLogic extends egret.EventDispatcher {
 				this.data[vo.type].push(vo);
 			}
 		}
-		WxApi.getInstance().setLocalData(GameConst.localkey_missiondata, localdata);
+		WxApi.getInstance().setLocalData(GameConst.localkey_missiondata, this.localdata);
 	}
 
 	/**本地数据 {id:time} */
 	private localdata: any;
 	public saveLocal(type: number, id: number, time: number) {
-		let localdata = WxApi.getInstance().getLocalData(GameConst.localkey_missiondata);
-		console.log("savelocal:",localdata);
-		
-		if (localdata == null) {
-			localdata = [,[],[],[]];
+		console.log("savelocal:", this.localdata);
+		if(this.localdata[type] == null){
+			this.localdata[type] = [];
 		}
-		if(localdata[type] == null){
-			localdata[type] = [];
+		let oldtime = this.localdata[type][id];
+		if (oldtime == null || oldtime > time) {
+			this.localdata[type][id] = time;
+			WxApi.getInstance().setLocalData(GameConst.localkey_missiondata, this.localdata);
 		}
-		localdata[type][id] = time;
-		WxApi.getInstance().setLocalData(GameConst.localkey_missiondata, localdata);
 	}
-	public getRecond
+	public getRecond(type: number, id: number): number {
+		if(this.localdata[type] == null){
+			this.localdata[type] = [];
+		}
+		return this.localdata[type][id] == null ? 0 : this.localdata[type][id];
+	}
 
 	public openStart() {
 		this.main.removeChildren();
