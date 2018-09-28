@@ -21,13 +21,27 @@ var GameOverUI = (function (_super) {
         for (var i = this.vo.times.length - 1; i >= 0; i--) {
             if (this.time <= this.vo.times[i] * 1000) {
                 star++;
+                this['star' + (this.vo.times.length - i)].source = RES.getRes("star_a_png");
             }
         }
         this.vo.stars = star;
-        GameLogic.getInstance().saveLocal(this.vo.type, this.vo.id, this.time);
+        console.log("gameover:", this.vo);
+        var recond = GameLogic.getInstance().getRecond(this.vo.type, this.vo.id);
+        if (recond != 0) {
+            this.lbl_best.text = "历史最快成绩：" + this.getText(recond);
+        }
+        if (recond == 0 || this.time < recond) {
+            GameLogic.getInstance().saveLocal(this.vo.type, this.vo.id, this.time);
+        }
+        if (this.time < recond) {
+            this.lbl_fast.visible = true;
+        }
         this.lbl.text = GameLogic.getInstance().getStringByStar(this.vo.stars);
-        var s = TimeUtil.ParseTime2Format(Math.floor(this.time / 1000), "m:s");
-        var hs = this.time % 1000;
+        this.lbl_time.text = this.getText(this.time);
+    };
+    GameOverUI.prototype.getText = function (t) {
+        var s = TimeUtil.ParseTime2Format(Math.floor(t / 1000), "m:s");
+        var hs = t % 1000;
         var ss = "";
         if (hs < 10) {
             ss = "00" + hs;
@@ -39,7 +53,7 @@ var GameOverUI = (function (_super) {
             ss = hs + "";
             ;
         }
-        this.lbl_time.text = s + ":" + ss;
+        return s + ":" + ss;
     };
     GameOverUI.prototype.initEvent = function () {
         this.btn_back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
@@ -60,3 +74,4 @@ var GameOverUI = (function (_super) {
     return GameOverUI;
 }(BaseUI));
 __reflect(GameOverUI.prototype, "GameOverUI");
+//# sourceMappingURL=GameOverUI.js.map

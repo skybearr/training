@@ -11,7 +11,8 @@ class GameOverUI extends BaseUI {
 	private btn_restart: eui.Button;
 	private time: number;
 	private lbl_time: eui.Label;
-
+	private lbl_best:eui.Label;
+	private lbl_fast:eui.Label;
 	protected initView() {
 		let star = 0;
 		for (let i = this.vo.times.length - 1; i >= 0; i--) {
@@ -24,15 +25,25 @@ class GameOverUI extends BaseUI {
 		console.log("gameover:",this.vo);
 		
 		let recond = GameLogic.getInstance().getRecond(this.vo.type,this.vo.id);
-		if(this.time < recond){
+		if(recond != 0){
+			this.lbl_best.text = "历史最快成绩：" + this.getText(recond);
+		}
+		if(recond == 0 || this.time < recond){
 			GameLogic.getInstance().saveLocal(this.vo.type,this.vo.id,this.time);
+		}
+		if(this.time < recond){
+			this.lbl_fast.visible = true;
 		}
 		
 
 		this.lbl.text = GameLogic.getInstance().getStringByStar(this.vo.stars);
 
-		let s = TimeUtil.ParseTime2Format(Math.floor(this.time / 1000), "m:s");
-		let hs = this.time % 1000;
+		this.lbl_time.text = this.getText(this.time);
+	}
+
+	private getText(t){
+		let s = TimeUtil.ParseTime2Format(Math.floor(t / 1000), "m:s");
+		let hs = t % 1000;
 		let ss = "";
 		if (hs < 10) {
 			ss = "00" + hs;
@@ -43,7 +54,7 @@ class GameOverUI extends BaseUI {
 		else {
 			ss = hs + "";;
 		}
-		this.lbl_time.text = s + ":" + ss;
+		return s + ":" + ss;
 	}
 
 	protected initEvent() {

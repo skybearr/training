@@ -24,17 +24,17 @@ class GameLogic extends egret.EventDispatcher {
 		this.openStart();
 
 		WxApi.getInstance().userInfo = platform.getUserInfo();
-        console.log("userinfo:",WxApi.getInstance().userInfo);
+		console.log("userinfo:", WxApi.getInstance().userInfo);
 	}
 
 	private initData() {
 		this.data = [, [], [], []];
 		this.config = RES.getRes("config_json");
 		let localdata = WxApi.getInstance().getLocalData(GameConst.localkey_missiondata);
-		console.log("initdata:",localdata,localdata == "");
-		
-		if(localdata == null || localdata == ""){
-			localdata = [,[],[],[]];
+		console.log("initdata:", localdata, localdata == "");
+
+		if (localdata == null || localdata == "") {
+			localdata = [, [], [], []];
 		}
 		if (this.config != null) {
 			for (let i in this.config) {
@@ -90,18 +90,25 @@ class GameLogic extends egret.EventDispatcher {
 	private localdata: any;
 	public saveLocal(type: number, id: number, time: number) {
 		let localdata = WxApi.getInstance().getLocalData(GameConst.localkey_missiondata);
-		console.log("savelocal:",localdata);
-		
+		console.log("savelocal:", localdata);
+
 		if (localdata == null) {
-			localdata = [,[],[],[]];
+			localdata = [, [], [], []];
 		}
-		if(localdata[type] == null){
+		if (localdata[type] == null) {
 			localdata[type] = [];
 		}
 		localdata[type][id] = time;
 		WxApi.getInstance().setLocalData(GameConst.localkey_missiondata, localdata);
 	}
-	public getRecond
+	public getRecond(type: number, id: number): number {
+		let key = type + "_" + id;
+		let value = WxApi.getInstance().getLocalData(key);
+		if (value == null || value == "") {
+			value = 0;
+		}
+		return value;
+	}
 
 	public openStart() {
 		this.main.removeChildren();
