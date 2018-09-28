@@ -7,6 +7,7 @@ var GameConst = (function () {
     /**web测试 0微信  1web本地 */
     GameConst.web = 1;
     GameConst.version = "201808181130";
+    GameConst.localkey_missiondata = "localkey_missiondata";
     return GameConst;
 }());
 __reflect(GameConst.prototype, "GameConst");
@@ -15,3 +16,4 @@ var INTERFACEAPI;
     INTERFACEAPI[INTERFACEAPI["TESTGET"] = 0] = "TESTGET";
     INTERFACEAPI[INTERFACEAPI["TESTPOST"] = 1] = "TESTPOST";
 })(INTERFACEAPI || (INTERFACEAPI = {}));
+//# sourceMappingURL=GameConst.js.map

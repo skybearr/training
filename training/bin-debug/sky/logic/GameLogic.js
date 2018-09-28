@@ -22,12 +22,15 @@ var GameLogic = (function (_super) {
     GameLogic.prototype.init = function () {
         this.initData();
         this.openStart();
+        WxApi.getInstance().userInfo = platform.getUserInfo();
+        console.log("userinfo:", WxApi.getInstance().userInfo);
     };
     GameLogic.prototype.initData = function () {
         this.data = [, [], [], []];
         this.config = RES.getRes("config_json");
-        var localdata = WxApi.getInstance().getLocalData("trainingmission");
-        if (localdata == null) {
+        var localdata = WxApi.getInstance().getLocalData(GameConst.localkey_missiondata);
+        console.log("initdata:", localdata, localdata == "");
+        if (localdata == null || localdata == "") {
             localdata = [, [], [], []];
         }
         if (this.config != null) {
@@ -77,14 +80,27 @@ var GameLogic = (function (_super) {
                 this.data[vo.type].push(vo);
             }
         }
+        WxApi.getInstance().setLocalData(GameConst.localkey_missiondata, localdata);
     };
     GameLogic.prototype.saveLocal = function (type, id, time) {
-        var localdata = WxApi.getInstance().getLocalData("trainingmission");
+        var localdata = WxApi.getInstance().getLocalData(GameConst.localkey_missiondata);
+        console.log("savelocal:", localdata);
         if (localdata == null) {
             localdata = [, [], [], []];
         }
+        if (localdata[type] == null) {
+            localdata[type] = [];
+        }
         localdata[type][id] = time;
-        WxApi.getInstance().setLocalData("trainingmission", localdata);
+        WxApi.getInstance().setLocalData(GameConst.localkey_missiondata, localdata);
+    };
+    GameLogic.prototype.getRecond = function (type, id) {
+        var key = type + "_" + id;
+        var value = WxApi.getInstance().getLocalData(key);
+        if (value == null || value == "") {
+            value = 0;
+        }
+        return value;
     };
     GameLogic.prototype.openStart = function () {
         this.main.removeChildren();
@@ -110,3 +126,4 @@ var GameLogic = (function (_super) {
     return GameLogic;
 }(egret.EventDispatcher));
 __reflect(GameLogic.prototype, "GameLogic");
+//# sourceMappingURL=GameLogic.js.map

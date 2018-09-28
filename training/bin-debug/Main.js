@@ -100,20 +100,14 @@ var Main = (function (_super) {
     };
     Main.prototype.runGame = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _a;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loadResource()];
                     case 1:
-                        _b.sent();
+                        _a.sent();
                         return [4 /*yield*/, platform.login()];
                     case 2:
-                        _b.sent();
-                        _a = WxApi.getInstance();
-                        return [4 /*yield*/, platform.getUserInfo()];
-                    case 3:
-                        _a.userInfo = _b.sent();
-                        console.log("userinfo:", WxApi.getInstance().userInfo);
+                        _a.sent();
                         this.createGameScene();
                         return [2 /*return*/];
                 }
@@ -170,3 +164,4 @@ var Main = (function (_super) {
     return Main;
 }(eui.UILayer));
 __reflect(Main.prototype, "Main");
+//# sourceMappingURL=Main.js.map
