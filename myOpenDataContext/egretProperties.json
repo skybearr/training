@@ -1,0 +1,16 @@
+{
+	"engineVersion": "5.2.6",
+	"compilerVersion": "5.2.6",
+	"template": {},
+	"target": {
+		"current": "wxgame"
+	},
+	"modules": [
+		{
+			"name": "egret"
+		},
+		{
+			"name": "game"
+		}
+	]
+}

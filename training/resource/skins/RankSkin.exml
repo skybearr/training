@@ -4,7 +4,7 @@
 	<e:Image touchEnabled="false" anchorOffsetY="0" height="742" anchorOffsetX="0" width="640" horizontalCenter="0" scale9Grid="12,12,76,76" y="200" source="rank_bg_png"/>
 
 	<e:Label id="lbl_2" text="每周一凌晨刷新" x="67" size="24" fontFamily="SimHei" touchEnabled="false" textColor="0x727891" y="208"/>
-	<e:Label id="lbl_title" text="好友排行榜" size="36" fontFamily="SimHei" touchEnabled="false" horizontalCenter="0" y="134" textColor="0xfffffe" bold="true"/>
+	<e:Label id="lbl_title" text="好友排行榜" size="36" fontFamily="SimHei" touchEnabled="false" horizontalCenter="0" y="60" textColor="0xfffffe" bold="true"/>
 	<e:Image id="img_rankgp" horizontalCenter="0" y="1146" source="rank_button_png"/>
 
 
