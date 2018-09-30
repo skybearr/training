@@ -2,5 +2,5 @@
 <e:Skin class="GameItemSkin" width="100" height="100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Rect id="rect_bg" width="100%" height="100%" fillColor="0x888888" horizontalCenter="0" verticalCenter="0" touchEnabled="false" touchChildren="false"/>
 	<e:Rect id="rect_click" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" x="10" y="10" fillColor="0x0f00ff" touchChildren="false" touchEnabled="false" visible="false"/>
-	<e:Label id="lbl" text="81" verticalAlign="middle" textAlign="center" anchorOffsetY="0" height="100" width="100" horizontalCenter="0" verticalCenter="0" fontFamily="SimHei" bold="true" size="60" textColor="0x000000" touchEnabled="false"/>
+	<e:Label id="lbl" text="双子" verticalAlign="middle" textAlign="center" anchorOffsetY="0" height="100" width="100" horizontalCenter="0" verticalCenter="0" fontFamily="SimHei" bold="true" size="48" textColor="0x000000" touchEnabled="false"/>
 </e:Skin>

@@ -21,7 +21,7 @@
 		"bin-debug/sky/model/GameConst.js",
 		"bin-debug/sky/model/PlayerConst.js",
 		"bin-debug/sky/msg/Int64.js",
-		"bin-debug/sky/vo/MissionVO.js",
+		"bin-debug/LoadingUI.js",
 		"bin-debug/sky/utils/StringUtil.js",
 		"bin-debug/sky/utils/TimeUtil.js",
 		"bin-debug/sky/utils/WxApi.js",
@@ -33,6 +33,6 @@
 		"bin-debug/sky/view/game/MissionUI.js",
 		"bin-debug/sky/view/game/RankUI.js",
 		"bin-debug/sky/view/game/StartUI.js",
-		"bin-debug/LoadingUI.js"
+		"bin-debug/sky/vo/MissionVO.js"
 	]
 }
