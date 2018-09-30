@@ -183,11 +183,11 @@ var egret = window.egret;
 	__extends(GameOverSkin, _super);
 	function GameOverSkin() {
 		_super.call(this);
-		this.skinParts = ["img_bg","lbl_time","lbl","btn_back","btn_restart","star1","star2","star3"];
+		this.skinParts = ["img_bg","lbl_time","lbl_fast","lbl_best","lbl","btn_back","btn_restart","star1","star2","star3"];
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this.img_bg_i(),this.lbl_time_i(),this.lbl_i(),this._Group1_i(),this._Group2_i()];
+		this.elementsContent = [this.img_bg_i(),this.lbl_time_i(),this.lbl_fast_i(),this.lbl_best_i(),this.lbl_i(),this._Group1_i(),this._Group2_i()];
 	}
 	var _proto = GameOverSkin.prototype;
 
@@ -211,12 +211,47 @@ var egret = window.egret;
 		t.height = 50;
 		t.horizontalCenter = 0;
 		t.size = 40;
-		t.text = "用时：1111";
+		t.text = "本次用时：1111";
 		t.textAlign = "center";
 		t.textColor = 0x1802f2;
 		t.verticalAlign = "top";
 		t.width = 640;
-		t.y = 500;
+		t.y = 431;
+		return t;
+	};
+	_proto.lbl_fast_i = function () {
+		var t = new eui.Label();
+		this.lbl_fast = t;
+		t.anchorOffsetY = 0;
+		t.bold = true;
+		t.fontFamily = "SimHei";
+		t.height = 50;
+		t.horizontalCenter = 0;
+		t.size = 50;
+		t.text = "超越了历史记录，恭喜你！";
+		t.textAlign = "center";
+		t.textColor = 0xef0e1c;
+		t.verticalAlign = "middle";
+		t.visible = false;
+		t.width = 640;
+		t.y = 490;
+		return t;
+	};
+	_proto.lbl_best_i = function () {
+		var t = new eui.Label();
+		this.lbl_best = t;
+		t.anchorOffsetY = 0;
+		t.bold = true;
+		t.fontFamily = "SimHei";
+		t.height = 50;
+		t.horizontalCenter = 0;
+		t.size = 40;
+		t.text = "";
+		t.textAlign = "center";
+		t.textColor = 0xff0f0f;
+		t.verticalAlign = "top";
+		t.width = 640;
+		t.y = 180;
 		return t;
 	};
 	_proto.lbl_i = function () {
@@ -273,7 +308,7 @@ var egret = window.egret;
 	_proto._Group2_i = function () {
 		var t = new eui.Group();
 		t.horizontalCenter = 0;
-		t.y = 326;
+		t.y = 288;
 		t.layout = this._HorizontalLayout2_i();
 		t.elementsContent = [this.star1_i(),this.star2_i(),this.star3_i()];
 		return t;
