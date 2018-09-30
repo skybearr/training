@@ -14,7 +14,7 @@ class RankUI extends BaseUI {
 	private shareticket: string;
 
 	/**初始化数据 */
-	protected initData(){
+	protected initData() {
 
 	}
 
@@ -53,11 +53,16 @@ class RankUI extends BaseUI {
 		egret.stopTick(this.tickerHandler, this);
 		egret.startTick(this.tickerHandler, this);
 
+		this.updateRank("score_1_3");
+	}
+
+	private updateRank(rankkey: string) {
 		WxApi.getInstance().postToDataContext({
 			shareTicket: this.shareticket,
 			userinfo: WxApi.getInstance().userInfo,
 			stageW: GameConst.GameStage.stageWidth,
 			stageH: GameConst.GameStage.stageHeight,
+			rankkey: rankkey,
 			command: "open"
 		})
 	}
@@ -68,7 +73,7 @@ class RankUI extends BaseUI {
 		return false;
 	}
 
-	
+
 	private clickGroupRank() {
 		WxApi.getInstance().share("grouprank=1");
 	}

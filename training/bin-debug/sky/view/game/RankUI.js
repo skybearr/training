@@ -46,11 +46,15 @@ var RankUI = (function (_super) {
         this.addChildAt(this.bmp_context, 4); //盖在底图上面，各种按钮下面
         egret.stopTick(this.tickerHandler, this);
         egret.startTick(this.tickerHandler, this);
+        this.updateRank("score_1_3");
+    };
+    RankUI.prototype.updateRank = function (rankkey) {
         WxApi.getInstance().postToDataContext({
             shareTicket: this.shareticket,
             userinfo: WxApi.getInstance().userInfo,
             stageW: GameConst.GameStage.stageWidth,
             stageH: GameConst.GameStage.stageHeight,
+            rankkey: rankkey,
             command: "open"
         });
     };

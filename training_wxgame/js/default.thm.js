@@ -713,7 +713,7 @@ var egret = window.egret;
 		t.text = "好友排行榜";
 		t.textColor = 0xfffffe;
 		t.touchEnabled = false;
-		t.y = 134;
+		t.y = 60;
 		return t;
 	};
 	_proto.img_rankgp_i = function () {
