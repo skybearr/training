@@ -36,6 +36,8 @@ class GameItemUI extends eui.ItemRenderer {
         let len = 720 / this.data.row;
         this.width = this.height = this.rect_bg.width = 
             this.rect_bg.height = this.rect_click.width = this.rect_click.height = len - 30;
+            console.log(this.data.id.length);
+        this.lbl.size = this.data.size;
         this.lbl.text = this.data.id + "";
     }
 }

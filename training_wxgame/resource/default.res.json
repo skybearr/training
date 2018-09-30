@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "rank_back_png,rank_bg_png,rank_button_png,reglogbg_png,star_a_png,star_b_png,yong_11_png,yong_3_png,yong_6_png,yong_7_png,yong_8_png,config_json",
+			"keys": "rank_back_png,rank_bg_png,rank_button_png,reglogbg_png,star_a_png,star_b_png,yong_11_png,yong_3_png,yong_6_png,yong_7_png,yong_8_png,config_json,share_jpg",
 			"name": "preload"
 		}
 	],
@@ -65,6 +65,11 @@
 			"url": "data/config.json",
 			"type": "json",
 			"name": "config_json"
+		},
+		{
+			"name": "share_jpg",
+			"type": "image",
+			"url": "assets/share.jpg"
 		}
 	]
 }

@@ -168,8 +168,8 @@ var egret = window.egret;
 		t.fontFamily = "SimHei";
 		t.height = 100;
 		t.horizontalCenter = 0;
-		t.size = 60;
-		t.text = "81";
+		t.size = 48;
+		t.text = "双子";
 		t.textAlign = "center";
 		t.textColor = 0x000000;
 		t.touchEnabled = false;
@@ -347,10 +347,10 @@ var egret = window.egret;
 	__extends(GameSkin, _super);
 	function GameSkin() {
 		_super.call(this);
-		this.skinParts = ["img_bg","lbl_time","list","btn_back","img_1","lbl_des","btn_start","gp"];
+		this.skinParts = ["img_bg","lbl_time","list","btn_back","btn_tips","lbl_num","img_1","lbl_des","btn_start","gp"];
 		
 		this.width = 750;
-		this.elementsContent = [this.img_bg_i(),this.lbl_time_i(),this.list_i(),this.btn_back_i(),this.gp_i()];
+		this.elementsContent = [this.img_bg_i(),this.lbl_time_i(),this.list_i(),this.btn_back_i(),this.btn_tips_i(),this.lbl_num_i(),this.gp_i()];
 	}
 	var _proto = GameSkin.prototype;
 
@@ -370,14 +370,14 @@ var egret = window.egret;
 		this.lbl_time = t;
 		t.anchorOffsetX = 0;
 		t.fontFamily = "SimHei";
-		t.horizontalCenter = 0;
+		t.horizontalCenter = -0.5;
 		t.size = 50;
-		t.text = "00:00:00";
+		t.text = "";
 		t.textAlign = "center";
 		t.textColor = 0xaa0cff;
 		t.verticalAlign = "middle";
 		t.width = 355.27;
-		t.y = 90;
+		t.y = 77.84;
 		return t;
 	};
 	_proto.list_i = function () {
@@ -385,10 +385,10 @@ var egret = window.egret;
 		this.list = t;
 		t.anchorOffsetX = 0;
 		t.anchorOffsetY = 0;
-		t.height = 720;
+		t.height = 800;
 		t.horizontalCenter = -2;
 		t.width = 720;
-		t.y = 193.48;
+		t.y = 192;
 		t.layout = this._TileLayout1_i();
 		return t;
 	};
@@ -411,6 +411,33 @@ var egret = window.egret;
 		t.skinName = "BaseButton1Skin";
 		t.visible = false;
 		t.width = 260;
+		return t;
+	};
+	_proto.btn_tips_i = function () {
+		var t = new eui.Button();
+		this.btn_tips = t;
+		t.bottom = 138;
+		t.height = 60;
+		t.horizontalCenter = 257;
+		t.label = "查看結果";
+		t.skinName = "BaseButton1Skin";
+		t.visible = false;
+		t.width = 160;
+		return t;
+	};
+	_proto.lbl_num_i = function () {
+		var t = new eui.Label();
+		this.lbl_num = t;
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 0;
+		t.size = 60;
+		t.text = "10457780";
+		t.textAlign = "center";
+		t.textColor = 0x000000;
+		t.verticalAlign = "middle";
+		t.visible = false;
+		t.width = 680;
+		t.y = 127.92;
 		return t;
 	};
 	_proto.gp_i = function () {

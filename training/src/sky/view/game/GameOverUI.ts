@@ -15,6 +15,8 @@ class GameOverUI extends BaseUI {
 	private lbl_fast:eui.Label;
 
 	protected initView() {
+
+
 		let star = 0;
 		for (let i = this.vo.times.length - 1; i >= 0; i--) {
 			if (this.time <= this.vo.times[i] * 1000){
@@ -38,7 +40,7 @@ class GameOverUI extends BaseUI {
 
 		this.lbl.text = GameLogic.getInstance().getStringByStar(this.vo.stars);
 
-		this.lbl_time.text = this.getText(this.time);
+		this.lbl_time.text = "本局用时：" + this.getText(this.time);
 	}
 
 	private getText(t){

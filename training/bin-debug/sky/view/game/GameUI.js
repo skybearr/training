@@ -42,29 +42,42 @@ var GameUI = (function (_super) {
         }
         var row = Math.sqrt(len);
         var a = this.shuffle(this.arr);
+        var size = 60;
         for (var i = 0; i < a.length; i++) {
-            this.arr_data.addItem({ id: a[i], row: row });
+            this.arr_data.addItem({ id: a[i], row: row, size: size });
         }
     };
     GameUI.prototype.initType2 = function () {
         var index = this.vo.content.indexOf(",");
         var s = index != -1 ? "," : "";
         this.arr = this.vo.content.split(s);
-        this.arr = this.shuffle(this.arr);
-        for (var i = 0; i < this.arr.length; i++) {
-            this.arr_data.addItem({ id: this.arr[i], row: this.vo.id < 3 ? 5 : 4 });
+        var a = this.shuffle(this.arr);
+        var size = 60;
+        if (this.vo.type == 2 && (this.vo.id == 8 || this.vo.id == 9)) {
+            size = 48;
+        }
+        var row = (this.vo.id < 3 || this.vo.id > 8) ? 5 : 4;
+        for (var i = 0; i < a.length; i++) {
+            this.arr_data.addItem({ id: a[i], row: this.vo.id < 3 ? 5 : 5, size: size });
         }
     };
     GameUI.prototype.initType3 = function () {
         var len = parseInt(this.vo.content);
         this.arr = [];
+        var str = "";
         for (var i = 0; i < len; i++) {
-            this.arr.push(Math.floor(Math.random() * 10) + "");
+            var n = Math.floor(Math.random() * 10) + "";
+            this.arr.push(n);
+            str += n;
         }
-        this.arr = this.shuffle(this.arr);
-        for (var i = 0; i < this.arr.length; i++) {
-            this.arr_data.addItem({ id: this.arr[i], row: 3 });
+        this.lbl_num.visible = true;
+        this.lbl_num.alpha = 1;
+        this.lbl_num.text = str;
+        var size = 60;
+        for (var i = 0; i < 10; i++) {
+            this.arr_data.addItem({ id: i + "", row: 5, size: size });
         }
+        this.list.visible = false;
     };
     /**对数组乱序 */
     GameUI.prototype.shuffle = function (a) {
@@ -88,8 +101,22 @@ var GameUI = (function (_super) {
         this.btn_back.visible = this.vo.type != 1;
     };
     GameUI.prototype.clickStart = function () {
+        var _this = this;
         this.gp.visible = false;
-        this.start();
+        if (this.vo.type == 3) {
+            egret.clearTimeout(this.timeId);
+            var t = (parseInt(this.vo.content) - 5) * 1000;
+            this.timeId = egret.setTimeout(function () {
+                egret.Tween.get(_this.lbl_num).to({ alpha: 0 }, 3000).call(function () {
+                    _this.lbl_num.visible = false;
+                    _this.list.visible = true;
+                    _this.start();
+                }, _this);
+            }, this, t);
+        }
+        else {
+            this.start();
+        }
     };
     GameUI.prototype.start = function () {
         GameLogic.getInstance().crtclick = 0;
@@ -147,6 +174,8 @@ var GameUI = (function (_super) {
         _super.prototype.clear.call(this);
         this.vo = null;
         GameLogic.getInstance().crtclick = 0;
+        egret.clearTimeout(this.timeId);
+        egret.Tween.removeTweens(this.lbl_num);
         this.btn_start.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStart, this);
         this.removeEventListener(egret.Event.ENTER_FRAME, this.enterframe, this);
         this.list.removeEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemClick, this);

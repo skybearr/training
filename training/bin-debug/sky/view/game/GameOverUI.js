@@ -37,7 +37,7 @@ var GameOverUI = (function (_super) {
             this.lbl_fast.visible = true;
         }
         this.lbl.text = GameLogic.getInstance().getStringByStar(this.vo.stars);
-        this.lbl_time.text = this.getText(this.time);
+        this.lbl_time.text = "本局用时：" + this.getText(this.time);
     };
     GameOverUI.prototype.getText = function (t) {
         var s = TimeUtil.ParseTime2Format(Math.floor(t / 1000), "m:s");

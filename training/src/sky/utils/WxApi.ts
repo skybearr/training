@@ -19,12 +19,14 @@ class WxApi extends egret.EventDispatcher {
 	public userInfo: any;
 
 	public init() {
+		
 		if(GameConst.web == 1){
 			GameLogic.getInstance().init();
 		}
 		else{
 			this.login();
 		}
+		this.showShareMenu();
 	}
 
 	/**登录 */
@@ -177,11 +179,9 @@ class WxApi extends egret.EventDispatcher {
 		console.log("showShareMenu:", info);
 
 		if (info == null) {
-			info = { title: "让你抓耳挠腮，虐你不留情面，来挑战啊", imageUrl: "resource/assets/share.png", query: "" };
+			info = { share_game_title: "舒尔特方格，训练你的注意力", share_game_img: "resource/assets/share.jpg", query: "" };
 		}
-		else {
-			this.shareInfo = info;
-		}
+		this.shareInfo = info;
 		let wx = window["wx"];
 		if (wx == null) {
 			return;
@@ -189,7 +189,7 @@ class WxApi extends egret.EventDispatcher {
 
 		wx.showShareMenu();
 		this.onShare();
-		this.initRewardVideoAd();
+		// this.initRewardVideoAd();
 		this.checkShareInfo();
 	}
 
