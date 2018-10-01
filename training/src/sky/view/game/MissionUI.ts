@@ -76,9 +76,9 @@ class MissionUI extends BaseUI {
 		if (vo == null) {
 			return;
 		}
-		if(vo.state == 0){
-			return;
-		}
+		// if(vo.state == 0){
+		// 	return;
+		// }
 		GameLogic.getInstance().startGame(vo);
 	}
 

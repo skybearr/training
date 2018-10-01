@@ -27,6 +27,16 @@ class GameLogic extends egret.EventDispatcher {
 		console.log("userinfo:", WxApi.getInstance().userInfo);
 	}
 
+	public setNextMission(type,id,state){
+		let arr = this.data[type];
+		if(arr != null){
+			let vo = arr[id];
+			if(vo != null){
+				vo.state = state;
+			}
+		}
+	}
+
 	private initData() {
 		this.data = [, [], [], []];
 		this.config = RES.getRes("config_json");
@@ -47,6 +57,7 @@ class GameLogic extends egret.EventDispatcher {
 				vo.type = o['type'];
 				vo.des = o['des'];
 				vo.content = o['content'];
+				vo.name = o['name'];
 				vo.times = [];
 				let ta = o['time'].split(":");
 				for (let j = 0; j < ta.length; j++) {

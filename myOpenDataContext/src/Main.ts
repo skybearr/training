@@ -181,8 +181,8 @@ class Main extends egret.DisplayObjectContainer {
         this.addChild(item);
     }
 
-    private item_bg_color1:number = 0x1f1e23;
-    private item_bg_color2:number = 0x2b2a30;
+    private item_bg_color1:number = 0xABD8BB;
+    private item_bg_color2:number = 0x8C8B91;
     
     private item_rankx:number = 40;
     private item_rankwidth:number = 50;
@@ -213,7 +213,8 @@ class Main extends egret.DisplayObjectContainer {
         let kvs = data.KVDataList;
         let kvo = {};
         if (kvs == null || kvs.length == 0) {
-            kvo = { score: "未上榜" };
+            kvo = {};
+            kvo[this.rankkey] = "未上榜";
             i = -1;
         }
         else {
@@ -269,11 +270,61 @@ class Main extends egret.DisplayObjectContainer {
 
         //分数
         let tf_score = this.createTextField(this.item_scorex,item.height,this.item_scorewidth,this.item_scoreheight,this.item_scorecolor,this.item_scorefont,this.item_scoresize,"right");
-        tf_score.text = kvo['score'];
+        tf_score.text = this.getText(kvo[this.rankkey]);
         item.addChild(tf_score);
 
         return item;
     }
+
+    private getText(t){
+		let s = this.ParseTime2Format(Math.floor(t / 1000), "m:s");
+		let hs = t % 1000;
+		let ss = "";
+		if (hs < 10) {
+			ss = "00" + hs;
+		}
+		else if (hs < 100) {
+			ss = "0" + hs;
+		}
+		else {
+			ss = hs + "";;
+		}
+		return s + ":" + ss;
+	}
+
+    private ParseTime2Format(t:number, f:string = "h:m:s"):string{
+		
+		var h:number = Math.floor(t/3600);
+		var m:number = Math.floor((t%3600)/60);
+		var s:number = (t%3600)%60;
+
+		function parse_format(t:number):string{
+			var s:string = t.toString();
+			if (t < 10){
+				s = "0" + t;
+			}
+			return s;
+		}
+
+		if (f.indexOf("h") != -1){
+			f = f.replace(/h/g, parse_format(h));
+		}else{
+			m += h*60;
+		}
+		if (f.indexOf("m") != -1){
+			f = f.replace(/m/g, parse_format(m));
+		}else{
+			if (f.indexOf("h") != -1){
+				s += m*60;
+			}else{
+				s = t;
+			}
+		}
+		if (f.indexOf("s") != -1){
+			f = f.replace(/s/g, parse_format(s));
+		}
+		return f;
+	}
 
     private createTextField(x,y,w,h,color,font,size,textalign="center",veralign="middle"):egret.TextField{
         let tf = new egret.TextField();

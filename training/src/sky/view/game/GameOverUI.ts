@@ -25,6 +25,10 @@ class GameOverUI extends BaseUI {
 			}
 		}
 		this.vo.stars = star;
+		if(star > 0){
+			this.vo.state = 2;
+			GameLogic.getInstance().setNextMission(this.vo.type,this.vo.id,1);
+		}
 		console.log("gameover:",this.vo);
 		
 		let recond = GameLogic.getInstance().getRecond(this.vo.type,this.vo.id);
@@ -33,6 +37,7 @@ class GameOverUI extends BaseUI {
 		}
 		if(recond == 0 || this.time < recond){
 			GameLogic.getInstance().saveLocal(this.vo.type,this.vo.id,this.time);
+			WxApi.getInstance().setHigherScore(this.vo.type,this.vo.id,this.time);
 		}
 		if(this.time < recond){
 			this.lbl_fast.visible = true;

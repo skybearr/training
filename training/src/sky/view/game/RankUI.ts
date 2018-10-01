@@ -10,23 +10,91 @@ class RankUI extends BaseUI {
 	private img_rankgp: eui.Image;
 	private lbl_title: eui.Label;
 	private lbl_2: eui.Label;
+	private list:eui.List;
+	private btn1:eui.Button;
+	private btn2:eui.Button;
+	private btn3:eui.Button;
+
+	private crtItem:RankTypeItemUI;
 
 	private shareticket: string;
 
 	/**初始化数据 */
 	protected initData() {
+		this.list.itemRenderer = RankTypeItemUI;
+		this.arr_data = new eui.ArrayCollection();
+	}
 
+	protected checkFit(){
+		this.rect_bg.height = GameLogic.getInstance().GameStage.stageHeight;
 	}
 
 	protected initView() {
 		this.lbl_title.text = this.shareticket != null ? "群排行榜" : "好友排行榜";
-
+		this.data = GameLogic.getInstance().getMissionData();
+		this.crttype = 1;
+		this.initList();
+		this.validateNow();
 		this.initDataContext();
 	}
+	private initList() {
+		let arr = this.data[this.crttype];
+		if (arr == null || arr.length == 0) {
+			return;
+		}
+		this.arr_data.removeAll();
+		for (let i = 0; i < arr.length; i++) {
+			this.arr_data.addItem(arr[i]);
+		}
+		this.list.dataProvider = this.arr_data;
+		this.initBtn();
+	}
+	private initBtn() {
+		for (let i = 1; i <= 3; i++) {
+			let btn: eui.Button = this['btn' + i];
+			if (btn != null) {
+				btn.filters = this.crttype != i ? FilterUtil.getGrayFilter() : null;
+			}
+		}
+	}
 
+
+	private arr_data: eui.ArrayCollection;
+	private data: MissionVO[][];
+	private crttype: number;
 	protected initEvent() {
 		this.img_close.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickClose, this);
 		this.img_rankgp.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickGroupRank, this);
+		this.btn1.addEventListener(egret.TouchEvent.TOUCH_TAP,this.btnClick,this);
+		this.btn2.addEventListener(egret.TouchEvent.TOUCH_TAP,this.btnClick,this);
+		this.btn3.addEventListener(egret.TouchEvent.TOUCH_TAP,this.btnClick,this);
+		this.list.addEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemClick, this);
+	}
+
+	private btnClick(e: egret.TouchEvent) {
+		let i = parseInt(e.currentTarget.name);
+		if (this.crttype == i) {
+			return;
+		}
+		this.crttype = i;
+		this.initList();
+		this.list.validateNow();
+		this.updateRank(i,1,this.list.getChildAt(0));
+	}
+	private itemClick(e: eui.ItemTapEvent) {
+		let i = e.itemIndex;
+		let arr = this.data[this.crttype];
+		console.log("itemclick:",i,arr);
+		
+		if (arr == null || arr.length == 0) {
+			return;
+		}
+		let vo = arr[i];
+		if (vo == null) {
+			return;
+		}
+		let rankkey = "score_" + vo.type + "_" + vo.id;
+		this.updateRank(vo.type,vo.id,e.itemRenderer);
 	}
 
 	private bmp_context: egret.Bitmap;
@@ -53,10 +121,20 @@ class RankUI extends BaseUI {
 		egret.stopTick(this.tickerHandler, this);
 		egret.startTick(this.tickerHandler, this);
 
-		this.updateRank("score_1_3");
+		this.updateRank(1,3,this.list.getChildAt(2));
 	}
 
-	private updateRank(rankkey: string) {
+	private updateRank(type,id,item) {
+		console.log("updateRank:",type,id,item);
+		
+		if(this.crtItem != null){
+			this.crtItem.setSelected(false);
+		}
+		this.crtItem = item;
+		if(this.crtItem != null){
+			this.crtItem.setSelected(true);
+		}
+		let rankkey = "score_" + type + "_" + id;
 		WxApi.getInstance().postToDataContext({
 			shareTicket: this.shareticket,
 			userinfo: WxApi.getInstance().userInfo,
@@ -89,6 +167,10 @@ class RankUI extends BaseUI {
 
 		this.img_close.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickClose, this);
 		this.img_rankgp.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickGroupRank, this);
+		this.btn1.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.btnClick,this);
+		this.btn2.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.btnClick,this);
+		this.btn3.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.btnClick,this);
+		this.list.removeEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemClick, this);
 
 		WxApi.getInstance().postToDataContext({
 			command: "close"

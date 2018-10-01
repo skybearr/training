@@ -12,4 +12,5 @@ class MissionVO {
 	public des:string;
 	public content:string;
 	public times:number[];
+	public name:string;
 }

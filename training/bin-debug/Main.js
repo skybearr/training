@@ -79,6 +79,7 @@ var Main = (function (_super) {
     Main.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);
         GameLogic.getInstance().GameStage = this.stage;
+        GameConst.GameStage = this.stage;
         GameLogic.getInstance().main = this;
         egret.lifecycle.addLifecycleListener(function (context) {
             // custom lifecycle plugin

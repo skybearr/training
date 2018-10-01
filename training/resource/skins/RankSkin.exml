@@ -9,6 +9,14 @@
 
 
 	<e:Image id="img_close" y="44" x="30" source="rank_back_png"/>
+	<e:Button id="btn1" name="1" label="舒尔特" x="55" y="128" skinName="BaseButton1Skin" height="40"/>
+	<e:Button id="btn2" name="2" label="趣味" x="215" y="128" skinName="BaseButton1Skin" height="40"/>
+	<e:Button id="btn3" name="3" label="瞬间记忆" x="375" y="128" skinName="BaseButton1Skin" height="40"/>
+	<e:List id="list" width="640" height="30" y="168" anchorOffsetY="0" anchorOffsetX="0" horizontalCenter="0">
+		<e:layout>
+			<e:HorizontalLayout gap="2"/>
+		</e:layout>
+	</e:List>
 
 
 

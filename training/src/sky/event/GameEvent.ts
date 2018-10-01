@@ -6,4 +6,6 @@ class GameEvent extends egret.Event{
     public data: any = null;
 
 	public static REWARDAD_CLOSE_EVENT:string = "REWARDAD_CLOSE_EVENT";
+
+     public static OPENRANK:string = "OPENRANK";
 }

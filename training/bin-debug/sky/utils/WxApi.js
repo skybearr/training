@@ -26,6 +26,7 @@ var WxApi = (function (_super) {
         else {
             this.login();
         }
+        this.showShareMenu();
     };
     /**登录 */
     WxApi.prototype.login = function () {
@@ -122,6 +123,7 @@ var WxApi = (function (_super) {
     };
     /**点击别人转发进来的 ，获取shareTicket*/
     WxApi.prototype.checkShareInfo = function () {
+        var _this = this;
         console.log("checkShareInfo");
         var wx = window["wx"];
         if (wx == null) {
@@ -137,7 +139,9 @@ var WxApi = (function (_super) {
                     shareTicket: info.shareTicket,
                     success: function (res) {
                         console.log("getShareInfo:success:", res);
-                        // GameLogic.getInstance().openGroupdRank(info.shareTicket);
+                        var event = new GameEvent(GameEvent.OPENRANK);
+                        event.data = info.shareTicket;
+                        _this.dispatchEvent(event);
                     },
                     fail: function (res) {
                         console.log("getShareInfo:fail:", res);
@@ -154,18 +158,16 @@ var WxApi = (function (_super) {
         if (info === void 0) { info = null; }
         console.log("showShareMenu:", info);
         if (info == null) {
-            info = { title: "让你抓耳挠腮，虐你不留情面，来挑战啊", imageUrl: "resource/assets/share.png", query: "" };
+            info = { share_game_title: "舒尔特方格，训练你的注意力", share_game_img: "resource/assets/share.jpg", query: "" };
         }
-        else {
-            this.shareInfo = info;
-        }
+        this.shareInfo = info;
         var wx = window["wx"];
         if (wx == null) {
             return;
         }
         wx.showShareMenu();
         this.onShare();
-        this.initRewardVideoAd();
+        // this.initRewardVideoAd();
         this.checkShareInfo();
     };
     /**监听用户点击右上角菜单的“转发”按钮时触发的事件
@@ -228,24 +230,21 @@ var WxApi = (function (_super) {
     /** 对用户托管数据进行写数据操作，允许同时写多组 KV 数据
      * @param	KVDataList	要修改的 KV 数据列表
     */
-    WxApi.prototype.setHigherScore = function (v) {
-        //0不计入
-        if (v <= 0) {
-            return;
-        }
+    WxApi.prototype.setHigherScore = function (type, id, v) {
         var wx = window["wx"];
         if (wx == null) {
             return;
         }
-        var n = PlayerConst.highestScore;
-        if (v <= n) {
-            return;
-        }
-        PlayerConst.highestScore = v;
+        // let n = PlayerConst.highestScore;
+        // if (v <= n) {
+        // 	return;
+        // }
+        // PlayerConst.highestScore = v;
+        var ranktype = "score_" + type + "_" + id;
         var KVDataList = [];
         wx.setUserCloudStorage({
             KVDataList: [
-                { key: "newscore", value: v + "" }
+                { key: ranktype, value: v + "" }
             ],
             success: function (res) {
                 console.log("setUserCloudStorage:res:", res);
@@ -411,6 +410,7 @@ var WxApi = (function (_super) {
         if (wx == null) {
             return;
         }
+        console.log("postToDataContext:", data);
         wx.getOpenDataContext().postMessage(data);
     };
     return WxApi;

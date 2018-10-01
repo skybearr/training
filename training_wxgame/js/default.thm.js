@@ -520,10 +520,12 @@ var egret = window.egret;
 		t.fontFamily = "SimHei";
 		t.height = 80;
 		t.horizontalCenter = 0;
-		t.size = 60;
-		t.text = "1";
+		t.size = 36;
+		t.stroke = 2;
+		t.strokeColor = 0xff0000;
+		t.text = "速记1";
 		t.textAlign = "center";
-		t.textColor = 0xffffff;
+		t.textColor = 0xead410;
 		t.touchEnabled = false;
 		t.verticalAlign = "middle";
 		t.verticalCenter = -3;
@@ -688,11 +690,11 @@ var egret = window.egret;
 	__extends(RankSkin, _super);
 	function RankSkin() {
 		_super.call(this);
-		this.skinParts = ["rect_bg","lbl_2","lbl_title","img_rankgp","img_close"];
+		this.skinParts = ["rect_bg","lbl_2","lbl_title","img_rankgp","img_close","btn1","btn2","btn3","list"];
 		
 		this.height = 1335;
 		this.width = 750;
-		this.elementsContent = [this.rect_bg_i(),this._Image1_i(),this.lbl_2_i(),this.lbl_title_i(),this.img_rankgp_i(),this.img_close_i()];
+		this.elementsContent = [this.rect_bg_i(),this._Image1_i(),this.lbl_2_i(),this.lbl_title_i(),this.img_rankgp_i(),this.img_close_i(),this.btn1_i(),this.btn2_i(),this.btn3_i(),this.list_i()];
 	}
 	var _proto = RankSkin.prototype;
 
@@ -759,7 +761,92 @@ var egret = window.egret;
 		t.y = 44;
 		return t;
 	};
+	_proto.btn1_i = function () {
+		var t = new eui.Button();
+		this.btn1 = t;
+		t.height = 40;
+		t.label = "舒尔特";
+		t.name = "1";
+		t.skinName = "BaseButton1Skin";
+		t.x = 55;
+		t.y = 128;
+		return t;
+	};
+	_proto.btn2_i = function () {
+		var t = new eui.Button();
+		this.btn2 = t;
+		t.height = 40;
+		t.label = "趣味";
+		t.name = "2";
+		t.skinName = "BaseButton1Skin";
+		t.x = 215;
+		t.y = 128;
+		return t;
+	};
+	_proto.btn3_i = function () {
+		var t = new eui.Button();
+		this.btn3 = t;
+		t.height = 40;
+		t.label = "瞬间记忆";
+		t.name = "3";
+		t.skinName = "BaseButton1Skin";
+		t.x = 375;
+		t.y = 128;
+		return t;
+	};
+	_proto.list_i = function () {
+		var t = new eui.List();
+		this.list = t;
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.height = 30;
+		t.horizontalCenter = 0;
+		t.width = 640;
+		t.y = 168;
+		t.layout = this._HorizontalLayout1_i();
+		return t;
+	};
+	_proto._HorizontalLayout1_i = function () {
+		var t = new eui.HorizontalLayout();
+		t.gap = 2;
+		return t;
+	};
 	return RankSkin;
+})(eui.Skin);generateEUI.paths['resource/skins/RankTypeItemSkin.exml'] = window.RankTypeItemSkin = (function (_super) {
+	__extends(RankTypeItemSkin, _super);
+	function RankTypeItemSkin() {
+		_super.call(this);
+		this.skinParts = ["rect_bg","lbl"];
+		
+		this.height = 30;
+		this.width = 71;
+		this.elementsContent = [this.rect_bg_i(),this.lbl_i()];
+	}
+	var _proto = RankTypeItemSkin.prototype;
+
+	_proto.rect_bg_i = function () {
+		var t = new eui.Rect();
+		this.rect_bg = t;
+		t.fillColor = 0xf2fc8d;
+		t.percentHeight = 100;
+		t.width = 71;
+		return t;
+	};
+	_proto.lbl_i = function () {
+		var t = new eui.Label();
+		this.lbl = t;
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 0;
+		t.size = 20;
+		t.stroke = 2;
+		t.text = "速记20";
+		t.textAlign = "center";
+		t.verticalAlign = "middle";
+		t.verticalCenter = 0;
+		t.width = 71;
+		return t;
+	};
+	return RankTypeItemSkin;
 })(eui.Skin);generateEUI.paths['resource/skins/StartSkin.exml'] = window.StartSkin = (function (_super) {
 	__extends(StartSkin, _super);
 	function StartSkin() {

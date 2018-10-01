@@ -10,6 +10,7 @@
 		"resource/skins/MissionItemSkin.exml",
 		"resource/skins/MissionSkin.exml",
 		"resource/skins/RankSkin.exml",
+		"resource/skins/RankTypeItemSkin.exml",
 		"resource/skins/StartSkin.exml"
 	],
 	"path": "resource/default.thm.json"

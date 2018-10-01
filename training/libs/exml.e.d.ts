@@ -14,5 +14,7 @@ declare class MissionSkin extends eui.Skin{
 }
 declare class RankSkin extends eui.Skin{
 }
+declare class RankTypeItemSkin extends eui.Skin{
+}
 declare class StartSkin extends eui.Skin{
 }

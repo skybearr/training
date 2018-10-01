@@ -150,7 +150,9 @@ class WxApi extends egret.EventDispatcher {
 					shareTicket: info.shareTicket,
 					success: res => {
 						console.log("getShareInfo:success:", res);
-						// GameLogic.getInstance().openGroupdRank(info.shareTicket);
+						let event = new GameEvent(GameEvent.OPENRANK);
+						event.data = info.shareTicket;
+						this.dispatchEvent(event);
 					},
 					fail: res => {
 						console.log("getShareInfo:fail:", res);
@@ -261,26 +263,23 @@ class WxApi extends egret.EventDispatcher {
     /** 对用户托管数据进行写数据操作，允许同时写多组 KV 数据
 	 * @param	KVDataList	要修改的 KV 数据列表	
 	*/
-	public setHigherScore(v: number) {
-		//0不计入
-		if (v <= 0) {
-			return;
-		}
+	public setHigherScore(type,id,v: number) {
 		let wx = window["wx"];
 		if (wx == null) {
 			return;
 		}
 
-		let n = PlayerConst.highestScore;
-		if (v <= n) {
-			return;
-		}
-		PlayerConst.highestScore = v;
+		// let n = PlayerConst.highestScore;
+		// if (v <= n) {
+		// 	return;
+		// }
+		// PlayerConst.highestScore = v;
+		let ranktype = "score_" + type + "_" + id;
 		let KVDataList = [];
 
 		wx.setUserCloudStorage({
 			KVDataList: [
-				{ key: "newscore", value: v + "" }
+				{ key: ranktype, value: v + "" }
 			],
 			success: res => {
 				console.log("setUserCloudStorage:res:", res);
@@ -468,6 +467,8 @@ class WxApi extends egret.EventDispatcher {
 		if (wx == null) {
 			return;
 		}
+		console.log("postToDataContext:",data);
+		
 		wx.getOpenDataContext().postMessage(data);
 	}
 }

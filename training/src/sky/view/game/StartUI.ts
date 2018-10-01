@@ -23,6 +23,7 @@ class StartUI extends BaseUI{
 		this.btn_rank.addEventListener(egret.TouchEvent.TOUCH_TAP,this.clickRank,this);
 		this.btn_share.addEventListener(egret.TouchEvent.TOUCH_TAP,this.clickShare,this);
 		this.btn_mission.addEventListener(egret.TouchEvent.TOUCH_TAP,this.clickMission,this);
+		WxApi.getInstance().addEventListener(GameEvent.OPENRANK, this.openRank, this);
 	}
 
 	private clickStart(){
@@ -31,6 +32,11 @@ class StartUI extends BaseUI{
 
 	private clickRank(){
 		this.addChild(new RankUI());
+	}
+
+	private openRank(e: GameEvent) {
+		let ticket = e == null ? null : e.data;
+		this.addChild(new RankUI(ticket));
 	}
 
 	private clickShare(){
@@ -48,5 +54,6 @@ class StartUI extends BaseUI{
 		this.btn_rank.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickRank,this);
 		this.btn_share.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickShare,this);
 		this.btn_mission.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickMission,this);
+		WxApi.getInstance().removeEventListener(GameEvent.OPENRANK, this.openRank, this);
 	}
 }

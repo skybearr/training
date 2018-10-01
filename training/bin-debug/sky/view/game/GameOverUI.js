@@ -32,6 +32,7 @@ var GameOverUI = (function (_super) {
         }
         if (recond == 0 || this.time < recond) {
             GameLogic.getInstance().saveLocal(this.vo.type, this.vo.id, this.time);
+            WxApi.getInstance().setHigherScore(this.vo.type, this.vo.id, this.time);
         }
         if (this.time < recond) {
             this.lbl_fast.visible = true;

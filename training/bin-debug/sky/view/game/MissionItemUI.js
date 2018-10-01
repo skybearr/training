@@ -26,7 +26,7 @@ var MissionItemUI = (function (_super) {
         this.initView(vo);
     };
     MissionItemUI.prototype.initView = function (vo) {
-        this.lbl.text = vo.id + "";
+        this.lbl.text = vo.name;
         this.lbl.textColor = vo.state == 0 ? 0xFF0000 : 0xffffff;
         if (vo.state == 2) {
             for (var i = 1; i <= 3; i++) {

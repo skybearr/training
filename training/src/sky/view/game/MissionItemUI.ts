@@ -24,8 +24,8 @@ class MissionItemUI extends eui.ItemRenderer {
     }
 
     private initView(vo: MissionVO) {
-        this.lbl.text = vo.id + "";
-        this.lbl.textColor = vo.state == 0 ? 0xFF0000 : 0xffffff;
+        this.lbl.text = vo.name;
+        this.lbl.textColor = 0xffffff;
         if (vo.state == 2) {
             for (let i = 1; i <= 3; i++) {
                 this['star' + i].source = RES.getRes(i <= vo.stars ? "star_a_png" : "star_b_png");

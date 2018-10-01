@@ -44,6 +44,7 @@ var GameLogic = (function (_super) {
                 vo.type = o['type'];
                 vo.des = o['des'];
                 vo.content = o['content'];
+                vo.name = o['name'];
                 vo.times = [];
                 var ta = o['time'].split(":");
                 for (var j = 0; j < ta.length; j++) {

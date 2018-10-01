@@ -34,6 +34,7 @@ class Main extends eui.UILayer {
         super.createChildren();
 
         GameLogic.getInstance().GameStage = this.stage;
+        GameConst.GameStage = this.stage;
         GameLogic.getInstance().main = this;
 
         egret.lifecycle.addLifecycleListener((context) => {
