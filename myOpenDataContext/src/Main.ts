@@ -158,7 +158,7 @@ class Main extends egret.DisplayObjectContainer {
         }
         let va = parseInt(a.KVDataList[0].value);
         let vb = parseInt(b.KVDataList[0].value);
-        if (va > vb) {
+        if (va < vb) {
             return -1;
         }
         else {

@@ -1,0 +1,17 @@
+{
+	"skins": {},
+	"autoGenerateExmlsList": true,
+	"exmls": [
+		"resource/skins/BaseButton1Skin.exml",
+		"resource/skins/BaseButtonSkin.exml",
+		"resource/skins/GameItemSkin.exml",
+		"resource/skins/GameOverSkin.exml",
+		"resource/skins/GameSkin.exml",
+		"resource/skins/MissionItemSkin.exml",
+		"resource/skins/MissionSkin.exml",
+		"resource/skins/RankSkin.exml",
+		"resource/skins/RankTypeItemSkin.exml",
+		"resource/skins/StartSkin.exml"
+	],
+	"path": "resource/default.thm.json"
+}

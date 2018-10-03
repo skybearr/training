@@ -58,11 +58,12 @@ class WxApi extends egret.EventDispatcher {
 		if (wx == null) {
 			return;
 		}
+		query = query == null ? "" : query;
 		this.updateShareMenu(true);
 		wx.shareAppMessage({
 			title: WxApi.getInstance().shareInfo.share_game_title,
 			imageUrl: WxApi.getInstance().shareInfo.share_game_img,
-			query: WxApi.getInstance().shareInfo.query
+			query: query
 		})
 	}
 	/**炫耀 */
@@ -181,7 +182,7 @@ class WxApi extends egret.EventDispatcher {
 		console.log("showShareMenu:", info);
 
 		if (info == null) {
-			info = { share_game_title: "舒尔特方格，训练你的注意力", share_game_img: "resource/assets/share.jpg", query: "" };
+			info = { share_game_title: "每天练习5分钟，提高孩子注意力", share_game_img: "resource/assets/share.jpg", query: "" };
 		}
 		this.shareInfo = info;
 		let wx = window["wx"];
