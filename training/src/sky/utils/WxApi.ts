@@ -19,11 +19,11 @@ class WxApi extends egret.EventDispatcher {
 	public userInfo: any;
 
 	public init() {
-		
-		if(GameConst.web == 1){
+
+		if (GameConst.web == 1) {
 			GameLogic.getInstance().init();
 		}
-		else{
+		else {
 			this.login();
 		}
 		this.showShareMenu();
@@ -37,7 +37,7 @@ class WxApi extends egret.EventDispatcher {
 		}
 		wx.login({
 			success: (res) => {
-				console.log("wxloginsuccess:",res);
+				console.log("wxloginsuccess:", res);
 				this.logincode = res['code'];
 				GameLogic.getInstance().init();
 			},
@@ -53,15 +53,16 @@ class WxApi extends egret.EventDispatcher {
     /**主动转发 
 	 * @param query 转发携带参数 必须是 key1=val1&key2=val2 的格式 用于区分其他用户点开这个分享链接时是否打开排行榜等操作
 	*/
-	public share(query: string = null) {
+	public share(title: string = null, query: string = null) {
 		let wx = window["wx"];
 		if (wx == null) {
 			return;
 		}
+		title = title == null ? WxApi.getInstance().shareInfo.share_game_title : title;
 		query = query == null ? "" : query;
 		this.updateShareMenu(true);
 		wx.shareAppMessage({
-			title: WxApi.getInstance().shareInfo.share_game_title,
+			title: title,
 			imageUrl: WxApi.getInstance().shareInfo.share_game_img,
 			query: query
 		})
@@ -264,7 +265,7 @@ class WxApi extends egret.EventDispatcher {
     /** 对用户托管数据进行写数据操作，允许同时写多组 KV 数据
 	 * @param	KVDataList	要修改的 KV 数据列表	
 	*/
-	public setHigherScore(type,id,v: number) {
+	public setHigherScore(type, id, v: number) {
 		let wx = window["wx"];
 		if (wx == null) {
 			return;
@@ -435,7 +436,7 @@ class WxApi extends egret.EventDispatcher {
 		catch (e) {
 			return null;
 		}
-	}	
+	}
 
 	/**跳转到其他小程序 */
 	public skipToProgram() {
@@ -468,8 +469,8 @@ class WxApi extends egret.EventDispatcher {
 		if (wx == null) {
 			return;
 		}
-		console.log("postToDataContext:",data);
-		
+		console.log("postToDataContext:", data);
+
 		wx.getOpenDataContext().postMessage(data);
 	}
 }

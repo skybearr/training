@@ -67,4 +67,3 @@ var HttpCommand = (function () {
     return HttpCommand;
 }());
 __reflect(HttpCommand.prototype, "HttpCommand");
-//# sourceMappingURL=HttpCommand.js.map

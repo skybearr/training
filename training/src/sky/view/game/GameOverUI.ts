@@ -13,6 +13,7 @@ class GameOverUI extends BaseUI {
 	private lbl_time: eui.Label;
 	private lbl_best:eui.Label;
 	private lbl_fast:eui.Label;
+	private btn_share:eui.Label;
 
 	protected initView() {
 
@@ -67,6 +68,7 @@ class GameOverUI extends BaseUI {
 	protected initEvent() {
 		this.btn_back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
 		this.btn_restart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickRestart, this);
+		this.btn_share.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickShare, this);
 	}
 
 	private clickRestart() {
@@ -77,6 +79,11 @@ class GameOverUI extends BaseUI {
 		GameLogic.getInstance().openStart();
 	}
 
+	private clickShare(){
+		let title = "这次舒尔特注意力训练" + this.vo.name +  "关卡我只用了" + this.getText(this.time) + "秒，快来挑战我吧";
+		WxApi.getInstance().share(title);
+	}
+
 	protected clear() {
 		super.clear();
 
@@ -84,5 +91,6 @@ class GameOverUI extends BaseUI {
 
 		this.btn_back.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
 		this.btn_restart.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickRestart, this);
+		this.btn_share.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickShare,this);
 	}
 }

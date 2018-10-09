@@ -153,7 +153,7 @@ class RankUI extends BaseUI {
 
 
 	private clickGroupRank() {
-		WxApi.getInstance().share("grouprank=1");
+		WxApi.getInstance().share(null,"grouprank=1");
 	}
 
 	private clickClose() {

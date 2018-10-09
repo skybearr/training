@@ -183,11 +183,11 @@ var egret = window.egret;
 	__extends(GameOverSkin, _super);
 	function GameOverSkin() {
 		_super.call(this);
-		this.skinParts = ["img_bg","lbl_time","lbl_fast","lbl_best","lbl","btn_back","btn_restart","star1","star2","star3"];
+		this.skinParts = ["img_bg","lbl_time","lbl_fast","lbl_best","lbl","btn_back","btn_restart","star1","star2","star3","btn_share"];
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this.img_bg_i(),this.lbl_time_i(),this.lbl_fast_i(),this.lbl_best_i(),this.lbl_i(),this._Group1_i(),this._Group2_i()];
+		this.elementsContent = [this.img_bg_i(),this.lbl_time_i(),this.lbl_fast_i(),this.lbl_best_i(),this.lbl_i(),this._Group1_i(),this._Group2_i(),this.btn_share_i()];
 	}
 	var _proto = GameOverSkin.prototype;
 
@@ -340,6 +340,17 @@ var egret = window.egret;
 		t.source = "star_b_png";
 		t.x = 264;
 		t.y = 0;
+		return t;
+	};
+	_proto.btn_share_i = function () {
+		var t = new eui.Button();
+		this.btn_share = t;
+		t.bottom = 384;
+		t.height = 80;
+		t.horizontalCenter = 0;
+		t.label = "炫耀";
+		t.skinName = "BaseButton1Skin";
+		t.width = 250;
 		return t;
 	};
 	return GameOverSkin;
@@ -903,6 +914,7 @@ var egret = window.egret;
 	_proto.btn_start_i = function () {
 		var t = new eui.Button();
 		this.btn_start = t;
+		t.height = 120;
 		t.label = "开始游戏";
 		t.skinName = "BaseButtonSkin";
 		t.x = 120;
@@ -912,12 +924,14 @@ var egret = window.egret;
 	_proto.btn_mission_i = function () {
 		var t = new eui.Button();
 		this.btn_mission = t;
+		t.height = 80;
+		t.horizontalCenter = 0;
 		t.label = "选择关卡";
 		t.scaleX = 1;
 		t.scaleY = 1;
 		t.skinName = "BaseButton1Skin";
-		t.x = 240;
-		t.y = 939;
+		t.width = 250;
+		t.y = 917;
 		return t;
 	};
 	_proto._Group1_i = function () {

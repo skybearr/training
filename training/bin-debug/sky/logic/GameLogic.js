@@ -25,6 +25,15 @@ var GameLogic = (function (_super) {
         WxApi.getInstance().userInfo = platform.getUserInfo();
         console.log("userinfo:", WxApi.getInstance().userInfo);
     };
+    GameLogic.prototype.setNextMission = function (type, id, state) {
+        var arr = this.data[type];
+        if (arr != null) {
+            var vo = arr[id];
+            if (vo != null) {
+                vo.state = state;
+            }
+        }
+    };
     GameLogic.prototype.initData = function () {
         this.data = [, [], [], []];
         this.config = RES.getRes("config_json");
@@ -127,4 +136,3 @@ var GameLogic = (function (_super) {
     return GameLogic;
 }(egret.EventDispatcher));
 __reflect(GameLogic.prototype, "GameLogic");
-//# sourceMappingURL=GameLogic.js.map

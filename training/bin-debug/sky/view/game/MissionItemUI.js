@@ -27,7 +27,7 @@ var MissionItemUI = (function (_super) {
     };
     MissionItemUI.prototype.initView = function (vo) {
         this.lbl.text = vo.name;
-        this.lbl.textColor = vo.state == 0 ? 0xFF0000 : 0xffffff;
+        this.lbl.textColor = 0xffffff;
         if (vo.state == 2) {
             for (var i = 1; i <= 3; i++) {
                 this['star' + i].source = RES.getRes(i <= vo.stars ? "star_a_png" : "star_b_png");
@@ -38,4 +38,3 @@ var MissionItemUI = (function (_super) {
 }(eui.ItemRenderer));
 __reflect(MissionItemUI.prototype, "MissionItemUI");
 window['MissionItemUI'] = MissionItemUI;
-//# sourceMappingURL=MissionItemUI.js.map

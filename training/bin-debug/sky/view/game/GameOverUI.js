@@ -25,6 +25,10 @@ var GameOverUI = (function (_super) {
             }
         }
         this.vo.stars = star;
+        if (star > 0) {
+            this.vo.state = 2;
+            GameLogic.getInstance().setNextMission(this.vo.type, this.vo.id, 1);
+        }
         console.log("gameover:", this.vo);
         var recond = GameLogic.getInstance().getRecond(this.vo.type, this.vo.id);
         if (recond != 0) {
@@ -59,6 +63,7 @@ var GameOverUI = (function (_super) {
     GameOverUI.prototype.initEvent = function () {
         this.btn_back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
         this.btn_restart.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickRestart, this);
+        this.btn_share.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickShare, this);
     };
     GameOverUI.prototype.clickRestart = function () {
         GameLogic.getInstance().startGame(this.vo);
@@ -66,13 +71,17 @@ var GameOverUI = (function (_super) {
     GameOverUI.prototype.clickBack = function () {
         GameLogic.getInstance().openStart();
     };
+    GameOverUI.prototype.clickShare = function () {
+        var title = "这次注意力训练我只用了" + this.getText(this.time) + "秒，快来挑战我吧";
+        WxApi.getInstance().share();
+    };
     GameOverUI.prototype.clear = function () {
         _super.prototype.clear.call(this);
         this.vo = null;
         this.btn_back.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
         this.btn_restart.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickRestart, this);
+        this.btn_share.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickShare, this);
     };
     return GameOverUI;
 }(BaseUI));
 __reflect(GameOverUI.prototype, "GameOverUI");
-//# sourceMappingURL=GameOverUI.js.map

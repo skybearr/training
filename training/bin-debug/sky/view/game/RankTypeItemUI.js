@@ -35,4 +35,3 @@ var RankTypeItemUI = (function (_super) {
 }(eui.ItemRenderer));
 __reflect(RankTypeItemUI.prototype, "RankTypeItemUI");
 window['RankTypeItemUI'] = RankTypeItemUI;
-//# sourceMappingURL=RankTypeItemUI.js.map

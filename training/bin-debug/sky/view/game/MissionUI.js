@@ -73,9 +73,9 @@ var MissionUI = (function (_super) {
         if (vo == null) {
             return;
         }
-        if (vo.state == 0) {
-            return;
-        }
+        // if(vo.state == 0){
+        // 	return;
+        // }
         GameLogic.getInstance().startGame(vo);
     };
     MissionUI.prototype.clear = function () {
@@ -93,4 +93,3 @@ var MissionUI = (function (_super) {
     return MissionUI;
 }(BaseUI));
 __reflect(MissionUI.prototype, "MissionUI");
-//# sourceMappingURL=MissionUI.js.map

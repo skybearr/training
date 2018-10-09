@@ -130,7 +130,7 @@ var RankUI = (function (_super) {
         return false;
     };
     RankUI.prototype.clickGroupRank = function () {
-        WxApi.getInstance().share("grouprank=1");
+        WxApi.getInstance().share(null, "grouprank=1");
     };
     RankUI.prototype.clickClose = function () {
         if (this.parent != null) {
@@ -159,4 +159,3 @@ var RankUI = (function (_super) {
 }(BaseUI));
 __reflect(RankUI.prototype, "RankUI");
 window["RankUI"] = RankUI;
-//# sourceMappingURL=RankUI.js.map

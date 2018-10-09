@@ -50,17 +50,20 @@ var WxApi = (function (_super) {
     /**主动转发
      * @param query 转发携带参数 必须是 key1=val1&key2=val2 的格式 用于区分其他用户点开这个分享链接时是否打开排行榜等操作
     */
-    WxApi.prototype.share = function (query) {
+    WxApi.prototype.share = function (title, query) {
+        if (title === void 0) { title = null; }
         if (query === void 0) { query = null; }
         var wx = window["wx"];
         if (wx == null) {
             return;
         }
+        title = title == null ? WxApi.getInstance().shareInfo.share_game_title : title;
+        query = query == null ? "" : query;
         this.updateShareMenu(true);
         wx.shareAppMessage({
-            title: WxApi.getInstance().shareInfo.share_game_title,
+            title: title,
             imageUrl: WxApi.getInstance().shareInfo.share_game_img,
-            query: WxApi.getInstance().shareInfo.query
+            query: query
         });
     };
     /**炫耀 */
@@ -158,7 +161,7 @@ var WxApi = (function (_super) {
         if (info === void 0) { info = null; }
         console.log("showShareMenu:", info);
         if (info == null) {
-            info = { share_game_title: "舒尔特方格，训练你的注意力", share_game_img: "resource/assets/share.jpg", query: "" };
+            info = { share_game_title: "每天练习5分钟，提高孩子注意力", share_game_img: "resource/assets/share.jpg", query: "" };
         }
         this.shareInfo = info;
         var wx = window["wx"];
@@ -416,4 +419,3 @@ var WxApi = (function (_super) {
     return WxApi;
 }(egret.EventDispatcher));
 __reflect(WxApi.prototype, "WxApi");
-//# sourceMappingURL=WxApi.js.map

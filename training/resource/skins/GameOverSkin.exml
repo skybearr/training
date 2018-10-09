@@ -20,4 +20,5 @@
 			<e:HorizontalLayout gap="10"/>
 		</e:layout>
 	</e:Group>
+	<e:Button id="btn_share" label="炫耀" skinName="BaseButton1Skin" width="250" height="80" bottom="384" horizontalCenter="0"/>
 </e:Skin>
