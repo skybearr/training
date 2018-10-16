@@ -13,6 +13,7 @@ class GameUI extends BaseUI {
 	private btn_back: eui.Button;
 	private lbl_num: eui.Label;
 	private btn_tips: eui.Button;
+	private btn_mission:eui.Button;
 
 	private starttime: number;
 	private vo: MissionVO;
@@ -111,7 +112,7 @@ class GameUI extends BaseUI {
 		this.lbl_des.text = this.vo.des;
 		this.list.itemRenderer = GameItemUI;
 		this.list.dataProvider = this.arr_data;
-		this.btn_back.visible = this.vo.type != 1 || this.vo.id > 3;
+		this.btn_back.visible = true;// this.vo.type != 1 || this.vo.id > 3;
 	}
 
 	private timeId: number;
@@ -153,6 +154,7 @@ class GameUI extends BaseUI {
 		this.btn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStart, this);
 		this.list.addEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemClick, this);
 		this.btn_back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
+		this.btn_mission.addEventListener(egret.TouchEvent.TOUCH_TAP,this.clickMission,this);
 	}
 	private clickBack() {
 		GameLogic.getInstance().openStart();
@@ -192,6 +194,10 @@ class GameUI extends BaseUI {
 		this.lbl_time.text = s + ":" + ss;
 	}
 
+	private clickMission(){
+		GameLogic.getInstance().openMission();
+	}
+
 	protected clear() {
 		super.clear();
 		this.vo = null;
@@ -202,5 +208,6 @@ class GameUI extends BaseUI {
 		this.removeEventListener(egret.Event.ENTER_FRAME, this.enterframe, this);
 		this.list.removeEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemClick, this);
 		this.btn_back.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
+		this.btn_mission.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickMission,this);
 	}
 }

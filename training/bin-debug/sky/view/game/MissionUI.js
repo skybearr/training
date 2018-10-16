@@ -22,9 +22,10 @@ var MissionUI = (function (_super) {
     MissionUI.prototype.initView = function () {
         this.data = GameLogic.getInstance().getMissionData();
         this.crttype = 1;
-        this.initList();
+        this.initList(3);
     };
-    MissionUI.prototype.initList = function () {
+    MissionUI.prototype.initList = function (id) {
+        if (id === void 0) { id = null; }
         var arr = this.data[this.crttype];
         if (arr == null || arr.length == 0) {
             return;
@@ -35,6 +36,10 @@ var MissionUI = (function (_super) {
         }
         this.list.dataProvider = this.arr_data;
         this.initBtn();
+        if (id != null) {
+            this.list.validateNow();
+            this.list.selectedIndex = id;
+        }
     };
     /**初始化事件 */
     MissionUI.prototype.initEvent = function () {
@@ -73,9 +78,6 @@ var MissionUI = (function (_super) {
         if (vo == null) {
             return;
         }
-        // if(vo.state == 0){
-        // 	return;
-        // }
         GameLogic.getInstance().startGame(vo);
     };
     MissionUI.prototype.clear = function () {
@@ -93,3 +95,4 @@ var MissionUI = (function (_super) {
     return MissionUI;
 }(BaseUI));
 __reflect(MissionUI.prototype, "MissionUI");
+//# sourceMappingURL=MissionUI.js.map

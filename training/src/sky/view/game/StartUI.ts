@@ -2,10 +2,10 @@ class StartUI extends BaseUI{
 	public constructor() {
 		super("StartSkin");
 	}
-	private btn_start:eui.Button;
 	private btn_rank:eui.Label;
 	private btn_share:eui.Label;
 	private btn_mission:eui.Button;
+	private btn_grow:eui.Button;
 
 	/**初始化数据 */
 	protected initData(){
@@ -15,6 +15,9 @@ class StartUI extends BaseUI{
 	private button:any;
 	/**初始化界面 */
 	protected initView(){
+		if(!WxApi.getInstance().checkWx()){
+			return;
+		}
 		this.button = wx.createGameClubButton({
 			icon: 'white',
 			style: {
@@ -29,15 +32,15 @@ class StartUI extends BaseUI{
 
 	/**初始化事件 */
 	protected initEvent(){
-		this.btn_start.addEventListener(egret.TouchEvent.TOUCH_TAP,this.clickStart,this);
 		this.btn_rank.addEventListener(egret.TouchEvent.TOUCH_TAP,this.clickRank,this);
 		this.btn_share.addEventListener(egret.TouchEvent.TOUCH_TAP,this.clickShare,this);
 		this.btn_mission.addEventListener(egret.TouchEvent.TOUCH_TAP,this.clickMission,this);
+		this.btn_grow.addEventListener(egret.TouchEvent.TOUCH_TAP,this.clickGrow,this);
 		WxApi.getInstance().addEventListener(GameEvent.OPENRANK, this.openRank, this);
 	}
 
-	private clickStart(){
-		GameLogic.getInstance().startGame(GameLogic.getInstance().getStartMission());
+	private clickGrow(){
+		GameLogic.getInstance().openGrow();
 	}
 
 	private clickRank(){
@@ -63,10 +66,10 @@ class StartUI extends BaseUI{
 			this.button.destroy();
 		}
 
-		this.btn_start.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickStart,this);
 		this.btn_rank.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickRank,this);
 		this.btn_share.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickShare,this);
 		this.btn_mission.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickMission,this);
+		this.btn_grow.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickGrow,this);
 		WxApi.getInstance().removeEventListener(GameEvent.OPENRANK, this.openRank, this);
 	}
 }

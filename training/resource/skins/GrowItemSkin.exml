@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="GrowItemSkin" width="100" height="140" xmlns:e="http://ns.egret.com/eui">
+    <e:Image id="img_bg" touchEnabled="false" source="yong_11_png" width="100" height="100" horizontalCenter="0"
+             scale9Grid="47,44,50,37"  top="0"/>
+    <e:Label id="lbl" text="12" verticalAlign="middle" textAlign="center" width="80" height="80" size="60"
+             fontFamily="SimHei" touchEnabled="false" anchorOffsetY="0" textColor="0xead410" stroke="2"
+             strokeColor="0xff0000" horizontalCenter="0"  y="8"/>
+    <e:Group horizontalCenter="0" y="100">
+        <e:Image id="star1" source="star_b_png" x="0" y="0" scaleX="0.4" scaleY="0.4" smoothing="true"  alpha="0.6"/>
+        <e:Image id="star2" x="10" y="10" scaleX="0.4" scaleY="0.4" source="star_b_png" smoothing="true"  alpha="0.6"/>
+        <e:Image id="star3" x="20" y="20" scaleX="0.4" scaleY="0.4" source="star_b_png" smoothing="true"  alpha="0.6"/>
+        <e:layout>
+            <e:HorizontalLayout gap="-10" />
+        </e:layout>
+    </e:Group>
+</e:Skin>

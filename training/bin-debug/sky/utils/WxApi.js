@@ -419,3 +419,4 @@ var WxApi = (function (_super) {
     return WxApi;
 }(egret.EventDispatcher));
 __reflect(WxApi.prototype, "WxApi");
+//# sourceMappingURL=WxApi.js.map

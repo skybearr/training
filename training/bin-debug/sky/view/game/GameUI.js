@@ -98,7 +98,7 @@ var GameUI = (function (_super) {
         this.lbl_des.text = this.vo.des;
         this.list.itemRenderer = GameItemUI;
         this.list.dataProvider = this.arr_data;
-        this.btn_back.visible = this.vo.type != 1;
+        this.btn_back.visible = true; // this.vo.type != 1 || this.vo.id > 3;
     };
     GameUI.prototype.clickStart = function () {
         var _this = this;
@@ -134,6 +134,7 @@ var GameUI = (function (_super) {
         this.btn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStart, this);
         this.list.addEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemClick, this);
         this.btn_back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
+        this.btn_mission.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickMission, this);
     };
     GameUI.prototype.clickBack = function () {
         GameLogic.getInstance().openStart();
@@ -170,6 +171,9 @@ var GameUI = (function (_super) {
         }
         this.lbl_time.text = s + ":" + ss;
     };
+    GameUI.prototype.clickMission = function () {
+        GameLogic.getInstance().openMission();
+    };
     GameUI.prototype.clear = function () {
         _super.prototype.clear.call(this);
         this.vo = null;
@@ -180,7 +184,9 @@ var GameUI = (function (_super) {
         this.removeEventListener(egret.Event.ENTER_FRAME, this.enterframe, this);
         this.list.removeEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemClick, this);
         this.btn_back.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
+        this.btn_mission.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickMission, this);
     };
     return GameUI;
 }(BaseUI));
 __reflect(GameUI.prototype, "GameUI");
+//# sourceMappingURL=GameUI.js.map

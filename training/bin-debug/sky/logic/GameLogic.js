@@ -136,3 +136,4 @@ var GameLogic = (function (_super) {
     return GameLogic;
 }(egret.EventDispatcher));
 __reflect(GameLogic.prototype, "GameLogic");
+//# sourceMappingURL=GameLogic.js.map

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="GrowSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="img_bg" height="1334" width="750" x="0" verticalCenter="0" source="yong_3_png" scale9Grid="51,47,43,32" locked="true"/>
+</e:Skin>

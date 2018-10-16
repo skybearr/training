@@ -8,6 +8,7 @@ class MissionUI extends BaseUI {
 	private data: MissionVO[][];
 	private crttype: number;
 	private btn_back:eui.Button;
+	
 
 	/**初始化数据 */
 	protected initData() {
@@ -19,10 +20,10 @@ class MissionUI extends BaseUI {
 	protected initView() {
 		this.data = GameLogic.getInstance().getMissionData();
 		this.crttype = 1;
-		this.initList();
+		this.initList(3);
 	}
 
-	private initList() {
+	private initList(id=null) {
 		let arr = this.data[this.crttype];
 		if (arr == null || arr.length == 0) {
 			return;
@@ -33,6 +34,11 @@ class MissionUI extends BaseUI {
 		}
 		this.list.dataProvider = this.arr_data;
 		this.initBtn();
+
+		if(id != null){
+			this.list.validateNow();
+			this.list.selectedIndex = id;
+		}
 	}
 
 	/**初始化事件 */
@@ -47,6 +53,8 @@ class MissionUI extends BaseUI {
 	private clickBack(){
 		GameLogic.getInstance().openStart();
 	}
+
+	
 
 	private btnClick(e: egret.TouchEvent) {
 		let i = parseInt(e.currentTarget.name);
@@ -76,9 +84,6 @@ class MissionUI extends BaseUI {
 		if (vo == null) {
 			return;
 		}
-		// if(vo.state == 0){
-		// 	return;
-		// }
 		GameLogic.getInstance().startGame(vo);
 	}
 
@@ -90,6 +95,7 @@ class MissionUI extends BaseUI {
 			this['btn' + i].removeEventListener(egret.TouchEvent.TOUCH_TAP, this.btnClick, this);
 		}
 		this.btn_back.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickBack,this);
+		
 		this.list.dataProvider = null;
 		this.arr_data = null;
 		this.list = null;

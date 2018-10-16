@@ -8,7 +8,13 @@
 			<e:TileLayout orientation="rows" horizontalGap="34" verticalGap="20" horizontalAlign="left" verticalAlign="top"/>
 		</e:layout>
 	</e:List>
-	<e:Button id="btn_back" label="返回首页" skinName="BaseButton1Skin" width="260" height="100" bottom="118" horizontalCenter="0" visible="false"/>
+	<e:Group y="1007" horizontalCenter="0">
+		<e:Button id="btn_back" label="返回首页" skinName="BaseButton1Skin" width="260" height="100" x="0" y="0"/>
+		<e:Button id="btn_mission" label="返回训练模式" skinName="BaseButton1Skin" width="260" height="100" x="0" y="998"/>
+		<e:layout>
+			<e:HorizontalLayout gap="20"/>
+		</e:layout>
+	</e:Group>
 	<e:Button id="btn_tips" label="查看結果" skinName="BaseButton1Skin" width="160" height="60" bottom="138" horizontalCenter="257" visible="false"/>
 	<e:Label id="lbl_num" text="10457780" y="127.92" size="60" fontFamily="SimHei" width="680" verticalAlign="middle" textAlign="center" textColor="0x000000" horizontalCenter="0" visible="false"/>
 	<e:Group id="gp" verticalCenter="0" horizontalCenter="0">

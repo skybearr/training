@@ -72,8 +72,8 @@ var GameOverUI = (function (_super) {
         GameLogic.getInstance().openStart();
     };
     GameOverUI.prototype.clickShare = function () {
-        var title = "这次注意力训练我只用了" + this.getText(this.time) + "秒，快来挑战我吧";
-        WxApi.getInstance().share();
+        var title = "这次舒尔特注意力训练" + this.vo.name + "关卡我只用了" + this.getText(this.time) + "秒，快来挑战我吧";
+        WxApi.getInstance().share(title);
     };
     GameOverUI.prototype.clear = function () {
         _super.prototype.clear.call(this);
@@ -85,3 +85,4 @@ var GameOverUI = (function (_super) {
     return GameOverUI;
 }(BaseUI));
 __reflect(GameOverUI.prototype, "GameOverUI");
+//# sourceMappingURL=GameOverUI.js.map

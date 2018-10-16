@@ -136,6 +136,11 @@ class GameLogic extends egret.EventDispatcher {
 		this.main.addChild(new MissionUI());
 	}
 
+	public openGrow(){
+		this.main.removeChildren();
+		this.main.addChild(new MissionUI());
+	}
+
 
 	public getMissionData(): MissionVO[][] {
 		return this.data;

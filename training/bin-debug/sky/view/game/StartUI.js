@@ -18,17 +18,26 @@ var StartUI = (function (_super) {
     };
     /**初始化界面 */
     StartUI.prototype.initView = function () {
+        if (!WxApi.getInstance().checkWx()) {
+            return;
+        }
+        this.button = wx.createGameClubButton({
+            icon: 'white',
+            style: {
+                left: 10,
+                top: 80,
+                width: 32,
+                height: 32,
+                text: "游戏圈"
+            }
+        });
     };
     /**初始化事件 */
     StartUI.prototype.initEvent = function () {
-        this.btn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStart, this);
         this.btn_rank.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickRank, this);
         this.btn_share.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickShare, this);
         this.btn_mission.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickMission, this);
         WxApi.getInstance().addEventListener(GameEvent.OPENRANK, this.openRank, this);
-    };
-    StartUI.prototype.clickStart = function () {
-        GameLogic.getInstance().startGame(GameLogic.getInstance().getStartMission());
     };
     StartUI.prototype.clickRank = function () {
         this.addChild(new RankUI());
@@ -45,7 +54,9 @@ var StartUI = (function (_super) {
     };
     StartUI.prototype.clear = function () {
         _super.prototype.clear.call(this);
-        this.btn_start.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStart, this);
+        if (this.button != null) {
+            this.button.destroy();
+        }
         this.btn_rank.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickRank, this);
         this.btn_share.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickShare, this);
         this.btn_mission.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickMission, this);
@@ -54,3 +65,4 @@ var StartUI = (function (_super) {
     return StartUI;
 }(BaseUI));
 __reflect(StartUI.prototype, "StartUI");
+//# sourceMappingURL=StartUI.js.map

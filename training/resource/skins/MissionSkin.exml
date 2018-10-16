@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="MissionSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image id="img_bg" height="1334" width="750" x="0" verticalCenter="0" source="yong_3_png" scale9Grid="51,47,43,32" locked="true"/>
-	<e:Label text="选择关卡" y="75" size="50" fontFamily="SimHei" textColor="0x341cef" bold="true" verticalAlign="middle" textAlign="center" horizontalCenter="0" background="false" backgroundColor="0xffffff"/>
+	<e:Image id="img_bg" height="1334" width="750" x="0" verticalCenter="0" source="yong_3_png" scale9Grid="51,47,43,32"/>
+	<e:Label text="训练模式" y="75" size="50" fontFamily="SimHei" textColor="0x341cef" bold="true" verticalAlign="middle" textAlign="center" horizontalCenter="0" background="false" backgroundColor="0xffffff"/>
 	<e:Image source="reglogbg_png" y="206" width="720" height="720" scale9Grid="70,55,426,330" horizontalCenter="0"/>
 	<e:List id="list" width="640" height="640" y="246" horizontalCenter="0">
 		<e:layout>
