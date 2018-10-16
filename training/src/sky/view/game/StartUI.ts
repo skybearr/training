@@ -12,9 +12,19 @@ class StartUI extends BaseUI{
 
 	}
 
+	private button:any;
 	/**初始化界面 */
 	protected initView(){
-		
+		this.button = wx.createGameClubButton({
+			icon: 'white',
+			style: {
+				left: 10,
+				top: 80,
+				width: 32,
+				height: 32,
+				text: "游戏圈"
+			}
+		})
 	}
 
 	/**初始化事件 */
@@ -49,6 +59,9 @@ class StartUI extends BaseUI{
 
 	protected clear(){
 		super.clear();
+		if (this.button != null) {
+			this.button.destroy();
+		}
 
 		this.btn_start.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickStart,this);
 		this.btn_rank.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickRank,this);

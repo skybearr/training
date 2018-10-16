@@ -10,6 +10,8 @@ declare interface Platform {
 
     login(): Promise<any>
 
+    /**游戏圈 */
+    createGameClubButton():Promise<any>;    
 }
 
 class DebugPlatform implements Platform {
@@ -19,7 +21,9 @@ class DebugPlatform implements Platform {
     async login() {
         
     }
-
+    async createGameClubButton(){
+        
+    }
 }
 
 

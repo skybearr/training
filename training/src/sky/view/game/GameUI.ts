@@ -111,7 +111,7 @@ class GameUI extends BaseUI {
 		this.lbl_des.text = this.vo.des;
 		this.list.itemRenderer = GameItemUI;
 		this.list.dataProvider = this.arr_data;
-		this.btn_back.visible = this.vo.type != 1;
+		this.btn_back.visible = this.vo.type != 1 || this.vo.id > 3;
 	}
 
 	private timeId: number;

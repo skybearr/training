@@ -16,6 +16,22 @@ class WxgamePlatform {
         })
     }
 
+  /**游戏圈 */
+  createGameClubButton() {
+    return new Promise((resolve, reject) => {
+      wx.createGameClubButton({
+        icon: 'white',
+        style: {
+          left: 10,
+          top: 40,
+          width: 32,
+          height: 32,
+          text: "游戏圈"
+        }
+      });
+    });
+  }
+
   /**获取授权 */
   getUserInfo() {
     return new Promise((resolve, reject) => {
