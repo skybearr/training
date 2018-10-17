@@ -37,7 +37,11 @@ var StartUI = (function (_super) {
         this.btn_rank.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickRank, this);
         this.btn_share.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickShare, this);
         this.btn_mission.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickMission, this);
+        this.btn_grow.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickGrow, this);
         WxApi.getInstance().addEventListener(GameEvent.OPENRANK, this.openRank, this);
+    };
+    StartUI.prototype.clickGrow = function () {
+        GameLogic.getInstance().openGrow();
     };
     StartUI.prototype.clickRank = function () {
         this.addChild(new RankUI());
@@ -60,6 +64,7 @@ var StartUI = (function (_super) {
         this.btn_rank.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickRank, this);
         this.btn_share.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickShare, this);
         this.btn_mission.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickMission, this);
+        this.btn_grow.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickGrow, this);
         WxApi.getInstance().removeEventListener(GameEvent.OPENRANK, this.openRank, this);
     };
     return StartUI;

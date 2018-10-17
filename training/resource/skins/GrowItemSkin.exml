@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="GrowItemSkin" width="100" height="140" xmlns:e="http://ns.egret.com/eui">
-    <e:Image id="img_bg" touchEnabled="false" source="yong_11_png" width="100" height="100" horizontalCenter="0"
-             scale9Grid="47,44,50,37"  top="0"/>
-    <e:Label id="lbl" text="12" verticalAlign="middle" textAlign="center" width="80" height="80" size="60"
-             fontFamily="SimHei" touchEnabled="false" anchorOffsetY="0" textColor="0xead410" stroke="2"
-             strokeColor="0xff0000" horizontalCenter="0"  y="8"/>
-    <e:Group horizontalCenter="0" y="100">
+<e:Skin class="GrowItemSkin" width="226" height="140" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect id="rect_select" width="100%" height="100%" horizontalCenter="0" verticalCenter="0" fillColor="0x8ffc02" visible="false"/>
+    <e:Image id="img_bg" touchEnabled="false" width="96%" height="94%"
+              source="reglogbg_png" scale9Grid="22,23,522,394" horizontalCenter="0" verticalCenter="0"/>
+    <e:Label id="lbl_title" text="99.第一训练场" verticalAlign="middle" textAlign="left" width="169" height="32" size="24"
+             fontFamily="SimHei" touchEnabled="false" anchorOffsetY="0" stroke="2"
+             strokeColor="0x000000"  y="23" anchorOffsetX="0" textColor="0xffffff" left="30"/>
+	<e:Label id="lbl_best" text="最好成绩：11:00:333" verticalAlign="middle" textAlign="center" width="226" height="32" size="20" fontFamily="SimHei" touchEnabled="false" anchorOffsetY="0" stroke="2" strokeColor="0x000000" y="90" anchorOffsetX="0" textColor="0xefd809" horizontalCenter="2"/>
+    <e:Group y="53" horizontalCenter="0">
         <e:Image id="star1" source="star_b_png" x="0" y="0" scaleX="0.4" scaleY="0.4" smoothing="true"  alpha="0.6"/>
         <e:Image id="star2" x="10" y="10" scaleX="0.4" scaleY="0.4" source="star_b_png" smoothing="true"  alpha="0.6"/>
         <e:Image id="star3" x="20" y="20" scaleX="0.4" scaleY="0.4" source="star_b_png" smoothing="true"  alpha="0.6"/>
+			<e:Image id="star4" x="30" y="30" scaleX="0.4" scaleY="0.4" source="star_b_png" smoothing="true" alpha="0.6"/>
+			<e:Image id="star5" x="40" y="40" scaleX="0.4" scaleY="0.4" source="star_b_png" smoothing="true" alpha="0.6"/>
         <e:layout>
             <e:HorizontalLayout gap="-10" />
         </e:layout>
     </e:Group>
+	<e:Rect id="rect_state" width="100%" height="100%" x="0" y="0" alpha="0.5" visible="false"/>
 </e:Skin>

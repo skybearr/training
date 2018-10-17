@@ -1,3 +1,5 @@
+declare class AvgSkin extends eui.Skin{
+}
 declare class BaseButton1Skin extends eui.Skin{
 }
 declare class BaseButtonSkin extends eui.Skin{
@@ -7,6 +9,12 @@ declare class GameItemSkin extends eui.Skin{
 declare class GameOverSkin extends eui.Skin{
 }
 declare class GameSkin extends eui.Skin{
+}
+declare class GrowItemSkin extends eui.Skin{
+}
+declare class GrowLeftItemSkin extends eui.Skin{
+}
+declare class GrowSkin extends eui.Skin{
 }
 declare class MissionItemSkin extends eui.Skin{
 }

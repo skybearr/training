@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="GrowLeftItemSkin" width="200" height="100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+    <e:Image id="img_bg" touchEnabled="false" source="yong_11_png" width="100%" height="96"
+             scale9Grid="47,44,50,37"  verticalCenter="0" left="0" locked="true"/>
+    <e:Label id="lbl" text="第22章" verticalAlign="middle" textAlign="left" width="130" height="60" size="40"
+             fontFamily="SimHei" touchEnabled="false" anchorOffsetY="0" stroke="2"
+             strokeColor="0x000000"  anchorOffsetX="0" verticalCenter="0" left="16" textColor="0xffffff"/>
+	<e:Label id="lbl_state" text="通关" verticalAlign="middle" textAlign="center" width="40" height="80" size="36" fontFamily="SimHei" touchEnabled="false" anchorOffsetY="0" stroke="2" strokeColor="0x000000" anchorOffsetX="0" textColor="0xF7DF07" right="18" verticalCenter="0"/>
+</e:Skin>

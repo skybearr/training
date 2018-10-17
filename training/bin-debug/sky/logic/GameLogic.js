@@ -124,6 +124,10 @@ var GameLogic = (function (_super) {
         this.main.removeChildren();
         this.main.addChild(new MissionUI());
     };
+    GameLogic.prototype.openGrow = function () {
+        this.main.removeChildren();
+        this.main.addChild(new MissionUI());
+    };
     GameLogic.prototype.getMissionData = function () {
         return this.data;
     };
