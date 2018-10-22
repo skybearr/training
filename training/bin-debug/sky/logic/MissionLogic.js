@@ -11,7 +11,11 @@ r.prototype = e.prototype, t.prototype = new r();
 var MissionLogic = (function (_super) {
     __extends(MissionLogic, _super);
     function MissionLogic() {
-        return _super.call(this) || this;
+        var _this = _super.call(this) || this;
+        _this.charpters = {};
+        _this.crtChapter = 2;
+        _this.crtMission = 202;
+        return _this;
     }
     MissionLogic.getInstance = function () {
         if (this._instance == null) {
@@ -20,7 +24,27 @@ var MissionLogic = (function (_super) {
         return this._instance;
     };
     MissionLogic.prototype.initCharpter = function () {
-        this.missions = RES.getRes("config_json");
+        this.charpters = RES.getRes("mission_json");
+    };
+    MissionLogic.prototype.getChaprters = function () {
+        return this.charpters;
+    };
+    MissionLogic.prototype.getMissionsByChapterID = function (charpterId) {
+        var charpter = this.charpters[charpterId];
+        return charpter.missions;
+    };
+    /** 当前章节的 当前关卡索引 0开始 */
+    MissionLogic.prototype.getCrtMissionInCharpter = function (charpterId) {
+        var charpter = this.charpters[charpterId];
+        var c = Math.floor(this.crtMission / 100);
+        if (c == charpterId) {
+            return this.crtMission % 100;
+        }
+        else {
+            return charpter.missions.length;
+        }
+    };
+    MissionLogic.prototype.startMissionGame = function (vo) {
     };
     return MissionLogic;
 }(egret.EventDispatcher));

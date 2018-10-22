@@ -21,6 +21,7 @@ class StartUI extends BaseUI {
 		this.canwatch = cd <= 0;
 		if (cd > 0) {
 			this.lbl_cd.text = TimeUtil.ParseTime2Format(cd);
+			this.lbl_cd.visible = true;
 		}
 		else {
 			this.lbl_cd.text = "";
@@ -30,6 +31,7 @@ class StartUI extends BaseUI {
 	private button: any;
 	/**初始化界面 */
 	protected initView() {
+		this.rewardCD();
 		platform.bannershow();
 		if (!WxApi.getInstance().checkWx()) {
 			return;
@@ -73,8 +75,8 @@ class StartUI extends BaseUI {
 	}
 
 	private clickGrow() {
-		// WxApi.getInstance().toast('即将推出');
-		GameLogic.getInstance().openGrow();
+		WxApi.getInstance().toast('即将推出');
+		// GameLogic.getInstance().openGrow();
 	}
 
 	private clickRank() {

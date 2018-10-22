@@ -21,6 +21,23 @@ var TimeUtil = (function () {
     TimeUtil.getServerDate = function () {
         return new Date(TimeUtil.getCrtServerTime() * 1000);
     };
+    /** 00:00:000格式 */
+    TimeUtil.formatSecondT = function (t) {
+        var s = TimeUtil.ParseTime2Format(Math.floor(t / 1000), "m:s");
+        var hs = t % 1000;
+        var ss = "";
+        if (hs < 10) {
+            ss = "00" + hs;
+        }
+        else if (hs < 100) {
+            ss = "0" + hs;
+        }
+        else {
+            ss = hs + "";
+            ;
+        }
+        return s + ":" + ss;
+    };
     /**
      * 返回一年中的第N天
      * @param t 秒

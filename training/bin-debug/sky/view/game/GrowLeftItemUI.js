@@ -26,13 +26,12 @@ var GrowLeftItemUI = (function (_super) {
         this.initView(vo);
     };
     GrowLeftItemUI.prototype.initView = function (vo) {
-        this.lbl.text = vo.name;
-        this.lbl.textColor = 0xffffff;
-        if (vo.state == 2) {
-            for (var i = 1; i <= 3; i++) {
-                this['star' + i].source = RES.getRes(i <= vo.stars ? "star_a_png" : "star_b_png");
-            }
-        }
+        this.lbl.text = "第" + vo.id + "章";
+        this.lbl_state.visible = vo.state != 1;
+        this.lbl_state.textColor = vo.state == 0 ? 0x8FFC02 : 0xF7DF07;
+    };
+    GrowLeftItemUI.prototype.isSelected = function (b) {
+        this.rect_bg.visible = b;
     };
     return GrowLeftItemUI;
 }(eui.ItemRenderer));

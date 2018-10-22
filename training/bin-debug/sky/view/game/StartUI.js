@@ -21,6 +21,7 @@ var StartUI = (function (_super) {
         this.canwatch = cd <= 0;
         if (cd > 0) {
             this.lbl_cd.text = TimeUtil.ParseTime2Format(cd);
+            this.lbl_cd.visible = true;
         }
         else {
             this.lbl_cd.text = "";
@@ -28,6 +29,7 @@ var StartUI = (function (_super) {
     };
     /**初始化界面 */
     StartUI.prototype.initView = function () {
+        this.rewardCD();
         platform.bannershow();
         if (!WxApi.getInstance().checkWx()) {
             return;
@@ -68,8 +70,8 @@ var StartUI = (function (_super) {
         }
     };
     StartUI.prototype.clickGrow = function () {
-        // WxApi.getInstance().toast('即将推出');
-        GameLogic.getInstance().openGrow();
+        WxApi.getInstance().toast('即将推出');
+        // GameLogic.getInstance().openGrow();
     };
     StartUI.prototype.clickRank = function () {
         this.addChild(new RankUI());

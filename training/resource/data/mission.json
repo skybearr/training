@@ -6,22 +6,7 @@
 		"content": "25",
 		"des": "用手指按 1 ~ 25 的顺序依次点击数字，同时诵读出声。点击完25个数字所用时间越短，注意力水平越高。",
 		"time": "10:16:25:34:120",
-		"dialog": {
-			"name": "孤儿院",
-			"bg": "mission_bg_1_png",
-			"dialog": [
-				{
-					"head": "MasterYi_Square_0_png",
-					"words": "哇，你不是娑娜吗？传说中的36E啊，让我看看",
-					"pos": 0
-				},
-				{
-					"head": "Sona_Square_0_png",
-					"words": "滚蛋，我才13岁",
-					"pos": 1
-				}
-			]
-		}
+		"dialog": {}
 	},
 	"102": {
 		"id": 102,
@@ -34,6 +19,7 @@
 			"name": "孤儿院",
 			"bg": "mission_bg_1_png",
 			"dialog": {}
+		}
 	},
 	"103": {
 		"id": 103,
