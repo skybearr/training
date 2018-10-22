@@ -23,6 +23,8 @@ var MissionUI = (function (_super) {
         this.data = GameLogic.getInstance().getMissionData();
         this.crttype = 1;
         this.initList(3);
+        var y = this.gp_1.y;
+        egret.Tween.get(this.gp_1, { loop: true }).to({ y: y - 30 }, 500).to(100).to({ y: y }, 500).wait(300);
     };
     MissionUI.prototype.initList = function (id) {
         if (id === void 0) { id = null; }
@@ -59,6 +61,7 @@ var MissionUI = (function (_super) {
         }
         this.crttype = i;
         this.initList();
+        this.gp_1.visible = i == 1;
     };
     MissionUI.prototype.initBtn = function () {
         for (var i = 1; i <= 3; i++) {
@@ -87,6 +90,7 @@ var MissionUI = (function (_super) {
             this['btn' + i].removeEventListener(egret.TouchEvent.TOUCH_TAP, this.btnClick, this);
         }
         this.btn_back.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
+        egret.Tween.removeTweens(this.gp_1);
         this.list.dataProvider = null;
         this.arr_data = null;
         this.list = null;

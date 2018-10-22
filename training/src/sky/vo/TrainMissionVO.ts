@@ -1,4 +1,4 @@
-class MissionVO {
+class TrainMissionVO {
 	public constructor() {
 	}
 
@@ -13,4 +13,7 @@ class MissionVO {
 	public content:string;
 	public times:number[];
 	public name:string;
+
+	
+	public dialogs:Object[];
 }

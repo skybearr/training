@@ -17,13 +17,15 @@
 		"bin-debug/sky/command/HttpCommand.js",
 		"bin-debug/sky/event/GameEvent.js",
 		"bin-debug/sky/logic/GameLogic.js",
+		"bin-debug/sky/logic/MissionLogic.js",
+		"bin-debug/sky/logic/TimerManager.js",
 		"bin-debug/sky/model/DataBase.js",
 		"bin-debug/sky/model/GameConst.js",
 		"bin-debug/sky/model/PlayerConst.js",
 		"bin-debug/sky/msg/Int64.js",
 		"bin-debug/sky/utils/FilterUtil.js",
 		"bin-debug/sky/utils/StringUtil.js",
-		"bin-debug/LoadingUI.js",
+		"bin-debug/sky/vo/TrainMissionVO.js",
 		"bin-debug/sky/utils/WxApi.js",
 		"bin-debug/AssetAdapter.js",
 		"bin-debug/sky/view/game/GameItemUI.js",
@@ -37,6 +39,8 @@
 		"bin-debug/sky/view/game/RankTypeItemUI.js",
 		"bin-debug/sky/view/game/RankUI.js",
 		"bin-debug/sky/view/game/StartUI.js",
-		"bin-debug/sky/vo/MissionVO.js"
+		"bin-debug/sky/view/game/games/GameBaseUI.js",
+		"bin-debug/sky/view/game/games/SRT.js",
+		"bin-debug/LoadingUI.js"
 	]
 }

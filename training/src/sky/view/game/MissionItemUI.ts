@@ -11,7 +11,7 @@ class MissionItemUI extends eui.ItemRenderer {
     private star3: eui.Image;
 
 
-    public setVO(vo: MissionVO) {
+    public setVO(vo: TrainMissionVO) {
         this.initView(vo);
     }
 
@@ -19,11 +19,11 @@ class MissionItemUI extends eui.ItemRenderer {
         if (this.data == null) {
             return;
         }
-        let vo = this.data as MissionVO;
+        let vo = this.data as TrainMissionVO;
         this.initView(vo);
     }
 
-    private initView(vo: MissionVO) {
+    private initView(vo: TrainMissionVO) {
         this.lbl.text = vo.name;
         this.lbl.textColor = 0xffffff;
         if (vo.state == 2) {

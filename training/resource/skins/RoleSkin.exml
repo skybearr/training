@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="RoleSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect id="rect_bg" width="100%" height="100%" x="0" y="0" fillColor="0x888888" locked="true"/>
+	<e:Group x="85" y="82">
+		<e:Label text="注意力" x="0" y="0" fontFamily="SimHei"/>
+		<e:Label text="瞬间记忆力" x="10" y="10" fontFamily="SimHei"/>
+		<e:Label text="学习能力" x="20" y="20" fontFamily="SimHei"/>
+		<e:Label text="生活自理能力" x="30" y="30" fontFamily="SimHei"/>
+		<e:Label text="社交能力" x="40" y="40" fontFamily="SimHei"/>
+		<e:Label text="安全" x="50" y="50" fontFamily="SimHei"/>
+		<e:Label text="品德" x="60" y="60" fontFamily="SimHei"/>
+		<e:Label text="健康" x="70" y="70" fontFamily="SimHei"/>
+		<e:Label text="志向理想" x="80" y="80" fontFamily="SimHei"/>
+		<e:Label text="兴趣爱好" x="90" y="90" fontFamily="SimHei"/>
+		<e:Label text="国学文化" x="100" y="100" fontFamily="SimHei"/>
+		<e:layout>
+			<e:VerticalLayout/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

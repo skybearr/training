@@ -21,3 +21,13 @@ enum INTERFACEAPI{
 	TESTGET = 0,
 	TESTPOST = 1,
 }
+
+enum WATCHTYPE{
+	THANKS = 1,//鼓励
+}
+
+enum GAMETYPE{
+	SRT = 1,//舒尔特
+	SHORTHAND = 2,//速记
+
+}

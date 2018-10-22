@@ -32,6 +32,7 @@ var RankUI = (function (_super) {
         this.initList();
         this.validateNow();
         this.initDataContext();
+        platform.bannerhide();
     };
     RankUI.prototype.initList = function () {
         var arr = this.data[this.crttype];
@@ -139,6 +140,7 @@ var RankUI = (function (_super) {
     };
     RankUI.prototype.clear = function () {
         _super.prototype.clear.call(this);
+        platform.bannershow();
         this.img_close.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickClose, this);
         this.img_rankgp.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickGroupRank, this);
         this.btn1.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.btnClick, this);

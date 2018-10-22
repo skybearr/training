@@ -16,7 +16,7 @@ class GameUI extends BaseUI {
 	private btn_mission:eui.Button;
 
 	private starttime: number;
-	private vo: MissionVO;
+	private vo: TrainMissionVO;
 	private arr: string[];
 	private arr_data: eui.ArrayCollection;
 

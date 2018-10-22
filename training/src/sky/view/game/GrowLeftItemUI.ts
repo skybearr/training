@@ -5,8 +5,10 @@ class GrowLeftItemUI extends eui.ItemRenderer {
     }
 
     private lbl: eui.Label;
+    private lbl_state:eui.Label;
+    private rect_bg:eui.Rect;
 
-    public setVO(vo: MissionVO) {
+    public setVO(vo: CharpterVO) {
         this.initView(vo);
     }
 
@@ -14,18 +16,18 @@ class GrowLeftItemUI extends eui.ItemRenderer {
         if (this.data == null) {
             return;
         }
-        let vo = this.data as MissionVO;
+        let vo = this.data as CharpterVO;
         this.initView(vo);
     }
 
-    private initView(vo: MissionVO) {
-        this.lbl.text = vo.name;
-        this.lbl.textColor = 0xffffff;
-        if (vo.state == 2) {
-            for (let i = 1; i <= 3; i++) {
-                this['star' + i].source = RES.getRes(i <= vo.stars ? "star_a_png" : "star_b_png");
-            }
-        }
+    private initView(vo: CharpterVO) {
+        this.lbl.text = "第" + vo.id + "章";
+        this.lbl_state.visible = vo.state != 1;
+        this.lbl_state.textColor = vo.state == 0 ? 0x8FFC02 : 0xF7DF07;
+    }
+
+    public isSelected(b){
+        this.rect_bg.visible = b;
     }
 }
 window['GrowLeftItemUI'] = GrowLeftItemUI;

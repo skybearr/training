@@ -27,6 +27,9 @@ class WxApi extends egret.EventDispatcher {
 			this.login();
 		}
 		this.showShareMenu();
+		//视频cd
+		let cd = this.getLocalData("rewardcd");
+		this.starttime = cd == null || cd == "" ? null : parseInt(cd);
 	}
 
 	/**登录 */
@@ -168,6 +171,17 @@ class WxApi extends egret.EventDispatcher {
 
 	}
 
+	public toast(str: string) {
+		if (!this.checkWx()) {
+			return;
+		}
+		wx.showToast({
+			title: str,
+			icon: 'none',
+			duration: 2000
+		});
+	}
+
 	// 	let shareinfo = {
 	// 	share_game_img: setting.share_game_img,
 	// 	share_game_title: setting.share_game_title,
@@ -193,7 +207,7 @@ class WxApi extends egret.EventDispatcher {
 
 		wx.showShareMenu();
 		this.onShare();
-		// this.initRewardVideoAd();
+		this.initRewardVideoAd();
 		this.checkShareInfo();
 	}
 
@@ -333,7 +347,7 @@ class WxApi extends egret.EventDispatcher {
 		if (wx == null) {
 			return;
 		}
-		this.rewardAd = wx.createRewardedVideoAd({ adUnitId: "adunit-dbf18bd3a9ac0892" })
+		this.rewardAd = wx.createRewardedVideoAd({ adUnitId: "adunit-922e89b51b9d9336" })
 
 
 		this.rewardAd.onLoad(() => {
@@ -356,9 +370,46 @@ class WxApi extends egret.EventDispatcher {
 				// 播放中途退出，不下发游戏奖励
 				state = 1;
 			}
+			this.rewardAdCDStart();
 			this.dispatchGameEvent(GameEvent.REWARDAD_CLOSE_EVENT, state);
 		})
 
+	}
+
+	private starttime: number;
+	private rewardAdCDStart() {
+		this.starttime = new Date().getTime();
+
+		this.setLocalDataByString("rewardcd", this.starttime + "");
+	}
+	public getRewardCD(): number {
+		let nowtime = new Date().getTime();
+
+
+		if (this.starttime == null) {
+			return 0;
+		}
+		else {
+			return 180 - Math.floor((nowtime - this.starttime) / 1000);
+		}
+	}
+
+	/**存取本地数据 */
+	public setLocalDataByObject(key: string, obj: Object) {
+		let value: string = JSON.stringify(obj);
+		this.setLocalDataByString(key, value);
+	}
+	/**存取本地数据 */
+	public setLocalDataByString(key: string, value: string) {
+		if (!this.checkWx()) {
+			return null;
+		}
+		try {
+			return wx.setStorageSync(key, value);
+		}
+		catch (e) {
+			return null;
+		}
 	}
 
 

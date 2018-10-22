@@ -12,6 +12,9 @@ declare interface Platform {
 
     /**游戏圈 */
     createGameClubButton():Promise<any>;    
+    bannershow():Promise<any>;
+    bannerdestroy():Promise<any>;
+    bannerhide():Promise<any>;
 }
 
 class DebugPlatform implements Platform {
@@ -23,6 +26,15 @@ class DebugPlatform implements Platform {
     }
     async createGameClubButton(){
         
+    }
+    async bannershow(){
+
+    }
+    async bannerdestroy(){
+
+    }
+    async bannerhide(){
+
     }
 }
 

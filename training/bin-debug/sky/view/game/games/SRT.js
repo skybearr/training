@@ -1,10 +1,10 @@
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
-var MissionVO = (function () {
-    function MissionVO() {
+var SRT = (function () {
+    function SRT() {
     }
-    return MissionVO;
+    return SRT;
 }());
-__reflect(MissionVO.prototype, "MissionVO");
-//# sourceMappingURL=MissionVO.js.map
+__reflect(SRT.prototype, "SRT");
+//# sourceMappingURL=SRT.js.map

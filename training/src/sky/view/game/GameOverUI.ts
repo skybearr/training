@@ -5,7 +5,7 @@ class GameOverUI extends BaseUI {
 		this.time = t;
 	}
 
-	private vo: MissionVO;
+	private vo: TrainMissionVO;
 	private lbl: eui.Label;
 	private btn_back: eui.Button;
 	private btn_restart: eui.Button;

@@ -27,6 +27,9 @@ var WxApi = (function (_super) {
             this.login();
         }
         this.showShareMenu();
+        //视频cd
+        var cd = this.getLocalData("rewardcd");
+        this.starttime = cd == null || cd == "" ? null : parseInt(cd);
     };
     /**登录 */
     WxApi.prototype.login = function () {
@@ -156,6 +159,16 @@ var WxApi = (function (_super) {
             }
         }
     };
+    WxApi.prototype.toast = function (str) {
+        if (!this.checkWx()) {
+            return;
+        }
+        wx.showToast({
+            title: str,
+            icon: 'none',
+            duration: 2000
+        });
+    };
     /**右上角转发 */
     WxApi.prototype.showShareMenu = function (info) {
         if (info === void 0) { info = null; }
@@ -170,7 +183,7 @@ var WxApi = (function (_super) {
         }
         wx.showShareMenu();
         this.onShare();
-        // this.initRewardVideoAd();
+        this.initRewardVideoAd();
         this.checkShareInfo();
     };
     /**监听用户点击右上角菜单的“转发”按钮时触发的事件
@@ -294,7 +307,7 @@ var WxApi = (function (_super) {
         if (wx == null) {
             return;
         }
-        this.rewardAd = wx.createRewardedVideoAd({ adUnitId: "adunit-dbf18bd3a9ac0892" });
+        this.rewardAd = wx.createRewardedVideoAd({ adUnitId: "adunit-922e89b51b9d9336" });
         this.rewardAd.onLoad(function () {
             console.log('激励视频 广告加载成功');
         });
@@ -313,8 +326,39 @@ var WxApi = (function (_super) {
                 // 播放中途退出，不下发游戏奖励
                 state = 1;
             }
+            _this.rewardAdCDStart();
             _this.dispatchGameEvent(GameEvent.REWARDAD_CLOSE_EVENT, state);
         });
+    };
+    WxApi.prototype.rewardAdCDStart = function () {
+        this.starttime = new Date().getTime();
+        this.setLocalDataByString("rewardcd", this.starttime + "");
+    };
+    WxApi.prototype.getRewardCD = function () {
+        var nowtime = new Date().getTime();
+        if (this.starttime == null) {
+            return 0;
+        }
+        else {
+            return 180 - Math.floor((nowtime - this.starttime) / 1000);
+        }
+    };
+    /**存取本地数据 */
+    WxApi.prototype.setLocalDataByObject = function (key, obj) {
+        var value = JSON.stringify(obj);
+        this.setLocalDataByString(key, value);
+    };
+    /**存取本地数据 */
+    WxApi.prototype.setLocalDataByString = function (key, value) {
+        if (!this.checkWx()) {
+            return null;
+        }
+        try {
+            return wx.setStorageSync(key, value);
+        }
+        catch (e) {
+            return null;
+        }
     };
     WxApi.prototype.showRewardAd = function (type) {
         var _this = this;

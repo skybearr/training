@@ -15,12 +15,13 @@ class GameLogic extends egret.EventDispatcher {
 	public GameStage: egret.Stage;
 	public main: eui.UILayer;
 
-	private data: MissionVO[][];
+	private data: TrainMissionVO[][];
 	private config: any;
 
 
 	public init() {
 		this.initData();
+		MissionLogic.getInstance().initCharpter();
 		this.openStart();
 
 		WxApi.getInstance().userInfo = platform.getUserInfo();
@@ -52,7 +53,7 @@ class GameLogic extends egret.EventDispatcher {
 				if (i.length < 8) {
 					continue;
 				}
-				let vo = new MissionVO();
+				let vo = new TrainMissionVO();
 				vo.id = o['id'];
 				vo.type = o['type'];
 				vo.des = o['des'];
@@ -126,7 +127,7 @@ class GameLogic extends egret.EventDispatcher {
 		this.main.addChild(new StartUI());
 	}
 
-	public startGame(vo: MissionVO) {
+	public startGame(vo: TrainMissionVO) {
 		this.main.removeChildren();
 		this.main.addChild(new GameUI(vo));
 	}
@@ -138,15 +139,15 @@ class GameLogic extends egret.EventDispatcher {
 
 	public openGrow(){
 		this.main.removeChildren();
-		this.main.addChild(new MissionUI());
+		this.main.addChild(new GrowUI());
 	}
 
 
-	public getMissionData(): MissionVO[][] {
+	public getMissionData(): TrainMissionVO[][] {
 		return this.data;
 	}
 
-	public getStartMission(): MissionVO {
+	public getStartMission(): TrainMissionVO {
 		return this.data[1][2];
 	}
 

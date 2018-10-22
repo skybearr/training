@@ -14,10 +14,11 @@
 
 
 
+
 	<e:Group id="gp" x="55" y="90">
 		<e:Image anchorOffsetX="0" width="640" height="160" source="yong_11_png" scale9Grid="68,0,17,94" y="0" x="0"/>
-		<e:Image anchorOffsetX="0" width="638.48" height="580" anchorOffsetY="0" source="yong_11_png" scale9Grid="68,66,50,25" y="188" x="1"/>
-		<e:Group y="801" horizontalCenter="0" touchChildren="true" touchEnabled="false">
+		<e:Image anchorOffsetX="0" width="638.48" height="434.55" anchorOffsetY="0" source="yong_11_png" scale9Grid="68,66,50,25" y="188" x="1"/>
+		<e:Group y="646" horizontalCenter="0" touchChildren="true" touchEnabled="false">
 			<e:Button id="btn_mission" label="训练模式" y="0" x="249" height="120" width="400" skinName="BaseButtonSkin"/>
 			<e:Button id="btn_grow" label="过关模式" y="0" x="0" height="120" width="400" skinName="BaseButtonSkin"/>
 			<e:layout>
@@ -25,15 +26,17 @@
 			</e:layout>
 		</e:Group>
 
-		<e:Group y="1102" x="148">
+		<e:Group y="930" horizontalCenter="0.5">
+			<e:Button id="btn_ad" label="鼓励作者" skinName="BaseButton1Skin" scaleX="1" scaleY="1" bottom="251" left="0" x="-203.00000000000003" y="0.6900000000000546"/>
 			<e:Button id="btn_rank" label="排行榜" x="-112.99999999999997" y="-59" skinName="BaseButton1Skin" scaleX="1" scaleY="1"/>
-			<e:Button id="btn_share" label="分享" x="-102.99999999999997" y="-49" skinName="BaseButton1Skin" scaleX="1" scaleY="1"/>
+			<e:Button id="btn_share" label="分享" x="-92.99999999999997" y="-39" skinName="BaseButton1Skin" scaleX="1" scaleY="1"/>
 			<e:layout>
 			<e:HorizontalLayout gap="25"/>
 			</e:layout>
 		</e:Group>
 		<e:Label text="舒尔特方格" size="66" anchorOffsetX="0" width="540" italic="true" bold="true" verticalAlign="middle" textAlign="center" y="45" x="56"/>
-		<e:Label text="“舒尔特方格”不但可以简单测量注意力水平，而且是很好的训练方法。又是心理咨询师进行心理治疗时常用的基本方法。 舒尔特表可以通过动态的练习锻炼视神经末梢。心理学上用此表来研究和发展心理感知的速度，其中包括视觉定向搜索运动的速度。 培养注意力集中、分配、控制能力；拓展视幅；加快视频 ；提高视觉的稳定性、辨别力、定向搜索能力。 练习的时间越长，看表所需的时间会越短。随着练习的深入，眼球的末梢视觉能力提高，不仅初学者可以有效地拓展视幅，加快阅读节奏，锻炼眼睛快速认读；而且对于进入提高阶段之后，同时拓展纵横视幅，达到一目十行、一目一页非常有效。 每表按字符顺序，迅速找全所有的字符，平均1个字符用1秒钟成绩为优良，即9格用9秒、16格用16秒、25格用25秒。 练习开始，达不到标准是非常正常的，切莫急躁。应该从9格开始练起。感觉熟练或比较轻松达到要求之后，再逐渐增加难度，千万不要因急于求成而使学习热情受挫。" size="26" fontFamily="SimHei" wordWrap="true" multiline="true" anchorOffsetY="0" height="544.3" width="560" lineSpacing="2" y="215.32" x="40"/>
+		<e:Label text="“舒尔特方格”不但可以简单测量注意力水平，而且是很好的训练方法。舒尔特表可以通过动态的练习锻炼视神经末梢 培养注意力集中、分配、控制能力；拓展视幅；加快视频 ；提高视觉的稳定性、辨别力、定向搜索能力。 练习的时间越长，看表所需的时间会越短。随着练习的深入，眼球的末梢视觉能力提高，不仅初学者可以有效地拓展视幅，加快阅读节奏，锻炼眼睛快速认读；而且对于进入提高阶段之后，同时拓展纵横视幅，达到一目十行、一目一页非常有效。  练习开始，达不到标准是非常正常的，切莫急躁。应该从9格开始练起。感觉熟练或比较轻松达到要求之后，再逐渐增加难度，千万不要因急于求成而使学习热情受挫。" size="26" fontFamily="SimHei" wordWrap="true" multiline="true" anchorOffsetY="0" height="395.69" width="560" lineSpacing="2" y="215.32" x="40"/>
+		<e:Label id="lbl_cd" text="10:00:00" x="72.01" y="988" fontFamily="SimHei" textColor="0x000000" visible="false"/>
 	</e:Group>
 
 

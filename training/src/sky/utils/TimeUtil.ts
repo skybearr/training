@@ -25,6 +25,23 @@ class TimeUtil {
 		return new Date(TimeUtil.getCrtServerTime()*1000);
 	}
 
+	/** 00:00:000格式 */
+	public static formatSecondT(t){
+		let s = TimeUtil.ParseTime2Format(Math.floor(t / 1000), "m:s");
+		let hs = t % 1000;
+		let ss = "";
+		if (hs < 10) {
+			ss = "00" + hs;
+		}
+		else if (hs < 100) {
+			ss = "0" + hs;
+		}
+		else {
+			ss = hs + "";;
+		}
+		return s + ":" + ss;
+	}
+
 	/**
 	 * 返回一年中的第N天
 	 * @param t 秒

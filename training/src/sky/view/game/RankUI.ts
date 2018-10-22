@@ -36,6 +36,7 @@ class RankUI extends BaseUI {
 		this.initList();
 		this.validateNow();
 		this.initDataContext();
+		platform.bannerhide();
 	}
 	private initList() {
 		let arr = this.data[this.crttype];
@@ -60,7 +61,7 @@ class RankUI extends BaseUI {
 
 
 	private arr_data: eui.ArrayCollection;
-	private data: MissionVO[][];
+	private data: TrainMissionVO[][];
 	private crttype: number;
 	protected initEvent() {
 		this.img_close.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickClose, this);
@@ -164,6 +165,8 @@ class RankUI extends BaseUI {
 
 	protected clear() {
 		super.clear();
+
+		platform.bannershow();
 
 		this.img_close.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickClose, this);
 		this.img_rankgp.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickGroupRank, this);

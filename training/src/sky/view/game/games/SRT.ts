@@ -1,0 +1,4 @@
+class SRT {
+	public constructor() {
+	}
+}

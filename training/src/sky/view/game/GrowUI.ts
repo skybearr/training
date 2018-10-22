@@ -3,99 +3,112 @@ class GrowUI extends BaseUI {
 		super("GrowSkin");
 	}
 
-	private list: eui.List;
-	private arr_data: eui.ArrayCollection;
-	private data: MissionVO[][];
-	private crttype: number;
-	private btn_back:eui.Button;
-	
+	private scroller_left: eui.Group;
+	private list_left: eui.List;
+	private arr_data_left: eui.ArrayCollection;
+	private charpters: Map<CharpterVO>;
+
+	private scroller_right: eui.Group;
+	private list_right: eui.List;
+	private arr_data_right: eui.ArrayCollection;
+	private missions: CharpterMissionVO[];
+
+	private btn_back: eui.Button;
+	private btn_start: eui.Button;
+
+	private crtChapter: number;
+	/** 当前章节的 当前关卡索引 0开始 */
+	private crtMission: number;
+	private clickMission:CharpterMissionVO;
 
 	/**初始化数据 */
 	protected initData() {
-		this.list.itemRenderer = GrowItemUI;
-		this.arr_data = new eui.ArrayCollection();
+		this.list_left.itemRenderer = GrowLeftItemUI;
+		this.arr_data_left = new eui.ArrayCollection();
+		this.list_right.itemRenderer = GrowLeftItemUI;
+		this.arr_data_right = new eui.ArrayCollection();
 	}
 
 	/**初始化界面 */
 	protected initView() {
-		this.data = GameLogic.getInstance().getMissionData();
-		this.crttype = 1;
-		this.initList(3);
+		this.charpters = MissionLogic.getInstance().getChaprters();
+		this.crtChapter = MissionLogic.getInstance().crtChapter;
+		this.initLeftList();
 	}
 
-	private initList(id=null) {
-		let arr = this.data[this.crttype];
-		if (arr == null || arr.length == 0) {
-			return;
+	private initLeftList() {
+		this.arr_data_left.removeAll();
+		for (let i in this.charpters) {
+			this.arr_data_left.addItem(this.charpters[i]);
 		}
-		this.arr_data.removeAll();
-		for (let i = 0; i < arr.length; i++) {
-			this.arr_data.addItem(arr[i]);
-		}
-		this.list.dataProvider = this.arr_data;
-		this.initBtn();
+		this.list_left.dataProvider = this.arr_data_left;
 
-		if(id != null){
-			this.list.validateNow();
-			this.list.selectedIndex = id;
+		this.list_left.validateNow();
+		this.list_left.selectedIndex = this.crtChapter - 1;
+
+		this.missions = MissionLogic.getInstance().getMissionsByChapterID(this.crtChapter);
+		this.crtMission = MissionLogic.getInstance().getCrtMissionInCharpter(this.crtChapter);
+
+		this.initRightList();
+	}
+
+	private initRightList() {
+		this.arr_data_right.removeAll();
+		for (let i=0;i<this.missions.length;i++) {
+			this.arr_data_right.addItem(this.missions[i]);
 		}
+		this.list_right.dataProvider = this.arr_data_right;
+
+		this.list_right.validateNow();
+		this.list_right.selectedIndex = this.crtMission;
+		this.clickMission = this.missions[this.crtMission];
 	}
 
 	/**初始化事件 */
 	protected initEvent() {
-		this.list.addEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemClick, this);
-		for (let i = 1; i <= 3; i++) {
-			this['btn' + i].addEventListener(egret.TouchEvent.TOUCH_TAP, this.btnClick, this);
-		}
-		this.btn_back.addEventListener(egret.TouchEvent.TOUCH_TAP,this.clickBack,this);
+		this.list_left.addEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemLeftClick, this);
+		this.list_right.addEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemRightClick, this);
+		this.btn_back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
+		this.btn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStart, this);
 	}
 
-	private clickBack(){
+	private clickStart() {
+		if(this.clickMission == null){
+
+		}
+		MissionLogic.getInstance().startMissionGame(this.clickMission);
+	}
+
+	private clickBack() {
 		GameLogic.getInstance().openStart();
 	}
 
-	
+	private itemLeftClick(e: eui.ItemTapEvent) {
+		let vo = this.list_left.selectedItem.data as CharpterVO;
+		
+		this.missions = vo.missions;
+		this.crtMission = MissionLogic.getInstance().getCrtMissionInCharpter(this.crtChapter);
 
-	private btnClick(e: egret.TouchEvent) {
-		let i = parseInt(e.currentTarget.name);
-		if (this.crttype == i) {
-			return;
-		}
-		this.crttype = i;
-		this.initList();
+		this.initRightList();
 	}
 
-	private initBtn() {
-		for (let i = 1; i <= 3; i++) {
-			let btn: eui.Button = this['btn' + i];
-			if (btn != null) {
-				btn.filters = this.crttype != i ? FilterUtil.getGrayFilter() : null;
-			}
-		}
-	}
-
-	private itemClick(e: eui.ItemTapEvent) {
-		let i = e.itemIndex;
-		let arr = this.data[this.crttype];
-		if (arr == null || arr.length == 0) {
-			return;
-		}
-		let vo = arr[i];
-		if (vo == null) {
-			return;
-		}
-		GameLogic.getInstance().startGame(vo);
+	private itemRightClick(e: eui.ItemTapEvent) {
+		this.clickMission = this.list_left.selectedItem.data as CharpterMissionVO;
 	}
 
 	protected clear() {
 		super.clear();
 
-		this.list.removeEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemClick, this);
-		this.btn_back.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickBack,this);
-		
-		this.list.dataProvider = null;
-		this.arr_data = null;
-		this.list = null;
-		this.data = null;
+		this.list_left.removeEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemLeftClick, this);
+		this.list_right.removeEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemRightClick, this);
+		this.btn_back.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
+		this.btn_start.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStart, this);
+		this.list_left.dataProvider = null;
+		this.list_right.dataProvider = null;
+		this.arr_data_left = null;
+		this.arr_data_right = null;
+		this.charpters = null;
+		this.missions = null;
+		this.clickMission = null;
 	}
 }

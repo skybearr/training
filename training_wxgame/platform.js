@@ -1,7 +1,7 @@
 /**
  * 请在白鹭引擎的Main.ts中调用 platform.login() 方法调用至此处。
  */
-
+var bannerAd;
 class WxgamePlatform {
 
     name = 'wxgame'
@@ -15,6 +15,46 @@ class WxgamePlatform {
             })
         })
     }
+	
+	bannershow() {
+    return new Promise((resolve, reject) => {
+      let sysInfo = wx.getSystemInfoSync();
+      let sdkVersion = sysInfo.SDKVersion;
+      sdkVersion = sdkVersion.replace(/\./g, "");
+      sdkVersion = sdkVersion.substr(0, 3);
+      let sdkVersionNum = parseInt(sdkVersion);
+      console.log("showbaner:", sdkVersionNum)
+      if (sdkVersionNum >= 204) { //基础调试库在2.0.6版本以上
+        let phoneWidth = wx.getSystemInfoSync().screenWidth;    //手机屏幕宽度
+        let phoneHeight = wx.getSystemInfoSync().screenHeight;  //手机屏幕高度
+        console.log(phoneWidth, phoneHeight)
+        bannerAd = wx.createBannerAd({
+          adUnitId: 'adunit-fac801131dcdda92',
+          style: {
+            left: 10,
+            top: phoneHeight - 122,
+            width: phoneWidth - 20,
+          }
+        })
+        bannerAd.show();
+        console.log(bannerAd)
+      }
+    })
+  }
+  bannerhide() {
+    return new Promise((resolve, reject) => {
+      if (bannerAd != null) {
+        bannerAd.hide();
+      }
+    })
+  }
+  bannerdestroy() {
+    return new Promise((resolve, reject) => {
+	  if (bannerAd != null) {
+        bannerAd.destroy();
+      }
+    })
+  }
 
   /**游戏圈 */
   createGameClubButton() {

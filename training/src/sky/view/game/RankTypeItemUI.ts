@@ -11,7 +11,7 @@ class RankTypeItemUI extends eui.ItemRenderer {
     private star3: eui.Image;
     private rect_bg:eui.Rect;
 
-    public setVO(vo: MissionVO) {
+    public setVO(vo: TrainMissionVO) {
         this.initView(vo);
     }
 
@@ -22,11 +22,11 @@ class RankTypeItemUI extends eui.ItemRenderer {
         if (this.data == null) {
             return;
         }
-        let vo = this.data as MissionVO;
+        let vo = this.data as TrainMissionVO;
         this.initView(vo);
     }
 
-    private initView(vo: MissionVO) {
+    private initView(vo: TrainMissionVO) {
         this.lbl.text = vo.name;
         
     }

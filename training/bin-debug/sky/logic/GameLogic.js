@@ -21,6 +21,7 @@ var GameLogic = (function (_super) {
     };
     GameLogic.prototype.init = function () {
         this.initData();
+        MissionLogic.getInstance().initCharpter();
         this.openStart();
         WxApi.getInstance().userInfo = platform.getUserInfo();
         console.log("userinfo:", WxApi.getInstance().userInfo);
@@ -48,7 +49,7 @@ var GameLogic = (function (_super) {
                 if (i.length < 8) {
                     continue;
                 }
-                var vo = new MissionVO();
+                var vo = new TrainMissionVO();
                 vo.id = o['id'];
                 vo.type = o['type'];
                 vo.des = o['des'];
@@ -126,7 +127,7 @@ var GameLogic = (function (_super) {
     };
     GameLogic.prototype.openGrow = function () {
         this.main.removeChildren();
-        this.main.addChild(new MissionUI());
+        this.main.addChild(new GrowUI());
     };
     GameLogic.prototype.getMissionData = function () {
         return this.data;

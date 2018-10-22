@@ -5,10 +5,11 @@ class MissionUI extends BaseUI {
 
 	private list: eui.List;
 	private arr_data: eui.ArrayCollection;
-	private data: MissionVO[][];
+	private data: TrainMissionVO[][];
 	private crttype: number;
-	private btn_back:eui.Button;
-	
+	private btn_back: eui.Button;
+	private gp_1: eui.Group;
+
 
 	/**初始化数据 */
 	protected initData() {
@@ -21,9 +22,12 @@ class MissionUI extends BaseUI {
 		this.data = GameLogic.getInstance().getMissionData();
 		this.crttype = 1;
 		this.initList(3);
+		
+		let y = this.gp_1.y;
+		egret.Tween.get(this.gp_1, { loop: true }).to({ y: y - 30 }, 500).to(100).to({ y: y }, 500).wait(300);
 	}
 
-	private initList(id=null) {
+	private initList(id = null) {
 		let arr = this.data[this.crttype];
 		if (arr == null || arr.length == 0) {
 			return;
@@ -35,7 +39,7 @@ class MissionUI extends BaseUI {
 		this.list.dataProvider = this.arr_data;
 		this.initBtn();
 
-		if(id != null){
+		if (id != null) {
 			this.list.validateNow();
 			this.list.selectedIndex = id;
 		}
@@ -47,14 +51,14 @@ class MissionUI extends BaseUI {
 		for (let i = 1; i <= 3; i++) {
 			this['btn' + i].addEventListener(egret.TouchEvent.TOUCH_TAP, this.btnClick, this);
 		}
-		this.btn_back.addEventListener(egret.TouchEvent.TOUCH_TAP,this.clickBack,this);
+		this.btn_back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
 	}
 
-	private clickBack(){
+	private clickBack() {
 		GameLogic.getInstance().openStart();
 	}
 
-	
+
 
 	private btnClick(e: egret.TouchEvent) {
 		let i = parseInt(e.currentTarget.name);
@@ -63,6 +67,8 @@ class MissionUI extends BaseUI {
 		}
 		this.crttype = i;
 		this.initList();
+
+		this.gp_1.visible = i == 1;
 	}
 
 	private initBtn() {
@@ -94,8 +100,9 @@ class MissionUI extends BaseUI {
 		for (let i = 1; i <= 3; i++) {
 			this['btn' + i].removeEventListener(egret.TouchEvent.TOUCH_TAP, this.btnClick, this);
 		}
-		this.btn_back.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.clickBack,this);
-		
+		this.btn_back.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
+
+		egret.Tween.removeTweens(this.gp_1);
 		this.list.dataProvider = null;
 		this.arr_data = null;
 		this.list = null;
