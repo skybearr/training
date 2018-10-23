@@ -11,7 +11,7 @@ class StartUI extends BaseUI {
 
 	/**初始化数据 */
 	protected initData() {
-
+		
 	}
 
 	private canwatch: boolean;

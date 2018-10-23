@@ -13,8 +13,8 @@ class MissionLogic extends egret.EventDispatcher {
 
 
 	private charpters: Map<CharpterVO> = {};
-	public crtChapter:number = 2;
-	public crtMission:number = 202;
+	public crtChapter: number = 2;
+	public crtMission: number = 202;
 
 	public initCharpter() {
 		this.charpters = RES.getRes("mission_json");
@@ -30,20 +30,22 @@ class MissionLogic extends egret.EventDispatcher {
 	}
 
 	/** 当前章节的 当前关卡索引 0开始 */
-	public getCrtMissionInCharpter(charpterId:number):number{
+	public getCrtMissionInCharpter(charpterId: number): number {
 		let charpter = this.charpters[charpterId];
 		let c = Math.floor(this.crtMission / 100);
-		if(c == charpterId){
+		if (c == charpterId) {
 			return this.crtMission % 100;
 		}
-		else{
+		else {
 			return charpter.missions.length;
 		}
 	}
 
 
-	public startMissionGame(vo:CharpterMissionVO){
-
+	public startMissionGame(vo: CharpterMissionVO) {
+		GameLogic.getInstance().main.removeChildren();
+		var obj_class: any = egret.getDefinitionByName("GameUI" + vo.type);
+		GameLogic.getInstance().main.addChild(new obj_class(vo));
 	}
-	
+
 }
