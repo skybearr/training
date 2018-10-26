@@ -26,8 +26,13 @@ var GrowRightItemUI = (function (_super) {
         this.initView(vo);
     };
     GrowRightItemUI.prototype.initView = function (vo) {
-        this.lbl_title.text = vo.title;
-        this.lbl_best.text = "最好成绩：" + TimeUtil.formatSecondT(vo.best);
+        this.lbl_title.text = vo.missionId + "." + vo.title;
+        if (vo.best != null) {
+            this.lbl_best.text = "最好成绩：" + TimeUtil.formatSecondT(vo.best);
+        }
+        else {
+            this.lbl_best.text = "";
+        }
         if (vo.state == 2) {
             for (var i = 1; i <= 5; i++) {
                 this['star' + i].source = RES.getRes(i <= vo.stars ? "star_a_png" : "star_b_png");

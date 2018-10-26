@@ -28,10 +28,12 @@ var GrowLeftItemUI = (function (_super) {
     GrowLeftItemUI.prototype.initView = function (vo) {
         this.lbl.text = "第" + vo.id + "章";
         this.lbl_state.visible = vo.state != 1;
+        this.lbl_state.text = vo.state == 0 ? "未解锁" : "通关";
         this.lbl_state.textColor = vo.state == 0 ? 0x8FFC02 : 0xF7DF07;
+        this.rect_state.visible = vo.state == 0;
     };
     GrowLeftItemUI.prototype.isSelected = function (b) {
-        this.rect_bg.visible = b;
+        this.rect_select.visible = b;
     };
     return GrowLeftItemUI;
 }(eui.ItemRenderer));

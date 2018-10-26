@@ -4,6 +4,8 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 var CharpterMissionVO = (function () {
     function CharpterMissionVO() {
     }
+    CharpterMissionVO.prototype.setDialog = function (o) {
+    };
     return CharpterMissionVO;
 }());
 __reflect(CharpterMissionVO.prototype, "CharpterMissionVO");

@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "rank_back_png,rank_bg_png,rank_button_png,reglogbg_png,star_a_png,star_b_png,yong_11_png,yong_3_png,yong_6_png,yong_7_png,yong_8_png,config_json,share_jpg,share2_jpg,skin_zibg_png,mission_json,xiaohong_jpg,xiaoming_jpg,xiaolei_jpg,bg_1_jpg,bg_2_jpg",
+			"keys": "rank_back_png,rank_bg_png,rank_button_png,reglogbg_png,star_a_png,star_b_png,yong_11_png,yong_3_png,yong_6_png,yong_7_png,yong_8_png,config_json,share_jpg,share2_jpg,skin_zibg_png,mission_json,xiaohong_jpg,xiaoming_jpg,xiaolei_jpg,bg_1_jpg,bg_2_jpg,avg_list_json",
 			"name": "preload"
 		}
 	],
@@ -110,6 +110,11 @@
 			"name": "bg_2_jpg",
 			"type": "image",
 			"url": "assets/dialog/bg_2.jpg"
+		},
+		{
+			"name": "avg_list_json",
+			"type": "json",
+			"url": "data/avg_list.json"
 		}
 	]
 }

@@ -15,6 +15,8 @@ var StartUI = (function (_super) {
     }
     /**初始化数据 */
     StartUI.prototype.initData = function () {
+        // HttpCommand.getInstance().testGet();
+        // HttpCommand.getInstance().testPost();
     };
     StartUI.prototype.rewardCD = function () {
         var cd = WxApi.getInstance().getRewardCD();
@@ -70,8 +72,8 @@ var StartUI = (function (_super) {
         }
     };
     StartUI.prototype.clickGrow = function () {
-        WxApi.getInstance().toast('即将推出');
-        // GameLogic.getInstance().openGrow();
+        // WxApi.getInstance().toast('即将推出');
+        GameLogic.getInstance().openGrow();
     };
     StartUI.prototype.clickRank = function () {
         this.addChild(new RankUI());

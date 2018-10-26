@@ -414,18 +414,18 @@ var egret = window.egret;
 	__extends(GrowLeftItemSkin, _super);
 	function GrowLeftItemSkin() {
 		_super.call(this);
-		this.skinParts = ["rect_bg","img_bg","lbl","lbl_state"];
+		this.skinParts = ["rect_select","img_bg","lbl","lbl_state","rect_state"];
 		
 		this.height = 100;
 		this.width = 200;
-		this.elementsContent = [this.rect_bg_i(),this.img_bg_i(),this.lbl_i(),this.lbl_state_i()];
+		this.elementsContent = [this.rect_select_i(),this.img_bg_i(),this.lbl_i(),this.lbl_state_i(),this.rect_state_i()];
 	}
 	var _proto = GrowLeftItemSkin.prototype;
 
-	_proto.rect_bg_i = function () {
+	_proto.rect_select_i = function () {
 		var t = new eui.Rect();
-		this.rect_bg = t;
-		t.fillColor = 0x6ef704;
+		this.rect_select = t;
+		t.fillColor = 0x8FFC02;
 		t.percentHeight = 100;
 		t.horizontalCenter = 0;
 		t.verticalCenter = 0;
@@ -436,12 +436,12 @@ var egret = window.egret;
 	_proto.img_bg_i = function () {
 		var t = new eui.Image();
 		this.img_bg = t;
-		t.percentHeight = 96;
+		t.percentHeight = 88;
 		t.horizontalCenter = 0;
 		t.scale9Grid = new egret.Rectangle(47,44,50,37);
 		t.source = "yong_11_png";
 		t.touchEnabled = false;
-		t.verticalCenter = 0;
+		t.verticalCenter = 1;
 		t.percentWidth = 96;
 		return t;
 	};
@@ -484,6 +484,17 @@ var egret = window.egret;
 		t.width = 40;
 		return t;
 	};
+	_proto.rect_state_i = function () {
+		var t = new eui.Rect();
+		this.rect_state = t;
+		t.alpha = 0.5;
+		t.percentHeight = 100;
+		t.horizontalCenter = 0;
+		t.verticalCenter = 0;
+		t.visible = false;
+		t.percentWidth = 100;
+		return t;
+	};
 	return GrowLeftItemSkin;
 })(eui.Skin);generateEUI.paths['resource/skins/GrowRightItemSkin.exml'] = window.GrowRightItemSkin = (function (_super) {
 	__extends(GrowRightItemSkin, _super);
@@ -504,6 +515,7 @@ var egret = window.egret;
 		t.percentHeight = 100;
 		t.horizontalCenter = 0;
 		t.verticalCenter = 0;
+		t.visible = false;
 		t.percentWidth = 100;
 		return t;
 	};
@@ -531,7 +543,7 @@ var egret = window.egret;
 		t.stroke = 2;
 		t.strokeColor = 0x000000;
 		t.text = "99.第一训练场";
-		t.textAlign = "left";
+		t.textAlign = "center";
 		t.textColor = 0xffffff;
 		t.touchEnabled = false;
 		t.verticalAlign = "middle";
@@ -736,6 +748,12 @@ var egret = window.egret;
 		t.scaleX = 1;
 		t.scaleY = 1;
 		t.y = 10;
+		t.layout = this._VerticalLayout1_i();
+		return t;
+	};
+	_proto._VerticalLayout1_i = function () {
+		var t = new eui.VerticalLayout();
+		t.gap = 10;
 		return t;
 	};
 	_proto.scroller_right_i = function () {
@@ -744,9 +762,9 @@ var egret = window.egret;
 		t.anchorOffsetX = 0;
 		t.anchorOffsetY = 0;
 		t.height = 720;
-		t.width = 468.79;
-		t.x = 243.6;
-		t.y = 188.32;
+		t.width = 468;
+		t.x = 249;
+		t.y = 188;
 		t.viewport = this.list_right_i();
 		return t;
 	};
@@ -754,10 +772,21 @@ var egret = window.egret;
 		var t = new eui.List();
 		this.list_right = t;
 		t.anchorOffsetY = 0;
-		t.horizontalCenter = 0;
+		t.horizontalCenter = -21;
 		t.scaleX = 1;
 		t.scaleY = 1;
-		t.y = 10;
+		t.y = -25.84;
+		t.layout = this._TileLayout1_i();
+		return t;
+	};
+	_proto._TileLayout1_i = function () {
+		var t = new eui.TileLayout();
+		t.horizontalAlign = "center";
+		t.horizontalGap = 16;
+		t.orientation = "rows";
+		t.rowAlign = "top";
+		t.verticalAlign = "top";
+		t.verticalGap = 12;
 		return t;
 	};
 	_proto._Group1_i = function () {

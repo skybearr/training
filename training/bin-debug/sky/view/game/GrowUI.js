@@ -17,7 +17,7 @@ var GrowUI = (function (_super) {
     GrowUI.prototype.initData = function () {
         this.list_left.itemRenderer = GrowLeftItemUI;
         this.arr_data_left = new eui.ArrayCollection();
-        this.list_right.itemRenderer = GrowLeftItemUI;
+        this.list_right.itemRenderer = GrowRightItemUI;
         this.arr_data_right = new eui.ArrayCollection();
     };
     /**初始化界面 */
@@ -36,6 +36,8 @@ var GrowUI = (function (_super) {
         this.list_left.selectedIndex = this.crtChapter - 1;
         this.missions = MissionLogic.getInstance().getMissionsByChapterID(this.crtChapter);
         this.crtMission = MissionLogic.getInstance().getCrtMissionInCharpter(this.crtChapter);
+        this.crtLeftItem = this.list_left.getElementAt(this.crtChapter - 1);
+        this.crtLeftItem.isSelected(true);
         this.initRightList();
     };
     GrowUI.prototype.initRightList = function () {
@@ -47,6 +49,8 @@ var GrowUI = (function (_super) {
         this.list_right.validateNow();
         this.list_right.selectedIndex = this.crtMission;
         this.clickMission = this.missions[this.crtMission];
+        this.crtRightItem = this.list_right.getElementAt(this.crtMission - 1);
+        this.crtRightItem.isSelected(true);
     };
     /**初始化事件 */
     GrowUI.prototype.initEvent = function () {
@@ -56,21 +60,40 @@ var GrowUI = (function (_super) {
         this.btn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStart, this);
     };
     GrowUI.prototype.clickStart = function () {
-        if (this.clickMission == null) {
+        if (this.clickMission != null) {
+            MissionLogic.getInstance().startMissionGame(this.clickMission);
         }
-        MissionLogic.getInstance().startMissionGame(this.clickMission);
     };
     GrowUI.prototype.clickBack = function () {
         GameLogic.getInstance().openStart();
     };
     GrowUI.prototype.itemLeftClick = function (e) {
-        var vo = this.list_left.selectedItem.data;
+        var vo = this.list_left.selectedItem;
+        if (vo.state == 0) {
+            return;
+        }
+        if (this.crtLeftItem != null) {
+            this.crtLeftItem.isSelected(false);
+        }
+        var i = this.list_left.selectedIndex;
+        this.crtLeftItem = this.list_left.getElementAt(i);
+        this.crtLeftItem.isSelected(true);
         this.missions = vo.missions;
         this.crtMission = MissionLogic.getInstance().getCrtMissionInCharpter(this.crtChapter);
         this.initRightList();
     };
     GrowUI.prototype.itemRightClick = function (e) {
-        this.clickMission = this.list_left.selectedItem.data;
+        var vo = this.list_right.selectedItem;
+        if (vo.state == 0) {
+            return;
+        }
+        this.clickMission = vo;
+        if (this.crtRightItem != null) {
+            this.crtRightItem.isSelected(false);
+        }
+        var i = this.list_right.selectedIndex;
+        this.crtRightItem = this.list_right.getElementAt(i);
+        this.crtRightItem.isSelected(true);
     };
     GrowUI.prototype.clear = function () {
         _super.prototype.clear.call(this);

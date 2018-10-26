@@ -13,11 +13,43 @@ class MissionLogic extends egret.EventDispatcher {
 
 
 	private charpters: Map<CharpterVO> = {};
-	public crtChapter: number = 2;
-	public crtMission: number = 202;
+	public crtChapter: number = 1;
+	public crtMission: number = 102;
 
 	public initCharpter() {
-		this.charpters = RES.getRes("mission_json");
+		let data = RES.getRes("mission_json");
+		let mid = this.crtMission % 100;
+		for (let id in data) {
+			let o = data[id];
+
+			let v = new CharpterMissionVO();
+			v.missionId = parseInt(o.id);
+			v.title = o.title;
+			v.type = parseInt(o.type);
+			v.content = o.content;
+			v.des = o.des;
+			v.times = o.time;
+			v.setDialog(o.dialog);
+
+			let cid = Math.floor(parseInt(id) / 100);
+			let vo:CharpterVO = this.charpters[cid];
+			if(vo == null){
+				vo = new CharpterVO();
+				vo.id = cid;
+				vo.missions = [];
+				if(cid == this.crtChapter){
+					vo.state = 1;
+					v.state = mid < v.missionId ? 2 : (mid > v.missionId ? 0 : 1);
+				}
+				else{
+					vo.state = cid < this.crtChapter ? 2 : 0;
+				}
+				
+			}
+			
+			vo.missions.push(v);
+			this.charpters[cid] = vo;
+		}
 	}
 
 	public getChaprters(): Map<CharpterVO> {
@@ -43,7 +75,6 @@ class MissionLogic extends egret.EventDispatcher {
 
 
 	public startMissionGame(vo: CharpterMissionVO) {
-		GameLogic.getInstance().main.removeChildren();
 		var obj_class: any = egret.getDefinitionByName("GameUI" + vo.type);
 		GameLogic.getInstance().main.addChild(new obj_class(vo));
 	}

@@ -16,6 +16,7 @@
 		"resource/skins/RankTypeItemSkin.exml",
 		"resource/skins/RoleSkin.exml",
 		"resource/skins/StartSkin.exml",
+		"resource/skins/games/Game1Skin.exml",
 		"resource/skins/games/GameSkin.exml"
 	],
 	"path": "resource/default.thm.json"

@@ -26,5 +26,7 @@ declare class RoleSkin extends eui.Skin{
 }
 declare class StartSkin extends eui.Skin{
 }
+declare class Game1Skin extends eui.Skin{
+}
 declare class GameSkin extends eui.Skin{
 }

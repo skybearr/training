@@ -10,6 +10,7 @@ class GameBaseUI extends eui.Component{
 	public constructor(skinname,vo:CharpterMissionVO) {
 		super();
 		this.skinName = skinname;
+		this.vo = vo;
 	}
 
 	protected img_bg:eui.Image;

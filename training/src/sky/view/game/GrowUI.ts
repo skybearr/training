@@ -19,13 +19,17 @@ class GrowUI extends BaseUI {
 	private crtChapter: number;
 	/** 当前章节的 当前关卡索引 0开始 */
 	private crtMission: number;
-	private clickMission:CharpterMissionVO;
+	private clickMission: CharpterMissionVO;
+
+	private crtLeftItem: GrowLeftItemUI;
+	private crtRightItem: GrowRightItemUI;
+
 
 	/**初始化数据 */
 	protected initData() {
 		this.list_left.itemRenderer = GrowLeftItemUI;
 		this.arr_data_left = new eui.ArrayCollection();
-		this.list_right.itemRenderer = GrowLeftItemUI;
+		this.list_right.itemRenderer = GrowRightItemUI;
 		this.arr_data_right = new eui.ArrayCollection();
 	}
 
@@ -48,13 +52,14 @@ class GrowUI extends BaseUI {
 
 		this.missions = MissionLogic.getInstance().getMissionsByChapterID(this.crtChapter);
 		this.crtMission = MissionLogic.getInstance().getCrtMissionInCharpter(this.crtChapter);
-
+		this.crtLeftItem = this.list_left.getElementAt(this.crtChapter - 1) as GrowLeftItemUI;
+		this.crtLeftItem.isSelected(true);
 		this.initRightList();
 	}
 
 	private initRightList() {
 		this.arr_data_right.removeAll();
-		for (let i=0;i<this.missions.length;i++) {
+		for (let i = 0; i < this.missions.length; i++) {
 			this.arr_data_right.addItem(this.missions[i]);
 		}
 		this.list_right.dataProvider = this.arr_data_right;
@@ -62,6 +67,8 @@ class GrowUI extends BaseUI {
 		this.list_right.validateNow();
 		this.list_right.selectedIndex = this.crtMission;
 		this.clickMission = this.missions[this.crtMission];
+		this.crtRightItem = this.list_right.getElementAt(this.crtMission - 1) as GrowRightItemUI;
+		this.crtRightItem.isSelected(true);
 	}
 
 	/**初始化事件 */
@@ -73,10 +80,9 @@ class GrowUI extends BaseUI {
 	}
 
 	private clickStart() {
-		if(this.clickMission == null){
-
+		if (this.clickMission != null) {
+			MissionLogic.getInstance().startMissionGame(this.clickMission);
 		}
-		MissionLogic.getInstance().startMissionGame(this.clickMission);
 	}
 
 	private clickBack() {
@@ -84,16 +90,35 @@ class GrowUI extends BaseUI {
 	}
 
 	private itemLeftClick(e: eui.ItemTapEvent) {
-		let vo = this.list_left.selectedItem.data as CharpterVO;
-		
+		let vo = this.list_left.selectedItem as CharpterVO;
+		if (vo.state == 0) {
+			return;
+		}
+		if (this.crtLeftItem != null) {
+			this.crtLeftItem.isSelected(false);
+		}
+		let i = this.list_left.selectedIndex;
+		this.crtLeftItem = this.list_left.getElementAt(i) as GrowLeftItemUI;
+		this.crtLeftItem.isSelected(true);
 		this.missions = vo.missions;
 		this.crtMission = MissionLogic.getInstance().getCrtMissionInCharpter(this.crtChapter);
 
 		this.initRightList();
 	}
 
+
 	private itemRightClick(e: eui.ItemTapEvent) {
-		this.clickMission = this.list_left.selectedItem.data as CharpterMissionVO;
+		let vo = this.list_right.selectedItem as CharpterMissionVO;
+		if (vo.state == 0) {
+			return;
+		}
+		this.clickMission = vo;
+		if (this.crtRightItem != null) {
+			this.crtRightItem.isSelected(false);
+		}
+		let i = this.list_right.selectedIndex;
+		this.crtRightItem = this.list_right.getElementAt(i) as GrowRightItemUI;
+		this.crtRightItem.isSelected(true);
 	}
 
 	protected clear() {

@@ -340,7 +340,7 @@ var WxApi = (function (_super) {
             return 0;
         }
         else {
-            return 180 - Math.floor((nowtime - this.starttime) / 1000);
+            return 60 - Math.floor((nowtime - this.starttime) / 1000);
         }
     };
     /**存取本地数据 */

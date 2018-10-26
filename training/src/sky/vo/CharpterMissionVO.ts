@@ -14,6 +14,8 @@ class CharpterMissionVO {
 	/** 1舒尔特 2速记 */
 	public type:number;
 
+	public content:string;
+
 	public des:string;
 
 	public best:number;
@@ -22,4 +24,7 @@ class CharpterMissionVO {
 
 	public avgVO:AvgVO;
 
+	public setDialog(o:any){
+		
+	}
 }

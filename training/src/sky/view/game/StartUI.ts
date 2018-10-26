@@ -11,7 +11,8 @@ class StartUI extends BaseUI {
 
 	/**初始化数据 */
 	protected initData() {
-		
+		// HttpCommand.getInstance().testGet();
+		// HttpCommand.getInstance().testPost();
 	}
 
 	private canwatch: boolean;
@@ -75,8 +76,8 @@ class StartUI extends BaseUI {
 	}
 
 	private clickGrow() {
-		WxApi.getInstance().toast('即将推出');
-		// GameLogic.getInstance().openGrow();
+		// WxApi.getInstance().toast('即将推出');
+		GameLogic.getInstance().openGrow();
 	}
 
 	private clickRank() {

@@ -390,7 +390,7 @@ class WxApi extends egret.EventDispatcher {
 			return 0;
 		}
 		else {
-			return 180 - Math.floor((nowtime - this.starttime) / 1000);
+			return 60 - Math.floor((nowtime - this.starttime) / 1000);
 		}
 	}
 
