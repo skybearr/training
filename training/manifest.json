@@ -10,9 +10,9 @@
 	],
 	"game": [
 		"bin-debug/sky/view/game/BaseUI.js",
-		"bin-debug/sky/view/game/games/GameBaseUI.js",
 		"bin-debug/sky/view/game/MissionItemUI.js",
-		"bin-debug/sky/view/game/GameOverUI.js",
+		"bin-debug/sky/view/game/games/GameBaseUI.js",
+		"bin-debug/sky/view/game/GameUI.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/sky/command/HttpCommand.js",
 		"bin-debug/sky/event/GameEvent.js",
@@ -30,8 +30,8 @@
 		"bin-debug/sky/utils/WxApi.js",
 		"bin-debug/AssetAdapter.js",
 		"bin-debug/sky/view/game/GameItemUI.js",
-		"bin-debug/sky/vo/TrainMissionVO.js",
-		"bin-debug/sky/view/game/GameUI.js",
+		"bin-debug/sky/view/game/GameOverUI.js",
+		"bin-debug/LoadingUI.js",
 		"bin-debug/sky/view/game/GrowLeftItemUI.js",
 		"bin-debug/sky/view/game/GrowRightItemUI.js",
 		"bin-debug/sky/view/game/GrowUI.js",
@@ -40,6 +40,8 @@
 		"bin-debug/sky/view/game/RankTypeItemUI.js",
 		"bin-debug/sky/view/game/RankUI.js",
 		"bin-debug/sky/view/game/StartUI.js",
+		"bin-debug/sky/view/game/avg/AVGLogic.js",
+		"bin-debug/sky/view/game/avg/AvgMainUI.js",
 		"bin-debug/Platform.js",
 		"bin-debug/sky/view/game/games/GamesOverUI.js",
 		"bin-debug/sky/view/game/games/GameUI1.js",
@@ -50,6 +52,6 @@
 		"bin-debug/sky/vo/AvgVO.js",
 		"bin-debug/sky/vo/CharpterMissionVO.js",
 		"bin-debug/sky/vo/CharpterVO.js",
-		"bin-debug/LoadingUI.js"
+		"bin-debug/sky/vo/TrainMissionVO.js"
 	]
 }
