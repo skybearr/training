@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="RankSkin" width="750" height="1335" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
-	<e:Rect id="rect_bg" width="750" height="1334" x="0" y="0" locked="true"/>
-	<e:Image touchEnabled="false" anchorOffsetY="0" height="742" anchorOffsetX="0" width="640" horizontalCenter="0" scale9Grid="12,12,76,76" y="200" source="rank_bg_png"/>
+<e:Skin class="RankSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing"
+        xmlns:fw="fw.*">
+	<e:Rect id="rect_bg" width="750" height="1334" x="0" y="0" fillColor="0x1c1b1b" />
+	<e:Label id="lbl_title" text="好友排行榜" size="36" fontFamily="SimHei" touchEnabled="false" horizontalCenter="0" y="90"
+	         textColor="0xfffffe" bold="true" />
+	<e:Image touchEnabled="false" anchorOffsetY="0" height="742" anchorOffsetX="0" width="640" horizontalCenter="0"
+	         scale9Grid="12,12,76,76" y="200" source="framework_json.rank_bg" />
+	<e:Label id="lbl_2" text="每周一凌晨刷新" x="67" size="24" fontFamily="SimHei" touchEnabled="false" textColor="0x727891"
+	         y="208" />
+	<e:Scroller id="scroller_world" width="640" height="700" anchorOffsetY="0" horizontalCenter="0" y="242">
+		<e:List id="list_world" />
+	</e:Scroller>
 
-	<e:Label id="lbl_2" text="每周一凌晨刷新" x="67" size="24" fontFamily="SimHei" touchEnabled="false" textColor="0x727891" y="208"/>
-	<e:Label id="lbl_title" text="好友排行榜" size="36" fontFamily="SimHei" touchEnabled="false" horizontalCenter="0" y="60" textColor="0xfffffe" bold="true"/>
-	<e:Image id="img_rankgp" horizontalCenter="0" y="1146" source="rank_button_png"/>
-
-
-	<e:Image id="img_close" y="44" x="30" source="rank_back_png"/>
-	<e:Button id="btn1" name="1" label="舒尔特" x="55" y="128" skinName="BaseButton1Skin" height="40"/>
-	<e:Button id="btn2" name="2" label="趣味" x="215" y="128" skinName="BaseButton1Skin" height="40"/>
-	<e:Button id="btn3" name="3" label="瞬间记忆" x="375" y="128" skinName="BaseButton1Skin" height="40"/>
-	<e:List id="list" width="640" height="30" y="168" anchorOffsetY="0" anchorOffsetX="0" horizontalCenter="0">
-		<e:layout>
-			<e:HorizontalLayout gap="2"/>
-		</e:layout>
-	</e:List>
-
-
-
-
+	<e:Image id="img_rankgp" horizontalCenter="0" y="1140" source="framework_json.rank_button" locked="true" />
+	<e:Image id="img_close" y="38" x="30" source="framework_json.rank_back" />
+	<e:Group id="gp_world" x="55" y="106" visible="false">
+		<e:Image source="framework_json.rank_tagbg" y="0" width="640" x="0" />
+		<e:Image id="img_tag1" source="framework_json.rank_tag" x="0" y="0" width="320" />
+		<e:Image id="img_tag2" source="framework_json.rank_tag" y="0" width="320" scaleX="-1" x="640" />
+		<e:Label id="lbl_tag1" text="好友排行" size="36" fontFamily="SimHei" touchEnabled="false" y="22" bold="true"
+		         textColor="0x000000" verticalAlign="middle" textAlign="center" x="89" />
+		<e:Label id="lbl_tag2" text="世界排行" size="36" fontFamily="SimHei" touchEnabled="false" y="22" textColor="0x000000"
+		         bold="true" x="405" />
+	</e:Group>
 </e:Skin>

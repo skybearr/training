@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="NoticeSkin" width="750" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="img_bg" height="1334" width="750" x="-1" verticalCenter="0" scale9Grid="24,6,150,40" source="start_button_png" touchEnabled="false"/>
+	<e:Label text="世界公告" verticalAlign="bottom" size="88" y="109.85" horizontalCenter="0" touchEnabled="false"/>
+	<e:Label id="lbl_version" text="版本号：1.2" verticalAlign="bottom" size="32" horizontalCenter="200" y="1255.31" fontFamily="SimHei" touchEnabled="false"/>
+	<e:Label id="lbl_content" text="世界公告" verticalAlign="top" size="32" y="286.36" anchorOffsetX="0" width="614.12" anchorOffsetY="0" height="865.27" textAlign="left" fontFamily="SimHei" horizontalCenter="0" touchEnabled="false"/>
+
+
+
+
+
+
+
+
+
+
+</e:Skin>

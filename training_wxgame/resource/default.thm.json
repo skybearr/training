@@ -5,18 +5,18 @@
 		"resource/skins/AvgSkin.exml",
 		"resource/skins/BaseButton1Skin.exml",
 		"resource/skins/BaseButtonSkin.exml",
-		"resource/skins/GameItemSkin.exml",
-		"resource/skins/GameOverSkin.exml",
-		"resource/skins/GrowLeftItemSkin.exml",
-		"resource/skins/GrowRightItemSkin.exml",
-		"resource/skins/GrowSkin.exml",
+		"resource/skins/GameSkin.exml",
+		"resource/skins/InviteItemSkin.exml",
+		"resource/skins/InviteSkin.exml",
 		"resource/skins/MissionItemSkin.exml",
 		"resource/skins/MissionSkin.exml",
+		"resource/skins/NoticeSkin.exml",
+		"resource/skins/RankItemSkin.exml",
 		"resource/skins/RankSkin.exml",
 		"resource/skins/RankTypeItemSkin.exml",
-		"resource/skins/RoleSkin.exml",
 		"resource/skins/StartSkin.exml",
-		"resource/skins/games/GameSkin.exml"
+		"resource/skins/TurnItemSkin.exml",
+		"resource/skins/TurnSkin.exml"
 	],
 	"path": "resource/default.thm.json"
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="AchieveItemSkin" width="640" height="128" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect width="100%" height="100%" horizontalCenter="0" verticalCenter="0" fillColor="0xc49d50" locked="true"/>
+	<e:Label id="lbl_name" text="成就名字" x="29" y="19" anchorOffsetX="0" width="258" size="26" fontFamily="SimHei" anchorOffsetY="0" height="64"/>
+	<e:Label id="lbl_reward" text="奖励" y="19" anchorOffsetX="0" width="163" right="187" textColor="0x1dff1c" anchorOffsetY="0" height="91" size="26" fontFamily="SimHei"/>
+	<e:Label id="lbl_progress" text="已连续登陆天" x="29" y="79" anchorOffsetX="0" width="292" textColor="0xef00ec" size="26" fontFamily="SimHei"/>
+	<e:Button id="btn" label="领取" y="59" skinName="BaseButton1Skin" right="23"/>
+</e:Skin>

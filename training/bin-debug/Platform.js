@@ -36,33 +36,87 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+/**
+ * DebugPlatform用于本地测试
+ */
 var DebugPlatform = (function () {
     function DebugPlatform() {
     }
-    DebugPlatform.prototype.getUserInfo = function () {
+    DebugPlatform.prototype.isdebug = function () {
+        return true;
+    };
+    DebugPlatform.prototype.initBuryingSDK = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, { nickName: "username" }];
+                console.log("debug_initBuryingSDK");
+                return [2 /*return*/];
+            });
+        });
+    };
+    DebugPlatform.prototype.buryingPoint = function (id, value) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                console.log("debug_buryingPoint", id);
+                return [2 /*return*/];
             });
         });
     };
     DebugPlatform.prototype.login = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
+                return [2 /*return*/, { code: "1D1C1C1C1C1C181L1L181F1F1C1G1E1F1H1C" }];
+            });
+        });
+    };
+    DebugPlatform.prototype.getUserInfo = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                PlayerConst.token = "1D1C1C1C1C1C181L1L181F1F1C1G1E1F1H1C";
+                return [2 /*return*/, { nickName: "debug_nickName", avatarUrl: "resource/assets/logo.png", city: "sz", country: "CHZ", gender: 1, language: "chinese", province: "js" }];
+            });
+        });
+    };
+    DebugPlatform.prototype.showShareMenu = function () {
+    };
+    DebugPlatform.prototype.share = function (title, imageUrl, query) {
+        console.log("debug_share", title, imageUrl, query);
+    };
+    DebugPlatform.prototype.onShareAppMessage = function (title, imageUrl, query) {
+        console.log("debug_onShareAppMessage", title, imageUrl, query);
+    };
+    DebugPlatform.prototype.updateShareMenu = function (bool) {
+        console.log("debug_updateShareMenu", bool);
+    };
+    DebugPlatform.prototype.getShareInfo = function (ticket) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, { encryptedData: "debug_encryptedData", iv: "debug_iv" }];
+            });
+        });
+    };
+    DebugPlatform.prototype.getLaunchOptionsSync = function () {
+        return { info: { query: "debug_query" }, shareTicket: "debug_shareTicket" };
+    };
+    DebugPlatform.prototype.createGameClubButton = function (textstr) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                console.log("debug_createGameClubButton", textstr);
                 return [2 /*return*/];
             });
         });
     };
-    DebugPlatform.prototype.createGameClubButton = function () {
+    DebugPlatform.prototype.vibrate = function (short) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
+                console.log("debug_vibrate", short);
                 return [2 /*return*/];
             });
         });
     };
-    DebugPlatform.prototype.bannershow = function () {
+    DebugPlatform.prototype.bannershow = function (bannerId) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
+                console.log("debug_bannershow");
                 return [2 /*return*/];
             });
         });
@@ -70,6 +124,7 @@ var DebugPlatform = (function () {
     DebugPlatform.prototype.bannerdestroy = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
+                console.log("debug_bannerdestroy");
                 return [2 /*return*/];
             });
         });
@@ -77,9 +132,55 @@ var DebugPlatform = (function () {
     DebugPlatform.prototype.bannerhide = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
+                console.log("debug_bannerhide");
                 return [2 /*return*/];
             });
         });
+    };
+    DebugPlatform.prototype.setStorageSync = function (key, value, isobj) {
+        if (typeof (value) != "string") {
+            value = JSON.stringify(value);
+        }
+        console.log("setStorageSync:", key, value);
+        egret.localStorage.setItem(key, value);
+    };
+    DebugPlatform.prototype.getStorageSync = function (key, isobj) {
+        var value = egret.localStorage.getItem(key);
+        value = JSON.parse(value);
+        console.log("getStorageSync:", key, value);
+        return value;
+    };
+    DebugPlatform.prototype.skipToProgram = function (appid, extraData) {
+        console.log("debug_postMessage", appid, extraData);
+    };
+    DebugPlatform.prototype.rewardAdCreate = function (adunitId) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, 1];
+            });
+        });
+    };
+    DebugPlatform.prototype.rerwardAdShow = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, 2];
+            });
+        });
+    };
+    DebugPlatform.prototype.postMessage = function (data) {
+        console.log("debug_postMessage", data);
+    };
+    DebugPlatform.prototype.setUserCloudStorage = function (KVDataList) {
+        console.log("debug_setUserCloudStorage", KVDataList);
+    };
+    DebugPlatform.prototype.openCustomerServiceConversation = function () {
+        console.log("debug_openCustomerServiceConversation");
+    };
+    DebugPlatform.prototype.toast = function (str) {
+        console.log("debug_toast:", str);
+    };
+    DebugPlatform.prototype.showModal = function (content, title, surestr) {
+        console.log("debug_showModal:", title, content, surestr);
     };
     return DebugPlatform;
 }());

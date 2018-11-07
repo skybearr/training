@@ -1,78 +1,49 @@
 {
 	"groups": [
 		{
-			"keys": "rank_back_png,rank_bg_png,rank_button_png,reglogbg_png,star_a_png,star_b_png,yong_11_png,yong_3_png,yong_6_png,yong_7_png,yong_8_png,config_json,share_jpg,share2_jpg,skin_zibg_png,mission_json,xiaohong_jpg,xiaoming_jpg,xiaolei_jpg,bg_1_jpg,bg_2_jpg,avg_list_json",
+			"keys": "framework_json,logo_png,start_button_png,rank_back_png,rank_bg_png,rank_button_png,reglogbg_png,share_jpg,skin_zibg_png,start_button2_png,star_a_png,star_b_png,yong_11_png,yong_3_png,yong_6_png,yong_7_png,yong_8_png,bg_1_jpg,bg_2_jpg,xiaohong_jpg,xiaolei_jpg,xiaoming_jpg,avg_list_json,config_json,mission_json",
 			"name": "preload"
 		}
 	],
 	"resources": [
 		{
-			"url": "assets/rank_back.png",
-			"type": "image",
-			"name": "rank_back_png"
+			"url": "assets/framework/framework.json",
+			"type": "sheet",
+			"name": "framework_json",
+			"subkeys": "rank_back,rank_bg,rank_button,rank_icon1,rank_icon2,rank_icon3,rank_tag,rank_tagbg"
 		},
 		{
-			"url": "assets/rank_bg.png",
+			"url": "assets/framework/logo.png",
 			"type": "image",
-			"name": "rank_bg_png"
+			"name": "logo_png"
 		},
 		{
-			"url": "assets/rank_button.png",
+			"url": "assets/framework/start_button.png",
 			"type": "image",
-			"name": "rank_button_png"
+			"name": "start_button_png"
 		},
 		{
-			"url": "assets/reglogbg.png",
+			"name": "rank_back_png",
 			"type": "image",
-			"name": "reglogbg_png"
+			"url": "assets/rank_back.png"
 		},
 		{
-			"url": "assets/star_a.png",
+			"name": "rank_bg_png",
 			"type": "image",
-			"name": "star_a_png"
+			"url": "assets/rank_bg.png"
 		},
 		{
-			"url": "assets/star_b.png",
+			"name": "rank_button_png",
 			"type": "image",
-			"name": "star_b_png"
+			"url": "assets/rank_button.png"
 		},
 		{
-			"url": "assets/yong_11.png",
+			"name": "reglogbg_png",
 			"type": "image",
-			"name": "yong_11_png"
-		},
-		{
-			"url": "assets/yong_3.png",
-			"type": "image",
-			"name": "yong_3_png"
-		},
-		{
-			"url": "assets/yong_6.png",
-			"type": "image",
-			"name": "yong_6_png"
-		},
-		{
-			"url": "assets/yong_7.png",
-			"type": "image",
-			"name": "yong_7_png"
-		},
-		{
-			"url": "assets/yong_8.png",
-			"type": "image",
-			"name": "yong_8_png"
-		},
-		{
-			"url": "data/config.json",
-			"type": "json",
-			"name": "config_json"
+			"url": "assets/reglogbg.png"
 		},
 		{
 			"name": "share_jpg",
-			"type": "image",
-			"url": "assets/share.jpg"
-		},
-		{
-			"name": "share2_jpg",
 			"type": "image",
 			"url": "assets/share.jpg"
 		},
@@ -82,24 +53,44 @@
 			"url": "assets/skin_zibg.png"
 		},
 		{
-			"name": "mission_json",
-			"type": "json",
-			"url": "data/mission.json"
+			"name": "start_button2_png",
+			"type": "image",
+			"url": "assets/start_button.png"
 		},
 		{
-			"name": "xiaohong_jpg",
+			"name": "star_a_png",
 			"type": "image",
-			"url": "assets/dialog/xiaohong.jpg"
+			"url": "assets/star_a.png"
 		},
 		{
-			"name": "xiaoming_jpg",
+			"name": "star_b_png",
 			"type": "image",
-			"url": "assets/dialog/xiaoming.jpg"
+			"url": "assets/star_b.png"
 		},
 		{
-			"name": "xiaolei_jpg",
+			"name": "yong_11_png",
 			"type": "image",
-			"url": "assets/dialog/xiaolei.jpg"
+			"url": "assets/yong_11.png"
+		},
+		{
+			"name": "yong_3_png",
+			"type": "image",
+			"url": "assets/yong_3.png"
+		},
+		{
+			"name": "yong_6_png",
+			"type": "image",
+			"url": "assets/yong_6.png"
+		},
+		{
+			"name": "yong_7_png",
+			"type": "image",
+			"url": "assets/yong_7.png"
+		},
+		{
+			"name": "yong_8_png",
+			"type": "image",
+			"url": "assets/yong_8.png"
 		},
 		{
 			"name": "bg_1_jpg",
@@ -112,9 +103,34 @@
 			"url": "assets/dialog/bg_2.jpg"
 		},
 		{
+			"name": "xiaohong_jpg",
+			"type": "image",
+			"url": "assets/dialog/xiaohong.jpg"
+		},
+		{
+			"name": "xiaolei_jpg",
+			"type": "image",
+			"url": "assets/dialog/xiaolei.jpg"
+		},
+		{
+			"name": "xiaoming_jpg",
+			"type": "image",
+			"url": "assets/dialog/xiaoming.jpg"
+		},
+		{
 			"name": "avg_list_json",
 			"type": "json",
 			"url": "data/avg_list.json"
+		},
+		{
+			"name": "config_json",
+			"type": "json",
+			"url": "data/config.json"
+		},
+		{
+			"name": "mission_json",
+			"type": "json",
+			"url": "data/mission.json"
 		}
 	]
 }

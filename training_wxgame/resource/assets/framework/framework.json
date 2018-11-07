@@ -1,0 +1,9 @@
+{"file":"framework.png","frames":{
+"rank_tag":{"x":1,"y":83,"w":300,"h":80,"offX":0,"offY":0,"sourceW":300,"sourceH":80},
+"rank_tagbg":{"x":1,"y":1,"w":600,"h":80,"offX":0,"offY":0,"sourceW":600,"sourceH":80},
+"rank_back":{"x":405,"y":83,"w":60,"h":60,"offX":0,"offY":0,"sourceW":60,"sourceH":60},
+"rank_bg":{"x":303,"y":83,"w":100,"h":100,"offX":0,"offY":0,"sourceW":100,"sourceH":100},
+"rank_button":{"x":603,"y":1,"w":420,"h":107,"offX":0,"offY":0,"sourceW":420,"sourceH":107},
+"rank_icon1":{"x":467,"y":83,"w":34,"h":47,"offX":0,"offY":0,"sourceW":34,"sourceH":47},
+"rank_icon2":{"x":539,"y":83,"w":34,"h":47,"offX":0,"offY":0,"sourceW":34,"sourceH":47},
+"rank_icon3":{"x":503,"y":83,"w":34,"h":47,"offX":0,"offY":0,"sourceW":34,"sourceH":47}}}

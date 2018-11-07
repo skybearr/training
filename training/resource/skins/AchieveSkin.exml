@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="AchieveSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect id="rect_bg" width="750" height="1334" x="0" y="0" fillColor="0x888888"/>
+	<e:Label text="成就" y="94.03" bold="true" size="40" fontFamily="SimHei" horizontalCenter="0"/>
+	<e:Button id="btn_close" label="关闭" x="557.4" y="1239.18" skinName="BaseButton1Skin"/>
+	<e:Scroller id="scroller" width="640" height="800" y="200" horizontalCenter="0">
+		<e:List id="list"/>
+	</e:Scroller>
+</e:Skin>

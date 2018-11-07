@@ -1,0 +1,94 @@
+//////////////////////////////////////////////////////////////////////////////////////
+//
+//  Copyright (c) 2014-present, Egret Technology.
+//  All rights reserved.
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above copyright
+//       notice, this list of conditions and the following disclaimer in the
+//       documentation and/or other materials provided with the distribution.
+//     * Neither the name of the Egret nor the
+//       names of its contributors may be used to endorse or promote products
+//       derived from this software without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
+//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+//////////////////////////////////////////////////////////////////////////////////////
+
+module fw {
+    export class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
+
+        public constructor() {
+            super();
+            this.createView();
+        }
+
+        private bg: egret.Shape;
+        private tf_progress: egret.TextField;
+        private img_circle: egret.Bitmap;
+
+        private createView(): void {
+            this.bg = GameUtil.getShape(GameConst.stageWidth, GameConst.stageHeight, 0x000000, 0.1);
+            this.bg.touchEnabled = true;
+            this.addChild(this.bg);
+
+            this.tf_progress = GameUtil.createTextField(null, 300, GameConst.stageWidth, null, 480, 100)
+            this.addChild(this.tf_progress);
+        }
+
+        public onProgress(current: number, total: number): void {
+            this.tf_progress.text = `Loading...${current}/${total}`;
+        }
+
+        public setLoadType(type: number) {
+            switch (type) {
+                case fw.LOADINGTYPE.RESET:
+                    return;
+                case fw.LOADINGTYPE.CIRCLE:
+                    if (this.img_circle == null) {
+                        this.createCircle();
+                    }
+                    else {
+                        this.img_circle.visible = true;
+                    }
+                    egret.Tween.get(this.img_circle, { loop: true }).to({ rotation: 360 }, 5000);
+                    break;
+                case fw.LOADINGTYPE.LOADING:
+                    this.tf_progress.visible = true;
+                    break;
+            }
+        }
+
+        public reset() {
+            this.tf_progress.visible = false;
+            if (this.img_circle == null) {
+                this.createCircle();
+            }
+            else {
+                this.img_circle.visible = false;
+                egret.Tween.removeTweens(this.img_circle);
+            }
+        }
+
+        private createCircle() {
+            this.img_circle = GameUtil.createBitmap("logo_png", null, null, GameConst.stageWidth, GameConst.stageHeight, 4, null, null);
+            this.img_circle.anchorOffsetX = this.img_circle.width / 2;
+            this.img_circle.anchorOffsetY = this.img_circle.height / 2;
+            this.img_circle.x = GameConst.stageWidth / 2;
+            this.img_circle.y = GameConst.stageHeight / 2;
+            this.addChild(this.img_circle);
+        }
+    }
+}

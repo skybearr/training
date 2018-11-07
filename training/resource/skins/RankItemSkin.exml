@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="RankItemSkin" width="640" height="100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect id="bg_rect" width="100%" height="100%" x="0" y="0" fillColor="0x8defb6"/>
+	<e:Label id="lbl_rank" text="99" textColor="0xf24343" width="50" textAlign="left" verticalAlign="middle" verticalCenter="0" x="40" size="36" fontFamily="SimHei" bold="true"/>
+	<e:Image id="img_rank" source="framework_json.rank_icon1" x="40" verticalCenter="0" visible="false"/>
+	<e:Image id="img_head" source="" x="98" width="48" height="48" verticalCenter="0"/>
+	<e:Label id="lbl_name" text="名字最长几个字" width="264" textAlign="left" verticalAlign="middle" x="170" verticalCenter="0" anchorOffsetX="0" fontFamily="SimHei" textColor="0xffffff"/>
+	<e:Label id="lbl_score" text="567" width="150" textAlign="right" verticalAlign="middle" verticalCenter="0" anchorOffsetX="0" fontFamily="SimHei" textColor="0xffffff" right="50"/>
+</e:Skin>

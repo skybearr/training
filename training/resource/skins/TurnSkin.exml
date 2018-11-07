@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="TurnSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<e:Rect id="rect_bg" width="750" height="1334" x="0" y="0" fillColor="0x888888"/>
+	<e:Label text="抽奖" y="17.03" bold="true" size="40" fontFamily="SimHei" horizontalCenter="0"/>
+	<e:Button id="btn_close" label="关闭" x="557.4" y="1239.18" skinName="BaseButton1Skin"/>
+	<e:Group id="gp_items" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" top="200">
+	</e:Group>
+	<e:Group y="1102.7" horizontalCenter="0">
+		<e:Button id="btn_1" label="开始抽奖" x="0" y="0" skinName="BaseButton1Skin"/>
+		<e:Button id="btn_2" label="免费抽奖" x="268.06" y="0" skinName="BaseButton1Skin"/>
+		<e:layout>
+			<e:HorizontalLayout gap="60"/>
+		</e:layout>
+	</e:Group>
+	<e:Label id="lbl_cd1" text="12:00:00" x="209.02" y="1162.7"/>
+	<e:Label id="lbl_cd2" text="12:00:00" x="428.24" y="1162.7"/>
+</e:Skin>

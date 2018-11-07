@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="TurnItemSkin" width="120" height="120" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect id="rect" width="100%" height="100%" x="0" y="0" fillColor="0x07f4ef"/>
+	<e:Label id="lbl" text="Label" x="20" y="45" textColor="0x000000"/>
+</e:Skin>
