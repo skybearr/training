@@ -587,7 +587,7 @@ var fw;
         UIManager.prototype.openUI = function (uiname, params, uitype, tweentype) {
             if (params === void 0) { params = null; }
             if (uitype === void 0) { uitype = 1; }
-            if (tweentype === void 0) { tweentype = 1; }
+            if (tweentype === void 0) { tweentype = 0; }
             if ((uitype == fw.UITYPE.FIRST && this.is_fst_ui_tween) || (uitype == fw.UITYPE.SECOND && this.is_sec_ui_tween)) {
                 console.log("正在打开界面，禁止操作");
                 return;
@@ -600,7 +600,7 @@ var fw;
             }
             var obj_class = egret.getDefinitionByName(uiname);
             var obj = { params: params, tweentype: tweentype };
-            var ui = new obj_class();
+            var ui = new obj_class(obj);
             ui.setParams(obj);
             if (uitype == fw.UITYPE.FIRST) {
                 this.openFirstUI(ui, tweentype);
@@ -616,6 +616,7 @@ var fw;
         UIManager.prototype.openFirstUI = function (ui, tweentype) {
             if (tweentype === void 0) { tweentype = 1; }
             this.main.addChild(ui);
+            this.secCon.removeChildren();
             if (this.main.numChildren == 0) {
                 this.openFirstUIFinish();
                 return;
@@ -1578,65 +1579,147 @@ var AchieveLogic = (function (_super) {
         return this._instance;
     };
     /** 初始化成就 */
-    AchieveLogic.prototype.initAchieves = function (arr) {
+    AchieveLogic.prototype.initAchieves = function () {
         this.achieves = {};
+        this.achievetypes = {};
         HttpCommand.getInstance().addEventListener(HttpEvent.getAchievesAll, this.achieveAllResponse, this, false, 1);
         HttpCommand.getInstance().addEventListener(HttpEvent.getAchieveGot, this.achieveGotResponse, this, false, 1);
         HttpCommand.getInstance().addEventListener(HttpEvent.postAchieve, this.achieveGotResponse, this, false, 1);
-        this.updateAchieves(arr);
     };
     AchieveLogic.prototype.achieveGotResponse = function (e) {
         this.updateAchieves(e.data);
+    };
+    AchieveLogic.prototype.getAllAchieves = function () {
+        return this.achieves;
     };
     /** 初始化所有成就 */
     AchieveLogic.prototype.achieveAllResponse = function (e) {
         var arr = e.data;
         for (var i = 0; i < arr.length; i++) {
             var o = arr[i];
-            var vo = this.achieves[o.id];
+            var vo = this.achieves[o.flow_id];
             if (vo == null) {
                 vo = new AchieveVO();
-                vo.id = parseInt(o.id);
+                vo.id = parseInt(o.flow_id);
                 vo.imgurl = o.imgurl;
                 vo.title = o.title;
-                vo.extradata = o.remark;
+                vo.remark = o.remark;
             }
+            vo.type = parseInt(o.extradata1);
             vo.appid = o.appid;
-            vo.baseline = o.baseline;
+            vo.baseline = parseInt(o.baseline);
+            //成绩
+            vo.grade = this.achievetypes[vo.type];
+            vo.reward = o.extradata2.split(";");
+            var v = this.achievetypes[vo.type];
+            if (vo.state != 2) {
+                // vo.state = v < vo.baseline ? 0 : (this.hasGet(vo.id) ? 2 : 1);
+                vo.state = v < vo.baseline ? 0 : 1;
+            }
             this.achieves[vo.id] = vo;
         }
     };
-    /** 更新已达成成就 */
+    /** 该成就是否已领取奖励 */
+    AchieveLogic.prototype.hasGet = function (id) {
+        var str = GameLogic.getInstance().getMyDataValueByID(MYDATA.ACHIEVE_GET);
+        var aaa = str == null ? [] : str.split("_");
+        return aaa.indexOf(id + "") != -1;
+    };
+    /** 领取奖励 */
+    AchieveLogic.prototype.getReward = function (id) {
+        var vo = this.achieves[id];
+        vo.state = 2;
+        var str = GameLogic.getInstance().getMyDataValueByID(MYDATA.ACHIEVE_GET);
+        if (str == null || str == "") {
+            str = vo.id + "";
+        }
+        else {
+            str += ("_" + vo.id);
+        }
+        // GameLogic.getInstance().updateMyDataValue(MYDATA.ACHIEVE_GET, str);//舒尔特测试用
+        this.updateAchieve(id, "", "");
+        console.log("getrward:", vo);
+        for (var i = 0; i < vo.reward.length; i++) {
+            var aaa = vo.reward[i].split(":");
+            console.log("udpateprop:", aaa);
+            PropLogic.getInstance().updateProp(parseInt(aaa[0]), parseInt(aaa[1]));
+        }
+    };
+    /** 更新已达成成就 已过期(因当时测试无法配表，所以用mydata处理，如有需求可以重新开启)*/
     AchieveLogic.prototype.updateAchieves = function (arr) {
         for (var i = 0; i < arr.length; i++) {
             var o = arr[i];
-            var vo = this.achieves[o.honor_id];
+            var vo = this.achieves[o.flow_id];
             if (vo == null) {
                 vo = new AchieveVO();
-                vo.id = parseInt(o.honor_id);
+                vo.id = parseInt(o.flow_id);
                 vo.imgurl = o.imgurl;
                 vo.title = o.title;
             }
-            vo.grade = o.grade;
+            vo.type = parseInt(o.extradata1);
+            vo.grade = parseInt(o.grade);
             vo.create_time = parseInt(o.create_time);
-            vo.extradata = o.remark;
+            vo.remark = o.remark;
+            vo.state = 2;
             this.achieves[vo.id] = vo;
         }
     };
-    /** 成就更新
+    /** 成就更新 已过期(因当时测试无法配表，所以用mydata处理，如有需求可以重新开启)
      * @param id 成就id
      * @param grade 成就的成绩
-     * @param extradata 备用参数 可选
+     * @param remark 备用参数 可选
     */
-    AchieveLogic.prototype.updateAchieve = function (id, grade, extradata) {
-        if (extradata === void 0) { extradata = ""; }
+    AchieveLogic.prototype.updateAchieve = function (id, grade, remark) {
+        if (remark === void 0) { remark = ""; }
         var vo = this.achieves[id];
         if (vo == null) {
             console.log("没有找到成就" + id + "，请联系GM");
         }
         else {
-            HttpCommand.getInstance().postAchieve(id, grade, extradata);
+            HttpCommand.getInstance().postAchieve(id, grade, remark);
         }
+    };
+    /** 检测是否更新成就
+     * @param type 成就类型 ACHIEVETYPE.XXXX
+     * @param value 值
+     */
+    AchieveLogic.prototype.updateAchieveType = function (type, value) {
+        if (value == null || value.toString() == "NaN") {
+            value = 0;
+        }
+        this.achievetypes[type] = value;
+    };
+    /** 获取成就进度 */
+    AchieveLogic.prototype.getAchieveTypeValue = function (type) {
+        return this.achievetypes[type] == null ? 0 : this.achievetypes[type];
+    };
+    /** 初始化Mydata中记录的成就数值 */
+    AchieveLogic.prototype.initAchieveType = function () {
+        //累计登录天数
+        this.updateAchieveType(ACHIEVETYPE.LOGIN_TOTAL, PlayerConst.checkInfo.total_num);
+        //单局得分
+        var s1 = parseInt(GameLogic.getInstance().getMyDataValueByID(MYDATA.BEST_SCORE));
+        this.updateAchieveType(ACHIEVETYPE.SCORE_SINGLE, s1);
+        //邀请好友数量
+        var s2 = parseInt(GameLogic.getInstance().getMyDataValueByID(MYDATA.INVITE_NUM));
+        this.updateAchieveType(ACHIEVETYPE.INVITE_NUM, s2);
+        //观看视频次数
+        var s3 = parseInt(GameLogic.getInstance().getMyDataValueByID(MYDATA.REWARD_NUM));
+        this.updateAchieveType(ACHIEVETYPE.REWARDAD_NUM, s3);
+    };
+    /** 更新观看视频次数成就 */
+    AchieveLogic.prototype.updateRewardAchieve = function (add) {
+        if (add === void 0) { add = 0; }
+        var s1 = GameLogic.getInstance().getMyDataValueByID(MYDATA.REWARD_NUM);
+        var n;
+        if (s1 == null) {
+            n = 1;
+        }
+        else {
+            n = parseInt(s1);
+        }
+        GameLogic.getInstance().updateMyDataValue(MYDATA.REWARD_NUM, n);
+        AchieveLogic.getInstance().updateAchieveType(ACHIEVETYPE.REWARDAD_NUM, n);
     };
     return AchieveLogic;
 }(egret.EventDispatcher));
@@ -1672,13 +1755,11 @@ var GameLogic = (function (_super) {
         HttpCommand.getInstance().addEventListener(HttpEvent.getShareSetting, this.getShareResponse, this, false, 1);
         HttpCommand.getInstance().addEventListener(HttpEvent.getAd, this.getAdResponse, this, false, 1);
         HttpCommand.getInstance().addEventListener(HttpEvent.getMyData, this.getMyDataResponse, this, false, 1);
-        HttpCommand.getInstance().getAchievesAll();
-        HttpCommand.getInstance().getMissionsAll();
-        HttpCommand.getInstance().getSkinsAll();
         this.updateCheckInfo(o.checkin);
         this.updateSetting(o.setting);
         this.updateMyData(o.mydata);
         this.checkLoginData();
+        this.checkNotice();
     };
     /** 每次登陆检测   */
     GameLogic.prototype.checkLoginData = function () {
@@ -1720,7 +1801,7 @@ var GameLogic = (function (_super) {
         str = str.slice(0, str.length - 1);
         HttpCommand.getInstance().postMyData(str);
     };
-    /** 根据获取我的数据
+    /** 根据id获取我的数据
      * @param id MYDATA.xxxx
      * @return 自定义的一个字符串，没有返回null
      */
@@ -1870,37 +1951,25 @@ var MissionLogic = (function (_super) {
         }
         return this._instance;
     };
-    /** 初始化已通关关卡 */
-    MissionLogic.prototype.initMissions = function (arr) {
+    /** 初始化关卡 */
+    MissionLogic.prototype.initMissions = function () {
         this.missions = {};
-        HttpCommand.getInstance().addEventListener(HttpEvent.getMissionsInfo, this.missionAllResponse, this, false, 1);
-        HttpCommand.getInstance().addEventListener(HttpEvent.getMissionsPass, this.missionPassResponse, this, false, 1);
-        HttpCommand.getInstance().addEventListener(HttpEvent.postMission, this.missionPassResponse, this, false, 1);
-        this.updatemissions(arr);
-    };
-    /** 初始化已通关关卡 */
-    MissionLogic.prototype.missionPassResponse = function (e) {
-        this.updatemissions(e.data);
+        var data = RES.getRes("mission_json");
+        for (var id in data) {
+            var o = data[id];
+            var v = new MissionVO();
+            v.id = parseInt(o.id);
+            v.title = o.title;
+            v.type = parseInt(o.type);
+            v.content = o.content;
+            v.des = o.des;
+            v.times = o.time;
+            v.setDialog(o.dialog);
+            this.missions[v.id] = v;
+        }
     };
     /** 初始化所有关卡配置 */
     MissionLogic.prototype.missionAllResponse = function (e) {
-        var arr = e.data;
-        for (var i = 0; i < arr.length; i++) {
-            var o = arr[i];
-            var vo = this.missions[o.id];
-            if (vo == null) {
-                vo = new MissionVO();
-            }
-            vo.id = parseInt(o.id);
-            vo.imgurl = o.imgurl;
-            vo.name = o.title;
-            if (vo.grade != null) {
-                vo.grade = vo.grade;
-            }
-            vo.appid = o.appid;
-            vo.baseline = o.baseline;
-            this.missions[vo.id] = vo;
-        }
         //本地配置
         var data = RES.getRes("mission_json");
         for (var id in data) {
@@ -1932,40 +2001,6 @@ var MissionLogic = (function (_super) {
         // }
         // vo.missions.push(v);
         // this.charpters[cid] = vo;
-    };
-    /** 更新所有已达成关卡 */
-    MissionLogic.prototype.updatemissions = function (arr) {
-        this.lastMissionId = 100;
-        for (var i = 0; i < arr.length; i++) {
-            var o = arr[i];
-            var vo = this.missions[o.level_id];
-            if (vo == null) {
-                vo = new MissionVO();
-                vo.id = parseInt(o.level_id);
-                vo.imgurl = o.imgurl;
-                vo.name = o.title;
-            }
-            vo.grade = o.grade;
-            vo.create_time = parseInt(o.create_time);
-            vo.extradata = o.remark;
-            this.missions[vo.id] = vo;
-            this.lastMissionId = vo.id;
-        }
-    };
-    /** 关卡更新
-     * @param id 关卡id
-     * @param grade 关卡的成绩
-     * @param extradata 备用参数 可选
-    */
-    MissionLogic.prototype.updatemission = function (id, grade, extradata) {
-        if (extradata === void 0) { extradata = ""; }
-        var vo = this.missions[id];
-        if (vo == null) {
-            console.log("没有找到关卡" + id + "，请联系GM");
-        }
-        else {
-            HttpCommand.getInstance().postMission(id, grade, extradata);
-        }
     };
     /**  */
     MissionLogic.prototype.getNextMissionVO = function (id) {
@@ -2021,6 +2056,16 @@ var PropLogic = (function (_super) {
             this.props[vo.id] = vo;
         }
     };
+    /** 根据id获取一个道具的名字 (含货币)*/
+    PropLogic.prototype.getPropNameByID = function (id) {
+        if (id < 10) {
+            return DataBase.COIN_NAME[id];
+        }
+        else {
+            var vo = this.getPropByID(id);
+            return vo == null ? id + "" : vo.name;
+        }
+    };
     /** 货币道具的变化
      * @param id 道具id
      * @param num 增加减少的数量
@@ -2042,12 +2087,22 @@ var PropLogic = (function (_super) {
             vo.num = num;
             this.props[id] = vo;
         }
-        var str = DataBase.PROP_NAME[id] + (num > 0 ? "增加" : "减少") + " " + num;
+        var str = DataBase.COIN_NAME[id] + (num > 0 ? "增加" : "减少") + " " + num;
         WxApi.getInstance().toast(str);
         HttpCommand.getInstance().postProps(id, num);
         var event = new GameEvent(GameEvent.PROP_NUM_CHANGE);
         event.data = { id: id, num: num };
         this.dispatchEvent(event);
+    };
+    /** 获取奖励
+     * @param reward 格式  1:100;2:200;3001:1
+     */
+    PropLogic.prototype.getReward = function (reward) {
+        var arr = reward.split(";");
+        for (var i = 0; i < arr.length; i++) {
+            var aaa = arr[i].split(":");
+            PropLogic.getInstance().updateProp(parseInt(aaa[0]), parseInt(aaa[1]));
+        }
     };
     /** 获取道具 */
     PropLogic.prototype.getPropByID = function (id) {
@@ -2282,12 +2337,11 @@ var WxApi = (function (_super) {
         PlayerConst.appid_server = e.data.appid;
         PlayerConst.uid = e.data.id;
         PropLogic.getInstance().initProps(e.data.prop);
-        AchieveLogic.getInstance().initAchieves(e.data.honor);
-        MissionLogic.getInstance().initMissions(e.data.level);
-        SkinLogic.getInstance().initSkins(e.data.skin);
         InviteLogic.getInstance().initInvite();
         TurnLogic.getInstance().initTurns();
         GameLogic.getInstance().init(e.data);
+        MissionTrainLogic.getInstance().initData();
+        AchieveLogic.getInstance().initAchieves();
         //被动分享
         this.share(4);
         this.initRewardVideoAd();
@@ -2561,62 +2615,37 @@ var GameTrainLogic = (function (_super) {
         }
     };
     GameTrainLogic.prototype.initData = function () {
-        // this.data = [, [], [], []];
-        // this.config = RES.getRes("config_json");
-        // let localdata = WxApi.getInstance().getLocalData(GameConst.localkey_missiondata);
-        // console.log("initdata:", localdata, localdata == "");
-        // if (localdata == null || localdata == "") {
-        // 	localdata = [, [], [], []];
-        // }
-        // if (this.config != null) {
-        // 	for (let i in this.config) {
-        // 		let o = this.config[i];
-        // 		if (i.length < 8) {
-        // 			continue;
-        // 		}
-        // 		let vo = new TrainMissionVO();
-        // 		vo.id = o['id'];
-        // 		vo.type = o['type'];
-        // 		vo.des = o['des'];
-        // 		vo.content = o['content'];
-        // 		vo.name = o['name'];
-        // 		vo.times = [];
-        // 		let ta = o['time'].split(":");
-        // 		for (let j = 0; j < ta.length; j++) {
-        // 			vo.times.push(parseInt(ta[j]));
-        // 		}
-        // 		vo.state = vo.type == 1 ? 0 : 1;
-        // 		if (vo.type == 1 && vo.id == 1) {
-        // 			vo.state = 1;
-        // 		}
-        // 		vo.stars = 0;
-        // 		let previewvo = this.data[vo.type][vo.id - 1];
-        // 		if (previewvo != null) {
-        // 			if (previewvo.state == 2) {
-        // 				vo.state = 1;
-        // 			}
-        // 		}
-        // 		if (localdata != null) {
-        // 			let brr = localdata[vo.type];
-        // 			if (brr != null) {
-        // 				let o = brr[vo.id];
-        // 				if (o != null) {
-        // 					let t = parseInt(o);
-        // 					for (let k = vo.times.length - 1; k >= 0; k--) {
-        // 						if (t <= vo.times[k] * 1000) {
-        // 							vo.stars++;
-        // 						}
-        // 					}
-        // 					if (vo.state == 0) {
-        // 						vo.state = vo.stars > 0 ? 1 : 0;
-        // 					}
-        // 				}
-        // 			}
-        // 		}
-        // 		this.data[vo.type].push(vo);
-        // 	}
-        // }
-        // WxApi.getInstance().setLocalData(GameConst.localkey_missiondata, localdata);
+        this.data = [, [], [], []];
+        this.config = RES.getRes("config_json");
+        for (var i in this.config) {
+            var o = this.config[i];
+            if (i.length < 8) {
+                continue;
+            }
+            var vo = new TrainMissionVO();
+            vo.id = o['id'];
+            vo.type = o['type'];
+            vo.des = o['des'];
+            vo.content = o['content'];
+            vo.name = o['name'];
+            vo.times = [];
+            var ta = o['time'].split(":");
+            for (var j = 0; j < ta.length; j++) {
+                vo.times.push(parseInt(ta[j]));
+            }
+            vo.state = vo.type == 1 ? 0 : 1;
+            if (vo.type == 1 && vo.id == 1) {
+                vo.state = 1;
+            }
+            vo.stars = 0;
+            var previewvo = this.data[vo.type][vo.id - 1];
+            if (previewvo != null) {
+                if (previewvo.state == 2) {
+                    vo.state = 1;
+                }
+            }
+            this.data[vo.type].push(vo);
+        }
     };
     GameTrainLogic.prototype.saveLocal = function (type, id, time) {
         // let localdata = WxApi.getInstance().getLocalData(GameConst.localkey_missiondata);
@@ -2661,20 +2690,16 @@ var GameTrainLogic = (function (_super) {
         WxApi.getInstance().setScore("score_" + id, time);
     };
     GameTrainLogic.prototype.openStart = function () {
-        this.main.removeChildren();
-        this.main.addChild(new StartUI());
+        fw.UIManager.getInstance().openUI(UIConst.START);
     };
     GameTrainLogic.prototype.startGame = function (vo) {
-        this.main.removeChildren();
-        this.main.addChild(new GameUI(vo));
+        fw.UIManager.getInstance().openUI(UIConst.GAME, vo);
     };
     GameTrainLogic.prototype.openMission = function () {
-        this.main.removeChildren();
-        this.main.addChild(new MissionUI());
+        fw.UIManager.getInstance().openUI(UIConst.MISSION);
     };
     GameTrainLogic.prototype.openGrow = function () {
-        this.main.removeChildren();
-        this.main.addChild(new GrowUI());
+        fw.UIManager.getInstance().openUI(UIConst.GROW);
     };
     GameTrainLogic.prototype.getMissionData = function () {
         return this.data;
@@ -2703,7 +2728,43 @@ var MissionTrainLogic = (function (_super) {
         }
         return this._instance;
     };
+    MissionTrainLogic.prototype.initData = function () {
+        this.initPassData();
+        GameTrainLogic.getInstance().initData();
+        this.initCharpter();
+    };
+    MissionTrainLogic.prototype.initPassData = function () {
+        this.passdata = {};
+        //格式  101=1151&102=313
+        var str = GameLogic.getInstance().getMyDataValueByID(MYDATA.MISSION_DATA);
+        if (str != null) {
+            var arr = str.split("&");
+            for (var i = 0; i < arr.length; i++) {
+                var a1 = arr[i].split("=");
+                this.passdata[a1[0]] = parseInt(a1[1]);
+            }
+        }
+    };
+    MissionTrainLogic.prototype.updatePassData = function (id, score) {
+        this.passdata[id] = score;
+        var s1 = "";
+        for (var id_1 in this.passdata) {
+            if (s1 != "") {
+                s1 += "&";
+            }
+            s1 += (id_1 + "=" + this.passdata[id_1]);
+        }
+        GameLogic.getInstance().updateMyDataValue(MYDATA.MISSION_DATA, s1);
+    };
     MissionTrainLogic.prototype.initCharpter = function () {
+        var s1 = GameLogic.getInstance().getMyDataValueByID(MYDATA.MISSION_CRT);
+        if (s1 == null) {
+            this.crtMission = 101;
+        }
+        else {
+            this.crtMission = parseInt(s1);
+        }
+        this.crtChapter = Math.floor(this.crtMission / 100);
         var data = RES.getRes("mission_json");
         var mid = this.crtMission % 100;
         for (var id in data) {
@@ -2714,7 +2775,7 @@ var MissionTrainLogic = (function (_super) {
             v.type = parseInt(o.type);
             v.content = o.content;
             v.des = o.des;
-            v.times = o.time;
+            v.times = o.time.split(":");
             v.setDialog(o.dialog);
             var cid = Math.floor(parseInt(id) / 100);
             var vo = this.charpters[cid];
@@ -2779,12 +2840,12 @@ __reflect(BuryingPoint.prototype, "BuryingPoint");
 var DataBase = (function () {
     function DataBase() {
     }
-    /** 道具文字 */
-    DataBase.PROP_NAME = [, '体力'];
+    /** 货币名字 */
+    DataBase.COIN_NAME = [, '体力', '金币', '钻石', '', '', '', '', '', '', '',];
     /** 挑战关卡需要消耗的体力 */
     DataBase.HP_REDUCE_BATTLE = 10;
-    /** 每日签到增加体力 */
-    DataBase.HP_ADD_SIGNIN = 50;
+    /** 每日签到奖励 */
+    DataBase.REWARD_ADD_SIGNIN = "1:50;2:1000;3:10";
     /** 邀请好友给的体力 */
     DataBase.HP_ADD_INVITE = 100;
     return DataBase;
@@ -2812,6 +2873,8 @@ var PROPTYPE;
 var COINTYPE;
 (function (COINTYPE) {
     COINTYPE[COINTYPE["HP"] = 1] = "HP";
+    COINTYPE[COINTYPE["MONEY"] = 2] = "MONEY";
+    COINTYPE[COINTYPE["DIAMOND"] = 3] = "DIAMOND";
 })(COINTYPE || (COINTYPE = {}));
 var SWITCHTYPE;
 (function (SWITCHTYPE) {
@@ -2823,13 +2886,25 @@ var SWITCHTYPE;
 var MYDATA;
 (function (MYDATA) {
     MYDATA[MYDATA["INVITE_GET"] = 0] = "INVITE_GET";
-    MYDATA[MYDATA["BEST_SCORE"] = 1] = "BEST_SCORE";
-    MYDATA[MYDATA["MISSION_CRT"] = 2] = "MISSION_CRT";
+    MYDATA[MYDATA["REWARD_NUM"] = 1] = "REWARD_NUM";
+    MYDATA[MYDATA["BEST_SCORE"] = 2] = "BEST_SCORE";
+    MYDATA[MYDATA["INVITE_NUM"] = 3] = "INVITE_NUM";
+    MYDATA[MYDATA["ACHIEVE_GET"] = 4] = "ACHIEVE_GET";
+    MYDATA[MYDATA["CURRENT_SKIN"] = 5] = "CURRENT_SKIN";
+    MYDATA[MYDATA["MISSION_CRT"] = 6] = "MISSION_CRT";
+    MYDATA[MYDATA["MISSION_DATA"] = 7] = "MISSION_DATA";
 })(MYDATA || (MYDATA = {}));
 var WATCHTYPE;
 (function (WATCHTYPE) {
     WATCHTYPE[WATCHTYPE["TURNPLAY"] = 1] = "TURNPLAY";
 })(WATCHTYPE || (WATCHTYPE = {}));
+var ACHIEVETYPE;
+(function (ACHIEVETYPE) {
+    ACHIEVETYPE[ACHIEVETYPE["LOGIN_TOTAL"] = 1] = "LOGIN_TOTAL";
+    ACHIEVETYPE[ACHIEVETYPE["SCORE_SINGLE"] = 2] = "SCORE_SINGLE";
+    ACHIEVETYPE[ACHIEVETYPE["INVITE_NUM"] = 3] = "INVITE_NUM";
+    ACHIEVETYPE[ACHIEVETYPE["REWARDAD_NUM"] = 4] = "REWARDAD_NUM";
+})(ACHIEVETYPE || (ACHIEVETYPE = {}));
 var PlayerConst = (function () {
     function PlayerConst() {
     }
@@ -2849,13 +2924,15 @@ var UIConst = (function () {
     }
     /** 一级界面 */
     UIConst.START = "StartUI";
-    UIConst.MISSION = "MissionUI";
     UIConst.GAME = "GameUI";
     /** 二级界面 */
     UIConst.NOTICE = "NoticeUI";
     UIConst.RANK = "RankUI";
     UIConst.TURN = "TurnUI";
     UIConst.INVITE = "InviteUI";
+    UIConst.GROW = "GrowUI";
+    UIConst.MISSION = "MissionUI";
+    UIConst.ACHIEVE = "AchieveUI";
     /** ----------------------------------- 开放域好友激励命令  ----------------------------------------- */
     /** 下一个比自己高的 必要额外参数：当前分数*/
     UIConst.command_getnext = "nextscore";
@@ -3694,6 +3771,89 @@ var ObjectUtil = (function () {
     return ObjectUtil;
 }());
 __reflect(ObjectUtil.prototype, "ObjectUtil");
+var StringUtil = (function () {
+    function StringUtil() {
+    }
+    /**
+     * 带文本替换功能的字符串：返回富文本
+     * @param StrID
+     * @param valArr
+     * @return
+     */
+    StringUtil.getSwfLangTextFlowVar = function (StrID, valArr) {
+        return new egret.HtmlTextParser().parser(StringUtil.getSwfLangStrVar(StrID, valArr));
+    };
+    StringUtil.getSwfLangStrVarByID = function (StrID, valArr) {
+        if (DataBase.strings == null) {
+            return StrID;
+        }
+        var data = DataBase.strings[StrID];
+        if (data == null) {
+            return StrID;
+        }
+        return StringUtil.getSwfLangStrVar(data, valArr);
+    };
+    /**
+     * 带文本替换功能的字符串
+     * @param StrID
+     * @param valArr
+     * @return
+     */
+    StringUtil.getSwfLangStrVar = function (strData, valArr) {
+        var indexpre;
+        var indexback;
+        var strget;
+        indexpre = strData.indexOf("{");
+        indexback = strData.indexOf("}");
+        //下一次搜索的起始偏移量,防止{@}嵌套时，造成死循环
+        var nextOffset = 0;
+        var firstIndex;
+        var strFlagPre;
+        var strFlagBack;
+        var strFlag;
+        while (indexpre != -1 && indexback != -1) {
+            strget = strData.substring(indexpre, indexback + 1);
+            firstIndex = strData.indexOf("@", nextOffset);
+            //var number: int = int(strData.charAt(strData.indexOf("@", nextOffset) + 1));
+            var numberic = parseInt(strData.substring(firstIndex + 1, strData.indexOf(":", firstIndex))) - 1;
+            if (numberic == NaN) {
+                return "stringError:" + strData;
+            }
+            //处理填充字符串参数（如果有）
+            strFlagPre = strData.indexOf("!#[", nextOffset) + 3;
+            if (strFlagPre > 2) {
+                //前缀{!#[PeerageRank_]@0:}
+                strFlagBack = strData.indexOf("]@", nextOffset);
+                strFlag = strData.substring(strFlagPre, strFlagBack);
+                valArr[numberic] = StringUtil.getSwfLangStr(strFlag + valArr[numberic]);
+            }
+            var strreplace = valArr[numberic].toString();
+            strData = strData.replace(strget, strreplace);
+            nextOffset = indexpre + strreplace.length;
+            indexpre = strData.indexOf("{", nextOffset);
+            indexback = strData.indexOf("}", nextOffset);
+        }
+        return strData;
+    };
+    /**
+     * 获取配置好的字符串
+     * @param StrID
+     * @return
+     *
+     */
+    StringUtil.getSwfLangStr = function (StrID) {
+        if (DataBase.strings == null) {
+            return StrID;
+        }
+        var data = DataBase.strings[StrID];
+        if (data == null) {
+            return StrID;
+        }
+        return data.toString();
+    };
+    return StringUtil;
+}());
+__reflect(StringUtil.prototype, "StringUtil");
 //////////////////////////////////////////////////////////////////////////////////////
 //
 //  小游戏通用框架
@@ -3789,240 +3949,10 @@ var Main = (function (_super) {
     Main.prototype.createGameScene = function () {
         fw.UIManager.getInstance().showLoading(false);
         fw.GameManager.getInstance().init();
-        var str = "123";
-        str = str.slice(0, str.length - 1);
-        console.log(str);
     };
     return Main;
 }(eui.UILayer));
 __reflect(Main.prototype, "Main");
-var TimeUtil = (function () {
-    function TimeUtil() {
-    }
-    /** 判断这个时间是否是今天
-     * @param t 时间 秒
-     */
-    TimeUtil.checkToday = function (t) {
-        var today0 = Math.floor(TimeUtil.getTodayZero() / 1000);
-        return t >= today0;
-    };
-    /** 获取今日的0点的时间
-     * @return 毫秒
-    */
-    TimeUtil.getTodayZero = function () {
-        var d = new Date();
-        var h = d.getHours();
-        var m = d.getMinutes();
-        var s = d.getSeconds();
-        var secs = h * 3600 + m * 60 + s;
-        return d.getTime() - secs * 1000;
-    };
-    /** 00:00:000格式 */
-    TimeUtil.formatSecondT = function (t) {
-        var s = TimeUtil.ParseTime2Format(Math.floor(t / 1000), "m:s");
-        var hs = t % 1000;
-        var ss = "";
-        if (hs < 10) {
-            ss = "00" + hs;
-        }
-        else if (hs < 100) {
-            ss = "0" + hs;
-        }
-        else {
-            ss = hs + "";
-            ;
-        }
-        return s + ":" + ss;
-    };
-    /**
-     * 返回一年中的第N天
-     * @param t 秒
-     */
-    TimeUtil.GetDayInYear = function (t) {
-        var time = new Date(t);
-        var month = time.getMonth() + 1;
-        var year = time.getFullYear();
-        var days = time.getDate();
-        var sum = 0;
-        var a = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        var b = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-        if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) {
-            for (var i = 0; i < month - 1; i++) {
-                sum += b[i];
-            }
-            return sum + days;
-        }
-        else {
-            for (var i = 0; i < month - 1; i++) {
-                sum += a[i];
-            }
-            return sum + days;
-        }
-    };
-    /**
-     * 返回时间点在当天的秒数
-     */
-    TimeUtil.getSecondInDay = function (date) {
-        return date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
-    };
-    /**
-     * 倒计时转换为时间格式（h:m:s） ，可自定义
-     * @param t 秒
-     * @param f 格式
-     */
-    TimeUtil.ParseTime2Format = function (t, f) {
-        if (f === void 0) { f = "h:m:s"; }
-        var d = Math.floor(t / 24 / 3600);
-        var h = Math.floor((t / 3600) % 24);
-        var m = Math.floor((t % 3600) / 60);
-        var s = (t % 3600) % 60;
-        function parse_format(t) {
-            var s = t.toString();
-            if (t < 10) {
-                s = "0" + t;
-            }
-            return s;
-        }
-        if (f.indexOf("d") != -1) {
-            f = f.replace(/d/g, parse_format(d));
-        }
-        else {
-            h += d * 24;
-        }
-        if (f.indexOf("h") != -1) {
-            f = f.replace(/h/g, parse_format(h));
-        }
-        else {
-            m += h * 60;
-        }
-        if (f.indexOf("m") != -1) {
-            f = f.replace(/m/g, parse_format(m));
-        }
-        else {
-            if (f.indexOf("h") != -1) {
-                s += m * 60;
-            }
-            else {
-                s = t;
-            }
-        }
-        if (f.indexOf("s") != -1) {
-            f = f.replace(/s/g, parse_format(s));
-        }
-        return f;
-    };
-    /**
-     * 转换为日期格式
-     * @param t 毫秒
-     * @param f 格式 Y/M/D h:m:s
-     */
-    TimeUtil.ParseTime2Date = function (t, f) {
-        if (f === void 0) { f = "Y-M-D h:m:s"; }
-        var d = new Date(t);
-        var Y = d.getFullYear();
-        var M = d.getMonth() + 1;
-        var D = d.getDate();
-        var h = d.getHours();
-        var m = d.getMinutes();
-        var s = d.getSeconds();
-        function parse_format(t) {
-            var s = t.toString();
-            if (t < 10) {
-                s = "0" + t;
-            }
-            return s;
-        }
-        if (f.indexOf("Y") != -1) {
-            f = f.replace(/Y/g, parse_format(Y));
-        }
-        if (f.indexOf("M") != -1) {
-            f = f.replace(/M/g, parse_format(M));
-        }
-        if (f.indexOf("D") != -1) {
-            f = f.replace(/D/g, parse_format(D));
-        }
-        if (f.indexOf("h") != -1) {
-            f = f.replace(/h/g, parse_format(h));
-        }
-        if (f.indexOf("m") != -1) {
-            f = f.replace(/m/g, parse_format(m));
-        }
-        if (f.indexOf("s") != -1) {
-            f = f.replace(/s/g, parse_format(s));
-        }
-        return f;
-    };
-    /**
-     * 将时间转换为天/小时/分钟/秒
-     * @param t 秒
-     */
-    TimeUtil.ParseTimeChangeToUtil = function (t) {
-        var str = "";
-        if (t >= 3600 * 24) {
-            str = Math.floor(t / (3600 * 24)) + "天";
-        }
-        else if (t >= 3600) {
-            str = Math.floor(t / 3600) + "小时";
-        }
-        else if (t >= 60) {
-            str = Math.floor(t / 60) + "分钟";
-        }
-        else if (t < 60 && t > 0) {
-            str = t + "秒";
-        }
-        return str;
-    };
-    /**
-     * 获得带单位的时间字符串
-     * * @param t 秒
-     * @param f 格式 "d" "h" "m" "s"
-     */
-    TimeUtil.ParseTime2Units = function (t, f) {
-        if (f === void 0) { f = "h"; }
-        var str = "";
-        if (f == "d") {
-            str = Math.ceil(t / (3600 * 24)) + "天";
-        }
-        else if (f == "h") {
-            str = Math.ceil(t / 3600) + "小时";
-        }
-        else if (f == "m") {
-            str = Math.ceil(t / 60) + "分钟";
-        }
-        else if (f == "s") {
-            str = t + "秒";
-        }
-        else {
-            var d = Math.floor(t / (3600 * 24));
-            var h = Math.floor(t / 3600);
-            var m = Math.floor(t / 60);
-            var s = t % 60;
-            str = d + "天" + h + "时" + m + "分" + s + "秒";
-        }
-        return str;
-    };
-    /**
-     * 注册倒计时
-     * @param fun 回调
-     * @param reg 域
-     * @param tim 延时
-     * @param rep 次数
-     */
-    TimeUtil.CreateCD = function (fun, reg, tim, rep) {
-        if (rep === void 0) { rep = 0; }
-        var t = new egret.Timer(tim, rep);
-        t.addEventListener(egret.TimerEvent.TIMER, fun, reg);
-        return t;
-    };
-    TimeUtil.RemoveCD = function (tim, fun, reg) {
-        if (tim != null) {
-            tim.stop();
-            tim.removeEventListener(egret.TimerEvent.TIMER, fun, reg);
-        }
-    };
-    return TimeUtil;
-}());
-__reflect(TimeUtil.prototype, "TimeUtil");
 /**
  *
  * @author
@@ -4126,6 +4056,89 @@ var ViewUtil = (function () {
     return ViewUtil;
 }());
 __reflect(ViewUtil.prototype, "ViewUtil");
+var AchieveItemUI = (function (_super) {
+    __extends(AchieveItemUI, _super);
+    function AchieveItemUI() {
+        var _this = _super.call(this) || this;
+        _this.skinName = "AchieveItemSkin";
+        return _this;
+    }
+    AchieveItemUI.prototype.childrenCreated = function () {
+        _super.prototype.childrenCreated.call(this);
+        this.btn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickGet, this);
+        this.addEventListener(egret.Event.REMOVED_FROM_STAGE, this.clear, this);
+    };
+    AchieveItemUI.prototype.dataChanged = function () {
+        if (this.data == null) {
+            return;
+        }
+        var vo = this.data;
+        this.lbl_name.text = vo.title;
+        var str = "";
+        for (var i = 0; i < vo.reward.length; i++) {
+            if (str.length > 0) {
+                str += "";
+            }
+            var a = vo.reward[i].split(":");
+            str += (PropLogic.getInstance().getPropNameByID(parseInt(a[0])) + " X" + parseInt(a[1]));
+            if (i < vo.reward.length - 1) {
+                str += "\n";
+            }
+        }
+        this.lbl_reward.text = str;
+        // this.lbl_progress.text = "已" + StringUtil.getSwfLangStrVar(DataBase.ACHIEVE_STR[vo.type], [AchieveLogic.getInstance().getAchieveTypeValue(vo.type) + ""]);
+        this.btn.label = vo.state == 0 ? "未达成" : (vo.state == 1 ? "领取" : "已领取");
+        this.btn.filters = vo.state != 1 ? FilterUtil.getGrayFilter() : null;
+    };
+    AchieveItemUI.prototype.clickGet = function () {
+        if (this.data.state != 1) {
+            return;
+        }
+        this.data.state = 2;
+        this.btn.label = this.data.state == 0 ? "未达成" : (this.data.state == 1 ? "领取" : "已领取");
+        AchieveLogic.getInstance().getReward(this.data.id);
+    };
+    AchieveItemUI.prototype.clear = function () {
+        this.btn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickGet, this);
+        this.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.clear, this);
+        this.data = null;
+    };
+    return AchieveItemUI;
+}(eui.ItemRenderer));
+__reflect(AchieveItemUI.prototype, "AchieveItemUI");
+var AchieveUI = (function (_super) {
+    __extends(AchieveUI, _super);
+    function AchieveUI() {
+        return _super.call(this, "AchieveSkin") || this;
+    }
+    /**初始化数据 */
+    AchieveUI.prototype.initData = function () {
+    };
+    /**初始化界面 */
+    AchieveUI.prototype.initView = function () {
+        this.list.itemRenderer = AchieveItemUI;
+        this.arr_data = new eui.ArrayCollection();
+        var dic = AchieveLogic.getInstance().getAllAchieves();
+        for (var id in dic) {
+            this.arr_data.addItem(dic[id]);
+        }
+        this.list.dataProvider = this.arr_data;
+    };
+    /**初始化事件 */
+    AchieveUI.prototype.initEvent = function () {
+    };
+    AchieveUI.prototype.clickClose = function () {
+        _super.prototype.clickClose.call(this);
+    };
+    AchieveUI.prototype.clear = function () {
+        _super.prototype.clear.call(this);
+        this.list.dataProvider = null;
+        this.arr_data = null;
+    };
+    return AchieveUI;
+}(fw.BaseUI));
+__reflect(AchieveUI.prototype, "AchieveUI");
+window['AchieveUI'] = AchieveUI;
 var GameItemUI = (function (_super) {
     __extends(GameItemUI, _super);
     function GameItemUI() {
@@ -4243,9 +4256,9 @@ var GameOverUI = (function (_super) {
 __reflect(GameOverUI.prototype, "GameOverUI");
 var GameUI = (function (_super) {
     __extends(GameUI, _super);
-    function GameUI(v) {
+    function GameUI(obj) {
         var _this = _super.call(this, "GameSkin") || this;
-        _this.vo = v;
+        _this.vo = obj.params;
         return _this;
     }
     GameUI.prototype.checkFit = function () {
@@ -4405,7 +4418,7 @@ var GameUI = (function (_super) {
         this.lbl_time.text = s + ":" + ss;
     };
     GameUI.prototype.clickMission = function () {
-        GameTrainLogic.getInstance().openMission();
+        fw.UIManager.getInstance().openUI(UIConst.MISSION);
     };
     GameUI.prototype.clear = function () {
         _super.prototype.clear.call(this);
@@ -4422,6 +4435,7 @@ var GameUI = (function (_super) {
     return GameUI;
 }(fw.BaseUI));
 __reflect(GameUI.prototype, "GameUI");
+window['GameUI'] = GameUI;
 var GrowLeftItemUI = (function (_super) {
     __extends(GrowLeftItemUI, _super);
     function GrowLeftItemUI() {
@@ -4683,7 +4697,7 @@ var LogoUI = (function (_super) {
         /** 工作室logo */
         _this.logo_src = "logo_png";
         /** 工作室口号 */
-        _this.logo_txt = "Hunter Game \n never disappointed you";
+        _this.logo_txt = "Domore Games\nGames can do more";
         _this.init();
         return _this;
     }
@@ -4908,7 +4922,7 @@ var MissionUI = (function (_super) {
         this.btn_back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
     };
     MissionUI.prototype.clickBack = function () {
-        GameTrainLogic.getInstance().openStart();
+        fw.UIManager.getInstance().openUI(UIConst.START);
     };
     MissionUI.prototype.btnClick = function (e) {
         var i = parseInt(e.currentTarget.name);
@@ -4937,7 +4951,7 @@ var MissionUI = (function (_super) {
         if (vo == null) {
             return;
         }
-        GameTrainLogic.getInstance().startGame(vo);
+        fw.UIManager.getInstance().openUI(UIConst.GAME, vo);
     };
     MissionUI.prototype.clear = function () {
         _super.prototype.clear.call(this);
@@ -4971,15 +4985,11 @@ var NoticeUI = (function (_super) {
     };
     /**初始化事件 */
     NoticeUI.prototype.initEvent = function () {
-        var _this = this;
-        egret.setTimeout(function () {
-            if (_this.parent != null) {
-                _this.parent.removeChild(_this);
-            }
-        }, this, 1000);
+        this.img_bg.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickClose, this);
     };
     NoticeUI.prototype.clear = function () {
         _super.prototype.clear.call(this);
+        this.img_bg.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickClose, this);
     };
     return NoticeUI;
 }(fw.BaseUI));
@@ -5008,7 +5018,7 @@ var StartUI = (function (_super) {
         this.btn_sign.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_turn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_invite.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
-        this.btn_role.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
+        this.btn_achieve.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_rank.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_share.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         HttpCommand.getInstance().addEventListener(HttpEvent.checkIn, this.updateCheckIn, this);
@@ -5016,11 +5026,27 @@ var StartUI = (function (_super) {
     };
     StartUI.prototype.updateHp = function () {
         var vo = PropLogic.getInstance().getPropByID(COINTYPE.HP);
-        this.lbl_hp.text = "当前体力：" + (vo == null ? "0" : vo.num);
+        this.lbl_hp.text = "体力：" + (vo == null ? "0" : vo.num);
+    };
+    StartUI.prototype.updateCoin = function () {
+        var vo = PropLogic.getInstance().getPropByID(COINTYPE.MONEY);
+        this.lbl_coin.text = "金币：" + (vo == null ? "0" : vo.num);
+    };
+    StartUI.prototype.updateDiamond = function () {
+        var vo = PropLogic.getInstance().getPropByID(COINTYPE.DIAMOND);
+        this.lbl_diamond.text = "钻石：" + (vo == null ? "0" : vo.num);
     };
     StartUI.prototype.propChange = function (e) {
-        if (e.data.id == COINTYPE.HP) {
-            this.updateHp();
+        switch (e.data.id) {
+            case COINTYPE.HP:
+                this.updateHp();
+                break;
+            case COINTYPE.MONEY:
+                this.updateCoin();
+                break;
+            case COINTYPE.DIAMOND:
+                this.updateDiamond();
+                break;
         }
     };
     StartUI.prototype.updateCheckIn = function () {
@@ -5032,6 +5058,7 @@ var StartUI = (function (_super) {
                 fw.UIManager.getInstance().openUI(UIConst.MISSION);
                 break;
             case this.btn_grow:
+                fw.UIManager.getInstance().openUI(UIConst.GROW);
                 break;
             case this.btn_sign:
                 GameLogic.getInstance().signIn();
@@ -5042,88 +5069,14 @@ var StartUI = (function (_super) {
             case this.btn_invite:
                 fw.UIManager.getInstance().openUI(UIConst.INVITE, null, fw.UITYPE.SECOND);
                 break;
-            case this.btn_role:
-                WxApi.getInstance().toast("暂未开放");
+            case this.btn_achieve:
+                fw.UIManager.getInstance().openUI(UIConst.ACHIEVE, null, fw.UITYPE.SECOND);
                 break;
             case this.btn_rank:
                 fw.UIManager.getInstance().openUI(UIConst.RANK, { shareticket: null, openworld: true }, fw.UITYPE.SECOND);
                 break;
             case this.btn_share:
                 WxApi.getInstance().share(fw.SHARETYPE.ACTIVE);
-                break;
-            case this['btn_0']:
-                MissionLogic.getInstance().updatemission(102, "22234", "skybear");
-                break;
-            case this['btn_1']:
-                if (this.bmp != null && this.bmp.parent != null) {
-                    this.bmp.clear();
-                }
-                else {
-                    this.bmp = new BitmapOpenDataContext();
-                    this.addChild(this.bmp);
-                    this.bmp.start();
-                    this.bmp.command(UIConst.command_getnext, { x: 0, y: 100, w: 120, h: 180, myscore: "33333" }, "score_1_3", fw.RANKSORTTYPE.DESC);
-                }
-                break;
-            case this['btn_2']:
-                if (this.bmp != null && this.bmp.parent != null) {
-                    this.bmp.clear();
-                }
-                else {
-                    this.bmp = new BitmapOpenDataContext();
-                    this.addChild(this.bmp);
-                    this.bmp.start();
-                    this.bmp.command(UIConst.command_exceed);
-                }
-                break;
-            case this['btn_3']:
-                if (this.bmp != null && this.bmp.parent != null) {
-                    this.bmp.clear();
-                }
-                else {
-                    this.bmp = new BitmapOpenDataContext();
-                    this.addChild(this.bmp);
-                    this.bmp.start();
-                    this.bmp.command(UIConst.command_nearfriend);
-                }
-                break;
-            case this['btn_4']:
-                if (this.bmp != null && this.bmp.parent != null) {
-                    this.bmp.clear();
-                }
-                else {
-                    this.bmp = new BitmapOpenDataContext();
-                    this.addChild(this.bmp);
-                    this.bmp.start();
-                    this.bmp.command(UIConst.command_exceedfriend);
-                }
-                break;
-            case this['btn_5']:
-                if (this.bmp != null && this.bmp.parent != null) {
-                    this.bmp.clear();
-                }
-                else {
-                    this.bmp = new BitmapOpenDataContext();
-                    this.addChild(this.bmp);
-                    this.bmp.start();
-                    this.bmp.command(UIConst.command_openrank);
-                }
-                break;
-            case this['btn_6']:
-                if (this.bmp != null && this.bmp.parent != null) {
-                    this.bmp.clear();
-                }
-                else {
-                    this.bmp = new BitmapOpenDataContext();
-                    this.addChild(this.bmp);
-                    this.bmp.start();
-                    this.bmp.command(UIConst.command_openrank, null, "score_1_3", fw.RANKSORTTYPE.ASC);
-                }
-                break;
-            case this['btn_7']:
-                HttpCommand.getInstance().getAd();
-                break;
-            case this['btn_8']:
                 break;
         }
     };
@@ -5137,7 +5090,7 @@ var StartUI = (function (_super) {
         this.btn_sign.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_turn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_invite.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
-        this.btn_role.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
+        this.btn_achieve.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_rank.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_share.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         HttpCommand.getInstance().removeEventListener(HttpEvent.checkIn, this.updateCheckIn, this);
@@ -5879,7 +5832,7 @@ var AchieveVO = (function () {
         get: function () {
             return this._grade;
         },
-        /** 达成成绩 */
+        /** 达成成绩 暂无用 */
         set: function (v) {
             this._grade = v;
         },
@@ -6012,7 +5965,7 @@ var MissionVO = (function () {
         return 0;
     };
     /** 剧情对话 */
-    MissionVO.prototype.setDialog = function (str) {
+    MissionVO.prototype.setDialog = function (id) {
     };
     return MissionVO;
 }());
@@ -6063,88 +6016,232 @@ var TurnVO = (function () {
     return TurnVO;
 }());
 __reflect(TurnVO.prototype, "TurnVO");
-var StringUtil = (function () {
-    function StringUtil() {
+var TimeUtil = (function () {
+    function TimeUtil() {
     }
-    /**
-     * 带文本替换功能的字符串：返回富文本
-     * @param StrID
-     * @param valArr
-     * @return
+    /** 判断这个时间是否是今天
+     * @param t 时间 秒
      */
-    StringUtil.getSwfLangTextFlowVar = function (StrID, valArr) {
-        return new egret.HtmlTextParser().parser(StringUtil.getSwfLangStrVar(StrID, valArr));
+    TimeUtil.checkToday = function (t) {
+        var today0 = Math.floor(TimeUtil.getTodayZero() / 1000);
+        return t >= today0;
     };
-    StringUtil.getSwfLangStrVarByID = function (StrID, valArr) {
-        if (DataBase.strings == null) {
-            return StrID;
+    /** 获取今日的0点的时间
+     * @return 毫秒
+    */
+    TimeUtil.getTodayZero = function () {
+        var d = new Date();
+        var h = d.getHours();
+        var m = d.getMinutes();
+        var s = d.getSeconds();
+        var secs = h * 3600 + m * 60 + s;
+        return d.getTime() - secs * 1000;
+    };
+    /** 00:00:000格式 */
+    TimeUtil.formatSecondT = function (t) {
+        var s = TimeUtil.ParseTime2Format(Math.floor(t / 1000), "m:s");
+        var hs = t % 1000;
+        var ss = "";
+        if (hs < 10) {
+            ss = "00" + hs;
         }
-        var data = DataBase.strings[StrID];
-        if (data == null) {
-            return StrID;
+        else if (hs < 100) {
+            ss = "0" + hs;
         }
-        return StringUtil.getSwfLangStrVar(data, valArr);
+        else {
+            ss = hs + "";
+            ;
+        }
+        return s + ":" + ss;
     };
     /**
-     * 带文本替换功能的字符串
-     * @param StrID
-     * @param valArr
-     * @return
+     * 返回一年中的第N天
+     * @param t 秒
      */
-    StringUtil.getSwfLangStrVar = function (strData, valArr) {
-        var indexpre;
-        var indexback;
-        var strget;
-        indexpre = strData.indexOf("{");
-        indexback = strData.indexOf("}");
-        //下一次搜索的起始偏移量,防止{@}嵌套时，造成死循环
-        var nextOffset = 0;
-        var firstIndex;
-        var strFlagPre;
-        var strFlagBack;
-        var strFlag;
-        while (indexpre != -1 && indexback != -1) {
-            strget = strData.substring(indexpre, indexback + 1);
-            firstIndex = strData.indexOf("@", nextOffset);
-            //var number: int = int(strData.charAt(strData.indexOf("@", nextOffset) + 1));
-            var numberic = parseInt(strData.substring(firstIndex + 1, strData.indexOf(":", firstIndex))) - 1;
-            if (numberic == NaN) {
-                return "stringError:" + strData;
+    TimeUtil.GetDayInYear = function (t) {
+        var time = new Date(t);
+        var month = time.getMonth() + 1;
+        var year = time.getFullYear();
+        var days = time.getDate();
+        var sum = 0;
+        var a = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        var b = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0)) {
+            for (var i = 0; i < month - 1; i++) {
+                sum += b[i];
             }
-            //处理填充字符串参数（如果有）
-            strFlagPre = strData.indexOf("!#[", nextOffset) + 3;
-            if (strFlagPre > 2) {
-                //前缀{!#[PeerageRank_]@0:}
-                strFlagBack = strData.indexOf("]@", nextOffset);
-                strFlag = strData.substring(strFlagPre, strFlagBack);
-                valArr[numberic] = StringUtil.getSwfLangStr(strFlag + valArr[numberic]);
-            }
-            var strreplace = valArr[numberic].toString();
-            strData = strData.replace(strget, strreplace);
-            nextOffset = indexpre + strreplace.length;
-            indexpre = strData.indexOf("{", nextOffset);
-            indexback = strData.indexOf("}", nextOffset);
+            return sum + days;
         }
-        return strData;
+        else {
+            for (var i = 0; i < month - 1; i++) {
+                sum += a[i];
+            }
+            return sum + days;
+        }
     };
     /**
-     * 获取配置好的字符串
-     * @param StrID
-     * @return
-     *
+     * 返回时间点在当天的秒数
      */
-    StringUtil.getSwfLangStr = function (StrID) {
-        if (DataBase.strings == null) {
-            return StrID;
-        }
-        var data = DataBase.strings[StrID];
-        if (data == null) {
-            return StrID;
-        }
-        return data.toString();
+    TimeUtil.getSecondInDay = function (date) {
+        return date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
     };
-    return StringUtil;
+    /**
+     * 倒计时转换为时间格式（h:m:s） ，可自定义
+     * @param t 秒
+     * @param f 格式
+     */
+    TimeUtil.ParseTime2Format = function (t, f) {
+        if (f === void 0) { f = "h:m:s"; }
+        var d = Math.floor(t / 24 / 3600);
+        var h = Math.floor((t / 3600) % 24);
+        var m = Math.floor((t % 3600) / 60);
+        var s = (t % 3600) % 60;
+        function parse_format(t) {
+            var s = t.toString();
+            if (t < 10) {
+                s = "0" + t;
+            }
+            return s;
+        }
+        if (f.indexOf("d") != -1) {
+            f = f.replace(/d/g, parse_format(d));
+        }
+        else {
+            h += d * 24;
+        }
+        if (f.indexOf("h") != -1) {
+            f = f.replace(/h/g, parse_format(h));
+        }
+        else {
+            m += h * 60;
+        }
+        if (f.indexOf("m") != -1) {
+            f = f.replace(/m/g, parse_format(m));
+        }
+        else {
+            if (f.indexOf("h") != -1) {
+                s += m * 60;
+            }
+            else {
+                s = t;
+            }
+        }
+        if (f.indexOf("s") != -1) {
+            f = f.replace(/s/g, parse_format(s));
+        }
+        return f;
+    };
+    /**
+     * 转换为日期格式
+     * @param t 毫秒
+     * @param f 格式 Y/M/D h:m:s
+     */
+    TimeUtil.ParseTime2Date = function (t, f) {
+        if (f === void 0) { f = "Y-M-D h:m:s"; }
+        var d = new Date(t);
+        var Y = d.getFullYear();
+        var M = d.getMonth() + 1;
+        var D = d.getDate();
+        var h = d.getHours();
+        var m = d.getMinutes();
+        var s = d.getSeconds();
+        function parse_format(t) {
+            var s = t.toString();
+            if (t < 10) {
+                s = "0" + t;
+            }
+            return s;
+        }
+        if (f.indexOf("Y") != -1) {
+            f = f.replace(/Y/g, parse_format(Y));
+        }
+        if (f.indexOf("M") != -1) {
+            f = f.replace(/M/g, parse_format(M));
+        }
+        if (f.indexOf("D") != -1) {
+            f = f.replace(/D/g, parse_format(D));
+        }
+        if (f.indexOf("h") != -1) {
+            f = f.replace(/h/g, parse_format(h));
+        }
+        if (f.indexOf("m") != -1) {
+            f = f.replace(/m/g, parse_format(m));
+        }
+        if (f.indexOf("s") != -1) {
+            f = f.replace(/s/g, parse_format(s));
+        }
+        return f;
+    };
+    /**
+     * 将时间转换为天/小时/分钟/秒
+     * @param t 秒
+     */
+    TimeUtil.ParseTimeChangeToUtil = function (t) {
+        var str = "";
+        if (t >= 3600 * 24) {
+            str = Math.floor(t / (3600 * 24)) + "天";
+        }
+        else if (t >= 3600) {
+            str = Math.floor(t / 3600) + "小时";
+        }
+        else if (t >= 60) {
+            str = Math.floor(t / 60) + "分钟";
+        }
+        else if (t < 60 && t > 0) {
+            str = t + "秒";
+        }
+        return str;
+    };
+    /**
+     * 获得带单位的时间字符串
+     * * @param t 秒
+     * @param f 格式 "d" "h" "m" "s"
+     */
+    TimeUtil.ParseTime2Units = function (t, f) {
+        if (f === void 0) { f = "h"; }
+        var str = "";
+        if (f == "d") {
+            str = Math.ceil(t / (3600 * 24)) + "天";
+        }
+        else if (f == "h") {
+            str = Math.ceil(t / 3600) + "小时";
+        }
+        else if (f == "m") {
+            str = Math.ceil(t / 60) + "分钟";
+        }
+        else if (f == "s") {
+            str = t + "秒";
+        }
+        else {
+            var d = Math.floor(t / (3600 * 24));
+            var h = Math.floor(t / 3600);
+            var m = Math.floor(t / 60);
+            var s = t % 60;
+            str = d + "天" + h + "时" + m + "分" + s + "秒";
+        }
+        return str;
+    };
+    /**
+     * 注册倒计时
+     * @param fun 回调
+     * @param reg 域
+     * @param tim 延时
+     * @param rep 次数
+     */
+    TimeUtil.CreateCD = function (fun, reg, tim, rep) {
+        if (rep === void 0) { rep = 0; }
+        var t = new egret.Timer(tim, rep);
+        t.addEventListener(egret.TimerEvent.TIMER, fun, reg);
+        return t;
+    };
+    TimeUtil.RemoveCD = function (tim, fun, reg) {
+        if (tim != null) {
+            tim.stop();
+            tim.removeEventListener(egret.TimerEvent.TIMER, fun, reg);
+        }
+    };
+    return TimeUtil;
 }());
-__reflect(StringUtil.prototype, "StringUtil");
+__reflect(TimeUtil.prototype, "TimeUtil");
 
 ;window.Main = Main;

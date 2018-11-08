@@ -9,7 +9,15 @@ class GameConst {
 	public static stageHeight: number;
 
 
-	public static version: string = "201808181130";
+	public static version: string = "1.10";
+	public static notice_content:string = "2018.11.10更新内容：\n" + 
+	"1，增加世界排行榜；\n" +
+	"2，增加体力，用户关卡挑战\n" +
+	"3，增加每日签到，用户可以签到获取体力\n" + 
+	"4，增加关卡模式，挑战可以获得成就及金币，后续可以购买商品\n" + 
+	"\n" + 
+	"\n" + 
+	"如果您有什么建议，请点击左侧游戏圈发帖，谢谢！\n"; 
 	
 
 	/** 广告id */
@@ -49,6 +57,7 @@ enum MYDATA{
 	CURRENT_SKIN = 5,//当前皮肤id
 	MISSION_CRT = 6,//当前关卡
 	MISSION_DATA = 7,//通关关卡数据
+	VERSION = 8,//版本号
 }
 
 enum WATCHTYPE{

@@ -37,7 +37,7 @@ class GamesOverUI extends fw.BaseUI {
 			this.lbl_best.text = "历史最快成绩：" + this.getText(recond);
 		}
 		if(recond == 0 || this.time < recond){
-			GameTrainLogic.getInstance().setRecond(this.vo.id,this.time);
+			GameTrainLogic.getInstance().setRecond(this.vo.id,this.time,this.vo.type);
 		}
 		if(this.time < recond){
 			this.lbl_fast.visible = true;

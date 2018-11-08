@@ -181,11 +181,13 @@ class WxApi extends egret.EventDispatcher {
 	}
 
 	/** 游戏结束 记录数据到服务器和开放域
-	 * @param key
+	 * @param type
+	 * @param id
 	 * @param score 
 	 */
-	public setScore(key:string,score: number) {
-		HttpCommand.getInstance().postWorldRank(score);
+	public setScore(type:number,id:number,score: number) {
+		HttpCommand.getInstance().postWorldRank(score,"1",type+"_"+id);
+		let key = "score_" + type + "_" + id;
 		let KVDataList = [{ key: key, value: score + "" }];
 		this.setUserCloudStorage(KVDataList);
 	}

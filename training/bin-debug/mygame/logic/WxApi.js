@@ -205,11 +205,13 @@ var WxApi = (function (_super) {
         platform.setUserCloudStorage(KVDataList);
     };
     /** 游戏结束 记录数据到服务器和开放域
-     * @param key
+     * @param type
+     * @param id
      * @param score
      */
-    WxApi.prototype.setScore = function (key, score) {
-        HttpCommand.getInstance().postWorldRank(score);
+    WxApi.prototype.setScore = function (type, id, score) {
+        HttpCommand.getInstance().postWorldRank(score, "1", type + "_" + id);
+        var key = "score_" + type + "_" + id;
         var KVDataList = [{ key: key, value: score + "" }];
         this.setUserCloudStorage(KVDataList);
     };

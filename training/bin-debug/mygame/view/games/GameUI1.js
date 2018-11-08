@@ -15,7 +15,6 @@ var GameUI1 = (function (_super) {
     }
     GameUI1.prototype.checkFit = function () {
         _super.prototype.checkFit.call(this);
-        this.img_1.height = GameConst.stageHeight;
     };
     /**初始化数据 */
     GameUI1.prototype.initData = function () {

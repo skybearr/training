@@ -86,6 +86,16 @@ var PropLogic = (function (_super) {
         event.data = { id: id, num: num };
         this.dispatchEvent(event);
     };
+    /** 获取奖励
+     * @param reward 格式  1:100;2:200;3001:1
+     */
+    PropLogic.prototype.getReward = function (reward) {
+        var arr = reward.split(";");
+        for (var i = 0; i < arr.length; i++) {
+            var aaa = arr[i].split(":");
+            PropLogic.getInstance().updateProp(parseInt(aaa[0]), parseInt(aaa[1]));
+        }
+    };
     /** 获取道具 */
     PropLogic.prototype.getPropByID = function (id) {
         return this.props[id];

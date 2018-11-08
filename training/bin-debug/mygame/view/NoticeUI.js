@@ -23,15 +23,11 @@ var NoticeUI = (function (_super) {
     };
     /**初始化事件 */
     NoticeUI.prototype.initEvent = function () {
-        var _this = this;
-        egret.setTimeout(function () {
-            if (_this.parent != null) {
-                _this.parent.removeChild(_this);
-            }
-        }, this, 1000);
+        this.img_bg.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickClose, this);
     };
     NoticeUI.prototype.clear = function () {
         _super.prototype.clear.call(this);
+        this.img_bg.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickClose, this);
     };
     return NoticeUI;
 }(fw.BaseUI));

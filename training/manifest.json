@@ -27,6 +27,7 @@
 		"bin-debug/framework/view/BitmapOpenDataContext.js",
 		"bin-debug/framework/view/LoadingUI.js",
 		"bin-debug/framework/view/RankItemUI.js",
+		"bin-debug/framework/view/RankTypeItemUI.js",
 		"bin-debug/framework/view/RankUI.js",
 		"bin-debug/framework/vo/RankVO.js",
 		"bin-debug/mygame/command/HttpCommand.js",

@@ -12,6 +12,8 @@ declare class GameItemSkin extends eui.Skin{
 }
 declare class GameOverSkin extends eui.Skin{
 }
+declare class Game1Skin extends eui.Skin{
+}
 declare class GameSkin extends eui.Skin{
 }
 declare class GrowLeftItemSkin extends eui.Skin{

@@ -24,13 +24,44 @@ var MissionTrainLogic = (function (_super) {
         return this._instance;
     };
     MissionTrainLogic.prototype.initData = function () {
+        this.initPassData();
         GameTrainLogic.getInstance().initData();
         this.initCharpter();
+    };
+    MissionTrainLogic.prototype.initPassData = function () {
+        this.passdata = {};
+        //格式  101=1151&102=313
+        var str = GameLogic.getInstance().getMyDataValueByID(MYDATA.MISSION_DATA);
+        if (str != null) {
+            var arr = str.split("&");
+            for (var i = 0; i < arr.length; i++) {
+                var a1 = arr[i].split("=");
+                this.passdata[a1[0]] = parseInt(a1[1]);
+            }
+        }
+    };
+    MissionTrainLogic.prototype.updatePassData = function (id, score) {
+        this.passdata[id] = score;
+        var s1 = "";
+        for (var id_1 in this.passdata) {
+            if (s1 != "") {
+                s1 += "&";
+            }
+            s1 += (id_1 + "=" + this.passdata[id_1]);
+        }
+        GameLogic.getInstance().updateMyDataValue(MYDATA.MISSION_DATA, s1);
+    };
+    MissionTrainLogic.prototype.getPassData = function () {
+        return this.passdata;
+    };
+    MissionTrainLogic.prototype.updateCrtMission = function (id) {
+        this.crtMission = id;
+        GameLogic.getInstance().updateMyDataValue(MYDATA.MISSION_CRT, this.crtMission + "");
     };
     MissionTrainLogic.prototype.initCharpter = function () {
         var s1 = GameLogic.getInstance().getMyDataValueByID(MYDATA.MISSION_CRT);
         if (s1 == null) {
-            this.crtMission = 101;
+            this.updateCrtMission(101);
         }
         else {
             this.crtMission = parseInt(s1);

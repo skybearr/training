@@ -19,8 +19,6 @@ class GameUI1 extends GameBaseUI {
 
 	protected checkFit() {
 		super.checkFit();
-
-		this.img_1.height = GameConst.stageHeight;
 	}
 
 	/**初始化数据 */

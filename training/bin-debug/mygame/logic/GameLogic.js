@@ -42,7 +42,17 @@ var GameLogic = (function (_super) {
         this.updateCheckInfo(o.checkin);
         this.updateSetting(o.setting);
         this.updateMyData(o.mydata);
+        this.checkNotice();
         this.checkLoginData();
+    };
+    GameLogic.prototype.checkNotice = function () {
+        var s1 = this.getMyDataValueByID(MYDATA.VERSION);
+        if (s1 == null || s1 != GameConst.version) {
+            PlayerConst.noticeInfo.content = GameConst.notice_content;
+            PlayerConst.noticeInfo.version_client = GameConst.version;
+            fw.UIManager.getInstance().openUI(UIConst.NOTICE, null, fw.UITYPE.SECOND);
+            this.updateMyDataValue(MYDATA.VERSION, GameConst.version);
+        }
     };
     /** 每次登陆检测   */
     GameLogic.prototype.checkLoginData = function () {
@@ -84,7 +94,7 @@ var GameLogic = (function (_super) {
         str = str.slice(0, str.length - 1);
         HttpCommand.getInstance().postMyData(str);
     };
-    /** 根据获取我的数据
+    /** 根据id获取我的数据
      * @param id MYDATA.xxxx
      * @return 自定义的一个字符串，没有返回null
      */
@@ -148,7 +158,7 @@ var GameLogic = (function (_super) {
     /** 签到成功*/
     GameLogic.prototype.checkInResponse = function (e) {
         this.updateCheckInfo(e.data);
-        PropLogic.getInstance().updateProp(COINTYPE.HP, DataBase.HP_ADD_SIGNIN);
+        PropLogic.getInstance().getReward(DataBase.REWARD_ADD_SIGNIN);
     };
     GameLogic.prototype.updateCheckInfo = function (data) {
         PlayerConst.checkInfo.data = data;

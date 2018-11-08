@@ -108,7 +108,7 @@ class GameTrainLogic extends egret.EventDispatcher {
 
 		return value;
 	}
-	public setRecond(id: number, time: number) {
+	public setRecond(id: number, time: number,type:number) {
 		let sss = id + "=" + time;
 		let str = GameLogic.getInstance().getMyDataValueByID(MYDATA.BEST_SCORE);
 		if (str == null) {
@@ -118,7 +118,7 @@ class GameTrainLogic extends egret.EventDispatcher {
 			str += ("&" + sss);
 		}
 		GameLogic.getInstance().updateMyDataValue(MYDATA.BEST_SCORE, str);
-		WxApi.getInstance().setScore("score_" + id, time);
+		WxApi.getInstance().setScore(type,id, time);
 	}
 
 	public openStart() {

@@ -4,7 +4,15 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 var GameConst = (function () {
     function GameConst() {
     }
-    GameConst.version = "201808181130";
+    GameConst.version = "1.10";
+    GameConst.notice_content = "2018.11.10更新内容：\n" +
+        "1，增加世界排行榜；\n" +
+        "2，增加体力，用户关卡挑战\n" +
+        "3，增加每日签到，用户可以签到获取体力\n" +
+        "4，增加关卡模式，挑战可以获得成就及金币，后续可以购买商品\n" +
+        "\n" +
+        "\n" +
+        "如果您有什么建议，请点击左侧游戏圈发帖，谢谢！\n";
     /** 广告id */
     GameConst.bannerId = "adunit-758f00e035da3372";
     GameConst.rewardAdId = "adunit-922e89b51b9d9336";
@@ -42,6 +50,8 @@ var MYDATA;
     MYDATA[MYDATA["ACHIEVE_GET"] = 4] = "ACHIEVE_GET";
     MYDATA[MYDATA["CURRENT_SKIN"] = 5] = "CURRENT_SKIN";
     MYDATA[MYDATA["MISSION_CRT"] = 6] = "MISSION_CRT";
+    MYDATA[MYDATA["MISSION_DATA"] = 7] = "MISSION_DATA";
+    MYDATA[MYDATA["VERSION"] = 8] = "VERSION";
 })(MYDATA || (MYDATA = {}));
 var WATCHTYPE;
 (function (WATCHTYPE) {

@@ -38,10 +38,31 @@ class MissionTrainLogic extends egret.EventDispatcher {
 		
 	}
 
+	public updatePassData(id:number,score:number){
+		this.passdata[id] = score;
+		let s1 = "";                        
+		for(let id in this.passdata){
+			if(s1 != ""){
+				s1 += "&";
+			}
+			s1 += (id + "=" + this.passdata[id]);
+		}
+		GameLogic.getInstance().updateMyDataValue(MYDATA.MISSION_DATA,s1);
+	}
+
+	public getPassData():fw.Map<number>{
+		return this.passdata;
+	}
+
+	public updateCrtMission(id:number){
+		this.crtMission = id;
+		GameLogic.getInstance().updateMyDataValue(MYDATA.MISSION_CRT,this.crtMission + "");
+	}
+
 	public initCharpter() {
 		let s1 = GameLogic.getInstance().getMyDataValueByID(MYDATA.MISSION_CRT);
 		if(s1 == null){
-			this.crtMission = 101;
+			this.updateCrtMission(101);
 		}
 		else{
 			this.crtMission = parseInt(s1);

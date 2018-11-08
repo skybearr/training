@@ -98,7 +98,7 @@ var GameTrainLogic = (function (_super) {
         }
         return value;
     };
-    GameTrainLogic.prototype.setRecond = function (id, time) {
+    GameTrainLogic.prototype.setRecond = function (id, time, type) {
         var sss = id + "=" + time;
         var str = GameLogic.getInstance().getMyDataValueByID(MYDATA.BEST_SCORE);
         if (str == null) {
@@ -108,7 +108,7 @@ var GameTrainLogic = (function (_super) {
             str += ("&" + sss);
         }
         GameLogic.getInstance().updateMyDataValue(MYDATA.BEST_SCORE, str);
-        WxApi.getInstance().setScore("score_" + id, time);
+        WxApi.getInstance().setScore(type, id, time);
     };
     GameTrainLogic.prototype.openStart = function () {
         fw.UIManager.getInstance().openUI(UIConst.START);

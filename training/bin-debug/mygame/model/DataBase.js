@@ -15,8 +15,8 @@ var DataBase = (function () {
     DataBase.COIN_NAME = [, '体力', '金币', '钻石', '', '', '', '', '', '', '',];
     /** 挑战关卡需要消耗的体力 */
     DataBase.HP_REDUCE_BATTLE = 10;
-    /** 每日签到增加体力 */
-    DataBase.HP_ADD_SIGNIN = 50;
+    /** 每日签到奖励 */
+    DataBase.REWARD_ADD_SIGNIN = "1:50;2:1000;3:10";
     /** 邀请好友给的体力 */
     DataBase.HP_ADD_INVITE = 100;
     return DataBase;
