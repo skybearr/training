@@ -101,7 +101,7 @@ class StartUI extends fw.BaseUI {
 				fw.UIManager.getInstance().openUI(UIConst.ACHIEVE, null, fw.UITYPE.SECOND);
 				break;
 			case this.btn_rank:
-				fw.UIManager.getInstance().openUI(UIConst.RANK, { shareticket: null, openworld: true }, fw.UITYPE.SECOND);
+				fw.UIManager.getInstance().openUI(UIConst.RANK, { shareticket: null, openworld: false }, fw.UITYPE.SECOND);
 				break;
 			case this.btn_share:
 				WxApi.getInstance().share(fw.SHARETYPE.ACTIVE);

@@ -68,18 +68,6 @@ var GameTrainLogic = (function (_super) {
             this.data[vo.type].push(vo);
         }
     };
-    GameTrainLogic.prototype.saveLocal = function (type, id, time) {
-        // let localdata = WxApi.getInstance().getLocalData(GameConst.localkey_missiondata);
-        // console.log("savelocal:", localdata);
-        // if (localdata == null) {
-        // 	localdata = [, [], [], []];
-        // }
-        // if (localdata[type] == null) {
-        // 	localdata[type] = [];
-        // }
-        // localdata[type][id] = time;
-        // WxApi.getInstance().setLocalData(GameConst.localkey_missiondata, localdata);
-    };
     GameTrainLogic.prototype.getRecond = function (id) {
         var value = 0;
         var str = GameLogic.getInstance().getMyDataValueByID(MYDATA.BEST_SCORE);

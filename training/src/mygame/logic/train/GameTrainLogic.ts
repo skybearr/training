@@ -72,22 +72,7 @@ class GameTrainLogic extends egret.EventDispatcher {
 			this.data[vo.type].push(vo);
 		}
 	}
-
-	/**本地数据 {id:time} */
-	private localdata: any;
-	public saveLocal(type: number, id: number, time: number) {
-		// let localdata = WxApi.getInstance().getLocalData(GameConst.localkey_missiondata);
-		// console.log("savelocal:", localdata);
-
-		// if (localdata == null) {
-		// 	localdata = [, [], [], []];
-		// }
-		// if (localdata[type] == null) {
-		// 	localdata[type] = [];
-		// }
-		// localdata[type][id] = time;
-		// WxApi.getInstance().setLocalData(GameConst.localkey_missiondata, localdata);
-	}
+	
 
 	public getRecond(id: number): number {
 		let value: number = 0;

@@ -13,7 +13,9 @@ var fw;
     var RankUI = (function (_super) {
         __extends(RankUI, _super);
         function RankUI() {
-            return _super.call(this, "RankSkin") || this;
+            var _this = _super.call(this, "RankSkin") || this;
+            _this.rankkey = "score_1_3";
+            return _this;
         }
         RankUI.prototype.childrenCreated = function () {
             _super.prototype.childrenCreated.call(this);
@@ -32,6 +34,7 @@ var fw;
         RankUI.prototype.initView = function () {
             this.list.itemRenderer = RankTypeItemUI;
             this.arr_data = new eui.ArrayCollection();
+            this.arr_data1 = new eui.ArrayCollection();
             this.data = GameTrainLogic.getInstance().getMissionData();
             this.crttype = 1;
             this.initList();
@@ -42,7 +45,6 @@ var fw;
                 this.initOpenRank();
                 this.list_world.itemRenderer = fw.RankItemUI;
                 this.arr_data = new eui.ArrayCollection();
-                HttpCommand.getInstance().getWorldRank();
             }
             else {
                 this.lbl_title.text = this.shareticket != null ? "群排行榜" : "好友排行榜";
@@ -110,11 +112,11 @@ var fw;
             if (arr == null || arr.length == 0) {
                 return;
             }
-            this.arr_data.removeAll();
+            this.arr_data1.removeAll();
             for (var i = 0; i < arr.length; i++) {
-                this.arr_data.addItem(arr[i]);
+                this.arr_data1.addItem(arr[i]);
             }
-            this.list.dataProvider = this.arr_data;
+            this.list.dataProvider = this.arr_data1;
             this.initBtn();
         };
         RankUI.prototype.initBtn = function () {
@@ -134,10 +136,14 @@ var fw;
             if (this.crtItem != null) {
                 this.crtItem.setSelected(true);
             }
-            var rankkey = "score_" + type + "_" + id;
-            this.bmp_context.command(UIConst.command_openrank, null, rankkey, fw.RANKSORTTYPE.ASC, this.shareticket);
-            var t = type * 100 + id;
-            HttpCommand.getInstance().getWorldRank(20, 1, t);
+            this.rankkey = "score_" + type + "_" + id;
+            if (this.ranktype == 0) {
+                this.bmp_context.command(UIConst.command_openrank, null, this.rankkey, fw.RANKSORTTYPE.ASC, this.shareticket);
+            }
+            else {
+                var t = type + "_" + id;
+                HttpCommand.getInstance().getWorldRank(20, 1, t);
+            }
         };
         RankUI.prototype.itemClick = function (e) {
             var i = e.itemIndex;

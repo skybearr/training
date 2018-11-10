@@ -23,9 +23,15 @@ module fw {
 
 		private shareticket: string;
 		private openworld: boolean;
+		/** 世界排行 */
 		private arr_data: eui.ArrayCollection;
+		/** 按钮中的小类型 */
+		private arr_data1: eui.ArrayCollection;
 		/** 0好友排行 1世界排行  */
 		private ranktype: number;
+		/** 当前类型 1舒尔特 2趣味 3速记 */
+		private crttype: number;
+		private rankkey: string = "score_1_3";
 
 		protected childrenCreated() {
 			super.childrenCreated();
@@ -47,6 +53,7 @@ module fw {
 		protected initView() {
 			this.list.itemRenderer = RankTypeItemUI;
 			this.arr_data = new eui.ArrayCollection();
+			this.arr_data1 = new eui.ArrayCollection();
 			this.data = GameTrainLogic.getInstance().getMissionData();
 			this.crttype = 1;
 			this.initList();
@@ -58,14 +65,12 @@ module fw {
 
 				this.list_world.itemRenderer = RankItemUI;
 				this.arr_data = new eui.ArrayCollection();
-
-				HttpCommand.getInstance().getWorldRank();
 			}
 			else {
 				this.lbl_title.text = this.shareticket != null ? "群排行榜" : "好友排行榜";
 				this.initOpenRank();
 			}
-			
+
 		}
 
 		private initOpenRank() {
@@ -115,7 +120,7 @@ module fw {
 		}
 
 		private data: TrainMissionVO[][];
-		private crttype: number;
+
 
 		protected initEvent() {
 			this.img_tag1.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickOpenRank, this);
@@ -143,11 +148,11 @@ module fw {
 			if (arr == null || arr.length == 0) {
 				return;
 			}
-			this.arr_data.removeAll();
+			this.arr_data1.removeAll();
 			for (let i = 0; i < arr.length; i++) {
-				this.arr_data.addItem(arr[i]);
+				this.arr_data1.addItem(arr[i]);
 			}
-			this.list.dataProvider = this.arr_data;
+			this.list.dataProvider = this.arr_data1;
 			this.initBtn();
 		}
 		private initBtn() {
@@ -169,10 +174,14 @@ module fw {
 			if (this.crtItem != null) {
 				this.crtItem.setSelected(true);
 			}
-			let rankkey = "score_" + type + "_" + id;
-			this.bmp_context.command(UIConst.command_openrank, null, rankkey, RANKSORTTYPE.ASC, this.shareticket);
-			let t = type * 100 + id;
-			HttpCommand.getInstance().getWorldRank(20,1,t);
+			this.rankkey = "score_" + type + "_" + id;
+			if (this.ranktype == 0) {
+				this.bmp_context.command(UIConst.command_openrank, null, this.rankkey, RANKSORTTYPE.ASC, this.shareticket);
+			}
+			else {
+				let t = type + "_" + id;
+				HttpCommand.getInstance().getWorldRank(20, 1, t);
+			}
 		}
 		private itemClick(e: eui.ItemTapEvent) {
 			let i = e.itemIndex;

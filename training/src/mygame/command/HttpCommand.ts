@@ -66,7 +66,7 @@ class HttpCommand extends egret.EventDispatcher {
      * @param type 排序分类 0全部 
      * @param page 页数
      */
-    public getWorldRank(limit = 20, sort = 0, type = 0, page = 1) {
+    public getWorldRank(limit = 20, sort = 0, type = "0", page = 1) {
         let url = "ranking?sort=" + sort + "&type=" + type + "&p=" + page + "&limit=" + limit;
         this.sendRequest(HttpEvent.getWorldRank, url);
     }

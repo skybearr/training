@@ -73,7 +73,7 @@ var HttpCommand = (function (_super) {
     HttpCommand.prototype.getWorldRank = function (limit, sort, type, page) {
         if (limit === void 0) { limit = 20; }
         if (sort === void 0) { sort = 0; }
-        if (type === void 0) { type = 0; }
+        if (type === void 0) { type = "0"; }
         if (page === void 0) { page = 1; }
         var url = "ranking?sort=" + sort + "&type=" + type + "&p=" + page + "&limit=" + limit;
         this.sendRequest(HttpEvent.getWorldRank, url);
