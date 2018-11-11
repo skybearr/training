@@ -54,7 +54,7 @@ class MissionLogic extends egret.EventDispatcher {
 
 	/** 初始化所有关卡配置 */
 	private missionAllResponse(e: HttpEvent) {
-		let mid = GameLogic.getInstance().getMyDataValueByID(MYDATA.CRT_MISSION);
+		let mid = GameLogic.getInstance().getMyDataValueByID(MYDATA.MISSION_CRT);
 		console.log("init:", mid);
 
 		this.crt_missionId = mid == null ? 101 : parseInt(mid);
@@ -122,11 +122,7 @@ class MissionLogic extends egret.EventDispatcher {
 			}
 			vo.grade = parseInt(o.grade);
 			vo.create_time = parseInt(o.create_time);
-			vo.remark = o.remark;
 			this.missions[vo.id] = vo;
-		}
-		if (this.missionui != null) {
-			this.missionui.update();
 		}
 	}
 
@@ -163,7 +159,7 @@ class MissionLogic extends egret.EventDispatcher {
 						this.crt_missionId = nextid;
 						nextvo.state = 1;
 						console.log("updateCrtMission:",this.crt_missionId);
-						GameLogic.getInstance().updateMyDataValue(MYDATA.CRT_MISSION, this.crt_missionId);
+						GameLogic.getInstance().updateMyDataValue(MYDATA.MISSION_CRT, this.crt_missionId);
 					}
 				}
 			}

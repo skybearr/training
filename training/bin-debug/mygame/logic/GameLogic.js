@@ -46,13 +46,13 @@ var GameLogic = (function (_super) {
         this.checkLoginData();
     };
     GameLogic.prototype.checkNotice = function () {
-        var s1 = this.getMyDataValueByID(MYDATA.VERSION);
-        if (s1 == null || s1 != GameConst.version) {
-            PlayerConst.noticeInfo.content = GameConst.notice_content;
-            PlayerConst.noticeInfo.version_client = GameConst.version;
-            fw.UIManager.getInstance().openUI(UIConst.NOTICE, null, fw.UITYPE.SECOND);
-            this.updateMyDataValue(MYDATA.VERSION, GameConst.version);
-        }
+        // let s1 = this.getMyDataValueByID(MYDATA.VERSION);
+        // if(s1 == null || s1 != GameConst.version){
+        // 	PlayerConst.noticeInfo.content = GameConst.notice_content;
+        // 	PlayerConst.noticeInfo.version_client = GameConst.version;
+        // 	fw.UIManager.getInstance().openUI(UIConst.NOTICE,null,fw.UITYPE.SECOND);
+        // 	this.updateMyDataValue(MYDATA.VERSION,GameConst.version);
+        // }
     };
     /** 每次登陆检测   */
     GameLogic.prototype.checkLoginData = function () {
@@ -162,6 +162,9 @@ var GameLogic = (function (_super) {
     };
     GameLogic.prototype.updateCheckInfo = function (data) {
         PlayerConst.checkInfo.data = data;
+        if (this.startui != null) {
+            this.startui.updateCheckIn();
+        }
     };
     return GameLogic;
 }(egret.EventDispatcher));

@@ -16,9 +16,11 @@ var DataBase = (function () {
     /** 挑战关卡需要消耗的体力 */
     DataBase.HP_REDUCE_BATTLE = 10;
     /** 每日签到奖励 */
-    DataBase.REWARD_ADD_SIGNIN = "1:50;2:1000;3:10";
+    DataBase.REWARD_ADD_SIGNIN = "1:50";
+    /** 看视频送的体力 */
+    DataBase.REWARD_ADD_WATCHAD = 50;
     /** 邀请好友给的体力 */
-    DataBase.HP_ADD_INVITE = 100;
+    DataBase.HP_ADD_INVITE = 120;
     return DataBase;
 }());
 __reflect(DataBase.prototype, "DataBase");

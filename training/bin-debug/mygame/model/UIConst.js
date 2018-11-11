@@ -15,6 +15,7 @@ var UIConst = (function () {
     UIConst.GROW = "GrowUI";
     UIConst.MISSION = "MissionUI";
     UIConst.ACHIEVE = "AchieveUI";
+    UIConst.PLAN = "PlatUI";
     /** ----------------------------------- 开放域好友激励命令  ----------------------------------------- */
     /** 下一个比自己高的 必要额外参数：当前分数*/
     UIConst.command_getnext = "nextscore";

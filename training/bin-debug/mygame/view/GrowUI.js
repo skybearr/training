@@ -22,6 +22,7 @@ var GrowUI = (function (_super) {
     };
     /**初始化界面 */
     GrowUI.prototype.initView = function () {
+        platform.bannershow(GameConst.bannerId);
         this.charpters = MissionTrainLogic.getInstance().getChaprters();
         this.crtChapter = MissionTrainLogic.getInstance().crtChapter;
         this.initLeftList();
@@ -97,6 +98,7 @@ var GrowUI = (function (_super) {
     };
     GrowUI.prototype.clear = function () {
         _super.prototype.clear.call(this);
+        platform.bannerdestroy();
         this.list_left.removeEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemLeftClick, this);
         this.list_right.removeEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemRightClick, this);
         this.btn_back.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);

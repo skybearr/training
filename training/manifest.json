@@ -69,6 +69,7 @@
 		"bin-debug/Platform.js",
 		"bin-debug/mygame/view/MissionUI.js",
 		"bin-debug/mygame/view/NoticeUI.js",
+		"bin-debug/mygame/view/PlatUI.js",
 		"bin-debug/mygame/view/StartUI.js",
 		"bin-debug/mygame/view/TurnItemUI.js",
 		"bin-debug/mygame/view/TurnUI.js",

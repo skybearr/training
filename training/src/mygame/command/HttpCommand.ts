@@ -145,8 +145,8 @@ class HttpCommand extends egret.EventDispatcher {
      * @param grade 过关成绩（可以是星级，分数，成绩）
      * @param extradata 备用，其他需要用的数据
      */
-    public postMission(mission_id: number, grade: string = "", extradata: string = "") {
-        let data = { level_id: mission_id + "", grade: grade, remark: extradata };
+    public postMission(mission_id: number, grade: number, extradata: string = "") {
+        let data = { level_id: mission_id + "", grade: grade+"", remark: extradata };
         this.sendRequest(HttpEvent.postMission, "level", data, 1);
     }
 

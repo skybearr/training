@@ -19,7 +19,7 @@
 			</e:layout>
 		</e:List>
 	</e:Scroller>
-	<e:Group y="1029" horizontalCenter="0">
+	<e:Group y="959" horizontalCenter="0">
 		<e:Button id="btn_back" label="返回" x="0" y="0" skinName="BaseButton1Skin" width="200" height="80"/>
 		<e:Button id="btn_start" label="挑战" x="10" y="10" skinName="BaseButton1Skin" width="200" height="80"/>
 		<e:layout>

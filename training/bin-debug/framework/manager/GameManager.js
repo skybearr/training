@@ -30,7 +30,8 @@ var fw;
         /** 游戏初始化 */
         GameManager.prototype.init = function () {
             /** 打开logo动画 */
-            fw.UIManager.getInstance().main.addChild(new LogoUI());
+            // fw.UIManager.getInstance().main.addChild(new LogoUI());
+            fw.GameManager.getInstance().logoOver();
             WxApi.getInstance().init();
         };
         /** logo动画结束，检测是否后台加载完毕 */

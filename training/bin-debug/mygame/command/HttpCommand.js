@@ -145,9 +145,8 @@ var HttpCommand = (function (_super) {
      * @param extradata 备用，其他需要用的数据
      */
     HttpCommand.prototype.postMission = function (mission_id, grade, extradata) {
-        if (grade === void 0) { grade = ""; }
         if (extradata === void 0) { extradata = ""; }
-        var data = { level_id: mission_id + "", grade: grade, remark: extradata };
+        var data = { level_id: mission_id + "", grade: grade + "", remark: extradata };
         this.sendRequest(HttpEvent.postMission, "level", data, 1);
     };
     /**

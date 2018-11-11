@@ -14,7 +14,7 @@ var MissionTrainLogic = (function (_super) {
         var _this = _super.call(this) || this;
         _this.charpters = {};
         _this.crtChapter = 1;
-        _this.crtMission = 102;
+        _this.crtMission = 101;
         return _this;
     }
     MissionTrainLogic.getInstance = function () {

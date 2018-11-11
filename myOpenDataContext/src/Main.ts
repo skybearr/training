@@ -448,7 +448,7 @@ class Main extends egret.DisplayObjectContainer {
         this.scrollView.y = this.listY;
 
 
-        this.initMyItem(myrank, mydata);
+        // this.initMyItem(myrank, mydata);
     }
 
     //分数按从高到低排序

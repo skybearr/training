@@ -20,6 +20,8 @@ var StartUI = (function (_super) {
     StartUI.prototype.initView = function () {
         this.updateHp();
         this.updateCheckIn();
+        GameLogic.getInstance().startui = this;
+        platform.bannershow(GameConst.bannerId);
     };
     /**初始化事件 */
     StartUI.prototype.initEvent = function () {
@@ -28,6 +30,7 @@ var StartUI = (function (_super) {
         }
         this.btn_mission.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_grow.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
+        this.btn_ad.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_sign.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_turn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_invite.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
@@ -67,11 +70,15 @@ var StartUI = (function (_super) {
     };
     StartUI.prototype.clickBtn = function (e) {
         switch (e.currentTarget) {
+            case this.btn_ad:
+                WxApi.getInstance().showRewardAd(1);
+                break;
             case this.btn_mission:
                 fw.UIManager.getInstance().openUI(UIConst.MISSION);
                 break;
             case this.btn_grow:
-                fw.UIManager.getInstance().openUI(UIConst.GROW);
+                // fw.UIManager.getInstance().openUI(UIConst.GROW);
+                fw.UIManager.getInstance().openUI(UIConst.PLAN);
                 break;
             case this.btn_sign:
                 GameLogic.getInstance().signIn();
@@ -83,7 +90,8 @@ var StartUI = (function (_super) {
                 fw.UIManager.getInstance().openUI(UIConst.INVITE, null, fw.UITYPE.SECOND);
                 break;
             case this.btn_achieve:
-                fw.UIManager.getInstance().openUI(UIConst.ACHIEVE, null, fw.UITYPE.SECOND);
+                platform.toast("尽情期待");
+                // fw.UIManager.getInstance().openUI(UIConst.ACHIEVE, null, fw.UITYPE.SECOND);
                 break;
             case this.btn_rank:
                 fw.UIManager.getInstance().openUI(UIConst.RANK, { shareticket: null, openworld: false }, fw.UITYPE.SECOND);
@@ -93,11 +101,18 @@ var StartUI = (function (_super) {
                 break;
         }
     };
+    StartUI.prototype.addHP = function (e) {
+        if (e.data.type == WATCHTYPE.ADDHP && e.data.data == 0) {
+            PropLogic.getInstance().updateProp(COINTYPE.HP, DataBase.REWARD_ADD_WATCHAD);
+        }
+    };
     StartUI.prototype.clear = function () {
         _super.prototype.clear.call(this);
+        GameLogic.getInstance().startui = null;
         for (var i = 0; i < 8; i++) {
             this['btn_' + i].removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         }
+        this.btn_ad.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_mission.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_grow.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         this.btn_sign.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
@@ -108,6 +123,7 @@ var StartUI = (function (_super) {
         this.btn_share.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
         HttpCommand.getInstance().removeEventListener(HttpEvent.checkIn, this.updateCheckIn, this);
         PropLogic.getInstance().removeEventListener(GameEvent.PROP_NUM_CHANGE, this.propChange, this);
+        platform.bannerdestroy();
     };
     return StartUI;
 }(fw.BaseUI));

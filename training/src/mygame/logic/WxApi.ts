@@ -301,7 +301,7 @@ class WxApi extends egret.EventDispatcher {
 		})
 
 		this.rewardAd.onError(err => {
-			console.log("视频拉取失败:", err)
+			platform.toast("广告拉取失败，请稍后尝试")
 		})
 
 		this.rewardAd.onClose(res => {
@@ -311,7 +311,7 @@ class WxApi extends egret.EventDispatcher {
 			if (res && res.isEnded || res === undefined) {
 				// 正常播放结束，可以下发游戏奖励
 				state = 0;
-				this.rewardAdCDStart();
+				// this.rewardAdCDStart();
 			}
 			else {
 				// 播放中途退出，不下发游戏奖励
@@ -332,7 +332,7 @@ class WxApi extends egret.EventDispatcher {
 			try {
 				this.rewardAd.show()
 					.catch(err => {
-						console.log("showRewardAd:", err);
+						this.toast("广告加载失败")
 
 						this.dispatchGameEvent(GameEvent.REWARDAD_CLOSE_EVENT, 2);
 					})

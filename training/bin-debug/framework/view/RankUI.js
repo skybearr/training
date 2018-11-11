@@ -32,6 +32,7 @@ var fw;
             this.openworld = this.args != null ? this.args.openworld : false;
         };
         RankUI.prototype.initView = function () {
+            platform.bannerhide();
             this.list.itemRenderer = RankTypeItemUI;
             this.arr_data = new eui.ArrayCollection();
             this.arr_data1 = new eui.ArrayCollection();
@@ -207,6 +208,7 @@ var fw;
                 this.bmp_context.clear();
                 this.bmp_context = null;
             }
+            platform.bannershow(GameConst.bannerId);
         };
         return RankUI;
     }(fw.BaseUI));
