@@ -126,6 +126,46 @@ class MissionTrainLogic extends egret.EventDispatcher {
 		}
 	}
 
+	/** 关卡更新
+	 * @param id 关卡id
+	 * @param grade 关卡的成绩
+	 * @param remark 备用参数 可选
+	*/
+	public updatemission(id: number, grade: number, remark: string = "") {
+		// let vo = this.missions[id];
+		// if (vo == null) {
+		// 	console.log("没有找到关卡" + id + "，请联系GM");
+		// }
+		// else {
+		// 	if(grade <= vo.grade){
+		// 		return;
+		// 	}
+		// 	HttpCommand.getInstance().postMission(id, grade, remark);
+		// 	console.log("updateMission:", vo, grade);
+
+		// 	if (grade >= vo.baseline) {
+		// 		//更新当前关卡
+		// 		if (vo.state == 1) {
+		// 			vo.state = 2;
+		// 			let nextid = id + 1;
+		// 			let nextvo = this.missions[nextid];
+		// 			if (nextvo == null) {//当前章节没有了，寻找下一章节的第一关
+		// 				nextid = (id - id % 100) + 101;
+		// 			}
+		// 			console.log("nextid:",nextid);
+					
+		// 			nextvo = this.missions[nextid];
+		// 			if (nextvo != null) {
+		// 				this.crt_missionId = nextid;
+		// 				nextvo.state = 1;
+		// 				console.log("updateCrtMission:",this.crt_missionId);
+		// 				GameLogic.getInstance().updateMyDataValue(MYDATA.CRT_MISSION, this.crt_missionId);
+		// 			}
+		// 		}
+		// 	}
+		// }
+	}
+
 
 	public startMissionGame(vo: CharpterMissionVO) {
 		var obj_class: any = egret.getDefinitionByName("GameUI" + vo.type);
