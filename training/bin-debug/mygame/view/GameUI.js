@@ -17,6 +17,7 @@ var GameUI = (function (_super) {
     }
     GameUI.prototype.checkFit = function () {
         _super.prototype.checkFit.call(this);
+        platform.bannerdestroy();
         this.img_1.height = GameConst.stageHeight;
     };
     /**初始化数据 */
@@ -95,27 +96,41 @@ var GameUI = (function (_super) {
     };
     /**初始化界面 */
     GameUI.prototype.initView = function () {
+        this.lbl_hp.text = "剩余体力：" + PropLogic.getInstance().getPropByID(COINTYPE.HP).num;
         this.lbl_des.text = this.vo.des;
         this.list.itemRenderer = GameItemUI;
         this.list.dataProvider = this.arr_data;
         this.btn_back.visible = true; // this.vo.type != 1 || this.vo.id > 3;
     };
+    GameUI.prototype.addHP = function (e) {
+        if (e.data.type == WATCHTYPE.ADDHP && e.data.data == 0) {
+            PropLogic.getInstance().updateProp(COINTYPE.HP, DataBase.REWARD_ADD_WATCHAD);
+            this.lbl_hp.text = "剩余体力：" + PropLogic.getInstance().getPropByID(COINTYPE.HP).num;
+        }
+    };
     GameUI.prototype.clickStart = function () {
         var _this = this;
-        this.gp.visible = false;
-        if (this.vo.type == 3) {
-            egret.clearTimeout(this.timeId);
-            var t = (parseInt(this.vo.content) - 5) * 1000;
-            this.timeId = egret.setTimeout(function () {
-                egret.Tween.get(_this.lbl_num).to({ alpha: 0 }, 3000).call(function () {
-                    _this.lbl_num.visible = false;
-                    _this.list.visible = true;
-                    _this.start();
-                }, _this);
-            }, this, t);
+        if (PropLogic.getInstance().getPropByID(COINTYPE.HP).num < 10) {
+            WxApi.getInstance().showRewardAd(WATCHTYPE.ADDHP);
         }
         else {
-            this.start();
+            PropLogic.getInstance().updateProp(COINTYPE.HP, -10);
+            this.lbl_hp.text = "剩余体力：" + PropLogic.getInstance().getPropByID(COINTYPE.HP).num;
+            this.gp.visible = false;
+            if (this.vo.type == 3) {
+                egret.clearTimeout(this.timeId);
+                var t = (parseInt(this.vo.content) - 5) * 1000;
+                this.timeId = egret.setTimeout(function () {
+                    egret.Tween.get(_this.lbl_num).to({ alpha: 0 }, 3000).call(function () {
+                        _this.lbl_num.visible = false;
+                        _this.list.visible = true;
+                        _this.start();
+                    }, _this);
+                }, this, t);
+            }
+            else {
+                this.start();
+            }
         }
     };
     GameUI.prototype.start = function () {
@@ -134,7 +149,9 @@ var GameUI = (function (_super) {
         this.btn_start.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStart, this);
         this.list.addEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemClick, this);
         this.btn_back.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
+        this.btn_back1.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
         this.btn_mission.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickMission, this);
+        WxApi.getInstance().addEventListener(GameEvent.REWARDAD_CLOSE_EVENT, this.addHP, this);
     };
     GameUI.prototype.clickBack = function () {
         GameTrainLogic.getInstance().openStart();
@@ -184,7 +201,9 @@ var GameUI = (function (_super) {
         this.removeEventListener(egret.Event.ENTER_FRAME, this.enterframe, this);
         this.list.removeEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemClick, this);
         this.btn_back.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
+        this.btn_back1.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);
         this.btn_mission.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickMission, this);
+        WxApi.getInstance().removeEventListener(GameEvent.REWARDAD_CLOSE_EVENT, this.addHP, this);
     };
     return GameUI;
 }(fw.BaseUI));

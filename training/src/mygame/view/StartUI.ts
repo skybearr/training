@@ -3,6 +3,7 @@ class StartUI extends fw.BaseUI {
 		super("StartSkin");
 	}
 
+	private btn_ad: eui.Button;
 	private btn_mission: eui.Button;
 	private btn_grow: eui.Button;
 	private btn_sign: eui.Button;
@@ -26,6 +27,10 @@ class StartUI extends fw.BaseUI {
 		this.updateHp();
 
 		this.updateCheckIn();
+
+		GameLogic.getInstance().startui = this;
+
+		platform.bannershow(GameConst.bannerId);
 	}
 
 	/**初始化事件 */
@@ -36,6 +41,7 @@ class StartUI extends fw.BaseUI {
 
 		this.btn_mission.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_grow.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
+		this.btn_ad.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_sign.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_turn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_invite.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
@@ -47,7 +53,7 @@ class StartUI extends fw.BaseUI {
 		PropLogic.getInstance().addEventListener(GameEvent.PROP_NUM_CHANGE, this.propChange, this);
 	}
 
-	private updateHp() {
+	public updateHp() {
 		let vo = PropLogic.getInstance().getPropByID(COINTYPE.HP);
 		this.lbl_hp.text = "体力：" + (vo == null ? "0" : vo.num);
 	}
@@ -75,18 +81,22 @@ class StartUI extends fw.BaseUI {
 		}
 	}
 
-	private updateCheckIn() {
+	public updateCheckIn() {
 		this.btn_sign.label = PlayerConst.checkInfo.signed_today ? "已签到" : "每日签到";
 	}
 
 	private bmp: BitmapOpenDataContext;
 	private clickBtn(e: egret.TouchEvent) {
 		switch (e.currentTarget) {
+			case this.btn_ad:
+				WxApi.getInstance().showRewardAd(1);
+				break;
 			case this.btn_mission:
 				fw.UIManager.getInstance().openUI(UIConst.MISSION);
 				break;
 			case this.btn_grow:
-				fw.UIManager.getInstance().openUI(UIConst.GROW);
+				// fw.UIManager.getInstance().openUI(UIConst.GROW);
+				fw.UIManager.getInstance().openUI(UIConst.PLAN);
 				break;
 			case this.btn_sign:
 				GameLogic.getInstance().signIn();
@@ -98,7 +108,8 @@ class StartUI extends fw.BaseUI {
 				fw.UIManager.getInstance().openUI(UIConst.INVITE, null, fw.UITYPE.SECOND);
 				break;
 			case this.btn_achieve:
-				fw.UIManager.getInstance().openUI(UIConst.ACHIEVE, null, fw.UITYPE.SECOND);
+				platform.toast("尽情期待")
+				// fw.UIManager.getInstance().openUI(UIConst.ACHIEVE, null, fw.UITYPE.SECOND);
 				break;
 			case this.btn_rank:
 				fw.UIManager.getInstance().openUI(UIConst.RANK, { shareticket: null, openworld: false }, fw.UITYPE.SECOND);
@@ -109,13 +120,20 @@ class StartUI extends fw.BaseUI {
 		}
 	}
 
+	private addHP(e:GameEvent){
+		if (e.data.type == WATCHTYPE.ADDHP && e.data.data == 0) {
+			PropLogic.getInstance().updateProp(COINTYPE.HP,DataBase.REWARD_ADD_WATCHAD);
+		}
+	}
+
 	protected clear() {
 		super.clear();
 
+		GameLogic.getInstance().startui = null;
 		for (let i = 0; i < 8; i++) {
 			this['btn_' + i].removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		}
-
+		this.btn_ad.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_mission.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_grow.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_sign.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
@@ -127,6 +145,8 @@ class StartUI extends fw.BaseUI {
 
 		HttpCommand.getInstance().removeEventListener(HttpEvent.checkIn, this.updateCheckIn, this);
 		PropLogic.getInstance().removeEventListener(GameEvent.PROP_NUM_CHANGE, this.propChange, this);
+
+		platform.bannerdestroy();
 	}
 }
 window['StartUI'] = StartUI;

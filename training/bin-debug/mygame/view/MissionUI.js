@@ -25,6 +25,7 @@ var MissionUI = (function (_super) {
         this.initList(3);
         var y = this.gp_1.y;
         egret.Tween.get(this.gp_1, { loop: true }).to({ y: y - 30 }, 500).to(100).to({ y: y }, 500).wait(300);
+        platform.bannershow(GameConst.bannerId);
     };
     MissionUI.prototype.initList = function (id) {
         if (id === void 0) { id = null; }
@@ -95,6 +96,7 @@ var MissionUI = (function (_super) {
         this.arr_data = null;
         this.list = null;
         this.data = null;
+        platform.bannerdestroy();
     };
     return MissionUI;
 }(fw.BaseUI));

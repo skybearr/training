@@ -14,7 +14,7 @@ class MissionTrainLogic extends egret.EventDispatcher {
 
 	private charpters: fw.Map<CharpterVO> = {};
 	public crtChapter: number = 1;
-	public crtMission: number = 102;
+	public crtMission: number = 101;
 	private passdata:fw.Map<number>;
 
 
@@ -81,6 +81,8 @@ class MissionTrainLogic extends egret.EventDispatcher {
 			v.des = o.des;
 			v.times = o.time.split(":");
 			v.setDialog(o.dialog);
+
+			
 
 			let cid = Math.floor(parseInt(id) / 100);
 			let vo:CharpterVO = this.charpters[cid];

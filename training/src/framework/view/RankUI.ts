@@ -51,6 +51,7 @@ module fw {
 		}
 
 		protected initView() {
+			platform.bannerhide();
 			this.list.itemRenderer = RankTypeItemUI;
 			this.arr_data = new eui.ArrayCollection();
 			this.arr_data1 = new eui.ArrayCollection();
@@ -256,6 +257,8 @@ module fw {
 				this.bmp_context.clear();
 				this.bmp_context = null;
 			}
+
+			platform.bannershow(GameConst.bannerId);
 		}
 	}
 }

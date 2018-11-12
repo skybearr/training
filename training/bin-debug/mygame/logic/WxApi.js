@@ -311,7 +311,7 @@ var WxApi = (function (_super) {
             console.log('激励视频 广告加载成功');
         });
         this.rewardAd.onError(function (err) {
-            console.log("视频拉取失败:", err);
+            platform.toast("广告拉取失败，请稍后尝试");
         });
         this.rewardAd.onClose(function (res) {
             // 用户点击了【关闭广告】按钮
@@ -320,7 +320,7 @@ var WxApi = (function (_super) {
             if (res && res.isEnded || res === undefined) {
                 // 正常播放结束，可以下发游戏奖励
                 state = 0;
-                _this.rewardAdCDStart();
+                // this.rewardAdCDStart();
             }
             else {
                 // 播放中途退出，不下发游戏奖励
@@ -339,7 +339,7 @@ var WxApi = (function (_super) {
             try {
                 this.rewardAd.show()
                     .catch(function (err) {
-                    console.log("showRewardAd:", err);
+                    _this.toast("广告加载失败");
                     _this.dispatchGameEvent(GameEvent.REWARDAD_CLOSE_EVENT, 2);
                 });
             }

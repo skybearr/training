@@ -459,7 +459,7 @@ var egret = window.egret;
 	_proto._Group1_i = function () {
 		var t = new eui.Group();
 		t.horizontalCenter = 0;
-		t.y = 1000;
+		t.y = 948;
 		t.layout = this._HorizontalLayout1_i();
 		t.elementsContent = [this.btn_back_i(),this.btn_restart_i()];
 		return t;
@@ -531,7 +531,7 @@ var egret = window.egret;
 	_proto.btn_share_i = function () {
 		var t = new eui.Button();
 		this.btn_share = t;
-		t.bottom = 384;
+		t.bottom = 398;
 		t.height = 80;
 		t.horizontalCenter = 0;
 		t.label = "炫耀";
@@ -540,16 +540,16 @@ var egret = window.egret;
 		return t;
 	};
 	return GameOverSkin;
-})(eui.Skin);generateEUI.paths['resource/skins/GameSkin.exml'] = window.GameSkin = (function (_super) {
-	__extends(GameSkin, _super);
-	function GameSkin() {
+})(eui.Skin);generateEUI.paths['resource/skins/games/Game1Skin.exml'] = window.Game1Skin = (function (_super) {
+	__extends(Game1Skin, _super);
+	function Game1Skin() {
 		_super.call(this);
 		this.skinParts = ["img_bg","lbl_time","list","btn_back","btn_mission","btn_tips","lbl_num","img_1","lbl_des","btn_start","gp"];
 		
 		this.width = 750;
 		this.elementsContent = [this.img_bg_i(),this.lbl_time_i(),this.list_i(),this._Group1_i(),this.btn_tips_i(),this.lbl_num_i(),this.gp_i()];
 	}
-	var _proto = GameSkin.prototype;
+	var _proto = Game1Skin.prototype;
 
 	_proto.img_bg_i = function () {
 		var t = new eui.Image();
@@ -706,6 +706,175 @@ var egret = window.egret;
 		t.width = 260;
 		t.x = 245;
 		t.y = 1034;
+		return t;
+	};
+	return Game1Skin;
+})(eui.Skin);generateEUI.paths['resource/skins/GameSkin.exml'] = window.GameSkin = (function (_super) {
+	__extends(GameSkin, _super);
+	function GameSkin() {
+		_super.call(this);
+		this.skinParts = ["img_bg","lbl_time","list","btn_back","btn_mission","btn_tips","lbl_num","img_1","lbl_des","btn_start","gp"];
+		
+		this.width = 750;
+		this.elementsContent = [this.img_bg_i(),this.lbl_time_i(),this.list_i(),this._Group1_i(),this.btn_tips_i(),this.lbl_num_i(),this.gp_i()];
+	}
+	var _proto = GameSkin.prototype;
+
+	_proto.img_bg_i = function () {
+		var t = new eui.Image();
+		this.img_bg = t;
+		t.height = 1334;
+		t.scale9Grid = new egret.Rectangle(51,47,43,32);
+		t.source = "yong_3_png";
+		t.verticalCenter = 0;
+		t.width = 750;
+		t.x = 0;
+		return t;
+	};
+	_proto.lbl_time_i = function () {
+		var t = new eui.Label();
+		this.lbl_time = t;
+		t.anchorOffsetX = 0;
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = -0.5;
+		t.size = 50;
+		t.text = "";
+		t.textAlign = "center";
+		t.textColor = 0xaa0cff;
+		t.verticalAlign = "middle";
+		t.width = 355.27;
+		t.y = 77.84;
+		return t;
+	};
+	_proto.list_i = function () {
+		var t = new eui.List();
+		this.list = t;
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.height = 800;
+		t.horizontalCenter = -2;
+		t.width = 720;
+		t.y = 192;
+		t.layout = this._TileLayout1_i();
+		return t;
+	};
+	_proto._TileLayout1_i = function () {
+		var t = new eui.TileLayout();
+		t.horizontalAlign = "left";
+		t.horizontalGap = 34;
+		t.orientation = "rows";
+		t.verticalAlign = "top";
+		t.verticalGap = 20;
+		return t;
+	};
+	_proto._Group1_i = function () {
+		var t = new eui.Group();
+		t.horizontalCenter = 0;
+		t.y = 891.85;
+		t.layout = this._HorizontalLayout1_i();
+		t.elementsContent = [this.btn_back_i(),this.btn_mission_i()];
+		return t;
+	};
+	_proto._HorizontalLayout1_i = function () {
+		var t = new eui.HorizontalLayout();
+		t.gap = 20;
+		return t;
+	};
+	_proto.btn_back_i = function () {
+		var t = new eui.Button();
+		this.btn_back = t;
+		t.height = 100;
+		t.label = "返回首页";
+		t.skinName = "BaseButton1Skin";
+		t.width = 260;
+		t.x = 0;
+		t.y = 0;
+		return t;
+	};
+	_proto.btn_mission_i = function () {
+		var t = new eui.Button();
+		this.btn_mission = t;
+		t.height = 100;
+		t.label = "返回训练模式";
+		t.skinName = "BaseButton1Skin";
+		t.width = 260;
+		t.x = 0;
+		t.y = 998;
+		return t;
+	};
+	_proto.btn_tips_i = function () {
+		var t = new eui.Button();
+		this.btn_tips = t;
+		t.bottom = 368;
+		t.height = 60;
+		t.horizontalCenter = 257;
+		t.label = "查看結果";
+		t.skinName = "BaseButton1Skin";
+		t.visible = false;
+		t.width = 160;
+		return t;
+	};
+	_proto.lbl_num_i = function () {
+		var t = new eui.Label();
+		this.lbl_num = t;
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 0;
+		t.size = 60;
+		t.text = "10457780";
+		t.textAlign = "center";
+		t.textColor = 0x000000;
+		t.verticalAlign = "middle";
+		t.visible = false;
+		t.width = 680;
+		t.y = 127.92;
+		return t;
+	};
+	_proto.gp_i = function () {
+		var t = new eui.Group();
+		this.gp = t;
+		t.horizontalCenter = 0;
+		t.verticalCenter = 0;
+		t.elementsContent = [this.img_1_i(),this.lbl_des_i(),this.btn_start_i()];
+		return t;
+	};
+	_proto.img_1_i = function () {
+		var t = new eui.Image();
+		this.img_1 = t;
+		t.height = 1334;
+		t.scale9Grid = new egret.Rectangle(12,12,76,76);
+		t.source = "rank_bg_png";
+		t.width = 750;
+		t.x = 0;
+		t.y = 0;
+		return t;
+	};
+	_proto.lbl_des_i = function () {
+		var t = new eui.Label();
+		this.lbl_des = t;
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.bold = true;
+		t.fontFamily = "SimHei";
+		t.height = 270;
+		t.size = 40;
+		t.text = "Label";
+		t.textAlign = "center";
+		t.textColor = 0x000000;
+		t.verticalAlign = "top";
+		t.width = 670;
+		t.x = 40;
+		t.y = 416.85;
+		return t;
+	};
+	_proto.btn_start_i = function () {
+		var t = new eui.Button();
+		this.btn_start = t;
+		t.height = 100;
+		t.label = "开始";
+		t.skinName = "BaseButton1Skin";
+		t.width = 260;
+		t.x = 245;
+		t.y = 894.61;
 		return t;
 	};
 	return GameSkin;
@@ -1091,7 +1260,7 @@ var egret = window.egret;
 	_proto._Group1_i = function () {
 		var t = new eui.Group();
 		t.horizontalCenter = 0;
-		t.y = 1029;
+		t.y = 959;
 		t.layout = this._HorizontalLayout1_i();
 		t.elementsContent = [this.btn_back_i(),this.btn_start_i()];
 		return t;
@@ -1426,7 +1595,7 @@ var egret = window.egret;
 	};
 	_proto._Image1_i = function () {
 		var t = new eui.Image();
-		t.height = 720;
+		t.height = 500;
 		t.horizontalCenter = 0;
 		t.scale9Grid = new egret.Rectangle(70,55,426,330);
 		t.source = "reglogbg_png";
@@ -1437,7 +1606,7 @@ var egret = window.egret;
 	_proto.list_i = function () {
 		var t = new eui.List();
 		this.list = t;
-		t.height = 640;
+		t.height = 440;
 		t.horizontalCenter = 0;
 		t.width = 640;
 		t.y = 246;
@@ -1486,7 +1655,7 @@ var egret = window.egret;
 	_proto.btn_back_i = function () {
 		var t = new eui.Button();
 		this.btn_back = t;
-		t.bottom = 233;
+		t.bottom = 460;
 		t.height = 100;
 		t.horizontalCenter = 0;
 		t.label = "返回";
@@ -1674,11 +1843,11 @@ var egret = window.egret;
 	__extends(RankSkin, _super);
 	function RankSkin() {
 		_super.call(this);
-		this.skinParts = ["rect_bg","lbl_title","lbl_2","list_world","scroller_world","img_rankgp","img_close","img_tag1","img_tag2","lbl_tag1","lbl_tag2","gp_world"];
+		this.skinParts = ["rect_bg","lbl_title","lbl_2","list_world","scroller_world","btn1","btn2","btn3","list","img_rankgp","img_close","img_tag1","img_tag2","lbl_tag1","lbl_tag2","gp_world"];
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this.rect_bg_i(),this.lbl_title_i(),this._Image1_i(),this.lbl_2_i(),this.scroller_world_i(),this.img_rankgp_i(),this.img_close_i(),this.gp_world_i()];
+		this.elementsContent = [this.rect_bg_i(),this.lbl_title_i(),this._Image1_i(),this.lbl_2_i(),this.scroller_world_i(),this.btn1_i(),this.btn2_i(),this.btn3_i(),this.list_i(),this.img_rankgp_i(),this.img_close_i(),this.gp_world_i()];
 	}
 	var _proto = RankSkin.prototype;
 
@@ -1744,6 +1913,56 @@ var egret = window.egret;
 	_proto.list_world_i = function () {
 		var t = new eui.List();
 		this.list_world = t;
+		return t;
+	};
+	_proto.btn1_i = function () {
+		var t = new eui.Button();
+		this.btn1 = t;
+		t.height = 40;
+		t.label = "舒尔特";
+		t.name = "1";
+		t.skinName = "BaseButton1Skin";
+		t.x = 55;
+		t.y = 976.36;
+		return t;
+	};
+	_proto.btn2_i = function () {
+		var t = new eui.Button();
+		this.btn2 = t;
+		t.height = 40;
+		t.label = "趣味";
+		t.name = "2";
+		t.skinName = "BaseButton1Skin";
+		t.x = 215;
+		t.y = 976.36;
+		return t;
+	};
+	_proto.btn3_i = function () {
+		var t = new eui.Button();
+		this.btn3 = t;
+		t.height = 40;
+		t.label = "瞬间记忆";
+		t.name = "3";
+		t.skinName = "BaseButton1Skin";
+		t.x = 375;
+		t.y = 976.36;
+		return t;
+	};
+	_proto.list_i = function () {
+		var t = new eui.List();
+		this.list = t;
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.height = 30;
+		t.horizontalCenter = 0;
+		t.width = 640;
+		t.y = 944;
+		t.layout = this._HorizontalLayout1_i();
+		return t;
+	};
+	_proto._HorizontalLayout1_i = function () {
+		var t = new eui.HorizontalLayout();
+		t.gap = 2;
 		return t;
 	};
 	_proto.img_rankgp_i = function () {
@@ -1866,7 +2085,7 @@ var egret = window.egret;
 	__extends(StartSkin, _super);
 	function StartSkin() {
 		_super.call(this);
-		this.skinParts = ["img_bg","lbl_hp","lbl_coin","lbl_diamond","btn_mission","btn_grow","btn_sign","btn_turn","btn_invite","btn_achieve","btn_rank","btn_share","gp","btn_0","btn_1","btn_2","btn_3","btn_4","btn_5","btn_6","btn_7","btn_8"];
+		this.skinParts = ["img_bg","lbl_hp","lbl_coin","lbl_diamond","btn_mission","btn_grow","btn_ad","btn_rank","btn_share","btn_sign","btn_turn","btn_invite","btn_achieve","gp","btn_0","btn_1","btn_2","btn_3","btn_4","btn_5","btn_6","btn_7","btn_8"];
 		
 		this.width = 750;
 		this.elementsContent = [this.img_bg_i(),this._Group1_i(),this.gp_i(),this._Group4_i()];
@@ -1887,6 +2106,7 @@ var egret = window.egret;
 	_proto._Group1_i = function () {
 		var t = new eui.Group();
 		t.horizontalCenter = 0;
+		t.visible = false;
 		t.y = 70;
 		t.elementsContent = [this._Rect1_i(),this.lbl_hp_i(),this.lbl_coin_i(),this.lbl_diamond_i()];
 		return t;
@@ -2057,6 +2277,7 @@ var egret = window.egret;
 		t.height = 120;
 		t.label = "过关模式";
 		t.skinName = "BaseButtonSkin";
+		t.visible = false;
 		t.width = 400;
 		t.x = 0;
 		t.y = 0;
@@ -2066,9 +2287,9 @@ var egret = window.egret;
 		var t = new eui.Group();
 		t.horizontalCenter = 0;
 		t.width = 500;
-		t.y = 750.69;
+		t.y = 713.69;
 		t.layout = this._TileLayout1_i();
-		t.elementsContent = [this.btn_sign_i(),this.btn_turn_i(),this.btn_invite_i(),this.btn_achieve_i(),this.btn_rank_i(),this.btn_share_i()];
+		t.elementsContent = [this.btn_ad_i(),this.btn_rank_i(),this.btn_share_i(),this.btn_sign_i(),this.btn_turn_i(),this.btn_invite_i(),this.btn_achieve_i()];
 		return t;
 	};
 	_proto._TileLayout1_i = function () {
@@ -2077,50 +2298,17 @@ var egret = window.egret;
 		t.verticalGap = 30;
 		return t;
 	};
-	_proto.btn_sign_i = function () {
+	_proto.btn_ad_i = function () {
 		var t = new eui.Button();
-		this.btn_sign = t;
+		this.btn_ad = t;
 		t.bottom = 251;
-		t.label = "每日签到";
+		t.label = "鼓励作者";
 		t.left = 0;
 		t.scaleX = 1;
 		t.scaleY = 1;
 		t.skinName = "BaseButton1Skin";
-		t.x = -203.00000000000003;
-		t.y = 0.6900000000000546;
-		return t;
-	};
-	_proto.btn_turn_i = function () {
-		var t = new eui.Button();
-		this.btn_turn = t;
-		t.label = "抽奖";
-		t.scaleX = 1;
-		t.scaleY = 1;
-		t.skinName = "BaseButton1Skin";
-		t.x = -112.99999999999997;
-		t.y = -59;
-		return t;
-	};
-	_proto.btn_invite_i = function () {
-		var t = new eui.Button();
-		this.btn_invite = t;
-		t.label = "邀请礼包";
-		t.scaleX = 1;
-		t.scaleY = 1;
-		t.skinName = "BaseButton1Skin";
-		t.x = -92.99999999999997;
-		t.y = -39;
-		return t;
-	};
-	_proto.btn_achieve_i = function () {
-		var t = new eui.Button();
-		this.btn_achieve = t;
-		t.label = "成就";
-		t.scaleX = 1;
-		t.scaleY = 1;
-		t.skinName = "BaseButton1Skin";
-		t.x = -82.99999999999997;
-		t.y = -29;
+		t.x = -193.00000000000003;
+		t.y = 10.690000000000055;
 		return t;
 	};
 	_proto.btn_rank_i = function () {
@@ -2145,10 +2333,61 @@ var egret = window.egret;
 		t.y = -9;
 		return t;
 	};
+	_proto.btn_sign_i = function () {
+		var t = new eui.Button();
+		this.btn_sign = t;
+		t.bottom = 251;
+		t.label = "每日签到";
+		t.left = 0;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.skinName = "BaseButton1Skin";
+		t.visible = false;
+		t.x = -203.00000000000003;
+		t.y = 0.6900000000000546;
+		return t;
+	};
+	_proto.btn_turn_i = function () {
+		var t = new eui.Button();
+		this.btn_turn = t;
+		t.label = "抽奖";
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.skinName = "BaseButton1Skin";
+		t.visible = false;
+		t.x = -112.99999999999997;
+		t.y = -59;
+		return t;
+	};
+	_proto.btn_invite_i = function () {
+		var t = new eui.Button();
+		this.btn_invite = t;
+		t.label = "邀请礼包";
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.skinName = "BaseButton1Skin";
+		t.visible = false;
+		t.x = -92.99999999999997;
+		t.y = -39;
+		return t;
+	};
+	_proto.btn_achieve_i = function () {
+		var t = new eui.Button();
+		this.btn_achieve = t;
+		t.label = "成就";
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.skinName = "BaseButton1Skin";
+		t.visible = false;
+		t.x = -82.99999999999997;
+		t.y = -29;
+		return t;
+	};
 	_proto._Group4_i = function () {
 		var t = new eui.Group();
 		t.horizontalCenter = 0;
 		t.verticalCenter = 513;
+		t.visible = false;
 		t.layout = this._HorizontalLayout1_i();
 		t.elementsContent = [this.btn_0_i(),this.btn_1_i(),this.btn_2_i(),this.btn_3_i(),this.btn_4_i(),this.btn_5_i(),this.btn_6_i(),this.btn_7_i(),this.btn_8_i()];
 		return t;

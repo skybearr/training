@@ -17,6 +17,7 @@ class GameLogic extends egret.EventDispatcher {
 		return this._instance;
 	}
 
+	public startui: StartUI;
 
 	/** 初始化游戏数据
 	 * @param o 数据
@@ -38,15 +39,52 @@ class GameLogic extends egret.EventDispatcher {
 		this.checkLoginData();
 	}
 
-	private checkNotice(){
-		let s1 = this.getMyDataValueByID(MYDATA.VERSION);
-		if(s1 == null || s1 != GameConst.version){
-			PlayerConst.noticeInfo.content = GameConst.notice_content;
-			PlayerConst.noticeInfo.version_client = GameConst.version;
+	public setTodayScore(time: number) {
+		let nowtime = Math.floor(new Date().getTime() / 1000);
+		let today0 = Math.floor(TimeUtil.getTodayZero() / 1000);
 
-			fw.UIManager.getInstance().openUI(UIConst.NOTICE,null,fw.UITYPE.SECOND);
-			this.updateMyDataValue(MYDATA.VERSION,GameConst.version);
+		let update = (begin: string, str: string) => {
+			this.updateMyDataValue(MYDATA.PLAY_DATA, str);
+			this.updateMyDataValue(MYDATA.PLAN_BEGIN, begin);
 		}
+
+		let begin0 = this.getMyDataValueByID(MYDATA.PLAN_BEGIN);
+		if (begin0 == null) {//还没开始训练
+			update(today0 + "", "1=" + time);
+		}
+		else {
+			let t = parseInt(begin0);
+			//今天第几天
+			let n = today0 - t;
+			let s2 = this.getMyDataValueByID(MYDATA.PLAY_DATA);
+			if (s2 == null) {
+				update(today0 + "", "1=" + time);
+			}
+			else {
+				let arr = s2.split("&");
+				let lastday:number = 0;//最近玩的一天
+				for(let i=0;i<arr.length;i++){
+					let a1 = arr[i].split("=");
+					let n1 = parseInt(a1[0]);
+					lastday = i;
+				}
+				
+			}
+		}
+
+
+		let str = this.getMyDataValueByID(MYDATA.PLAY_DATA);
+	}
+
+	private checkNotice() {
+		// let s1 = this.getMyDataValueByID(MYDATA.VERSION);
+		// if(s1 == null || s1 != GameConst.version){
+		// 	PlayerConst.noticeInfo.content = GameConst.notice_content;
+		// 	PlayerConst.noticeInfo.version_client = GameConst.version;
+
+		// 	fw.UIManager.getInstance().openUI(UIConst.NOTICE,null,fw.UITYPE.SECOND);
+		// 	this.updateMyDataValue(MYDATA.VERSION,GameConst.version);
+		// }
 	}
 
 	/** 每次登陆检测   */
@@ -77,7 +115,7 @@ class GameLogic extends egret.EventDispatcher {
 		}
 		WxApi.getInstance().setStorage(todayloginkey, date.getTime() + "");
 	}
-	
+
 	/** ------------------ 其他数据 ------------------------------ */
 	private mydata: fw.Map<string> = {};
 	/** 更新我的数据
@@ -88,19 +126,19 @@ class GameLogic extends egret.EventDispatcher {
 		this.mydata[id] = value;
 		this.PostMyData();
 	}
-	public PostMyData(){
+	public PostMyData() {
 		let str = "";
-		for(let id in this.mydata){
-			str += (id + ":" + this.mydata[id] + ";"); 
+		for (let id in this.mydata) {
+			str += (id + ":" + this.mydata[id] + ";");
 		}
-		str = str.slice(0,str.length - 1);
+		str = str.slice(0, str.length - 1);
 		HttpCommand.getInstance().postMyData(str);
 	}
 	/** 根据id获取我的数据
 	 * @param id MYDATA.xxxx
 	 * @return 自定义的一个字符串，没有返回null
 	 */
-	public getMyDataValueByID(id):string{
+	public getMyDataValueByID(id): string {
 		return this.mydata[id];
 	}
 	private getMyDataResponse(e: HttpEvent) {
@@ -112,14 +150,14 @@ class GameLogic extends egret.EventDispatcher {
 	private updateMyData(str: string) {
 		this.mydata = {};
 		let arr = str.split(";");
-		for(let i=0;i<arr.length;i++){
+		for (let i = 0; i < arr.length; i++) {
 			let sss = arr[i];
 			let aaa = sss.split(":");
 			this.mydata[aaa[0]] = aaa[1];
 		}
 	}
 	/** 警告，勿用 */
-	private clearMyData(){
+	private clearMyData() {
 		HttpCommand.getInstance().postMyData("")
 	}
 
@@ -181,5 +219,8 @@ class GameLogic extends egret.EventDispatcher {
 	}
 	private updateCheckInfo(data) {
 		PlayerConst.checkInfo.data = data;
+		if (this.startui != null) {
+			this.startui.updateCheckIn();
+		}
 	}
 }

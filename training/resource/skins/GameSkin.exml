@@ -8,18 +8,21 @@
 			<e:TileLayout orientation="rows" horizontalGap="34" verticalGap="20" horizontalAlign="left" verticalAlign="top"/>
 		</e:layout>
 	</e:List>
-	<e:Group y="1007" horizontalCenter="0">
+	<e:Group y="891.85" horizontalCenter="0">
 		<e:Button id="btn_back" label="返回首页" skinName="BaseButton1Skin" width="260" height="100" x="0" y="0"/>
 		<e:Button id="btn_mission" label="返回训练模式" skinName="BaseButton1Skin" width="260" height="100" x="0" y="998"/>
 		<e:layout>
 			<e:HorizontalLayout gap="20"/>
 		</e:layout>
 	</e:Group>
-	<e:Button id="btn_tips" label="查看結果" skinName="BaseButton1Skin" width="160" height="60" bottom="138" horizontalCenter="257" visible="false"/>
+	<e:Button id="btn_tips" label="查看結果" skinName="BaseButton1Skin" width="160" height="60" bottom="368" horizontalCenter="257" visible="false"/>
 	<e:Label id="lbl_num" text="10457780" y="127.92" size="60" fontFamily="SimHei" width="680" verticalAlign="middle" textAlign="center" textColor="0x000000" horizontalCenter="0" visible="false"/>
 	<e:Group id="gp" verticalCenter="0" horizontalCenter="0">
 		<e:Image id="img_1" source="rank_bg_png" x="0" y="0" width="750" height="1334" scale9Grid="12,12,76,76"/>
-		<e:Label id="lbl_des" text="Label" textColor="0x000000" anchorOffsetX="0" width="670" anchorOffsetY="0" height="270" verticalAlign="top" textAlign="center" size="40" fontFamily="SimHei" bold="true" x="40" y="532"/>
-		<e:Button id="btn_start" label="开始" skinName="BaseButton1Skin" width="260" height="100" x="245" y="1034"/>
+		<e:Label id="lbl_des" text="Label" textColor="0x000000" anchorOffsetX="0" width="670" anchorOffsetY="0" height="270" verticalAlign="top" textAlign="center" size="40" fontFamily="SimHei" bold="true" x="40" y="416.85"/>
+		<e:Label text="每次游戏需要消耗体力10" anchorOffsetX="0" width="376" anchorOffsetY="0" height="51" verticalAlign="middle" size="30" fontFamily="SimHei" bold="true" y="840.85" strokeColor="0xa1f407" textColor="0x000000" stroke="1" horizontalCenter="-183" textAlign="right"/>
+		<e:Label id="lbl_hp" text="剩余体力：50" textColor="0x000000" anchorOffsetX="0" width="330" anchorOffsetY="0" height="51" verticalAlign="middle" textAlign="center" size="40" fontFamily="SimHei" bold="true" y="840.85" horizontalCenter="174" stroke="1" strokeColor="0x888888"/>
+		<e:Button id="btn_start" label="开始" skinName="BaseButton1Skin" width="260" height="100" y="892" horizontalCenter="0"/>
+		<e:Button id="btn_back1" label="返回首页" skinName="BaseButton1Skin" width="160" height="50" x="13" y="942.85"/>
 	</e:Group>
 </e:Skin>

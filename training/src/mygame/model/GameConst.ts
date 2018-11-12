@@ -58,10 +58,13 @@ enum MYDATA{
 	MISSION_CRT = 6,//当前关卡
 	MISSION_DATA = 7,//通关关卡数据
 	VERSION = 8,//版本号
+	PLAN_BEGIN = 9,//30天计划开始的0点
+	PLAY_DATA = 10,//30天训练计划数据
 }
 
 enum WATCHTYPE{
 	TURNPLAY = 1,//视频抽奖
+	ADDHP = 2,//增加体力
 }
 
 enum ACHIEVETYPE{

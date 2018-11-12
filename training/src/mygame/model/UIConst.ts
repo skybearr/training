@@ -15,6 +15,7 @@ class UIConst {
 	public static GROW: string = "GrowUI";
 	public static MISSION: string = "MissionUI";
 	public static ACHIEVE: string = "AchieveUI";
+	public static PLAN:string = "PlatUI";
 
 
 

@@ -25,6 +25,8 @@ class MissionUI extends fw.BaseUI {
 		
 		let y = this.gp_1.y;
 		egret.Tween.get(this.gp_1, { loop: true }).to({ y: y - 30 }, 500).to(100).to({ y: y }, 500).wait(300);
+
+		platform.bannershow(GameConst.bannerId);
 	}
 
 	private initList(id = null) {
@@ -107,6 +109,8 @@ class MissionUI extends fw.BaseUI {
 		this.arr_data = null;
 		this.list = null;
 		this.data = null;
+
+		platform.bannerdestroy();
 	}
 }
 window['MissionUI'] = MissionUI;

@@ -23,8 +23,8 @@ module fw {
 		/** 游戏初始化 */
 		public init() {
 			/** 打开logo动画 */
-			fw.UIManager.getInstance().main.addChild(new LogoUI());
-
+			// fw.UIManager.getInstance().main.addChild(new LogoUI());
+			fw.GameManager.getInstance().logoOver();
 			WxApi.getInstance().init();
 		}
 

@@ -35,6 +35,7 @@ class GrowUI extends fw.BaseUI {
 
 	/**初始化界面 */
 	protected initView() {
+		platform.bannershow(GameConst.bannerId);
 		this.charpters = MissionTrainLogic.getInstance().getChaprters();
 		this.crtChapter = MissionTrainLogic.getInstance().crtChapter;
 		this.initLeftList();
@@ -123,7 +124,7 @@ class GrowUI extends fw.BaseUI {
 
 	protected clear() {
 		super.clear();
-
+		platform.bannerdestroy();
 		this.list_left.removeEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemLeftClick, this);
 		this.list_right.removeEventListener(eui.ItemTapEvent.ITEM_TAP, this.itemRightClick, this);
 		this.btn_back.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBack, this);

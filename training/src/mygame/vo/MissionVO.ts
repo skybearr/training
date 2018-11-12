@@ -4,7 +4,7 @@ class MissionVO {
 
 	public id:number;
 	/** 开启条件 */
-	public baseline:string;
+	public baseline:number;
 
 	
 	public imgurl:string;
@@ -21,13 +21,13 @@ class MissionVO {
 	/** 通关时间 null表示未达成 */
 	public create_time:number;
 
-	private _grade:string;
+	private _grade:number;
 	/** 达成成绩 */
-	public set grade(v:string){
+	public set grade(v:number){
 		this._grade = v;
 		this.star = this.getStarByGrade(v);
 	}
-	public get grade():string{
+	public get grade():number{
 		return this._grade;
 	}
 
@@ -38,6 +38,9 @@ class MissionVO {
 		}
 		return 0;
 	}
+
+		/** 过关星级 */
+	public starline: number[];
 
 	/** 备用参数1 */
 	public extradata:string;

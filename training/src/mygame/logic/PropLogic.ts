@@ -43,6 +43,10 @@ class PropLogic extends egret.EventDispatcher {
 			vo.extradata2 = o.uid;
 			this.props[vo.id] = vo;
 		}
+
+		if(GameLogic.getInstance().startui != null){
+			GameLogic.getInstance().startui.updateHp();
+		}
 	}
 
 	/** 根据id获取一个道具的名字 (含货币)*/
