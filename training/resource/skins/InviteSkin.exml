@@ -3,8 +3,8 @@
 	<e:Rect id="rect_bg" width="100%" height="100%" fillColor="0x888888"/>
 	<e:Label text="邀请礼包" y="40" bold="true" fontFamily="SimHei" verticalAlign="middle" textAlign="center" size="50" horizontalCenter="0"/>
 	<e:Label text="每邀请一个好友加入游戏可获得120体力" y="115" bold="true" fontFamily="SimHei" verticalAlign="middle" textAlign="center" size="28" textColor="0xe05e0d" stroke="2" horizontalCenter="0"/>
-	<e:Button id="btn_close" label="关闭" x="565" skinName="BaseButton1Skin" bottom="60"/>
-	<e:Button id="btn_invite" label="邀请好友" skinName="BaseButton1Skin" bottom="60" horizontalCenter="-72"/>
+	<e:Button id="btn_close" label="关闭" x="565" skinName="BaseButton1Skin" bottom="320"/>
+	<e:Button id="btn_invite" label="邀请好友" skinName="BaseButton1Skin" bottom="320" horizontalCenter="-72"/>
 	<e:Scroller id="scroller" width="658" height="300" y="175" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0">
 		<e:List id="list">
 			<e:layout>

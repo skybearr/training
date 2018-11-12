@@ -90,7 +90,7 @@ class StartUI extends fw.BaseUI {
 	private clickBtn(e: egret.TouchEvent) {
 		switch (e.currentTarget) {
 			case this.btn_ad:
-				WxApi.getInstance().showRewardAd(1);
+				WxApi.getInstance().showRewardAd(WATCHTYPE.ADDHP);
 				break;
 			case this.btn_mission:
 				fw.UIManager.getInstance().openUI(UIConst.MISSION);

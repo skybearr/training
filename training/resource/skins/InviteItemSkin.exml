@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="InviteItemSkin" width="160" height="300" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Rect id="rect_bg" width="160" height="300" fillColor="0x1a8ef4"/>
-	<e:Label id="lbl_name" text="邀请礼包" y="19" bold="true" fontFamily="SimHei" verticalAlign="middle" textAlign="center" size="26" horizontalCenter="0"/>
+	<e:Label id="lbl_name" text="邀请礼包" y="19" bold="true" fontFamily="SimHei" verticalAlign="middle" textAlign="center" size="22" horizontalCenter="0" width="140"/>
 	<e:Image id="img" width="20" height="20" y="70" horizontalCenter="0"/>
 	<e:Button id="btn_get" label="领取" skinName="BaseButton1Skin" width="120" height="40" horizontalCenter="0" bottom="15"/>
 	<e:Image source="star_a_png" x="20" y="159" anchorOffsetX="0" width="40" anchorOffsetY="0" height="40" visible="false"/>
