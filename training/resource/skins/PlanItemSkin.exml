@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="PlanItemSkin" width="20" height="300" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Label id="lbl" text="第30天" fontFamily="SimHei" size="20" verticalAlign="middle" textAlign="center" horizontalCenter="0" y="300" width="20"/>
+	<e:Rect id="rect_bg" width="16" height="16" fillColor="0xff0000" ellipseWidth="16" ellipseHeight="16" horizontalCenter="0" anchorOffsetX="8" anchorOffsetY="8" y="250"/>
+</e:Skin>

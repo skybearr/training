@@ -48,32 +48,49 @@ class GameLogic extends egret.EventDispatcher {
 			this.updateMyDataValue(MYDATA.PLAN_BEGIN, begin);
 		}
 
-		let begin0 = this.getMyDataValueByID(MYDATA.PLAN_BEGIN);
+		let begin0 = parseInt(this.getMyDataValueByID(MYDATA.PLAN_BEGIN));
+		// begin0 = today0 - 24 * 3600 * 30;//测试
 		if (begin0 == null) {//还没开始训练
-			update(today0 + "", "1=" + time);
+			update(today0 + "", "0=" + time);
 		}
 		else {
-			let t = parseInt(begin0);
-			//今天第几天
-			let n = today0 - t;
+			//今天第几天 0开始 对应data数组有1个
+			let n = Math.floor((today0 - begin0) / 24 / 3600);
 			let s2 = this.getMyDataValueByID(MYDATA.PLAY_DATA);
+			//测试
+			// s2 = ""
+			// for(let i=0;i<30;i++){
+			// 	s2 += (i + "=" + GameUtil.between(0,90000));
+			// 	if(i < 29){
+			// 		s2 += "&";
+			// 	}
+			// }
+			
 			if (s2 == null) {
-				update(today0 + "", "1=" + time);
+				update(today0 + "", "0=" + time);
 			}
 			else {
 				let arr = s2.split("&");
-				let lastday:number = 0;//最近玩的一天
-				for(let i=0;i<arr.length;i++){
-					let a1 = arr[i].split("=");
-					let n1 = parseInt(a1[0]);
-					lastday = i;
+				if(arr.length < n){//没坚持
+					update(today0 + "", "0=" + time);
 				}
-				
+				else{
+					arr[n] = n + "=" + time;
+					if(arr.length > 30){//超过30天减去前面一天
+						arr = arr.slice(arr.length - 30);
+						begin0 = today0 - 24 * 3600 * 29;
+					}
+					let s1:string = "";
+					for(let i=0;i<arr.length;i++){
+						s1 += arr[i];
+						if(i < arr.length - 1){
+							s1 += "&";
+						}
+					}
+					update(begin0 + "",s1);
+				}
 			}
 		}
-
-
-		let str = this.getMyDataValueByID(MYDATA.PLAY_DATA);
 	}
 
 	private checkNotice() {

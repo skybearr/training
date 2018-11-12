@@ -134,6 +134,7 @@ var fw;
          */
         UIManager.prototype.showLoading = function (b, type) {
             if (type === void 0) { type = 1; }
+            b = false;
             if (b) {
                 if (this.loadingView == null) {
                     this.loadingView = new fw.LoadingUI();

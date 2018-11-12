@@ -6,7 +6,7 @@ class CheckInVO {
 	public set data(o: any) {
 		this._data = o;
 		if (o == null) {
-			
+			PropLogic.getInstance().updateProp(COINTYPE.HP,50);
 		}
 		else {
 			//自定义

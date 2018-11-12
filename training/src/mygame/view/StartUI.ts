@@ -31,6 +31,7 @@ class StartUI extends fw.BaseUI {
 		GameLogic.getInstance().startui = this;
 
 		platform.bannershow(GameConst.bannerId);
+		
 	}
 
 	/**初始化事件 */

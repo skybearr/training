@@ -19,6 +19,7 @@ var CheckInVO = (function () {
         set: function (o) {
             this._data = o;
             if (o == null) {
+                PropLogic.getInstance().updateProp(COINTYPE.HP, 50);
             }
             else {
                 //自定义

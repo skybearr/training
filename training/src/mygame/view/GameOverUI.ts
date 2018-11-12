@@ -30,8 +30,9 @@ class GameOverUI extends fw.BaseUI {
 			this.vo.state = 2;
 			GameTrainLogic.getInstance().setNextMission(this.vo.type,this.vo.id,1);
 		}
-		
-		GameLogic.getInstance().setTodayScore(this.time);
+		if(this.vo.type == 1 && this.vo.id == 3){
+			GameLogic.getInstance().setTodayScore(this.time);
+		}
 		
 		console.log("gameover:",this.vo);
 		

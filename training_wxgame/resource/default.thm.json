@@ -19,6 +19,8 @@
 		"resource/skins/MissionItemSkin.exml",
 		"resource/skins/MissionSkin.exml",
 		"resource/skins/NoticeSkin.exml",
+		"resource/skins/PlanItemSkin.exml",
+		"resource/skins/PlatSkin.exml",
 		"resource/skins/RankItemSkin.exml",
 		"resource/skins/RankSkin.exml",
 		"resource/skins/RankTypeItemSkin.exml",

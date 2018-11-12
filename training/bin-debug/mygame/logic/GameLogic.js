@@ -45,6 +45,57 @@ var GameLogic = (function (_super) {
         this.checkNotice();
         this.checkLoginData();
     };
+    GameLogic.prototype.setTodayScore = function (time) {
+        var _this = this;
+        var nowtime = Math.floor(new Date().getTime() / 1000);
+        var today0 = Math.floor(TimeUtil.getTodayZero() / 1000);
+        var update = function (begin, str) {
+            _this.updateMyDataValue(MYDATA.PLAY_DATA, str);
+            _this.updateMyDataValue(MYDATA.PLAN_BEGIN, begin);
+        };
+        var begin0 = parseInt(this.getMyDataValueByID(MYDATA.PLAN_BEGIN));
+        begin0 = today0 - 24 * 3600 * 30; //测试
+        if (begin0 == null) {
+            update(today0 + "", "0=" + time);
+        }
+        else {
+            //今天第几天 0开始 对应data数组有1个
+            var n = Math.floor((today0 - begin0) / 24 / 3600);
+            var s2 = this.getMyDataValueByID(MYDATA.PLAY_DATA);
+            //测试
+            s2 = "";
+            for (var i = 0; i < 30; i++) {
+                s2 += (i + "=" + GameUtil.between(0, 90000));
+                if (i < 29) {
+                    s2 += "&";
+                }
+            }
+            if (s2 == null) {
+                update(today0 + "", "0=" + time);
+            }
+            else {
+                var arr = s2.split("&");
+                if (arr.length < n) {
+                    update(today0 + "", "0=" + time);
+                }
+                else {
+                    arr[n] = n + "=" + time;
+                    if (arr.length > 30) {
+                        arr = arr.slice(arr.length - 30);
+                        begin0 = today0 - 24 * 3600 * 29;
+                    }
+                    var s1 = "";
+                    for (var i = 0; i < arr.length; i++) {
+                        s1 += arr[i];
+                        if (i < arr.length - 1) {
+                            s1 += "&";
+                        }
+                    }
+                    update(begin0 + "", s1);
+                }
+            }
+        }
+    };
     GameLogic.prototype.checkNotice = function () {
         // let s1 = this.getMyDataValueByID(MYDATA.VERSION);
         // if(s1 == null || s1 != GameConst.version){

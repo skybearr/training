@@ -162,6 +162,7 @@ module fw {
 		 * @param type 类型 LOADINGTYPE.XXXX 
 		 */
 		public showLoading(b: boolean, type: number = 1) {
+			b = false;
 			if (b) {
 				if (this.loadingView == null) {
 					this.loadingView = new LoadingUI();

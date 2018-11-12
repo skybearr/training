@@ -18,10 +18,66 @@ var PlatUI = (function (_super) {
     };
     /**初始化界面 */
     PlatUI.prototype.initView = function () {
+        var s2 = GameLogic.getInstance().getMyDataValueByID(MYDATA.PLAY_DATA);
+        var s0 = "还没开始训练或你之前中断了训练，请点击下面的训练开始30天训练计划吧，坚持就能看到成果！加油！";
+        if (s2 == null) {
+            this.lbl.text = s0;
+            return;
+        }
+        var arr = s2.split("&");
+        var max = 0;
+        var min = 9999999999;
+        var total = 0;
+        var avg = 0;
+        var lastvo;
+        for (var i = 0; i < arr.length; i++) {
+            var a1 = arr[i].split("=");
+            var time = parseInt(a1[1]);
+            if (time > max) {
+                max = time;
+            }
+            if (time < min) {
+                min = time;
+            }
+            total += time;
+            var vo = new PlanVO();
+            vo.id = parseInt(a1[0]);
+            vo.time = time;
+            var item = new PlanItemUI(vo);
+            this.gp.addChild(item);
+            lastvo = vo;
+        }
+        avg = Math.floor(total / arr.length);
         //1，连续坚持天数，最快，最慢，平均，
         //2，加油
         var str = "";
+        if (lastvo == null) {
+            str = s0;
+        }
+        else {
+            str = "你已坚持训练" + (lastvo.id + 1) + "天，\n" +
+                "最快用时" + this.getText(min) + "秒，\n" +
+                "最慢用时" + this.getText(max) + "秒，\n" +
+                "平均用时" + this.getText(avg) + "秒。\n" +
+                "你真棒！继续加油哦！";
+        }
         this.lbl.text = str;
+    };
+    PlatUI.prototype.getText = function (t) {
+        var s = TimeUtil.ParseTime2Format(Math.floor(t / 1000), "m:s");
+        var hs = t % 1000;
+        var ss = "";
+        if (hs < 10) {
+            ss = "00" + hs;
+        }
+        else if (hs < 100) {
+            ss = "0" + hs;
+        }
+        else {
+            ss = hs + "";
+            ;
+        }
+        return s + ":" + ss;
     };
     /**初始化事件 */
     PlatUI.prototype.initEvent = function () {
@@ -32,7 +88,9 @@ var PlatUI = (function (_super) {
         fw.UIManager.getInstance().openUI(UIConst.START);
     };
     PlatUI.prototype.clickStart = function () {
-        fw.UIManager.getInstance().openUI(UIConst.MISSION);
+        // fw.UIManager.getInstance().openUI(UIConst.MISSION);
+        var vo = GameTrainLogic.getInstance().getStartMission();
+        fw.UIManager.getInstance().openUI(UIConst.GAME, vo);
     };
     PlatUI.prototype.clickClose = function () {
         _super.prototype.clickClose.call(this);

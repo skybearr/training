@@ -713,7 +713,7 @@ var egret = window.egret;
 	__extends(GameSkin, _super);
 	function GameSkin() {
 		_super.call(this);
-		this.skinParts = ["img_bg","lbl_time","list","btn_back","btn_mission","btn_tips","lbl_num","img_1","lbl_des","btn_start","gp"];
+		this.skinParts = ["img_bg","lbl_time","list","btn_back","btn_mission","btn_tips","lbl_num","img_1","lbl_des","lbl_hp","btn_start","btn_back1","gp"];
 		
 		this.width = 750;
 		this.elementsContent = [this.img_bg_i(),this.lbl_time_i(),this.list_i(),this._Group1_i(),this.btn_tips_i(),this.lbl_num_i(),this.gp_i()];
@@ -834,7 +834,7 @@ var egret = window.egret;
 		this.gp = t;
 		t.horizontalCenter = 0;
 		t.verticalCenter = 0;
-		t.elementsContent = [this.img_1_i(),this.lbl_des_i(),this.btn_start_i()];
+		t.elementsContent = [this.img_1_i(),this.lbl_des_i(),this._Label1_i(),this.lbl_hp_i(),this.btn_start_i(),this.btn_back1_i()];
 		return t;
 	};
 	_proto.img_1_i = function () {
@@ -866,15 +866,65 @@ var egret = window.egret;
 		t.y = 416.85;
 		return t;
 	};
+	_proto._Label1_i = function () {
+		var t = new eui.Label();
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.bold = true;
+		t.fontFamily = "SimHei";
+		t.height = 51;
+		t.horizontalCenter = -183;
+		t.size = 30;
+		t.stroke = 1;
+		t.strokeColor = 0xa1f407;
+		t.text = "每次游戏需要消耗体力10";
+		t.textAlign = "right";
+		t.textColor = 0x000000;
+		t.verticalAlign = "middle";
+		t.width = 376;
+		t.y = 840.85;
+		return t;
+	};
+	_proto.lbl_hp_i = function () {
+		var t = new eui.Label();
+		this.lbl_hp = t;
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.bold = true;
+		t.fontFamily = "SimHei";
+		t.height = 51;
+		t.horizontalCenter = 174;
+		t.size = 40;
+		t.stroke = 1;
+		t.strokeColor = 0x888888;
+		t.text = "剩余体力：50";
+		t.textAlign = "center";
+		t.textColor = 0x000000;
+		t.verticalAlign = "middle";
+		t.width = 330;
+		t.y = 840.85;
+		return t;
+	};
 	_proto.btn_start_i = function () {
 		var t = new eui.Button();
 		this.btn_start = t;
 		t.height = 100;
+		t.horizontalCenter = 0;
 		t.label = "开始";
 		t.skinName = "BaseButton1Skin";
 		t.width = 260;
-		t.x = 245;
-		t.y = 894.61;
+		t.y = 892;
+		return t;
+	};
+	_proto.btn_back1_i = function () {
+		var t = new eui.Button();
+		this.btn_back1 = t;
+		t.height = 50;
+		t.label = "返回首页";
+		t.skinName = "BaseButton1Skin";
+		t.width = 160;
+		t.x = 13;
+		t.y = 942.85;
 		return t;
 	};
 	return GameSkin;
@@ -1308,7 +1358,7 @@ var egret = window.egret;
 	_proto.rect_bg_i = function () {
 		var t = new eui.Rect();
 		this.rect_bg = t;
-		t.fillColor = 0xd6660a;
+		t.fillColor = 0x1a8ef4;
 		t.height = 300;
 		t.width = 160;
 		return t;
@@ -1352,6 +1402,7 @@ var egret = window.egret;
 		t.anchorOffsetY = 0;
 		t.height = 40;
 		t.source = "star_a_png";
+		t.visible = false;
 		t.width = 40;
 		t.x = 20;
 		t.y = 159;
@@ -1361,10 +1412,10 @@ var egret = window.egret;
 		var t = new eui.Label();
 		this.lbl_num1 = t;
 		t.anchorOffsetX = 0;
-		t.text = "1000";
-		t.width = 85;
-		t.x = 61;
-		t.y = 165;
+		t.horizontalCenter = 0.5;
+		t.size = 26;
+		t.text = "体力:120";
+		t.y = 178;
 		return t;
 	};
 	_proto._Image2_i = function () {
@@ -1399,7 +1450,7 @@ var egret = window.egret;
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this.rect_bg_i(),this._Label1_i(),this.btn_close_i(),this.btn_invite_i(),this.scroller_i()];
+		this.elementsContent = [this.rect_bg_i(),this._Label1_i(),this._Label2_i(),this.btn_close_i(),this.btn_invite_i(),this.scroller_i()];
 	}
 	var _proto = InviteSkin.prototype;
 
@@ -1421,6 +1472,20 @@ var egret = window.egret;
 		t.textAlign = "center";
 		t.verticalAlign = "middle";
 		t.y = 40;
+		return t;
+	};
+	_proto._Label2_i = function () {
+		var t = new eui.Label();
+		t.bold = true;
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 0;
+		t.size = 28;
+		t.stroke = 2;
+		t.text = "每邀请一个好友加入游戏可获得120体力";
+		t.textAlign = "center";
+		t.textColor = 0xe05e0d;
+		t.verticalAlign = "middle";
+		t.y = 115;
 		return t;
 	};
 	_proto.btn_close_i = function () {
@@ -1754,6 +1819,226 @@ var egret = window.egret;
 		return t;
 	};
 	return NoticeSkin;
+})(eui.Skin);generateEUI.paths['resource/skins/PlanItemSkin.exml'] = window.PlanItemSkin = (function (_super) {
+	__extends(PlanItemSkin, _super);
+	function PlanItemSkin() {
+		_super.call(this);
+		this.skinParts = ["lbl","rect_bg"];
+		
+		this.height = 300;
+		this.width = 20;
+		this.elementsContent = [this.lbl_i(),this.rect_bg_i()];
+	}
+	var _proto = PlanItemSkin.prototype;
+
+	_proto.lbl_i = function () {
+		var t = new eui.Label();
+		this.lbl = t;
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 0;
+		t.size = 20;
+		t.text = "第30天";
+		t.textAlign = "center";
+		t.verticalAlign = "middle";
+		t.width = 20;
+		t.y = 300;
+		return t;
+	};
+	_proto.rect_bg_i = function () {
+		var t = new eui.Rect();
+		this.rect_bg = t;
+		t.anchorOffsetX = 8;
+		t.anchorOffsetY = 8;
+		t.ellipseHeight = 16;
+		t.ellipseWidth = 16;
+		t.fillColor = 0xff0000;
+		t.height = 16;
+		t.horizontalCenter = 0;
+		t.width = 16;
+		t.y = 250;
+		return t;
+	};
+	return PlanItemSkin;
+})(eui.Skin);generateEUI.paths['resource/skins/PlatSkin.exml'] = window.PlatSkin = (function (_super) {
+	__extends(PlatSkin, _super);
+	function PlatSkin() {
+		_super.call(this);
+		this.skinParts = ["rect_bg","lbl","btn_back","btn_start","gp"];
+		
+		this.height = 1334;
+		this.width = 750;
+		this.elementsContent = [this.rect_bg_i(),this._Label1_i(),this._Label2_i(),this.lbl_i(),this._Group1_i(),this.gp_i(),this._Group2_i()];
+	}
+	var _proto = PlatSkin.prototype;
+
+	_proto.rect_bg_i = function () {
+		var t = new eui.Rect();
+		this.rect_bg = t;
+		t.fillColor = 0x888888;
+		t.height = 1334;
+		t.width = 750;
+		t.x = -1;
+		t.y = -1;
+		return t;
+	};
+	_proto._Label1_i = function () {
+		var t = new eui.Label();
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 0;
+		t.size = 56;
+		t.stroke = 1;
+		t.strokeColor = 0xf26b0e;
+		t.text = "30天训练计划";
+		t.y = 106;
+		return t;
+	};
+	_proto._Label2_i = function () {
+		var t = new eui.Label();
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.fontFamily = "SimHei";
+		t.height = 160;
+		t.horizontalCenter = 0;
+		t.lineSpacing = 10;
+		t.size = 36;
+		t.stroke = 2;
+		t.strokeColor = 0x0224ef;
+		t.text = "任何训练都要持之以恒，同学，我们来做一个训练计划吧，每天训练5分钟，坚持30天，每天都要看到自己的进步哦！";
+		t.width = 640;
+		t.y = 200;
+		return t;
+	};
+	_proto.lbl_i = function () {
+		var t = new eui.Label();
+		this.lbl = t;
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.fontFamily = "SimHei";
+		t.height = 245.12;
+		t.horizontalCenter = 0;
+		t.size = 32;
+		t.stroke = 2;
+		t.strokeColor = 0xf70202;
+		t.text = "30天训练计划";
+		t.width = 640;
+		t.y = 400;
+		return t;
+	};
+	_proto._Group1_i = function () {
+		var t = new eui.Group();
+		t.horizontalCenter = 0;
+		t.y = 998;
+		t.layout = this._HorizontalLayout1_i();
+		t.elementsContent = [this.btn_back_i(),this.btn_start_i()];
+		return t;
+	};
+	_proto._HorizontalLayout1_i = function () {
+		var t = new eui.HorizontalLayout();
+		t.gap = 100;
+		return t;
+	};
+	_proto.btn_back_i = function () {
+		var t = new eui.Button();
+		this.btn_back = t;
+		t.label = "返回";
+		t.skinName = "BaseButton1Skin";
+		t.x = 0;
+		t.y = 0;
+		return t;
+	};
+	_proto.btn_start_i = function () {
+		var t = new eui.Button();
+		this.btn_start = t;
+		t.label = "开始训练";
+		t.skinName = "BaseButton1Skin";
+		t.x = 383;
+		t.y = 0;
+		return t;
+	};
+	_proto.gp_i = function () {
+		var t = new eui.Group();
+		this.gp = t;
+		t.left = 66;
+		t.y = 600;
+		t.layout = this._HorizontalLayout2_i();
+		return t;
+	};
+	_proto._HorizontalLayout2_i = function () {
+		var t = new eui.HorizontalLayout();
+		t.gap = 1;
+		return t;
+	};
+	_proto._Group2_i = function () {
+		var t = new eui.Group();
+		t.height = 322;
+		t.x = 11.04;
+		t.y = 588.8;
+		t.elementsContent = [this._Label3_i(),this._Label4_i(),this._Label5_i(),this._Label6_i(),this._Label7_i()];
+		return t;
+	};
+	_proto._Label3_i = function () {
+		var t = new eui.Label();
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 0;
+		t.size = 22;
+		t.text = "0秒";
+		t.textAlign = "center";
+		t.verticalAlign = "middle";
+		t.width = 48;
+		t.y = 300;
+		return t;
+	};
+	_proto._Label4_i = function () {
+		var t = new eui.Label();
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 0;
+		t.size = 22;
+		t.text = "15秒";
+		t.textAlign = "center";
+		t.verticalAlign = "middle";
+		t.width = 48;
+		t.y = 250;
+		return t;
+	};
+	_proto._Label5_i = function () {
+		var t = new eui.Label();
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 0;
+		t.size = 22;
+		t.text = "30秒";
+		t.textAlign = "center";
+		t.verticalAlign = "middle";
+		t.width = 48;
+		t.y = 200;
+		return t;
+	};
+	_proto._Label6_i = function () {
+		var t = new eui.Label();
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 0;
+		t.size = 22;
+		t.text = "45秒";
+		t.textAlign = "center";
+		t.verticalAlign = "middle";
+		t.width = 48;
+		t.x = 10;
+		t.y = 150;
+		return t;
+	};
+	_proto._Label7_i = function () {
+		var t = new eui.Label();
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 0;
+		t.size = 22;
+		t.text = "60秒";
+		t.textAlign = "center";
+		t.verticalAlign = "middle";
+		t.width = 48;
+		t.x = 20;
+		t.y = 100;
+		return t;
+	};
+	return PlatSkin;
 })(eui.Skin);generateEUI.paths['resource/skins/RankItemSkin.exml'] = window.RankItemSkin = (function (_super) {
 	__extends(RankItemSkin, _super);
 	function RankItemSkin() {
@@ -2085,7 +2370,7 @@ var egret = window.egret;
 	__extends(StartSkin, _super);
 	function StartSkin() {
 		_super.call(this);
-		this.skinParts = ["img_bg","lbl_hp","lbl_coin","lbl_diamond","btn_mission","btn_grow","btn_ad","btn_rank","btn_share","btn_sign","btn_turn","btn_invite","btn_achieve","gp","btn_0","btn_1","btn_2","btn_3","btn_4","btn_5","btn_6","btn_7","btn_8"];
+		this.skinParts = ["img_bg","lbl_hp","lbl_coin","lbl_diamond","btn_mission","btn_grow","btn_sign","btn_ad","btn_invite","btn_achieve","btn_rank","btn_share","btn_turn","gp","btn_0","btn_1","btn_2","btn_3","btn_4","btn_5","btn_6","btn_7","btn_8"];
 		
 		this.width = 750;
 		this.elementsContent = [this.img_bg_i(),this._Group1_i(),this.gp_i(),this._Group4_i()];
@@ -2106,8 +2391,7 @@ var egret = window.egret;
 	_proto._Group1_i = function () {
 		var t = new eui.Group();
 		t.horizontalCenter = 0;
-		t.visible = false;
-		t.y = 70;
+		t.y = 779.79;
 		t.elementsContent = [this._Rect1_i(),this.lbl_hp_i(),this.lbl_coin_i(),this.lbl_diamond_i()];
 		return t;
 	};
@@ -2123,20 +2407,20 @@ var egret = window.egret;
 	_proto.lbl_hp_i = function () {
 		var t = new eui.Label();
 		this.lbl_hp = t;
+		t.anchorOffsetX = 0;
 		t.anchorOffsetY = 0;
 		t.bold = true;
 		t.fontFamily = "SimHei";
-		t.left = 0;
+		t.horizontalCenter = 0;
 		t.lineSpacing = 6;
 		t.multiline = true;
 		t.size = 28;
 		t.stroke = 2;
 		t.strokeColor = 0x000000;
-		t.text = "体力：9999";
+		t.text = "体力：10";
 		t.textAlign = "left";
 		t.textColor = 0x40f400;
 		t.verticalAlign = "middle";
-		t.width = 230;
 		t.wordWrap = true;
 		return t;
 	};
@@ -2157,6 +2441,7 @@ var egret = window.egret;
 		t.textColor = 0x09b5f7;
 		t.verticalAlign = "middle";
 		t.verticalCenter = 0;
+		t.visible = false;
 		t.width = 230;
 		t.wordWrap = true;
 		return t;
@@ -2180,6 +2465,7 @@ var egret = window.egret;
 		t.textColor = 0xf4c700;
 		t.verticalAlign = "middle";
 		t.verticalCenter = 0;
+		t.visible = false;
 		t.width = 230;
 		t.wordWrap = true;
 		return t;
@@ -2250,7 +2536,7 @@ var egret = window.egret;
 		t.horizontalCenter = 0;
 		t.touchChildren = true;
 		t.touchEnabled = false;
-		t.y = 420;
+		t.y = 389.7;
 		t.layout = this._VerticalLayout1_i();
 		t.elementsContent = [this.btn_mission_i(),this.btn_grow_i()];
 		return t;
@@ -2266,7 +2552,7 @@ var egret = window.egret;
 		t.height = 120;
 		t.label = "训练模式";
 		t.skinName = "BaseButtonSkin";
-		t.width = 400;
+		t.width = 480;
 		t.x = 249;
 		t.y = 0;
 		return t;
@@ -2275,10 +2561,9 @@ var egret = window.egret;
 		var t = new eui.Button();
 		this.btn_grow = t;
 		t.height = 120;
-		t.label = "过关模式";
+		t.label = "30天训练计划";
 		t.skinName = "BaseButtonSkin";
-		t.visible = false;
-		t.width = 400;
+		t.width = 480;
 		t.x = 0;
 		t.y = 0;
 		return t;
@@ -2289,26 +2574,61 @@ var egret = window.egret;
 		t.width = 500;
 		t.y = 713.69;
 		t.layout = this._TileLayout1_i();
-		t.elementsContent = [this.btn_ad_i(),this.btn_rank_i(),this.btn_share_i(),this.btn_sign_i(),this.btn_turn_i(),this.btn_invite_i(),this.btn_achieve_i()];
+		t.elementsContent = [this.btn_sign_i(),this.btn_ad_i(),this.btn_invite_i(),this.btn_achieve_i(),this.btn_rank_i(),this.btn_share_i(),this.btn_turn_i()];
 		return t;
 	};
 	_proto._TileLayout1_i = function () {
 		var t = new eui.TileLayout();
 		t.orientation = "rows";
-		t.verticalGap = 30;
+		t.verticalGap = 16;
+		return t;
+	};
+	_proto.btn_sign_i = function () {
+		var t = new eui.Button();
+		this.btn_sign = t;
+		t.bottom = 251;
+		t.label = "点击签到";
+		t.left = 0;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.skinName = "BaseButton1Skin";
+		t.x = -203.00000000000003;
+		t.y = 0.6900000000000546;
 		return t;
 	};
 	_proto.btn_ad_i = function () {
 		var t = new eui.Button();
 		this.btn_ad = t;
 		t.bottom = 251;
-		t.label = "鼓励作者";
+		t.label = "获取体力";
 		t.left = 0;
 		t.scaleX = 1;
 		t.scaleY = 1;
 		t.skinName = "BaseButton1Skin";
 		t.x = -193.00000000000003;
 		t.y = 10.690000000000055;
+		return t;
+	};
+	_proto.btn_invite_i = function () {
+		var t = new eui.Button();
+		this.btn_invite = t;
+		t.label = "邀请礼包";
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.skinName = "BaseButton1Skin";
+		t.x = -92.99999999999997;
+		t.y = -39;
+		return t;
+	};
+	_proto.btn_achieve_i = function () {
+		var t = new eui.Button();
+		this.btn_achieve = t;
+		t.label = "成就";
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.skinName = "BaseButton1Skin";
+		t.x = -82.99999999999997;
+		t.y = -29;
 		return t;
 	};
 	_proto.btn_rank_i = function () {
@@ -2333,20 +2653,6 @@ var egret = window.egret;
 		t.y = -9;
 		return t;
 	};
-	_proto.btn_sign_i = function () {
-		var t = new eui.Button();
-		this.btn_sign = t;
-		t.bottom = 251;
-		t.label = "每日签到";
-		t.left = 0;
-		t.scaleX = 1;
-		t.scaleY = 1;
-		t.skinName = "BaseButton1Skin";
-		t.visible = false;
-		t.x = -203.00000000000003;
-		t.y = 0.6900000000000546;
-		return t;
-	};
 	_proto.btn_turn_i = function () {
 		var t = new eui.Button();
 		this.btn_turn = t;
@@ -2357,30 +2663,6 @@ var egret = window.egret;
 		t.visible = false;
 		t.x = -112.99999999999997;
 		t.y = -59;
-		return t;
-	};
-	_proto.btn_invite_i = function () {
-		var t = new eui.Button();
-		this.btn_invite = t;
-		t.label = "邀请礼包";
-		t.scaleX = 1;
-		t.scaleY = 1;
-		t.skinName = "BaseButton1Skin";
-		t.visible = false;
-		t.x = -92.99999999999997;
-		t.y = -39;
-		return t;
-	};
-	_proto.btn_achieve_i = function () {
-		var t = new eui.Button();
-		this.btn_achieve = t;
-		t.label = "成就";
-		t.scaleX = 1;
-		t.scaleY = 1;
-		t.skinName = "BaseButton1Skin";
-		t.visible = false;
-		t.x = -82.99999999999997;
-		t.y = -29;
 		return t;
 	};
 	_proto._Group4_i = function () {

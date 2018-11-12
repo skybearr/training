@@ -53,8 +53,8 @@
 		"bin-debug/mygame/util/GameUtil.js",
 		"bin-debug/mygame/util/ObjectUtil.js",
 		"bin-debug/mygame/util/StringUtil.js",
+		"bin-debug/mygame/util/TimeUtil.js",
 		"bin-debug/Main.js",
-		"bin-debug/mygame/util/ViewUtil.js",
 		"bin-debug/mygame/view/AchieveItemUI.js",
 		"bin-debug/mygame/view/AchieveUI.js",
 		"bin-debug/mygame/view/GameItemUI.js",
@@ -69,6 +69,7 @@
 		"bin-debug/Platform.js",
 		"bin-debug/mygame/view/MissionUI.js",
 		"bin-debug/mygame/view/NoticeUI.js",
+		"bin-debug/mygame/view/PlanItemUI.js",
 		"bin-debug/mygame/view/PlatUI.js",
 		"bin-debug/mygame/view/StartUI.js",
 		"bin-debug/mygame/view/TurnItemUI.js",
@@ -91,11 +92,12 @@
 		"bin-debug/mygame/vo/MissionVO.js",
 		"bin-debug/mygame/vo/MyDataVO.js",
 		"bin-debug/framework/interfaces/IPool.js",
+		"bin-debug/mygame/vo/PlanVO.js",
 		"bin-debug/mygame/vo/PropVO.js",
 		"bin-debug/framework/interfaces/Map.js",
 		"bin-debug/mygame/vo/SkinVO.js",
 		"bin-debug/mygame/vo/TrainMissionVO.js",
 		"bin-debug/mygame/vo/TurnVO.js",
-		"bin-debug/mygame/util/TimeUtil.js"
+		"bin-debug/mygame/util/ViewUtil.js"
 	]
 }
