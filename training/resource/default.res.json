@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "framework_json,logo_png,start_button_png,rank_back_png,rank_bg_png,rank_button_png,reglogbg_png,share_jpg,skin_zibg_png,start_button2_png,star_a_png,star_b_png,yong_11_png,yong_3_png,yong_6_png,yong_7_png,yong_8_png,bg_1_jpg,bg_2_jpg,xiaohong_jpg,xiaolei_jpg,xiaoming_jpg,avg_list_json,config_json,mission_json,achieve_json",
+			"keys": "framework_json,logo_png,start_button_png,rank_back_png,rank_bg_png,rank_button_png,reglogbg_png,share_jpg,skin_zibg_png,start_button2_png,star_a_png,star_b_png,yong_11_png,yong_3_png,yong_6_png,yong_7_png,yong_8_png,avg_list_json,config_json,mission_json,achieve_json",
 			"name": "preload"
 		}
 	],
@@ -91,31 +91,6 @@
 			"name": "yong_8_png",
 			"type": "image",
 			"url": "assets/yong_8.png"
-		},
-		{
-			"name": "bg_1_jpg",
-			"type": "image",
-			"url": "assets/dialog/bg_1.jpg"
-		},
-		{
-			"name": "bg_2_jpg",
-			"type": "image",
-			"url": "assets/dialog/bg_2.jpg"
-		},
-		{
-			"name": "xiaohong_jpg",
-			"type": "image",
-			"url": "assets/dialog/xiaohong.jpg"
-		},
-		{
-			"name": "xiaolei_jpg",
-			"type": "image",
-			"url": "assets/dialog/xiaolei.jpg"
-		},
-		{
-			"name": "xiaoming_jpg",
-			"type": "image",
-			"url": "assets/dialog/xiaoming.jpg"
 		},
 		{
 			"name": "avg_list_json",
