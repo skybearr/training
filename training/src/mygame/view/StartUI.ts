@@ -85,7 +85,16 @@ class StartUI extends fw.BaseUI {
 	public updateCheckIn() {
 		this.btn_sign.label = PlayerConst.checkInfo.signed_today ? "已签到" : "每日签到";
 	}
-
+	private check():boolean{
+		let time = new Date().getTime();
+		
+		if(time < 1542286353102){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 	private bmp: BitmapOpenDataContext;
 	private clickBtn(e: egret.TouchEvent) {
 		switch (e.currentTarget) {
@@ -97,7 +106,13 @@ class StartUI extends fw.BaseUI {
 				break;
 			case this.btn_grow:
 				// fw.UIManager.getInstance().openUI(UIConst.GROW);
-				fw.UIManager.getInstance().openUI(UIConst.PLAN);
+				if(this.check()){
+					platform.toast("即将推出");
+				}
+				else{
+					fw.UIManager.getInstance().openUI(UIConst.PLAN);
+				}
+				
 				break;
 			case this.btn_sign:
 				GameLogic.getInstance().signIn();
