@@ -17,6 +17,9 @@ module fw {
             return this.instance;
         }
 
+
+        private retrycount: number = 0;
+
         /**发送http请求
          * @param interf 接口编号
          * @param url   接口链接
@@ -35,11 +38,15 @@ module fw {
                 request.setRequestHeader(o['type'], o['value']);
             }
 
-            
+
 
             request.once(egret.IOErrorEvent.IO_ERROR, (e: egret.Event) => {
                 console.log("IOERROR:", interf, e.currentTarget);
                 WxApi.getInstance().toast("HttpIOERROR:" + interf);
+                if (interf == HttpEvent.getToken && this.retrycount < 5) {
+                    WxApi.getInstance().init();
+                    this.retrycount++;
+                }
             }, this);
 
             request.once(egret.ProgressEvent.PROGRESS, (e: egret.Event) => { }, this);
@@ -51,6 +58,10 @@ module fw {
                 if (code != 200) {
                     console.log("请求--" + interf + "--失败，错误代码：" + response['code']);
                     WxApi.getInstance().toast("HttpFailed:" + interf + ",  code:" + code);
+                    if (interf == HttpEvent.getToken && this.retrycount < 5) {
+                        WxApi.getInstance().init();
+                        this.retrycount++;
+                    }
                 }
                 else {
                     console.log("收到消息:", interf, response);
