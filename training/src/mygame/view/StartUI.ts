@@ -88,7 +88,7 @@ class StartUI extends fw.BaseUI {
 	private check():boolean{
 		let time = new Date().getTime();
 		
-		if(time < 1542286353102){
+		if(time < 1542376005280){
 			return true;
 		}
 		else{

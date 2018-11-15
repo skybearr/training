@@ -24,6 +24,9 @@ class WxApi extends egret.EventDispatcher {
 		this.inited = false;
 		//登录
 		let res = await platform.login();
+		if(res == null){
+			platform.toast("因人数太多，服务器忙碌，请关闭后重新登录尝试，非常抱歉")
+		}
 		this.logincode = res.code;
 		console.log("logincod:", res.code);
 
