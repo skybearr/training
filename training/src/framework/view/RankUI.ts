@@ -257,8 +257,6 @@ module fw {
 				this.bmp_context.clear();
 				this.bmp_context = null;
 			}
-
-			platform.bannershow(GameConst.bannerId);
 		}
 	}
 }
