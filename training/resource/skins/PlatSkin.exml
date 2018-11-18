@@ -2,7 +2,7 @@
 <e:Skin class="PlatSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
 	<e:Rect id="rect_bg" width="750" height="1334" x="-1" y="-1" fillColor="0x888888" locked="true"/>
 	<e:Label text="30天训练计划" y="106" size="56" fontFamily="SimHei" horizontalCenter="0" stroke="1" strokeColor="0xf26b0e" locked="true"/>
-	<e:Label text="任何训练都要持之以恒，同学，我们来做一个训练计划吧，每天训练5分钟，坚持30天，每天都要看到自己的进步哦！" y="200" size="36" fontFamily="SimHei" anchorOffsetX="0" width="640" anchorOffsetY="0" height="160" horizontalCenter="0" lineSpacing="10" stroke="2" strokeColor="0x0224ef" locked="true"/>
+	<e:Label text="任何学习训练都要持之以恒，同学，我们来做一个训练计划吧，每天训练5-10分钟，坚持30天，每天都要看到自己的进步，30天后见证一个新的自己！" y="200" size="36" fontFamily="SimHei" anchorOffsetX="0" width="640" anchorOffsetY="0" height="160" horizontalCenter="0" lineSpacing="10" stroke="2" strokeColor="0x0224ef" locked="true"/>
 	<e:Label id="lbl" text="30天训练计划" y="400" size="32" fontFamily="SimHei" anchorOffsetX="0" width="640" anchorOffsetY="0" height="245.12" horizontalCenter="0" stroke="2" strokeColor="0xf70202"/>
 	<e:Group y="998" horizontalCenter="0" locked="true">
 		<e:Button id="btn_back" label="返回" x="0" y="0" skinName="BaseButton1Skin"/>

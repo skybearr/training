@@ -54,7 +54,7 @@ var GameLogic = (function (_super) {
             _this.updateMyDataValue(MYDATA.PLAN_BEGIN, begin);
         };
         var begin0 = parseInt(this.getMyDataValueByID(MYDATA.PLAN_BEGIN));
-        begin0 = today0 - 24 * 3600 * 30; //测试
+        // begin0 = today0 - 24 * 3600 * 30;//测试
         if (begin0 == null) {
             update(today0 + "", "0=" + time);
         }
@@ -63,13 +63,13 @@ var GameLogic = (function (_super) {
             var n = Math.floor((today0 - begin0) / 24 / 3600);
             var s2 = this.getMyDataValueByID(MYDATA.PLAY_DATA);
             //测试
-            s2 = "";
-            for (var i = 0; i < 30; i++) {
-                s2 += (i + "=" + GameUtil.between(0, 90000));
-                if (i < 29) {
-                    s2 += "&";
-                }
-            }
+            // s2 = ""
+            // for(let i=0;i<30;i++){
+            // 	s2 += (i + "=" + GameUtil.between(0,90000));
+            // 	if(i < 29){
+            // 		s2 += "&";
+            // 	}
+            // }
             if (s2 == null) {
                 update(today0 + "", "0=" + time);
             }

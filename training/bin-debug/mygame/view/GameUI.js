@@ -17,6 +17,7 @@ var GameUI = (function (_super) {
     }
     GameUI.prototype.checkFit = function () {
         _super.prototype.checkFit.call(this);
+        platform.bannerhide();
         platform.bannerdestroy();
         this.img_1.height = GameConst.stageHeight;
     };

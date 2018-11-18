@@ -161,8 +161,6 @@ class StartUI extends fw.BaseUI {
 
 		HttpCommand.getInstance().removeEventListener(HttpEvent.checkIn, this.updateCheckIn, this);
 		PropLogic.getInstance().removeEventListener(GameEvent.PROP_NUM_CHANGE, this.propChange, this);
-
-		platform.bannerdestroy();
 	}
 }
 window['StartUI'] = StartUI;

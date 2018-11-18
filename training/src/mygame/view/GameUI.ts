@@ -23,6 +23,7 @@ class GameUI extends fw.BaseUI {
 
 	protected checkFit() {
 		super.checkFit();
+		platform.bannerhide();
 		platform.bannerdestroy();
 		this.img_1.height = GameConst.stageHeight;
 	}

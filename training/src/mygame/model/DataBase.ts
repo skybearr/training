@@ -24,8 +24,8 @@ class DataBase {
 	/** 每日签到奖励 */
 	public static REWARD_ADD_SIGNIN:string = "1:50";
 	/** 看视频送的体力 */
-	public static REWARD_ADD_WATCHAD:number = 50;
+	public static REWARD_ADD_WATCHAD:number = 80;
 	/** 邀请好友给的体力 */
-	public static HP_ADD_INVITE:number = 120;
+	public static HP_ADD_INVITE:number = 160;
 	
 }

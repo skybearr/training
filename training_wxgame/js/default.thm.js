@@ -369,11 +369,11 @@ var egret = window.egret;
 	__extends(GameOverSkin, _super);
 	function GameOverSkin() {
 		_super.call(this);
-		this.skinParts = ["img_bg","lbl_time","lbl_fast","lbl_best","lbl","btn_back","btn_restart","star1","star2","star3","btn_share"];
+		this.skinParts = ["img_bg","lbl_time","lbl_fast","lbl_best","lbl","btn_share","btn_back","btn_restart","star1","star2","star3"];
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this.img_bg_i(),this.lbl_time_i(),this.lbl_fast_i(),this.lbl_best_i(),this.lbl_i(),this._Group1_i(),this._Group2_i(),this.btn_share_i()];
+		this.elementsContent = [this.img_bg_i(),this.lbl_time_i(),this.lbl_fast_i(),this.lbl_best_i(),this.lbl_i(),this.btn_share_i(),this._Group1_i(),this._Group2_i()];
 	}
 	var _proto = GameOverSkin.prototype;
 
@@ -456,6 +456,17 @@ var egret = window.egret;
 		t.y = 576;
 		return t;
 	};
+	_proto.btn_share_i = function () {
+		var t = new eui.Button();
+		this.btn_share = t;
+		t.height = 80;
+		t.horizontalCenter = 0;
+		t.label = "炫耀";
+		t.skinName = "BaseButton1Skin";
+		t.width = 250;
+		t.y = 855;
+		return t;
+	};
 	_proto._Group1_i = function () {
 		var t = new eui.Group();
 		t.horizontalCenter = 0;
@@ -526,17 +537,6 @@ var egret = window.egret;
 		t.source = "star_b_png";
 		t.x = 264;
 		t.y = 0;
-		return t;
-	};
-	_proto.btn_share_i = function () {
-		var t = new eui.Button();
-		this.btn_share = t;
-		t.bottom = 398;
-		t.height = 80;
-		t.horizontalCenter = 0;
-		t.label = "炫耀";
-		t.skinName = "BaseButton1Skin";
-		t.width = 250;
 		return t;
 	};
 	return GameOverSkin;
@@ -834,7 +834,7 @@ var egret = window.egret;
 		this.gp = t;
 		t.horizontalCenter = 0;
 		t.verticalCenter = 0;
-		t.elementsContent = [this.img_1_i(),this.lbl_des_i(),this._Label1_i(),this.lbl_hp_i(),this.btn_start_i(),this.btn_back1_i()];
+		t.elementsContent = [this.img_1_i(),this.lbl_des_i(),this._Label1_i(),this.lbl_hp_i(),this.btn_start_i(),this.btn_back1_i(),this._Label2_i()];
 		return t;
 	};
 	_proto.img_1_i = function () {
@@ -919,12 +919,30 @@ var egret = window.egret;
 	_proto.btn_back1_i = function () {
 		var t = new eui.Button();
 		this.btn_back1 = t;
-		t.height = 50;
-		t.label = "返回首页";
+		t.height = 60;
+		t.label = "";
 		t.skinName = "BaseButton1Skin";
 		t.width = 160;
 		t.x = 13;
-		t.y = 942.85;
+		t.y = 931.85;
+		return t;
+	};
+	_proto._Label2_i = function () {
+		var t = new eui.Label();
+		t.anchorOffsetY = 0;
+		t.bold = true;
+		t.fontFamily = "SimHei";
+		t.height = 50;
+		t.lineSpacing = 2;
+		t.size = 26;
+		t.text = "返回首页获取体力";
+		t.textAlign = "center";
+		t.textColor = 0x000000;
+		t.touchEnabled = false;
+		t.verticalAlign = "middle";
+		t.width = 120;
+		t.x = 31;
+		t.y = 936;
 		return t;
 	};
 	return GameSkin;
@@ -1904,7 +1922,7 @@ var egret = window.egret;
 		t.size = 36;
 		t.stroke = 2;
 		t.strokeColor = 0x0224ef;
-		t.text = "任何训练都要持之以恒，同学，我们来做一个训练计划吧，每天训练5分钟，坚持30天，每天都要看到自己的进步哦！";
+		t.text = "任何学习训练都要持之以恒，同学，我们来做一个训练计划吧，每天训练5-10分钟，坚持30天，每天都要看到自己的进步，30天后见证一个新的自己！";
 		t.width = 640;
 		t.y = 200;
 		return t;

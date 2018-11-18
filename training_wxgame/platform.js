@@ -233,7 +233,6 @@ class WxgamePlatform {
   }
 
   bannershow(adunitId) {
-    return new Promise((resolve, reject) => {
       let sysInfo = wx.getSystemInfoSync();
       let sdkVersion = sysInfo.SDKVersion;
       sdkVersion = sdkVersion.replace(/\./g, "");
@@ -256,23 +255,20 @@ class WxgamePlatform {
           console.log("bannerAdError:", err)
         });
         bannerAd.show();
-        console.log(bannerAd)
+        console.log("bannerAdshow:", bannerAd != null)
       }
-    })
   }
   bannerhide() {
-    return new Promise((resolve, reject) => {
-      if (bannerAd != null) {
-        bannerAd.hide();
-      }
-    })
+    console.log("bannerhide",bannerAd != null)
+    if (bannerAd != null) {
+      bannerAd.hide();
+    }
   }
   bannerdestroy() {
-    return new Promise((resolve, reject) => {
-      if (bannerAd != null) {
-        bannerAd.destroy();
-      }
-    })
+    console.log("bannerdestroy", bannerAd != null)
+    if (bannerAd != null) {
+      bannerAd.destroy();
+    }
   }
 
   /** 同步存储本地缓存

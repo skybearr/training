@@ -44,13 +44,13 @@ declare interface Platform {
     vibrate(short): Promise<any>
 
     /** 展示banner广告 */
-    bannershow(bannerId): Promise<any>
+    bannershow(bannerId): any
 
     /** 隐藏banner广告 */
-    bannerhide(): Promise<any>
+    bannerhide(): any
 
     /** 销毁banner广告 */
-    bannerdestroy(): Promise<any>
+    bannerdestroy():any
 
     /** 同步存储本地缓存
      * @param key 缓存的key
@@ -143,13 +143,13 @@ class DebugPlatform implements Platform {
     async vibrate(short) {
         console.log("debug_vibrate", short);
     }
-    async bannershow(bannerId) {
+    bannershow(bannerId) {
         console.log("debug_bannershow");
     }
-    async bannerdestroy() {
+    bannerdestroy() {
         console.log("debug_bannerdestroy");
     }
-    async bannerhide() {
+    bannerhide() {
         console.log("debug_bannerhide");
     }
     setStorageSync(key, value, isobj) {
@@ -164,7 +164,6 @@ class DebugPlatform implements Platform {
         value = JSON.parse(value);
         console.log("getStorageSync:", key, value);
         return value;
-
     }
     skipToProgram(appid, extraData) {
         console.log("debug_postMessage", appid, extraData);

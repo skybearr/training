@@ -33,7 +33,6 @@ var InviteUI = (function (_super) {
     InviteUI.prototype.getInviteResponse = function () {
         this.invites = InviteLogic.getInstance().getInvites();
         this.arr_data = new eui.ArrayCollection();
-        this.invites = this.invites.concat(this.invites).concat(this.invites);
         for (var i = 0; i < this.invites.length; i++) {
             this.arr_data.addItem(this.invites[i]);
         }

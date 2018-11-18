@@ -96,6 +96,7 @@ var MissionUI = (function (_super) {
         this.arr_data = null;
         this.list = null;
         this.data = null;
+        platform.bannerhide();
         platform.bannerdestroy();
     };
     return MissionUI;

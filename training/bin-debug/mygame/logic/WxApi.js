@@ -65,6 +65,9 @@ var WxApi = (function (_super) {
                         return [4 /*yield*/, platform.login()];
                     case 1:
                         res = _a.sent();
+                        if (res == null) {
+                            platform.toast("因人数太多，服务器忙碌，请关闭后重新登录尝试，非常抱歉");
+                        }
                         this.logincode = res.code;
                         console.log("logincod:", res.code);
                         return [4 /*yield*/, platform.getUserInfo()];

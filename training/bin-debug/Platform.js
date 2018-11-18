@@ -114,28 +114,13 @@ var DebugPlatform = (function () {
         });
     };
     DebugPlatform.prototype.bannershow = function (bannerId) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log("debug_bannershow");
-                return [2 /*return*/];
-            });
-        });
+        console.log("debug_bannershow");
     };
     DebugPlatform.prototype.bannerdestroy = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log("debug_bannerdestroy");
-                return [2 /*return*/];
-            });
-        });
+        console.log("debug_bannerdestroy");
     };
     DebugPlatform.prototype.bannerhide = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log("debug_bannerhide");
-                return [2 /*return*/];
-            });
-        });
+        console.log("debug_bannerhide");
     };
     DebugPlatform.prototype.setStorageSync = function (key, value, isobj) {
         if (typeof (value) != "string") {

@@ -18,9 +18,9 @@ var DataBase = (function () {
     /** 每日签到奖励 */
     DataBase.REWARD_ADD_SIGNIN = "1:50";
     /** 看视频送的体力 */
-    DataBase.REWARD_ADD_WATCHAD = 50;
+    DataBase.REWARD_ADD_WATCHAD = 80;
     /** 邀请好友给的体力 */
-    DataBase.HP_ADD_INVITE = 120;
+    DataBase.HP_ADD_INVITE = 160;
     return DataBase;
 }());
 __reflect(DataBase.prototype, "DataBase");

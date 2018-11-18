@@ -68,17 +68,31 @@ var StartUI = (function (_super) {
     StartUI.prototype.updateCheckIn = function () {
         this.btn_sign.label = PlayerConst.checkInfo.signed_today ? "已签到" : "每日签到";
     };
+    StartUI.prototype.check = function () {
+        var time = new Date().getTime();
+        if (time < 1542376005280) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
     StartUI.prototype.clickBtn = function (e) {
         switch (e.currentTarget) {
             case this.btn_ad:
-                WxApi.getInstance().showRewardAd(1);
+                WxApi.getInstance().showRewardAd(WATCHTYPE.ADDHP);
                 break;
             case this.btn_mission:
                 fw.UIManager.getInstance().openUI(UIConst.MISSION);
                 break;
             case this.btn_grow:
                 // fw.UIManager.getInstance().openUI(UIConst.GROW);
-                fw.UIManager.getInstance().openUI(UIConst.PLAN);
+                if (this.check()) {
+                    platform.toast("即将推出");
+                }
+                else {
+                    fw.UIManager.getInstance().openUI(UIConst.PLAN);
+                }
                 break;
             case this.btn_sign:
                 GameLogic.getInstance().signIn();

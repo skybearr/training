@@ -18,7 +18,9 @@ var fw;
     var HttpManager = (function (_super) {
         __extends(HttpManager, _super);
         function HttpManager() {
-            return _super.call(this) || this;
+            var _this = _super.call(this) || this;
+            _this.retrycount = 0;
+            return _this;
         }
         HttpManager.getInstance = function () {
             if (this.instance == null) {
@@ -34,6 +36,7 @@ var fw;
          * @param method 请求类型 仅支持egret.HttpMethod.GET / egret.HttpMethod.POST
          */
         HttpManager.prototype.sendRequest = function (interf, url, headers, data, method) {
+            var _this = this;
             if (data === void 0) { data = null; }
             if (method === void 0) { method = "GET"; }
             console.log("发送消息:", interf, url, data);
@@ -47,6 +50,10 @@ var fw;
             request.once(egret.IOErrorEvent.IO_ERROR, function (e) {
                 console.log("IOERROR:", interf, e.currentTarget);
                 WxApi.getInstance().toast("HttpIOERROR:" + interf);
+                if (interf == HttpEvent.getToken && _this.retrycount < 5) {
+                    WxApi.getInstance().init();
+                    _this.retrycount++;
+                }
             }, this);
             request.once(egret.ProgressEvent.PROGRESS, function (e) { }, this);
             request.once(egret.Event.COMPLETE, function (e) {
@@ -55,6 +62,10 @@ var fw;
                 if (code != 200) {
                     console.log("请求--" + interf + "--失败，错误代码：" + response['code']);
                     WxApi.getInstance().toast("HttpFailed:" + interf + ",  code:" + code);
+                    if (interf == HttpEvent.getToken && _this.retrycount < 5) {
+                        WxApi.getInstance().init();
+                        _this.retrycount++;
+                    }
                 }
                 else {
                     console.log("收到消息:", interf, response);
