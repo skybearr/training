@@ -15,6 +15,7 @@ class StartUI extends fw.BaseUI {
 	private lbl_hp: eui.Label;
 	private lbl_coin: eui.Label;
 	private lbl_diamond: eui.Label;
+	private lbl_cd:eui.Label;
 
 
 	/**初始化数据 */
@@ -30,8 +31,26 @@ class StartUI extends fw.BaseUI {
 
 		GameLogic.getInstance().startui = this;
 
+		this.rewardCD();
+
 		platform.bannershow(GameConst.bannerId);
 		
+		
+	}
+
+	private can1:boolean;
+	private rewardCD() {
+		let cd = WxApi.getInstance().getRewardCD();
+
+		this.btn_ad.touchEnabled = cd <= 0;
+		this.btn_ad.filters = cd <= 0 ? null : FilterUtil.getGrayFilter();
+		this.can1 = cd <= 0;
+		if (cd > 0) {
+			this.lbl_cd.text = GameUtil.ParseTime2Format(cd);
+		}
+		else {
+			this.lbl_cd.text = "";
+		}
 	}
 
 	/**初始化事件 */
@@ -52,6 +71,7 @@ class StartUI extends fw.BaseUI {
 
 		HttpCommand.getInstance().addEventListener(HttpEvent.checkIn, this.updateCheckIn, this);
 		PropLogic.getInstance().addEventListener(GameEvent.PROP_NUM_CHANGE, this.propChange, this);
+		TimerManager.getInstance().addTimerCallBack(this.rewardCD, this);
 	}
 
 	public updateHp() {
@@ -99,6 +119,11 @@ class StartUI extends fw.BaseUI {
 	private clickBtn(e: egret.TouchEvent) {
 		switch (e.currentTarget) {
 			case this.btn_ad:
+				let cd = WxApi.getInstance().getRewardCD();
+				if(cd > 0){
+					platform.toast(cd + "秒后再来吧，体力还在积蓄中~~~")
+					return;
+				}
 				WxApi.getInstance().showRewardAd(WATCHTYPE.ADDHP);
 				break;
 			case this.btn_mission:
@@ -144,7 +169,7 @@ class StartUI extends fw.BaseUI {
 
 	protected clear() {
 		super.clear();
-
+		platform.bannerhide();
 		GameLogic.getInstance().startui = null;
 		for (let i = 0; i < 8; i++) {
 			this['btn_' + i].removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
@@ -161,6 +186,7 @@ class StartUI extends fw.BaseUI {
 
 		HttpCommand.getInstance().removeEventListener(HttpEvent.checkIn, this.updateCheckIn, this);
 		PropLogic.getInstance().removeEventListener(GameEvent.PROP_NUM_CHANGE, this.propChange, this);
+		TimerManager.getInstance().removeFun(this.rewardCD, this);
 	}
 }
 window['StartUI'] = StartUI;

@@ -38,6 +38,7 @@ class GrowUI extends fw.BaseUI {
 		this.charpters = MissionTrainLogic.getInstance().getChaprters();
 		this.crtChapter = MissionTrainLogic.getInstance().crtChapter;
 		this.initLeftList();
+		platform.bannerhide();
 	}
 
 	private initLeftList() {
@@ -134,5 +135,6 @@ class GrowUI extends fw.BaseUI {
 		this.charpters = null;
 		this.missions = null;
 		this.clickMission = null;
+		platform.bannershow(GameConst.bannerId);
 	}
 }

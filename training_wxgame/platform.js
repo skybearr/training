@@ -1,8 +1,8 @@
 /**
  * 请在白鹭引擎的Main.ts中调用 platform.login() 方法调用至此处。
  */
-var mta = require('./mta_analysis.js');
-require('./utils/ald-game.js')
+// var mta = require('./mta_analysis.js');
+// require('./utils/ald-game.js')
 var bannerAd;
 var rewardAd;
 class WxgamePlatform {
@@ -14,28 +14,28 @@ class WxgamePlatform {
 
   /**埋点初始化 */
   initBuryingSDK() {
-    if (mta == null) {
-      return;
-    }
-    console.log("initmta:", mta)
+    // if (mta == null) {
+    //   return;
+    // }
+    // console.log("initmta:", mta)
 
-    mta.App.init({
-      "appID": "500641675",
-      "eventID": "500641683",
-    });
-    mta.Page.init()
+    // mta.App.init({
+    //   "appID": "500641675",
+    //   "eventID": "500641683",
+    // });
+    // mta.Page.init()
   }
 
   /**添加埋点 */
   buryingPoint(id, data) {
-    if (mta == null) {
-      return;
-    }
-    console.log("mtaLoad:", id, data)
-    mta.Event.stat(id, data);
-    wx.aldSendEvent(id, {
-      id: "true"
-    });
+    // if (mta == null) {
+    //   return;
+    // }
+    // console.log("mtaLoad:", id, data)
+    // mta.Event.stat(id, data);
+    // wx.aldSendEvent(id, {
+    //   id: "true"
+    // });
   }
 
   /**登陆 */

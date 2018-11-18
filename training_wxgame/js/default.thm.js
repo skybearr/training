@@ -1500,7 +1500,7 @@ var egret = window.egret;
 		t.horizontalCenter = 0;
 		t.size = 28;
 		t.stroke = 2;
-		t.text = "每邀请一个好友加入游戏可获得120体力";
+		t.text = "每邀请一个好友加入游戏可获得160体力";
 		t.textAlign = "center";
 		t.textColor = 0xe05e0d;
 		t.verticalAlign = "middle";
@@ -2389,10 +2389,10 @@ var egret = window.egret;
 	__extends(StartSkin, _super);
 	function StartSkin() {
 		_super.call(this);
-		this.skinParts = ["img_bg","lbl_hp","lbl_coin","lbl_diamond","btn_mission","btn_grow","btn_sign","btn_ad","btn_invite","btn_achieve","btn_rank","btn_share","btn_turn","gp","btn_0","btn_1","btn_2","btn_3","btn_4","btn_5","btn_6","btn_7","btn_8"];
+		this.skinParts = ["img_bg","lbl_hp","lbl_coin","lbl_diamond","btn_mission","btn_grow","btn_sign","btn_ad","btn_invite","btn_achieve","btn_rank","btn_share","btn_turn","gp","btn_0","btn_1","btn_2","btn_3","btn_4","btn_5","btn_6","btn_7","btn_8","lbl_cd"];
 		
 		this.width = 750;
-		this.elementsContent = [this.img_bg_i(),this._Group1_i(),this.gp_i(),this._Group4_i()];
+		this.elementsContent = [this.img_bg_i(),this._Group1_i(),this.gp_i(),this._Group4_i(),this.lbl_cd_i()];
 	}
 	var _proto = StartSkin.prototype;
 
@@ -2831,6 +2831,28 @@ var egret = window.egret;
 		t.width = 66;
 		t.x = 551;
 		t.y = 80;
+		return t;
+	};
+	_proto.lbl_cd_i = function () {
+		var t = new eui.Label();
+		this.lbl_cd = t;
+		t.anchorOffsetX = 0;
+		t.anchorOffsetY = 0;
+		t.bold = true;
+		t.fontFamily = "SimHei";
+		t.lineSpacing = 6;
+		t.multiline = true;
+		t.size = 26;
+		t.stroke = 2;
+		t.strokeColor = 0x000000;
+		t.text = "00:00:00";
+		t.textAlign = "left";
+		t.textColor = 0xffffff;
+		t.touchEnabled = false;
+		t.verticalAlign = "middle";
+		t.wordWrap = true;
+		t.x = 317;
+		t.y = 881;
 		return t;
 	};
 	return StartSkin;

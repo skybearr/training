@@ -58,4 +58,5 @@
 			<e:HorizontalLayout gap="15"/>
 		</e:layout>
 	</e:Group>
+	<e:Label id="lbl_cd" text="00:00:00" size="26" fontFamily="SimHei" wordWrap="true" multiline="true" anchorOffsetY="0" lineSpacing="6" bold="true" verticalAlign="middle" textAlign="left" stroke="2" strokeColor="0x000000" anchorOffsetX="0" textColor="0xffffff" x="317" y="881" touchEnabled="false"/>
 </e:Skin>

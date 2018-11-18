@@ -314,11 +314,12 @@ class WxApi extends egret.EventDispatcher {
 			if (res && res.isEnded || res === undefined) {
 				// 正常播放结束，可以下发游戏奖励
 				state = 0;
-				// this.rewardAdCDStart();
+				this.rewardAdCDStart();
 			}
 			else {
 				// 播放中途退出，不下发游戏奖励
 				state = 1;
+				this.rewardAdCDStart();
 			}
 			this.dispatchGameEvent(GameEvent.REWARDAD_CLOSE_EVENT, state);
 		})
