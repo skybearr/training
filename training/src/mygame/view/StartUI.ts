@@ -16,6 +16,7 @@ class StartUI extends fw.BaseUI {
 	private lbl_coin: eui.Label;
 	private lbl_diamond: eui.Label;
 	private lbl_cd:eui.Label;
+	private btn_lifegame:eui.Label;
 
 
 	/**初始化数据 */
@@ -68,6 +69,8 @@ class StartUI extends fw.BaseUI {
 		this.btn_achieve.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_rank.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_share.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
+		this.btn_lifegame.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
+		
 
 		HttpCommand.getInstance().addEventListener(HttpEvent.checkIn, this.updateCheckIn, this);
 		PropLogic.getInstance().addEventListener(GameEvent.PROP_NUM_CHANGE, this.propChange, this);
@@ -158,6 +161,9 @@ class StartUI extends fw.BaseUI {
 			case this.btn_share:
 				WxApi.getInstance().share(fw.SHARETYPE.ACTIVE);
 				break;
+				case this.btn_lifegame:
+				platform.skipToProgram("wx6a3ca3523aaa4e34",null)
+				break;
 		}
 	}
 
@@ -183,6 +189,7 @@ class StartUI extends fw.BaseUI {
 		this.btn_achieve.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_rank.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_share.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
+		this.btn_lifegame.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 
 		HttpCommand.getInstance().removeEventListener(HttpEvent.checkIn, this.updateCheckIn, this);
 		PropLogic.getInstance().removeEventListener(GameEvent.PROP_NUM_CHANGE, this.propChange, this);

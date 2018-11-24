@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="StartSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing"  width="750">
+<e:Skin class="StartSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing"  width="750" height="1180">
 	<w:Config id="162d237403c" ></w:Config>
-	<e:Image id="img_bg" height="1334" width="750" x="0" source="yong_3_png" scale9Grid="51,47,43,32" y="0"/>
-	<e:Group y="779.79" horizontalCenter="0">
-		<e:Rect width="690" height="28" fillColor="0x78b555" horizontalCenter="0" verticalCenter="0"/>
+	<e:Image id="img_bg" height="1334" width="750" x="0" source="yong_3_png" scale9Grid="51,47,43,32" y="-1"/>
+	<e:Group y="816.79" horizontalCenter="0">
+		<e:Rect width="690" height="28" fillColor="0x78b555" horizontalCenter="0" verticalCenter="-37"/>
 		<e:Label id="lbl_hp" text="体力：10" size="28" fontFamily="SimHei" wordWrap="true" multiline="true" anchorOffsetY="0" lineSpacing="6" bold="true" verticalAlign="middle" textAlign="left" stroke="2" strokeColor="0x000000" textColor="0x40f400" anchorOffsetX="0" horizontalCenter="0"/>
 		<e:Label id="lbl_coin" text="金币：9999" size="28" fontFamily="SimHei" wordWrap="true" multiline="true" anchorOffsetY="0" width="230" lineSpacing="6" bold="true" verticalAlign="middle" textAlign="left" stroke="2" strokeColor="0x000000" textColor="0x09b5f7" horizontalCenter="0" verticalCenter="0" visible="false"/>
 		<e:Label id="lbl_diamond" text="钻石：9999" size="28" fontFamily="SimHei" wordWrap="true" multiline="true" anchorOffsetY="0" width="230" lineSpacing="6" bold="true" verticalAlign="middle" textAlign="center" stroke="2" strokeColor="0x000000" scaleX="1" scaleY="1" textColor="0xf4c700" verticalCenter="0" right="0" visible="false"/>
 	</e:Group>
-	<e:Group id="gp" y="115.99" horizontalCenter="0">
+	<e:Group id="gp" y="70.99" horizontalCenter="0">
 		<e:Image anchorOffsetX="0" width="640" height="140" source="yong_11_png" scale9Grid="68,0,17,94" y="0" horizontalCenter="0"/>
 		<e:Label text="舒尔特方格" size="60" anchorOffsetX="0" width="540" italic="true" bold="true" verticalAlign="middle" textAlign="center" y="37.04" horizontalCenter="0" fontFamily="SimHei"/>
 		<e:Image anchorOffsetX="0" width="638.48" height="210" anchorOffsetY="0" source="yong_11_png" scale9Grid="68,66,50,25" y="156" horizontalCenter="0"/>
 		<e:Label text="“舒尔特方格”不但可以简单测量注意力水平，而且是很好的训练方法。舒尔特表可以通过动态的练习锻炼视神经末梢 培养注意力集中、分配、控制能力；拓展视幅；加快视频 ；提高视觉的稳定性、辨别力、定向搜索能力。" size="26" fontFamily="SimHei" wordWrap="true" multiline="true" anchorOffsetY="0" height="162" width="560" lineSpacing="6" y="182" horizontalCenter="0"/>
-		<e:Group y="389.7" horizontalCenter="0" touchChildren="true" touchEnabled="false">
+		<e:Group y="374.7" horizontalCenter="0" touchChildren="true" touchEnabled="false">
 			<e:Button id="btn_mission" label="训练模式" y="0" x="249" height="120" width="480" skinName="BaseButtonSkin"/>
 			<e:Button id="btn_grow" label="30天训练计划" y="0" x="0" height="120" width="480" skinName="BaseButtonSkin"/>
+			<e:Button id="btn_lifegame" label="智商160玩的游戏" y="10" x="10" height="120" width="480" skinName="BaseButtonSkin"/>
 			<e:layout>
-				<e:VerticalLayout gap="20"/>
+				<e:VerticalLayout gap="2"/>
 			</e:layout>
 		</e:Group>
 
 
-		<e:Group y="713.69" width="500" horizontalCenter="0">
+		<e:Group y="783.69" width="500" horizontalCenter="0">
 			<e:Button id="btn_sign" label="点击签到" skinName="BaseButton1Skin" scaleX="1" scaleY="1" bottom="251" left="0" x="-203.00000000000003" y="0.6900000000000546"/>
 			<e:Button id="btn_ad" label="获取体力" skinName="BaseButton1Skin" scaleX="1" scaleY="1" bottom="251" left="0" x="-193.00000000000003" y="10.690000000000055"/>
 			<e:Button id="btn_invite" label="邀请礼包" x="-92.99999999999997" y="-39" skinName="BaseButton1Skin" scaleX="1" scaleY="1"/>
@@ -58,5 +59,5 @@
 			<e:HorizontalLayout gap="15"/>
 		</e:layout>
 	</e:Group>
-	<e:Label id="lbl_cd" text="00:00:00" size="26" fontFamily="SimHei" wordWrap="true" multiline="true" anchorOffsetY="0" lineSpacing="6" bold="true" verticalAlign="middle" textAlign="left" stroke="2" strokeColor="0x000000" anchorOffsetX="0" textColor="0xffffff" x="317" y="881" touchEnabled="false"/>
+	<e:Label id="lbl_cd" text="00:00:00" size="26" fontFamily="SimHei" wordWrap="true" multiline="true" anchorOffsetY="0" lineSpacing="6" bold="true" verticalAlign="middle" textAlign="left" stroke="2" strokeColor="0x000000" anchorOffsetX="0" textColor="0xffffff" x="317" y="910" touchEnabled="false"/>
 </e:Skin>

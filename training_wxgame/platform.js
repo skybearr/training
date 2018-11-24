@@ -7,6 +7,27 @@ var bannerAd;
 var rewardAd;
 class WxgamePlatform {
 
+  checkVersion() {
+    try {
+      const updateManager = wx.getUpdateManager()
+      updateManager.onUpdateReady(function () {
+        wx.showModal({
+          title: '更新提示',
+          content: '新版本已经准备好，是否重启应用？',
+          success: function (res) {
+            console.log(res)
+            if (res.confirm) {
+              updateManager.applyUpdate();
+            }
+          }
+        })
+      })
+      updateManager.onUpdateFailed(function () { })
+    } catch (err) {
+      console.log('基础库版本低于1.9.90')
+    }
+  }
+  
   /** 是否debug */
   isdebug(){
     return false;

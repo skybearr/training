@@ -26,6 +26,7 @@ module fw {
 			// fw.UIManager.getInstance().main.addChild(new LogoUI());
 			fw.GameManager.getInstance().logoOver();
 			WxApi.getInstance().init();
+			platform.checkVersion();
 		}
 
 		/** logo动画结束，检测是否后台加载完毕 */

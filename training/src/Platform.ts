@@ -96,6 +96,7 @@ declare interface Platform {
 
     /** 弹窗窗提示 */
     showModal(content, title, surestr): any
+    checkVersion();
 }
 
 /**
@@ -104,6 +105,9 @@ declare interface Platform {
 class DebugPlatform implements Platform {
     isdebug(){
         return true;
+    }
+    checkVersion(){
+        
     }
     async initBuryingSDK() {
         console.log("debug_initBuryingSDK");
