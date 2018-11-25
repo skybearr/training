@@ -15,8 +15,9 @@ class StartUI extends fw.BaseUI {
 	private lbl_hp: eui.Label;
 	private lbl_coin: eui.Label;
 	private lbl_diamond: eui.Label;
-	private lbl_cd:eui.Label;
-	private btn_lifegame:eui.Label;
+	private lbl_cd: eui.Label;
+	private btn_lifegame: eui.Label;
+	private btn_jiyi: eui.Button;
 
 
 	/**初始化数据 */
@@ -35,11 +36,11 @@ class StartUI extends fw.BaseUI {
 		this.rewardCD();
 
 		platform.bannershow(GameConst.bannerId);
-		
-		
+
+
 	}
 
-	private can1:boolean;
+	private can1: boolean;
 	private rewardCD() {
 		let cd = WxApi.getInstance().getRewardCD();
 
@@ -70,7 +71,8 @@ class StartUI extends fw.BaseUI {
 		this.btn_rank.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_share.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_lifegame.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
-		
+		this.btn_jiyi.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
+
 
 		HttpCommand.getInstance().addEventListener(HttpEvent.checkIn, this.updateCheckIn, this);
 		PropLogic.getInstance().addEventListener(GameEvent.PROP_NUM_CHANGE, this.propChange, this);
@@ -108,13 +110,13 @@ class StartUI extends fw.BaseUI {
 	public updateCheckIn() {
 		this.btn_sign.label = PlayerConst.checkInfo.signed_today ? "已签到" : "每日签到";
 	}
-	private check():boolean{
+	private check(): boolean {
 		let time = new Date().getTime();
-		
-		if(time < 1542376005280){
+
+		if (time < 1542376005280) {
 			return true;
 		}
-		else{
+		else {
 			return false;
 		}
 	}
@@ -123,7 +125,7 @@ class StartUI extends fw.BaseUI {
 		switch (e.currentTarget) {
 			case this.btn_ad:
 				let cd = WxApi.getInstance().getRewardCD();
-				if(cd > 0){
+				if (cd > 0) {
 					platform.toast(cd + "秒后再来吧，体力还在积蓄中~~~")
 					return;
 				}
@@ -134,13 +136,13 @@ class StartUI extends fw.BaseUI {
 				break;
 			case this.btn_grow:
 				// fw.UIManager.getInstance().openUI(UIConst.GROW);
-				if(this.check()){
+				if (this.check()) {
 					platform.toast("即将推出");
 				}
-				else{
+				else {
 					fw.UIManager.getInstance().openUI(UIConst.PLAN);
 				}
-				
+
 				break;
 			case this.btn_sign:
 				GameLogic.getInstance().signIn();
@@ -161,15 +163,18 @@ class StartUI extends fw.BaseUI {
 			case this.btn_share:
 				WxApi.getInstance().share(fw.SHARETYPE.ACTIVE);
 				break;
-				case this.btn_lifegame:
-				platform.skipToProgram("wx6a3ca3523aaa4e34",null)
+			case this.btn_lifegame:
+				platform.skipToProgram("wx6a3ca3523aaa4e34", null)
+				break;
+			case this.btn_jiyi:
+				this.addChild(new Game1UI());
 				break;
 		}
 	}
 
-	private addHP(e:GameEvent){
+	private addHP(e: GameEvent) {
 		if (e.data.type == WATCHTYPE.ADDHP && e.data.data == 0) {
-			PropLogic.getInstance().updateProp(COINTYPE.HP,DataBase.REWARD_ADD_WATCHAD);
+			PropLogic.getInstance().updateProp(COINTYPE.HP, DataBase.REWARD_ADD_WATCHAD);
 		}
 	}
 
@@ -190,6 +195,7 @@ class StartUI extends fw.BaseUI {
 		this.btn_rank.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_share.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 		this.btn_lifegame.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
+		this.btn_jiyi.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn, this);
 
 		HttpCommand.getInstance().removeEventListener(HttpEvent.checkIn, this.updateCheckIn, this);
 		PropLogic.getInstance().removeEventListener(GameEvent.PROP_NUM_CHANGE, this.propChange, this);

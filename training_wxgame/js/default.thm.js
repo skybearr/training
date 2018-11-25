@@ -47,7 +47,6 @@ var egret = window.egret;
 		t.textAlign = "center";
 		t.textColor = 0x161616;
 		t.verticalCenter = 0;
-		t.width = 160;
 		return t;
 	};
 	return BaseButton1Skin;
@@ -709,6 +708,170 @@ var egret = window.egret;
 		return t;
 	};
 	return Game1Skin;
+})(eui.Skin);generateEUI.paths['resource/skins/games/Game2Skin.exml'] = window.Game2Skin = (function (_super) {
+	__extends(Game2Skin, _super);
+	function Game2Skin() {
+		_super.call(this);
+		this.skinParts = ["rect_bg","gp2","rect","gp1","lbl_score","lbl_over","gp_over","btn1","btn2","btn3"];
+		
+		this.height = 1334;
+		this.width = 750;
+		this.elementsContent = [this.rect_bg_i(),this.gp1_i(),this._Label1_i(),this.lbl_score_i(),this.gp_over_i(),this._Group1_i(),this.btn3_i()];
+	}
+	var _proto = Game2Skin.prototype;
+
+	_proto.rect_bg_i = function () {
+		var t = new eui.Rect();
+		this.rect_bg = t;
+		t.fillColor = 0x959dd8;
+		t.height = 1334;
+		t.width = 750;
+		t.x = 0;
+		t.y = 0;
+		return t;
+	};
+	_proto.gp1_i = function () {
+		var t = new eui.Group();
+		this.gp1 = t;
+		t.height = 660;
+		t.horizontalCenter = 0;
+		t.width = 660;
+		t.y = 250;
+		t.elementsContent = [this._Rect1_i(),this.gp2_i(),this.rect_i()];
+		return t;
+	};
+	_proto._Rect1_i = function () {
+		var t = new eui.Rect();
+		t.fillColor = 0x332126;
+		t.height = 660;
+		t.width = 660;
+		t.x = 0;
+		t.y = 0;
+		return t;
+	};
+	_proto.gp2_i = function () {
+		var t = new eui.Group();
+		this.gp2 = t;
+		t.height = 660;
+		t.horizontalCenter = 0;
+		t.verticalCenter = 0;
+		t.width = 660;
+		return t;
+	};
+	_proto.rect_i = function () {
+		var t = new eui.Rect();
+		this.rect = t;
+		t.fillColor = 0x9574cc;
+		t.height = 660;
+		t.visible = false;
+		t.width = 660;
+		t.x = 0;
+		t.y = 0;
+		return t;
+	};
+	_proto._Label1_i = function () {
+		var t = new eui.Label();
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 0;
+		t.size = 80;
+		t.text = "找出新出现的图标";
+		t.textColor = 0xdb5820;
+		t.y = 84;
+		return t;
+	};
+	_proto.lbl_score_i = function () {
+		var t = new eui.Label();
+		this.lbl_score = t;
+		t.fontFamily = "SimHei";
+		t.size = 60;
+		t.stroke = 2;
+		t.strokeColor = 0x1038e8;
+		t.text = "得分：64";
+		t.textColor = 0x56ed1a;
+		t.x = 45;
+		t.y = 180;
+		return t;
+	};
+	_proto.gp_over_i = function () {
+		var t = new eui.Group();
+		this.gp_over = t;
+		t.horizontalCenter = 0;
+		t.verticalCenter = 0;
+		t.visible = false;
+		t.elementsContent = [this._Rect2_i(),this.lbl_over_i()];
+		return t;
+	};
+	_proto._Rect2_i = function () {
+		var t = new eui.Rect();
+		t.fillColor = 0x4fdb27;
+		t.height = 660;
+		t.horizontalCenter = 0;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.verticalCenter = 0;
+		t.width = 660;
+		return t;
+	};
+	_proto.lbl_over_i = function () {
+		var t = new eui.Label();
+		this.lbl_over = t;
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 0;
+		t.scaleX = 1;
+		t.scaleY = 1;
+		t.size = 80;
+		t.text = "恭喜你过关！";
+		t.textColor = 0xDB5820;
+		t.verticalCenter = 0;
+		return t;
+	};
+	_proto._Group1_i = function () {
+		var t = new eui.Group();
+		t.horizontalCenter = 0;
+		t.y = 980;
+		t.layout = this._HorizontalLayout1_i();
+		t.elementsContent = [this.btn1_i(),this.btn2_i()];
+		return t;
+	};
+	_proto._HorizontalLayout1_i = function () {
+		var t = new eui.HorizontalLayout();
+		t.gap = 20;
+		return t;
+	};
+	_proto.btn1_i = function () {
+		var t = new eui.Button();
+		this.btn1 = t;
+		t.height = 60;
+		t.label = "回到首页";
+		t.skinName = "BaseButton1Skin";
+		t.width = 200;
+		t.x = 0;
+		t.y = 0;
+		return t;
+	};
+	_proto.btn2_i = function () {
+		var t = new eui.Button();
+		this.btn2 = t;
+		t.height = 60;
+		t.label = "重新开始";
+		t.skinName = "BaseButton1Skin";
+		t.width = 200;
+		t.x = 340;
+		t.y = 0;
+		return t;
+	};
+	_proto.btn3_i = function () {
+		var t = new eui.Button();
+		this.btn3 = t;
+		t.height = 60;
+		t.label = "炫耀";
+		t.skinName = "BaseButton1Skin";
+		t.width = 200;
+		t.x = 265;
+		t.y = 914;
+		return t;
+	};
+	return Game2Skin;
 })(eui.Skin);generateEUI.paths['resource/skins/GameSkin.exml'] = window.GameSkin = (function (_super) {
 	__extends(GameSkin, _super);
 	function GameSkin() {
@@ -2389,7 +2552,7 @@ var egret = window.egret;
 	__extends(StartSkin, _super);
 	function StartSkin() {
 		_super.call(this);
-		this.skinParts = ["img_bg","lbl_hp","lbl_coin","lbl_diamond","btn_mission","btn_grow","btn_lifegame","btn_sign","btn_ad","btn_invite","btn_achieve","btn_rank","btn_share","btn_turn","gp","btn_0","btn_1","btn_2","btn_3","btn_4","btn_5","btn_6","btn_7","btn_8","lbl_cd"];
+		this.skinParts = ["img_bg","lbl_hp","lbl_coin","lbl_diamond","btn_mission","btn_grow","btn_lifegame","btn_jiyi","btn_sign","btn_ad","btn_invite","btn_achieve","btn_rank","btn_share","btn_turn","gp","btn_0","btn_1","btn_2","btn_3","btn_4","btn_5","btn_6","btn_7","btn_8","lbl_cd"];
 		
 		this.height = 1180;
 		this.width = 750;
@@ -2556,24 +2719,19 @@ var egret = window.egret;
 		t.horizontalCenter = 0;
 		t.touchChildren = true;
 		t.touchEnabled = false;
+		t.width = 640;
 		t.y = 374.7;
-		t.layout = this._VerticalLayout1_i();
-		t.elementsContent = [this.btn_mission_i(),this.btn_grow_i(),this.btn_lifegame_i()];
-		return t;
-	};
-	_proto._VerticalLayout1_i = function () {
-		var t = new eui.VerticalLayout();
-		t.gap = 2;
+		t.elementsContent = [this.btn_mission_i(),this.btn_grow_i(),this.btn_lifegame_i(),this.btn_jiyi_i()];
 		return t;
 	};
 	_proto.btn_mission_i = function () {
 		var t = new eui.Button();
 		this.btn_mission = t;
 		t.height = 120;
+		t.horizontalCenter = 0;
 		t.label = "训练模式";
 		t.skinName = "BaseButtonSkin";
 		t.width = 480;
-		t.x = 249;
 		t.y = 0;
 		return t;
 	};
@@ -2581,22 +2739,33 @@ var egret = window.egret;
 		var t = new eui.Button();
 		this.btn_grow = t;
 		t.height = 120;
+		t.horizontalCenter = 0;
 		t.label = "30天训练计划";
 		t.skinName = "BaseButtonSkin";
 		t.width = 480;
-		t.x = 0;
-		t.y = 0;
+		t.y = 120;
 		return t;
 	};
 	_proto.btn_lifegame_i = function () {
 		var t = new eui.Button();
 		this.btn_lifegame = t;
-		t.height = 120;
+		t.height = 80;
 		t.label = "智商160玩的游戏";
-		t.skinName = "BaseButtonSkin";
-		t.width = 480;
-		t.x = 10;
-		t.y = 10;
+		t.left = 0;
+		t.skinName = "BaseButton1Skin";
+		t.width = 300;
+		t.y = 254;
+		return t;
+	};
+	_proto.btn_jiyi_i = function () {
+		var t = new eui.Button();
+		this.btn_jiyi = t;
+		t.height = 80;
+		t.label = "记忆力闯关";
+		t.right = 0;
+		t.skinName = "BaseButton1Skin";
+		t.width = 300;
+		t.y = 254;
 		return t;
 	};
 	_proto._Group3_i = function () {

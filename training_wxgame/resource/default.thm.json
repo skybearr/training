@@ -10,6 +10,7 @@
 		"resource/skins/GameItemSkin.exml",
 		"resource/skins/GameOverSkin.exml",
 		"resource/skins/games/Game1Skin.exml",
+		"resource/skins/games/Game2Skin.exml",
 		"resource/skins/GameSkin.exml",
 		"resource/skins/GrowLeftItemSkin.exml",
 		"resource/skins/GrowRightItemSkin.exml",

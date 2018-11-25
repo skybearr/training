@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "framework_json,logo_png,start_button_png,rank_back_png,rank_bg_png,rank_button_png,reglogbg_png,share_jpg,skin_zibg_png,start_button2_png,star_a_png,star_b_png,yong_11_png,yong_3_png,yong_6_png,yong_7_png,yong_8_png,avg_list_json,config_json,mission_json,achieve_json",
+			"keys": "framework_json,logo_png,start_button_png,rank_back_png,rank_bg_png,rank_button_png,reglogbg_png,share_jpg,skin_zibg_png,start_button2_png,star_a_png,star_b_png,yong_11_png,yong_3_png,yong_6_png,yong_7_png,yong_8_png,avg_list_json,config_json,mission_json,achieve_json,icon1_json,icon2_json,icon3_json,icon4_json",
 			"name": "preload"
 		}
 	],
@@ -111,6 +111,30 @@
 			"name": "achieve_json",
 			"type": "json",
 			"url": "data/achieve.json"
+		},
+		{
+			"name": "icon1_json",
+			"type": "sheet",
+			"url": "assets/sheet/icon1.json",
+			"subkeys": "icon_47,icon_48,icon_49,icon_50,icon_51,icon_52,icon_53,icon_54,icon_55,icon_56,icon_57,icon_58,icon_59,icon_60,icon_61,icon_62,icon_63,icon_64,icon_1,icon_2,icon_3,icon_4,icon_5,icon_6,icon_7,icon_8,icon_9,icon_10,icon_11,icon_12,icon_13,icon_14,icon_15,icon_16,icon_17,icon_18,icon_19,icon_20,icon_21,icon_22,icon_23,icon_24,icon_25,icon_26,icon_27,icon_28,icon_29,icon_30,icon_31,icon_32,icon_33,icon_34,icon_35,icon_36,icon_37,icon_38,icon_39,icon_40,icon_41,icon_42,icon_43,icon_44,icon_45,icon_46"
+		},
+		{
+			"name": "icon2_json",
+			"type": "sheet",
+			"url": "assets/sheet/icon2.json",
+			"subkeys": "icon_107,icon_108,icon_109,icon_110,icon_111,icon_112,icon_113,icon_114,icon_115,icon_116,icon_117,icon_118,icon_119,icon_120,icon_121,icon_122,icon_123,icon_124,icon_125,icon_126,icon_127,icon_128,icon_65,icon_66,icon_67,icon_68,icon_69,icon_70,icon_71,icon_72,icon_73,icon_74,icon_75,icon_76,icon_77,icon_78,icon_79,icon_80,icon_81,icon_82,icon_83,icon_84,icon_85,icon_86,icon_87,icon_88,icon_89,icon_90,icon_91,icon_92,icon_93,icon_94,icon_95,icon_96,icon_97,icon_98,icon_99,icon_100,icon_101,icon_102,icon_103,icon_104,icon_105,icon_106"
+		},
+		{
+			"name": "icon3_json",
+			"type": "sheet",
+			"url": "assets/sheet/icon3.json",
+			"subkeys": "icon_174,icon_175,icon_176,icon_177,icon_178,icon_179,icon_180,icon_181,icon_182,icon_183,icon_184,icon_185,icon_186,icon_187,icon_188,icon_189,icon_190,icon_191,icon_192,icon_129,icon_130,icon_131,icon_132,icon_133,icon_134,icon_135,icon_136,icon_137,icon_138,icon_139,icon_140,icon_141,icon_142,icon_143,icon_144,icon_145,icon_146,icon_147,icon_148,icon_149,icon_150,icon_151,icon_152,icon_153,icon_154,icon_155,icon_156,icon_157,icon_158,icon_159,icon_160,icon_161,icon_162,icon_163,icon_164,icon_165,icon_166,icon_167,icon_168,icon_169,icon_170,icon_171,icon_172,icon_173"
+		},
+		{
+			"name": "icon4_json",
+			"type": "sheet",
+			"url": "assets/sheet/icon4.json",
+			"subkeys": "icon_254,icon_255,icon_256,icon_193,icon_194,icon_195,icon_196,icon_197,icon_198,icon_199,icon_200,icon_201,icon_202,icon_203,icon_204,icon_205,icon_206,icon_207,icon_208,icon_209,icon_210,icon_211,icon_212,icon_213,icon_214,icon_215,icon_216,icon_217,icon_218,icon_219,icon_220,icon_221,icon_222,icon_223,icon_224,icon_225,icon_226,icon_227,icon_228,icon_229,icon_230,icon_231,icon_232,icon_233,icon_234,icon_235,icon_236,icon_237,icon_238,icon_239,icon_240,icon_241,icon_242,icon_243,icon_244,icon_245,icon_246,icon_247,icon_248,icon_249,icon_250,icon_251,icon_252,icon_253"
 		}
 	]
 }

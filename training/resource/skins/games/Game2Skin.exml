@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="Game2Skin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect id="rect_bg" width="750" height="1334" x="0" y="0" fillColor="0x959dd8" locked="true"/>
+	<e:Group id="gp1" horizontalCenter="0" width="660" height="660" y="250">
+		<e:Rect width="660" height="660" y="0" x="0" fillColor="0x332126"/>
+		<e:Group id="gp2" width="660" height="660" horizontalCenter="0" verticalCenter="0">
+		</e:Group>
+		<e:Rect id="rect" width="660" height="660" y="0" x="0" fillColor="0x9574cc" visible="false"/>
+	</e:Group>
+	<e:Label text="找出新出现的图标" y="84" fontFamily="SimHei" size="80" textColor="0xdb5820" horizontalCenter="0"/>
+	<e:Label id="lbl_score" text="得分：64" x="45" y="180" textColor="0x56ed1a" stroke="2" strokeColor="0x1038e8" size="60" fontFamily="SimHei"/>
+	<e:Group id="gp_over" horizontalCenter="0" verticalCenter="0" visible="false">
+		<e:Rect width="660" height="660" scaleX="1" scaleY="1" fillColor="0x4fdb27" horizontalCenter="0" verticalCenter="0"/>
+		<e:Label id="lbl_over" text="恭喜你过关！" fontFamily="SimHei" size="80" textColor="0xDB5820" scaleX="1" scaleY="1" horizontalCenter="0" verticalCenter="0"/>
+	</e:Group>
+	<e:Group y="980" horizontalCenter="0">
+		<e:Button id="btn1" label="回到首页" x="0" y="0" skinName="BaseButton1Skin" width="200" height="60"/>
+		<e:Button id="btn2" label="重新开始" x="340" y="0" skinName="BaseButton1Skin" width="200" height="60"/>
+		<e:layout>
+		<e:HorizontalLayout gap="20"/>
+		</e:layout>
+	</e:Group>
+	<e:Button id="btn3" label="炫耀" x="265" y="914" skinName="BaseButton1Skin" width="200" height="60"/>
+</e:Skin>
