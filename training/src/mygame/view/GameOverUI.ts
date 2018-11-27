@@ -84,7 +84,8 @@ class GameOverUI extends fw.BaseUI {
 
 	private clickShare(){
 		let title = "这次舒尔特注意力训练" + this.vo.name +  "关卡我只用了" + this.getText(this.time) + "秒，快来挑战我吧";
-		WxApi.getInstance().share(fw.SHARETYPE.CRTSCORE,title);
+		let img = "resource/assets/share.jpg";
+		WxApi.getInstance().share(fw.SHARETYPE.CRTSCORE,title,img);
 	}
 
 	protected clear() {

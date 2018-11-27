@@ -9,9 +9,10 @@
 	</e:Group>
 	<e:Label text="找出新出现的图标" y="84" fontFamily="SimHei" size="80" textColor="0xdb5820" horizontalCenter="0"/>
 	<e:Label id="lbl_score" text="得分：64" x="45" y="180" textColor="0x56ed1a" stroke="2" strokeColor="0x1038e8" size="60" fontFamily="SimHei"/>
-	<e:Group id="gp_over" horizontalCenter="0" verticalCenter="0" visible="false">
+	<e:Group id="gp_over" horizontalCenter="0" y="250">
 		<e:Rect width="660" height="660" scaleX="1" scaleY="1" fillColor="0x4fdb27" horizontalCenter="0" verticalCenter="0"/>
 		<e:Label id="lbl_over" text="恭喜你过关！" fontFamily="SimHei" size="80" textColor="0xDB5820" scaleX="1" scaleY="1" horizontalCenter="0" verticalCenter="0"/>
+		<e:Label id="lbl_cd" text="00:00:00" y="571" fontFamily="SimHei" textColor="0xf26504" bold="true" horizontalCenter="2.5"/>
 	</e:Group>
 	<e:Group y="980" horizontalCenter="0">
 		<e:Button id="btn1" label="回到首页" x="0" y="0" skinName="BaseButton1Skin" width="200" height="60"/>
@@ -21,4 +22,5 @@
 		</e:layout>
 	</e:Group>
 	<e:Button id="btn3" label="炫耀" x="265" y="914" skinName="BaseButton1Skin" width="200" height="60"/>
+	<e:Button id="btn4" label="复活" x="275" y="766" skinName="BaseButton1Skin" width="200" height="60"/>
 </e:Skin>

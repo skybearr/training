@@ -14,10 +14,10 @@
 		<e:Image anchorOffsetX="0" width="638.48" height="210" anchorOffsetY="0" source="yong_11_png" scale9Grid="68,66,50,25" y="156" horizontalCenter="0"/>
 		<e:Label text="“舒尔特方格”不但可以简单测量注意力水平，而且是很好的训练方法。舒尔特表可以通过动态的练习锻炼视神经末梢 培养注意力集中、分配、控制能力；拓展视幅；加快视频 ；提高视觉的稳定性、辨别力、定向搜索能力。" size="26" fontFamily="SimHei" wordWrap="true" multiline="true" anchorOffsetY="0" height="162" width="560" lineSpacing="6" y="182" horizontalCenter="0"/>
 		<e:Group y="374.7" horizontalCenter="0" touchChildren="true" touchEnabled="false" width="640">
-			<e:Button id="btn_mission" label="训练模式" y="0" height="120" width="480" skinName="BaseButtonSkin" horizontalCenter="0"/>
-			<e:Button id="btn_grow" label="30天训练计划" y="120" height="120" width="480" skinName="BaseButtonSkin" horizontalCenter="0"/>
-			<e:Button id="btn_lifegame" label="智商160玩的游戏" width="300" skinName="BaseButton1Skin" left="0" y="254" height="80"/>
-			<e:Button id="btn_jiyi" label="记忆力闯关" y="254" width="300" skinName="BaseButton1Skin" right="0" height="80"/>
+			<e:Button id="btn_mission" label="注意力训练" y="0" height="120" width="480" skinName="BaseButtonSkin" horizontalCenter="0"/>
+			<e:Button id="btn_jiyi" label="记忆力训练" y="120" height="120" width="480" skinName="BaseButtonSkin" horizontalCenter="0"/>
+			<e:Button id="btn_lifegame" label="智商160玩的游戏" width="300" skinName="BaseButton1Skin" y="254" height="80" right="0"/>
+			<e:Button id="btn_grow" label="30天训练计划" y="254" width="300" skinName="BaseButton1Skin" height="80" left="0"/>
 		</e:Group>
 
 

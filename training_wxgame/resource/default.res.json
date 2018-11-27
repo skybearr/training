@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "framework_json,logo_png,start_button_png,rank_back_png,rank_bg_png,rank_button_png,reglogbg_png,share_jpg,skin_zibg_png,start_button2_png,star_a_png,star_b_png,yong_11_png,yong_3_png,yong_6_png,yong_7_png,yong_8_png,avg_list_json,config_json,mission_json,achieve_json,icon1_json,icon2_json,icon3_json,icon4_json",
+			"keys": "framework_json,logo_png,start_button_png,rank_back_png,rank_bg_png,rank_button_png,reglogbg_png,share_jpg,skin_zibg_png,start_button2_png,star_a_png,star_b_png,yong_11_png,yong_3_png,yong_6_png,yong_7_png,yong_8_png,avg_list_json,config_json,mission_json,achieve_json,icon1_json,icon2_json,icon3_json,icon4_json,share1_png",
 			"name": "preload"
 		}
 	],
@@ -135,6 +135,11 @@
 			"type": "sheet",
 			"url": "assets/sheet/icon4.json",
 			"subkeys": "icon_254,icon_255,icon_256,icon_193,icon_194,icon_195,icon_196,icon_197,icon_198,icon_199,icon_200,icon_201,icon_202,icon_203,icon_204,icon_205,icon_206,icon_207,icon_208,icon_209,icon_210,icon_211,icon_212,icon_213,icon_214,icon_215,icon_216,icon_217,icon_218,icon_219,icon_220,icon_221,icon_222,icon_223,icon_224,icon_225,icon_226,icon_227,icon_228,icon_229,icon_230,icon_231,icon_232,icon_233,icon_234,icon_235,icon_236,icon_237,icon_238,icon_239,icon_240,icon_241,icon_242,icon_243,icon_244,icon_245,icon_246,icon_247,icon_248,icon_249,icon_250,icon_251,icon_252,icon_253"
+		},
+		{
+			"name": "share1_png",
+			"type": "image",
+			"url": "assets/share1.png"
 		}
 	]
 }

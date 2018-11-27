@@ -168,6 +168,7 @@ class StartUI extends fw.BaseUI {
 				break;
 			case this.btn_jiyi:
 				this.addChild(new Game1UI());
+				PropLogic.getInstance().updateProp(COINTYPE.HP,-10);
 				break;
 		}
 	}

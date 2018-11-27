@@ -65,6 +65,7 @@ enum MYDATA{
 enum WATCHTYPE{
 	TURNPLAY = 1,//视频抽奖
 	ADDHP = 2,//增加体力
+	RELIFE = 3,//记忆力复活
 }
 
 enum ACHIEVETYPE{

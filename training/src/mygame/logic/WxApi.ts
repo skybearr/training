@@ -131,7 +131,7 @@ class WxApi extends egret.EventDispatcher {
 				platform.share("每天练习5分钟，提高孩子注意力", "resource/assets/share.jpg", query)
 				break;
 			case fw.SHARETYPE.CRTSCORE:
-				platform.share(title, "resource/assets/share.jpg", query)
+				platform.share(title, img, query)
 				break;
 			case fw.SHARETYPE.PASSIVE:
 				platform.showShareMenu();

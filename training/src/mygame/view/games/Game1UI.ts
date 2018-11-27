@@ -10,15 +10,17 @@ class Game1UI extends eui.Component {
 	private btn1: eui.Button;
 	private btn2: eui.Button;
 	private btn3: eui.Button;
+	private btn4: eui.Button;
 	private rect_bg: eui.Rect;
 	private gp_over: eui.Group;
 	private lbl_over: eui.Label;
 	private rect: eui.Rect;
+	private lbl_cd: eui.Label;
 
 	private icons: eui.Image[];
 	private itemArr: eui.Image[] = [];
-	private indexArr:number[] = [];
-	
+	private indexArr: number[] = [];
+
 	private max: number = 400;
 	private len: number = 20;
 	private unitw: number = 64;
@@ -45,8 +47,11 @@ class Game1UI extends eui.Component {
 	}
 
 	private reset() {
+		this.relifetime = 0;
 		this.gp_over.visible = false;
+		this.lbl_cd.visible = false;
 		this.btn3.visible = false;
+		this.btn4.visible = false;
 		for (let i = 0; i < this.itemArr.length; i++) {
 			this.itemArr[i].removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickImage, this);
 		}
@@ -63,7 +68,7 @@ class Game1UI extends eui.Component {
 			image.width = image.height = this.unitw;
 			this.icons.push(image);
 		}
-		for(let i=0;i<this.max;i++){
+		for (let i = 0; i < this.max; i++) {
 			this.indexArr.push(i);
 		}
 
@@ -71,7 +76,7 @@ class Game1UI extends eui.Component {
 		this.updateScore();
 	}
 
-	private updateScore(){
+	private updateScore() {
 		this.lbl_score.text = "已通过" + (this.crtIndex + 1) + "关";
 	}
 
@@ -88,7 +93,7 @@ class Game1UI extends eui.Component {
 		let image = this.icons[this.crtIndex];
 		let r = Math.floor(Math.random() * this.indexArr.length);
 		let i = this.indexArr[r];
-		this.indexArr.splice(r,1);
+		this.indexArr.splice(r, 1);
 		let a = i % this.len;
 		let b = Math.floor(i / this.len);
 		image.x = (this.unitw + 2) * a;
@@ -111,7 +116,7 @@ class Game1UI extends eui.Component {
 					this.rect.visible = true;
 					egret.Tween.get(this.rect).to({ x: 0 }, s).call(() => {
 						this.gp2.addChild(image);
-					}, this).wait(200).to({ x:-800 }, s).call(() => {
+					}, this).wait(200).to({ x: -800 }, s).call(() => {
 						this.isTween = false;
 						this.rect.visible = false;
 					});
@@ -166,8 +171,10 @@ class Game1UI extends eui.Component {
 
 	private gameover() {
 		this.gp_over.visible = true;
-		this.lbl_over.text = "继续加油！";
+		this.lbl_over.text = "点错啦，加油！";
 		this.btn3.visible = true;
+		this.btn4.visible = true;
+		this.lbl_cd.visible = true;
 	}
 
 	/**初始化事件 */
@@ -175,13 +182,64 @@ class Game1UI extends eui.Component {
 		this.btn1.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn1, this);
 		this.btn2.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn2, this);
 		this.btn3.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn3, this);
+		this.btn4.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn4, this);
+		WxApi.getInstance().addEventListener(GameEvent.REWARDAD_CLOSE_EVENT, this.watchReward, this);
+		TimerManager.getInstance().addTimerCallBack(this.rewardCD, this);
 		this.addEventListener(egret.Event.REMOVED_FROM_STAGE, this.clear, this);
 	}
 
-	private clickBtn3(){
-		let title:string = "我在记忆力训练中过了" + this.crtIndex + "关！你也来试试？";
-		let image:string = "resource/assets/share1.png";
-		platform.share(title,image,null);
+	private clickBtn3() {
+		let title: string = "我在记忆力训练中过了" + this.crtIndex + "关！你也来试试？";
+		let image: string = "resource/assets/share1.png";
+		platform.share(title, image, null);
+	}
+
+	private watchReward(e: GameEvent) {
+		if (e.data.type == WATCHTYPE.RELIFE && e.data.data == 0) {
+			this.gp_over.visible = false;
+			this.btn3.visible = false;
+			this.btn4.visible = false;
+			this.lbl_cd.visible = false;
+
+			let img = this.itemArr[this.itemArr.length - 1];
+			this.isTween = true;
+			let t = 200;
+			egret.Tween.get(img).to({ alpha: 0 }, t).to({ alpha: 1 }, t).to({ alpha: 0 }, t).
+				to({ alpha: 1 }, t).to({ alpha: 0 }, t).to({ alpha: 1 }, t).call(() => {
+					this.isTween = false;
+				}, this);
+		}
+	}
+
+	private can1: boolean;
+	private rewardCD() {
+		let cd = WxApi.getInstance().getRewardCD();
+
+		this.btn4.touchEnabled = cd <= 0;
+		this.btn4.filters = cd <= 0 ? null : FilterUtil.getGrayFilter();
+		this.can1 = cd <= 0;
+		if (cd > 0) {
+			this.lbl_cd.text = GameUtil.ParseTime2Format(cd);
+		}
+		else {
+			this.lbl_cd.text = "";
+		}
+	}
+	private relifetime:number = 0;
+	private clickBtn4() {
+		if(this.relifetime >= 3){
+			WxApi.getInstance().toast("单局游戏只能复活3次");
+			return;
+		}
+		this.relifetime ++;
+		let cd = WxApi.getInstance().getRewardCD();
+		if (cd > 0) {
+			WxApi.getInstance().toast("看视频太快了，请稍后再试");
+		}
+		else {
+			WxApi.getInstance().showRewardAd(WATCHTYPE.RELIFE);
+		}
+
 	}
 
 	private clickBtn1() {
@@ -199,6 +257,9 @@ class Game1UI extends eui.Component {
 		this.btn1.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn1, this);
 		this.btn2.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn2, this);
 		this.btn3.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn3, this);
+		this.btn4.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickBtn4, this);
+		WxApi.getInstance().removeEventListener(GameEvent.REWARDAD_CLOSE_EVENT, this.watchReward, this);
+		TimerManager.getInstance().removeFun(this.rewardCD, this);
 		this.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.clear, this);
 	}
 }

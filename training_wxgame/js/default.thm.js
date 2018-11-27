@@ -712,11 +712,11 @@ var egret = window.egret;
 	__extends(Game2Skin, _super);
 	function Game2Skin() {
 		_super.call(this);
-		this.skinParts = ["rect_bg","gp2","rect","gp1","lbl_score","lbl_over","gp_over","btn1","btn2","btn3"];
+		this.skinParts = ["rect_bg","gp2","rect","gp1","lbl_score","lbl_over","lbl_cd","gp_over","btn1","btn2","btn3","btn4"];
 		
 		this.height = 1334;
 		this.width = 750;
-		this.elementsContent = [this.rect_bg_i(),this.gp1_i(),this._Label1_i(),this.lbl_score_i(),this.gp_over_i(),this._Group1_i(),this.btn3_i()];
+		this.elementsContent = [this.rect_bg_i(),this.gp1_i(),this._Label1_i(),this.lbl_score_i(),this.gp_over_i(),this._Group1_i(),this.btn3_i(),this.btn4_i()];
 	}
 	var _proto = Game2Skin.prototype;
 
@@ -796,9 +796,8 @@ var egret = window.egret;
 		var t = new eui.Group();
 		this.gp_over = t;
 		t.horizontalCenter = 0;
-		t.verticalCenter = 0;
-		t.visible = false;
-		t.elementsContent = [this._Rect2_i(),this.lbl_over_i()];
+		t.y = 250;
+		t.elementsContent = [this._Rect2_i(),this.lbl_over_i(),this.lbl_cd_i()];
 		return t;
 	};
 	_proto._Rect2_i = function () {
@@ -823,6 +822,17 @@ var egret = window.egret;
 		t.text = "恭喜你过关！";
 		t.textColor = 0xDB5820;
 		t.verticalCenter = 0;
+		return t;
+	};
+	_proto.lbl_cd_i = function () {
+		var t = new eui.Label();
+		this.lbl_cd = t;
+		t.bold = true;
+		t.fontFamily = "SimHei";
+		t.horizontalCenter = 2.5;
+		t.text = "00:00:00";
+		t.textColor = 0xf26504;
+		t.y = 571;
 		return t;
 	};
 	_proto._Group1_i = function () {
@@ -869,6 +879,17 @@ var egret = window.egret;
 		t.width = 200;
 		t.x = 265;
 		t.y = 914;
+		return t;
+	};
+	_proto.btn4_i = function () {
+		var t = new eui.Button();
+		this.btn4 = t;
+		t.height = 60;
+		t.label = "复活";
+		t.skinName = "BaseButton1Skin";
+		t.width = 200;
+		t.x = 275;
+		t.y = 766;
 		return t;
 	};
 	return Game2Skin;
@@ -2552,7 +2573,7 @@ var egret = window.egret;
 	__extends(StartSkin, _super);
 	function StartSkin() {
 		_super.call(this);
-		this.skinParts = ["img_bg","lbl_hp","lbl_coin","lbl_diamond","btn_mission","btn_grow","btn_lifegame","btn_jiyi","btn_sign","btn_ad","btn_invite","btn_achieve","btn_rank","btn_share","btn_turn","gp","btn_0","btn_1","btn_2","btn_3","btn_4","btn_5","btn_6","btn_7","btn_8","lbl_cd"];
+		this.skinParts = ["img_bg","lbl_hp","lbl_coin","lbl_diamond","btn_mission","btn_jiyi","btn_lifegame","btn_grow","btn_sign","btn_ad","btn_invite","btn_achieve","btn_rank","btn_share","btn_turn","gp","btn_0","btn_1","btn_2","btn_3","btn_4","btn_5","btn_6","btn_7","btn_8","lbl_cd"];
 		
 		this.height = 1180;
 		this.width = 750;
@@ -2721,7 +2742,7 @@ var egret = window.egret;
 		t.touchEnabled = false;
 		t.width = 640;
 		t.y = 374.7;
-		t.elementsContent = [this.btn_mission_i(),this.btn_grow_i(),this.btn_lifegame_i(),this.btn_jiyi_i()];
+		t.elementsContent = [this.btn_mission_i(),this.btn_jiyi_i(),this.btn_lifegame_i(),this.btn_grow_i()];
 		return t;
 	};
 	_proto.btn_mission_i = function () {
@@ -2729,18 +2750,18 @@ var egret = window.egret;
 		this.btn_mission = t;
 		t.height = 120;
 		t.horizontalCenter = 0;
-		t.label = "训练模式";
+		t.label = "注意力训练";
 		t.skinName = "BaseButtonSkin";
 		t.width = 480;
 		t.y = 0;
 		return t;
 	};
-	_proto.btn_grow_i = function () {
+	_proto.btn_jiyi_i = function () {
 		var t = new eui.Button();
-		this.btn_grow = t;
+		this.btn_jiyi = t;
 		t.height = 120;
 		t.horizontalCenter = 0;
-		t.label = "30天训练计划";
+		t.label = "记忆力训练";
 		t.skinName = "BaseButtonSkin";
 		t.width = 480;
 		t.y = 120;
@@ -2751,18 +2772,18 @@ var egret = window.egret;
 		this.btn_lifegame = t;
 		t.height = 80;
 		t.label = "智商160玩的游戏";
-		t.left = 0;
+		t.right = 0;
 		t.skinName = "BaseButton1Skin";
 		t.width = 300;
 		t.y = 254;
 		return t;
 	};
-	_proto.btn_jiyi_i = function () {
+	_proto.btn_grow_i = function () {
 		var t = new eui.Button();
-		this.btn_jiyi = t;
+		this.btn_grow = t;
 		t.height = 80;
-		t.label = "记忆力闯关";
-		t.right = 0;
+		t.label = "30天训练计划";
+		t.left = 0;
 		t.skinName = "BaseButton1Skin";
 		t.width = 300;
 		t.y = 254;
